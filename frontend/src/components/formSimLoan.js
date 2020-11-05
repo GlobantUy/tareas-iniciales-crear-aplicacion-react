@@ -48,46 +48,73 @@ class SimLoan extends Component {
     render() {
         return (
             <div>
-                <header>
-                    <h1>STB Bank Logo </h1>
-                    <button type="submit"> Ingresar</button>
-                </header>
-
                 <form onSubmit={this.handleSumbit}>
-                    <h2>SIMULADOR DE PRÉSTAMO</h2>
+                    <h2>Simulador de préstamos</h2>
                     <p>Ingreso:</p>
                     <input
-                        type="text"
+                        type="number"
                         name="Ingreso" placeholder="Agregar en $U"
-                        value={this.state.email}
+                        value={this.state.Ingreso}
                         onChange={this.handleChange}
                         required />
                     <p>Monto a Pedir:</p>
                     <input
-                        type="text"
+                        type="number"
                         name="Monto_a_pedir"
                         placeholder="Agregar Monto"
-                        value={this.state.password}
+                        value={this.state.Monto_a_pedir}
                         onChange={this.handleChange}
-                        required />
+                        required /><br />
+
                     <p>Moneda del Préstamo</p>
                     <input
                         type="radio"
                         id="Moneda_U$S"
-                        name="Moneda_U$S"
+                        name="Moneda"
                         value={this.state.Moneda_U$S}
                     />
                     <label for="Moneda_U$S">U$S</label>
+
                     <input
                         type="radio"
                         id="Moneda_$U"
-                        name="Moneda_$U"
+                        name="Moneda"
                         value={this.state.Moneda_$U}
-                       
+
                     />
-                    <label for="Moneda_$U">$U</label><br></br>
+                    <label for="Moneda_$U">$U</label><br />
+
+                    <p>Moneda del Préstamo</p>
+
+                    <input
+                        type="checkbox"
+                        id="Inmueble"
+                        name="TipoDePrestamo"
+                        value={this.state.Inmueble}
+
+                    />
+                    <label for="Inmueble">Inmueble</label><br />
+
+                    <input
+                        type="checkbox"
+                        id="Automotor"
+                        name="TipoDePrestamo"
+                        value={this.state.Automotor}
+
+                    />
+                    <label for="Automotor">Automotor</label><br />
+
+                    <input
+                        type="checkbox"
+                        id="Otros"
+                        name="TipoDePrestamo"
+                        value={this.state.Otros}
+
+                    />
+                    <label for="Otros">Otros</label><br />
+
                 </form>
-                <button type="submit"> Simular Prestamo</button>
+                <button class="btn-ingresar" type="submit"> Simular Prestamo</button>
             </div>
         )
     }
