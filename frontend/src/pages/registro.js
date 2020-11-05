@@ -1,4 +1,4 @@
-import SimLogin from '../components/formSimLogin' 
+import SimLogin from '../components/formLogin' 
 
 export default function Registro() {
     return (

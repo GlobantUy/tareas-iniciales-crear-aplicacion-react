@@ -1,11 +1,63 @@
-body {
-  font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
-    'Arial', sans-serif;
-  padding: 20px 20px 60px;
-  max-width: 680px;
-  margin: 0 auto;
-}
-
 a{
   text-decoration: none;
+}
+
+body{
+  font: 1em sans-serif;
+}
+
+.header{
+  position: absolute;
+  color: black;
+  top: 0px;
+  left: 0px;
+  right: 0px; 
+}
+.titleHeader{
+}
+.btnHeader{
+  font: 1em sans-serif;
+  color: black;
+  background-color: transparent;
+  border-radius: 5px;
+  height:40px;
+  width:180px;
+  left: 50%;
+}
+
+.btnHeader:hover{
+  cursor: pointer;
+}
+
+.form{
+  position: absolute;
+  margin-left: -300px; 
+  top: 30%;
+  left: 50%;
+  right: 50%;
+}
+
+.inputMonto{
+  height:30px;
+  width:150px;
+  outline: none;
+}
+
+.inputAños{
+  height:30px;
+  width:150px;
+  outline: none;
+}
+.btnSim{
+  font: 1em sans-serif;
+  color: black;
+  background-color: #bdc3c7;
+  border: none;
+  height:40px;
+  width:150px;
+  outline: none;
+}
+
+.btnSim:hover{
+  cursor: pointer;
 }

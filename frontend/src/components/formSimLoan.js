@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
 class SimLoan extends Component {
     constructor(props) {
         super(props)
@@ -48,16 +49,18 @@ class SimLoan extends Component {
     render() {
         return (
             <div>
+
+                <div class="form">
                 <form onSubmit={this.handleSumbit}>
                     <h2>Simulador de préstamos</h2>
-                    <p>Ingreso:</p>
+                    <p>Ingreso($U)</p>
                     <input
                         type="number"
                         name="Ingreso" placeholder="Agregar en $U"
                         value={this.state.Ingreso}
                         onChange={this.handleChange}
                         required />
-                    <p>Monto a Pedir:</p>
+                    <p>Monto a Pedir($U)</p>
                     <input
                         type="number"
                         name="Monto_a_pedir"
@@ -84,37 +87,47 @@ class SimLoan extends Component {
                     />
                     <label for="Moneda_$U">$U</label><br />
 
-                    <p>Moneda del Préstamo</p>
+                        <p>Años de financiacion</p>
+                        <select class="inputAños" name="financiacion">
+                        <option hidden>Selecciona una opción</option>
+                            <option value="1">10</option>
+                            <option value="2">15</option>
+                            <option value="3">20</option>
+                            <option value="4">25</option>
+                            <option value="5">30</option>
+                            value={this.state.financiacion}
+                        </select>
+                        <label for=""></label>
 
-                    <input
-                        type="checkbox"
-                        id="Inmueble"
-                        name="TipoDePrestamo"
-                        value={this.state.Inmueble}
+                        <p>Tipo de préstamo</p>
+                        <input
+                            type="checkbox"
+                            id="Inmuebles"
+                            name="TipoDePrestamo"
+                            value={this.state.Inmuebles}
+                        />
+                        <label for="Inmuebles">Inmuebles</label><br></br>
 
-                    />
-                    <label for="Inmueble">Inmueble</label><br />
+                        <input
+                            type="checkbox"
+                            id="Automotor"
+                            name="TipoDePrestamo"
+                            value={this.state.Automotor}
+                        />
+                        <label for="Automotor">Automotor</label><br></br>
 
-                    <input
-                        type="checkbox"
-                        id="Automotor"
-                        name="TipoDePrestamo"
-                        value={this.state.Automotor}
+                        <input
+                            type="checkbox"
+                            id="Otros"
+                            name="TipoDePrestamo"
+                            value={this.state.Otros}
+                        />
+                        <label for="Otros">Otros</label><br></br>
 
-                    />
-                    <label for="Automotor">Automotor</label><br />
 
-                    <input
-                        type="checkbox"
-                        id="Otros"
-                        name="TipoDePrestamo"
-                        value={this.state.Otros}
-
-                    />
-                    <label for="Otros">Otros</label><br />
-
-                </form>
-                <button class="btn-ingresar" type="submit"> Simular Prestamo</button>
+                    </form>
+                    <button type="submit" class="btnSim"> Simular Prestamo</button>
+                </div>
             </div>
         )
     }
