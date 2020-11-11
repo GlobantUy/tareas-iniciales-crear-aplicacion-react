@@ -51,45 +51,44 @@ class SimLoan extends Component {
             <div>
 
                 <div class="form">
-                <form onSubmit={this.handleSumbit}>
-                    <h2>Simulador de préstamos</h2>
-                    <p>Ingreso($U)</p>
-                    <input
-                        type="number"
-                        name="Ingreso" placeholder="Agregar en $U"
-                        value={this.state.Ingreso}
-                        onChange={this.handleChange}
-                        required />
-                    <p>Monto a Pedir($U)</p>
-                    <input
-                        type="number"
-                        name="Monto_a_pedir"
-                        placeholder="Agregar Monto"
-                        value={this.state.Monto_a_pedir}
-                        onChange={this.handleChange}
-                        required /><br />
+                    <form onSubmit={this.handleSumbit}>
+                    <h1 class="titleForm">Simulador de préstamos</h1>
+                        <p>Ingreso($U)</p>
+                        <input class= "inputIngreso"
+                            type="number"
+                            name="Ingreso" placeholder="Agregar en $U"
+                            value={this.state.Ingreso}
+                            onChange={this.handleChange}
+                            required />
+                        <p>Monto a Pedir($U)</p>
+                        <input class= "inputMonto"
+                            type="number"
+                            name="Monto_a_pedir"
+                            placeholder="Agregar Monto"
+                            value={this.state.Monto_a_pedir}
+                            onChange={this.handleChange}
+                            required /><br />
+                        <p>Moneda del Préstamo</p>
+                        <input
+                            type="radio"
+                            id="Moneda_U$S"
+                            name="Moneda"
+                            value={this.state.Moneda_U$S}
+                        />
+                        <label for="Moneda_U$S">U$S</label>
 
-                    <p>Moneda del Préstamo</p>
-                    <input
-                        type="radio"
-                        id="Moneda_U$S"
-                        name="Moneda"
-                        value={this.state.Moneda_U$S}
-                    />
-                    <label for="Moneda_U$S">U$S</label>
+                        <input class= "inputPesos"
+                            type="radio"
+                            id="Moneda_$U"
+                            name="Moneda"
+                            value={this.state.Moneda_$U}
 
-                    <input
-                        type="radio"
-                        id="Moneda_$U"
-                        name="Moneda"
-                        value={this.state.Moneda_$U}
-
-                    />
-                    <label for="Moneda_$U">$U</label><br />
+                        />
+                        <label class= "inputPesos" for="Moneda_$U">$U</label><br />
 
                         <p>Años de financiacion</p>
                         <select class="inputAños" name="financiacion">
-                        <option hidden>Selecciona una opción</option>
+                            <option hidden>Selecciona una opción</option>
                             <option value="1">10</option>
                             <option value="2">15</option>
                             <option value="3">20</option>

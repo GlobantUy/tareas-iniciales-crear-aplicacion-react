@@ -1,63 +1,117 @@
-a{
-  text-decoration: none;
+footer {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    width: 100%;
+    height: 40px;
+    background: #F07E1A;
 }
 
-body{
-  font: 1em sans-serif;
+a {
+    text-decoration: none
 }
 
-.header{
-  position: absolute;
-  color: black;
-  top: 0px;
-  left: 0px;
-  right: 0px; 
-}
-.titleHeader{
-}
-.btnHeader{
-  font: 1em sans-serif;
-  color: black;
-  background-color: transparent;
-  border-radius: 5px;
-  height:40px;
-  width:180px;
-  left: 50%;
+body {
+    font: 1em sans-serif
 }
 
-.btnHeader:hover{
-  cursor: pointer;
+h1 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
 }
 
-.form{
-  position: absolute;
-  margin-left: -300px; 
-  top: 30%;
-  left: 50%;
-  right: 50%;
+p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
 }
 
-.inputMonto{
-  height:30px;
-  width:150px;
-  outline: none;
+button {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
 }
 
-.inputAños{
-  height:30px;
-  width:150px;
-  outline: none;
-}
-.btnSim{
-  font: 1em sans-serif;
-  color: black;
-  background-color: #bdc3c7;
-  border: none;
-  height:40px;
-  width:150px;
-  outline: none;
+.rectangulo {
+    Width: 100%;
+    Height: 2px;
+    Top: 80px;
 }
 
-.btnSim:hover{
-  cursor: pointer;
+.header {
+    margin-top: 5px;
+    position: relative;
+    color: #000;
+}
+
+.titleHeader {
+    float: left
+}
+
+.titleForm {}
+
+.btnHeader {
+    margin-top: 20px;
+    margin-right: 102px;
+    float: right;
+    Width: 166.38px;
+    Height: 40px;
+    border: 1px solid #F07E1A;
+    box-sizing: border-box;
+    background-color: transparent;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: #F07E1A;
+}
+
+.btnHeader:hover {
+    cursor: pointer
+}
+
+.form {
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    text-align: left;
+}
+
+.inputIngreso {
+    height: 40px;
+    width: 167px;
+}
+
+.inputMonto {
+    height: 40px;
+    width: 167px;
+}
+
+.inputPesos{
+}
+
+.inputAños {
+    height: 40px;
+    width: 167px;
+}
+
+.btnSim {
+    color: #636363;
+    background: #E0E0E0;
+    border: none;
+    height: 40px;
+    width: 169px;
+}
+
+.btnSim:hover {
+    cursor: pointer
 }
