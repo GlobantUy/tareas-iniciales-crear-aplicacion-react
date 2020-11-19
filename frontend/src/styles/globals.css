@@ -1,5 +1,5 @@
 footer {
-    position: absolute;
+    position: fixed;
     left: 0%;
     right: 0%;
     bottom: 0%;
@@ -12,33 +12,66 @@ a {
     text-decoration: none
 }
 
-body {
-    font: 1em sans-serif
-}
+body {}
 
 h1 {
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 24px;
-    line-height: 28px;
     color: #000000;
 }
 
 p {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    color: #000000;
+    text-align: left;
+    height: 0;
+}
+
+label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
     line-height: 19px;
     color: #000000;
 }
 
+.logoheader {
+    width: 142px;
+    height: 44px;
+    margin-top: 15px;
+    margin-left: 102px;
+    float: left;
+}
+
 button {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    outline: none;
+}
+
+header {
+    border-bottom-style: solid;
+    height: 78px;
+    position: fixed;
+    width: 100%;
+}
+
+input {
+    outline: none;
+}
+
+input:focus {
+    border: 2px solid #f07e1a;
+}
+
+select {
+    outline: none;
+}
+
+select:focus {
+    border: 2px solid #f07e1a;
 }
 
 .rectangulo {
@@ -46,18 +79,6 @@ button {
     Height: 2px;
     Top: 80px;
 }
-
-.header {
-    margin-top: 5px;
-    position: relative;
-    color: #000;
-}
-
-.titleHeader {
-    float: left
-}
-
-.titleForm {}
 
 .btnHeader {
     margin-top: 20px;
@@ -68,25 +89,34 @@ button {
     border: 1px solid #F07E1A;
     box-sizing: border-box;
     background-color: transparent;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     color: #F07E1A;
+    outline: none;
 }
 
 .btnHeader:hover {
-    cursor: pointer
+    cursor: pointer;
+}
+
+.titleForm{
+    
 }
 
 .form {
-    position: absolute;
-    top: 10%;
-    left: 40%;
-    text-align: left;
+    width:168px;
+    position:absolute;left:50%;
+    margin-left:-82px;
+    margin-top: 118px;
+    text-align: center;
+    margin-bottom: 82px;
+
 }
 
 .inputIngreso {
+    margin-top: 4px;
     height: 40px;
     width: 167px;
 }
@@ -97,21 +127,76 @@ button {
 }
 
 .inputPesos{
+    margin-top: 4px;
+}
+
+.inputTipo{
+    margin-top: 4px;
+    text-align: right;
+}
+
+input[type='radio']{
 }
 
 .inputAños {
+    margin-top: 4px;
     height: 40px;
     width: 167px;
 }
 
-.btnSim {
-    color: #636363;
-    background: #E0E0E0;
-    border: none;
-    height: 40px;
-    width: 169px;
+input[type='checkbox']{
+    
 }
 
-.btnSim:hover {
-    cursor: pointer
+/* Ingreso */
+
+.formLogin {
+    width:168px;
+    position:absolute;left:50%;
+    margin-left:-82px;
+    margin-top: 118px;
+    text-align: center;
+}
+
+.recContr {
+    text-decoration: underline;
+    color: black;
+    text-align: right;
+}
+
+.btnPrimario {
+    color: #000000;
+    background: #F07E1A;
+    border: none;
+    height: 40px;
+    width: 168px;
+    margin-top: 24px;
+}
+
+.btnPrimario:hover {
+    cursor: pointer;
+    background: rgba(240, 126, 26, 0.8);}
+
+.btnPrimario:disabled {
+    color: #636363;
+    background: #E0E0E0;
+}
+
+.btnSecundario {
+    width: 168px;
+    height: 40px;
+    border: 1px solid #F07E1A;
+    color: #F07E1A;
+    background-color: transparent;
+}
+
+.btnSecundario:hover {
+    cursor: pointer;
+    color: rgba(240, 126, 26, 0.8);
+    border: 1px solid rgba(240, 126, 26, 0.8);
+}
+
+.btnSecundario:disabled {
+    color: #636363;
+    border: 1px solid #636363;
 }

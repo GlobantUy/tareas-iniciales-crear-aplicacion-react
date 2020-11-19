@@ -4,8 +4,8 @@ import SimLogin from '../components/formLogin'
 export default function Ingreso() {
   return (
     <div >
-      <header>
-        <h1>STB Bank Logo </h1>
+      <header className="header">
+      <img className="logoheader" src="/logo.jpg"/>
       </header>
       <SimLogin />
       <footer>
