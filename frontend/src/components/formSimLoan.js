@@ -52,21 +52,14 @@ class SimLoan extends Component {
                 <div className="form">
                     <form onSubmit={this.handleSumbit}>
                         <h1 className="titleForm">Simulador de prestamos</h1>
-                        <p>Ingreso($U)</p>
+                        <p>Ingreso($U)*</p>
                         <input className="inputIngreso"
+                            autoComplete="off"
                             type="number"
                             name="Ingreso" placeholder="Agregar en $U"
                             value={this.state.Ingreso}
                             onChange={this.handleChange}
                             required />
-                        <p>Monto a Pedir($U)</p>
-                        <input className="inputMonto"
-                            type="number"
-                            name="Monto_a_pedir"
-                            placeholder="Agregar Monto"
-                            value={this.state.Monto_a_pedir}
-                            onChange={this.handleChange}
-                            required /><br />
 
                         <p>Moneda del Préstamo</p>
                         <input className="inputPesos"
@@ -85,6 +78,17 @@ class SimLoan extends Component {
 
                         />
                         <label htmlFor="Moneda_$U">$U</label><br />
+                        <p>Monto a Pedir($U)*</p>
+                        <input className="inputMonto"
+                            autoComplete="off"
+                            type="number"
+                            name="Monto_a_pedir"
+                            placeholder="Agregar Monto"
+                            value={this.state.Monto_a_pedir}
+                            onChange={this.handleChange}
+                            required /><br />
+
+
 
                         <p>Años de financiación</p>
                         <select className="inputAños" name="financiacion">
@@ -131,4 +135,5 @@ class SimLoan extends Component {
         )
     }
 }
+
 export default SimLoan;

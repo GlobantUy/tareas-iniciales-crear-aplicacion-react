@@ -101,18 +101,16 @@ select:focus {
     cursor: pointer;
 }
 
-.titleForm{
-    
-}
+.titleForm {}
 
 .form {
-    width:168px;
-    position:absolute;left:50%;
-    margin-left:-82px;
+    width: 168px;
+    position: absolute;
+    left: 50%;
+    margin-left: -82px;
     margin-top: 118px;
     text-align: center;
     margin-bottom: 82px;
-
 }
 
 .inputIngreso {
@@ -126,17 +124,16 @@ select:focus {
     width: 167px;
 }
 
-.inputPesos{
+.inputPesos {
     margin-top: 4px;
 }
 
-.inputTipo{
+.inputTipo {
     margin-top: 4px;
     text-align: right;
 }
 
-input[type='radio']{
-}
+input[type='radio'] {}
 
 .inputAños {
     margin-top: 4px;
@@ -144,16 +141,15 @@ input[type='radio']{
     width: 167px;
 }
 
-input[type='checkbox']{
-    
-}
+input[type='checkbox'] {}
 
 /* Ingreso */
 
 .formLogin {
-    width:168px;
-    position:absolute;left:50%;
-    margin-left:-82px;
+    width: 168px;
+    position: absolute;
+    left: 50%;
+    margin-left: -82px;
     margin-top: 118px;
     text-align: center;
 }
@@ -175,9 +171,10 @@ input[type='checkbox']{
 
 .btnPrimario:hover {
     cursor: pointer;
-    background: rgba(240, 126, 26, 0.8);}
+    background: rgba(240, 126, 26, 0.8);
+}
 
-.btnPrimario:disabled {
+disabled {
     color: #636363;
     background: #E0E0E0;
 }

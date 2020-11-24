@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import Link from 'next/link'
 class SimLogin extends Component {
@@ -6,6 +6,7 @@ class SimLogin extends Component {
         super(props)
 
         this.state = {
+            valid: true,
             email: '',
             password: '',
             registrationErrors: ''
@@ -46,7 +47,7 @@ class SimLogin extends Component {
 
     render() {
         return (
-            <div>
+            <Fragment>
                 <div className="formLogin">
                     <form onSubmit={this.handleSumbit}>
                         <h1>Ingreso</h1>
@@ -57,7 +58,7 @@ class SimLogin extends Component {
                             name="email"
                             value={this.state.email}
                             onChange={this.handleChange}
-                            required />
+                        />
                         <p>Contraseña *</p>
                         <input className="inputIngreso"
                             autoComplete="off"
@@ -65,20 +66,17 @@ class SimLogin extends Component {
                             name="password"
                             value={this.state.password}
                             onChange={this.handleChange}
-                            required />
-                        <Link href="/empty">
-                            <a type="submit"><p className="recContr"> Recuperar contraseña</p></a>
-                        </Link>
-                        <Link href="/">
-                            <a><button className="btnPrimario" type="submit"> Ingresar</button></a>
-                        </Link>
-
+                        />
+                        <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
+                        <a href="/"><button disabled={this.valid} className="btnPrimario" type="submit"> Ingresar</button></a>
                     </form><br />
                     <a href="http://localhost:3000/registro" target="_blank"><button className="btnSecundario">Registrarse</button></a>
                 </div>
-            </div>
+            </Fragment>
 
         )
     }
+
 }
+
 export default SimLogin;
