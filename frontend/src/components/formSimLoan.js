@@ -123,9 +123,13 @@ class SimLoan extends Component {
                         />
                         <label htmlFor="Otros">Otros</label><br></br>
 
-                        <button type="submit" className="btnPrimario"> Simular Prestamo</button>
+                       
 
+                         <button className="btnPrimario" ><a href="http://localhost:3000/Descuento" class="button"> Simular prestamo</a></button>       
+                      
+                 
                     </form>
+
                 </div>
             </div>
         )

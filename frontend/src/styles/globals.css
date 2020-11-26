@@ -107,7 +107,8 @@ select:focus {
 
 .form {
     width:168px;
-    position:absolute;left:50%;
+    position:absolute;
+    left:50%;
     margin-left:-82px;
     margin-top: 118px;
     text-align: center;
@@ -211,8 +212,8 @@ input[type='checkbox']{
     width: 168px;
     margin-top: 24px;
     position: absolute;
-    top:396px;
-    left:90px;
+    top:496px;
+    left:700px;
 }
 
 .btnCuarto:hover {
@@ -231,8 +232,8 @@ input[type='checkbox']{
     color: #F07E1A;
     background-color: transparent;
     position: absolute;
-    top:420px;
-    left:-105px;
+    top:520px;
+    left:500px;
 }
 
 .btnTerciario:hover {
@@ -244,4 +245,12 @@ input[type='checkbox']{
 .btnTerciario:disabled {
     color: #636363;
     border: 1px solid #636363;
+}
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
 }
