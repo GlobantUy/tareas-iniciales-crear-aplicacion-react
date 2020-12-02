@@ -16,7 +16,7 @@ class SimLoan extends Component {
         this.handleSumbit = this.handleSumbit.bind(this)
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -24,6 +24,7 @@ class SimLoan extends Component {
 
     handleSumbit(e) {
         e.preventDefault();
+        localStorage.setItem('prestamoValues', JSON.stringify(this.state));
         const {
             Ingreso,
             Monto_a_pedir,
@@ -44,6 +45,21 @@ class SimLoan extends Component {
             .catch(error => {
                 console.log("registration error", error)
             });
+    }
+    componentDidMount() {
+        this.documentData = JSON.parse(localStorage.getItem('prestamoValues'));
+
+        if (localStorage.getItem('prestamoValues')) {
+            this.setState({
+                Ingreso: this.state.Ingreso,
+                Monto_a_pedir: this.state.Monto_a_pedir,
+            })
+        } else {
+            this.setState({
+                Ingreso: '',
+                Monto_a_pedir: '',
+            })
+        }
     }
 
     render() {
@@ -123,11 +139,10 @@ class SimLoan extends Component {
                         />
                         <label htmlFor="Otros">Otros</label><br></br>
 
-                       
 
-                         <button className="btnPrimario" ><a href="http://localhost:3000/Descuento" class="button"> Simular prestamo</a></button>       
-                      
-                 
+
+                        <a href="http://localhost:3000/Descuento"><button className="btnPrimario">Registrarse</button></a>
+
                     </form>
 
                 </div>
