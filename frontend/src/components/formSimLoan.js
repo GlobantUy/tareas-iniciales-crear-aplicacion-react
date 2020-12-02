@@ -23,6 +23,7 @@ class SimLoan extends Component {
     }
 
     handleSumbit(e) {
+        
         e.preventDefault();
         localStorage.setItem('prestamoValues', JSON.stringify(this.state));
         const {
