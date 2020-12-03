@@ -53,7 +53,7 @@ class SimLoan extends Component {
                     <form onSubmit={this.handleSumbit}>
                         <h1 className="titleForm">Simulador de prestamos</h1>
                         <p>Ingreso($U)*</p>
-                        <input className="inputIngreso"
+                        <input className="Ingreso"
                             autoComplete="off"
                             type="number"
                             name="Ingreso" placeholder="Agregar en $U"
@@ -62,7 +62,7 @@ class SimLoan extends Component {
                             required />
 
                         <p>Moneda del Préstamo</p>
-                        <input className="inputPesos"
+                        <input
                             type="radio"
                             id="Moneda_U$S"
                             name="Moneda"
@@ -70,14 +70,16 @@ class SimLoan extends Component {
                         />
                         <label htmlFor="Moneda_U$S">U$S</label>
 
-                        <input className="inputPesos"
-                            type="radio"
-                            id="Moneda_$U"
-                            name="Moneda"
-                            value={this.state.Moneda_$U}
+                        <div className="inputPesos">
+                            <input
+                                type="radio"
+                                id="Moneda_$U"
+                                name="Moneda"
+                                value={this.state.Moneda_$U}
+                            />
+                            <label htmlFor="Moneda_$U">$U</label>
+                        </div>
 
-                        />
-                        <label htmlFor="Moneda_$U">$U</label><br />
                         <p>Monto a Pedir($U)*</p>
                         <input className="inputMonto"
                             autoComplete="off"
@@ -88,9 +90,7 @@ class SimLoan extends Component {
                             onChange={this.handleChange}
                             required /><br />
 
-
-
-                        <p>Años de financiación</p>
+                        <p>Años de financiación*</p>
                         <select className="inputAños" name="financiacion">
                             <option hidden>Selecciona una opción</option>
                             <option value="1">10</option>
@@ -127,7 +127,7 @@ class SimLoan extends Component {
                         />
                         <label htmlFor="Otros">Otros</label><br></br>
 
-                        <button type="submit" className="btnPrimario"> Simular Prestamo</button>
+                        <button type="submit" className="btnPrimario">Simular Prestamo</button>
 
                     </form>
                 </div>
