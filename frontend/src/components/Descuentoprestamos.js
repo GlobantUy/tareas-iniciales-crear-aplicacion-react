@@ -7,9 +7,9 @@ class Descuento extends Component {
     }
 
     volverSimular=()=> {
-       const ingresoValue = JSON.parse(localStorage.getItem('prestamoValues')).Ingreso;
-       const montoValue = JSON.parse(localStorage.getItem('prestamoValues')).Monto_a_pedir;
-        console.log('finfdifndifn')
+        sessionStorage.setItem('volverBoton', true);
+        window.location.href = 'http://localhost:3000'
+    
     }
 
     render() {
