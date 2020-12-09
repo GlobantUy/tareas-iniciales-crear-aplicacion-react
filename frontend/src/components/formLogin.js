@@ -1,85 +1,162 @@
-import React from 'react';
+import React, { Component, } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
-const SimLogin = () => (
-    <div className="formLogin">
-        <h1>Ingreso</h1>
-        <Formik
-            initialValues={{ email: '', password: '' }}
-            validate={values => {
-                const errors = {};
-                if (!values.email) {
-                    errors.email = 'Ingrese mail';
-                } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                ) {
-                    errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
-                }
-                return errors;
-            }}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
-                const { email, password, } = this.state;
-                axios.post('http://localhost:3000/api/hello', {
-                    user: {
-                        email: this.state.email,
-                        password: this.state.password,
+
+let rol
+let errorPass = true
+let mailCorrecto = false
+let contraCorrecta = false
+class SimLogin extends Component {
+
+    constructor(props) {
+        super(props)
+    }
+
+    redireccionar() {
+        if (rol == "CUSTOMER") {
+            window.location.href = "/"
+
+        } else if (rol == "ADMIN") {
+            window.location.href = "/registro"
+
+        } else {
+            if (mailCorrecto == false && contraCorrecta == false){
+                errorPass = false
+            }
+        }
+    }
+
+    post(email, pass) {
+        axios.post('http://localhost:8000/login', {
+            "email": email,
+            "passwd": pass,
+        },
+        )
+            .then(Response => {
+
+                console.log("post realizado correctamente", Response)
+
+                if (Response.data.found == undefined) {
+                    rol = Response.data.Rol;
+                    if (rol == "CUSTOMER") {
+                        console.log(rol)
+                        this.redireccionar()
+                    } else {
+                        console.log(rol)
+                        this.redireccionar()
                     }
-                },
-                )
-                    .then(Response => {
-                        console.log("ingreso res", Response)
-                    })
-                    .catch(error => {
-                        console.log("ingreso error", error)
-                    });
-            }}
+                } else {
+                    console.log(Response.data.found)
+                    this.redireccionar()
+                }
+            })
+            .catch(error => {
+                console.log("Error al iniciar sesion", error)
+            });
+    }
 
 
-        >
-            {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isSubmitting,
-            }) => (
-                    <form onSubmit={handleSubmit}>
-                        <p>Email *</p>
-                        <input className="inputIngreso"
-                            type="text"
-                            name="email"
-                            autoComplete="off"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
-                        />
-                        {errors.email && touched.email && <label className="error">{errors.email}</label>}
+    render() {
+        return (
+            <div className="formLogin">
+                <h1>Ingreso</h1>
+                <Formik
+                    initialValues={{ email: '', password: '' }}
+                    validate={values => {
+                        const errors = {};
 
-                        <p>Contraseña *</p>
-                        <input className="inputIngreso"
-                            type="password"
-                            name="password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.password}
-                        />
-                        {errors.password && touched.password && errors.password}
-                        <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
-                        <button className="btnPrimario" type="submit" disabled={isSubmitting}>
-                            Ingresar
+                        if (!values.password) {
+                            contraCorrecta = true
+                            errors.password = 'Ingrese contraseña';
+                            if (!values.email) {
+                                mailCorrecto = true
+                                errors.email = 'Ingrese mail';
+                            } else if (
+                                !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
+                            ) {
+                                mailCorrecto = true
+                                errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
+                            } else {
+                                mailCorrecto = false
+                            }
+
+                        } else {
+                            contraCorrecta = false
+                            if (errorPass == false) {
+                                errors.password = "La contraseña o el Mail son incorrectos";
+                                errorPass = true
+                            }
+
+                            if (!values.email) {
+                                mailCorrecto = true
+                                errors.email = 'Ingrese mail';
+                            } else if (
+                                !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
+                            ) {
+                                mailCorrecto = true
+                                errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
+                            } else {
+                                mailCorrecto = false
+                            }
+                        }
+
+                        return errors;
+                    }}
+
+
+                    onSubmit={(values, { setSubmitting }) => {
+                        if (mailCorrecto == false && contraCorrecta == false) {
+                            this.post(values.email, values.password)
+                            this.redireccionar
+                        }
+                        setSubmitting(false);
+                    }}
+                >
+                    {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                    }) => (
+                            <form onSubmit={handleSubmit}>
+                                <p>Email *</p>
+                                <input className="inputIngreso"
+                                    type="text"
+                                    name="email"
+                                    autoComplete="off"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
+                                />
+                                { touched.email && <label className="error">{errors.email}</label>}
+
+                                <p>Contraseña *</p>
+                                <input className="inputIngreso"
+                                    type="password"
+                                    name="password"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.password}
+                                />
+                                { touched.password && <label className="error">{errors.password}</label>}
+
+
+                                <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
+                                <button className="btnPrimario" type="submit" disabled={isSubmitting} onKeyDown={handleSubmit} onClick={handleSubmit}  >
+                                    Ingresar
                         </button><br />
-                    </form>
-                )}
-        </Formik>
-        <a href="http://localhost:3000/registro" target="_blank"><button className="btnSecundario">Registrarse</button></a>
+                            </form>
+                        )}
+                </Formik>
+                <a href="http://localhost:3000/registro" target="_blank"><button className="btnSecundario">Registrarse</button></a>
 
-    </div>
-);
+            </div>
+        )
+    }
+
+}
 
 export default SimLogin;
