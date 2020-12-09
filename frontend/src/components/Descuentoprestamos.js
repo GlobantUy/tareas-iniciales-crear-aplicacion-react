@@ -48,7 +48,8 @@ class Descuento extends Component {
                     <a href="http://localhost:3000" target="_blank"><button >Volver al inicio</button></a>
                 </ModalFooter>
             </Modal> 
-        </>    
+        </>  
+        /*fin popup*/  
         )
     }
 }
