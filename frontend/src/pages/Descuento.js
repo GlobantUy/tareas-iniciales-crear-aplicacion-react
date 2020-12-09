@@ -1,4 +1,4 @@
-import Descuento from '../components/Descuentoprestamos'
+import Table from '../components/Table'
 
 export default function Descuentoo() {
   return (
@@ -8,8 +8,9 @@ export default function Descuentoo() {
       
       <a href="http://localhost:3000/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a>
       </header>
-
-      <Descuento/>
+<div className="tablea">
+      <Table/>
+      </div>
       <footer>
 
       </footer>
