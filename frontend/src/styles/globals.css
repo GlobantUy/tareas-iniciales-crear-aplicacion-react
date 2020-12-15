@@ -388,3 +388,89 @@ line-height: 23px;
     font-size: 16px;
 line-height: 23px;
 }
+
+/*modal usuario logueado*/
+.modalStyles {
+    align-items: flex-start;
+    width: 416px;
+    height: 194px;
+    left: 6px;
+    top: 25%;
+    background: #FFFFFF;
+    border: 1px solid #8F8F8F;
+    box-sizing: border-box;
+    text-align: center;
+}
+.title {
+    margin-top: 30px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+}
+
+.text{
+    margin-top: 24px;
+    margin-left:51px;
+    margin-right: 43px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 23px;
+    text-align: center;
+    color: #000000;
+}
+
+.textModal2{
+    margin-top: 32px;
+    margin-left: 37px;
+    margin-right: 37px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 23px;
+    text-align: center;
+    color: #000000;
+}
+
+#btnCancelar {
+    position: absolute;
+    height: 40px;
+    width: 165px;
+    margin-left: 60px;
+    bottom: -80px;
+    border: 1px solid #F07E1A;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    color: #F07E1A;
+}
+
+#btnSolicitar {
+    
+    position: absolute;
+    margin-left: 270px;
+    width: 165px;
+    height: 40px;
+    margin-bottom: 20px;
+    color: #000000;
+    background: #F07E1A;
+    box-sizing: border-box;
+    bottom: -100px;
+    border: 1px solid #F07E1A;
+}
+
+#btnVolver{
+    position: absolute;
+    left: 160px;
+    bottom: -100px;
+    width: 168px;
+    height: 40px;
+    color: #000000;
+    background: #F07E1A;
+    box-sizing: border-box;
+    border: 1px solid #F07E1A;
+}

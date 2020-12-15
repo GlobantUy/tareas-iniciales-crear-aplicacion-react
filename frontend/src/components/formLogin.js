@@ -27,7 +27,7 @@ class SimLogin extends Component {
     }
 
     post(email, pass) {
-        axios.post('http://localhost:8000/login', {
+        axios.post('https://backendmain-lw9cfx37o.vercel.app/api/login', {
             "email": email,
             "passwd": pass,
         },
@@ -37,7 +37,7 @@ class SimLogin extends Component {
                 console.log("post realizado correctamente", Response)
 
                 if (Response.data.found == undefined) {
-                    rol = Response.data.Rol;
+                    rol = Response.data.rol;
                     if (rol == "CUSTOMER") {
                         console.log(rol)
                         this.redireccionar()
@@ -151,7 +151,7 @@ class SimLogin extends Component {
                             </form>
                         )}
                 </Formik>
-                <a href="http://localhost:3000/registro" target="_blank"><button className="btnSecundario">Registrarse</button></a>
+                <a href="http://localhost:3000/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
 
             </div>
         )
