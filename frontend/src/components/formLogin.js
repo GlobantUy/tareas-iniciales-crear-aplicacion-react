@@ -151,7 +151,7 @@ class SimLogin extends Component {
                             </form>
                         )}
                 </Formik>
-                <a href="http://localhost:3000/registro" target="_blank"><button className="btnSecundario">Registrarse</button></a>
+                <a href="http://localhost:3000/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
 
             </div>
         )
