@@ -79,6 +79,13 @@ class Table extends Component {
         })
     }
 
+    volverSimular=()=> {
+        sessionStorage.setItem('volverBoton', true);
+        window.location.href = 'http://localhost:3000'
+    
+    }
+
+
     render() {
         return (
             <div className="container">
@@ -97,7 +104,10 @@ class Table extends Component {
                     </table>
                 </div>
                 <div className="Buttons">
-                    <a href="http://localhost:3000" target="_self"><button type="submit" className="btnTerciario"> Volver a simular</button></a>
+
+                <button onClick={this.volverSimular} type="submit" className="btnTerciario"> Volver a simular</button>
+
+                    
                     <button type="submit" className="btnCuarto" onClick={this.abrirModal}> Solicitar préstamo</button>
                 </div>
 

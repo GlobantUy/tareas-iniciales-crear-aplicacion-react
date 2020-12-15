@@ -141,7 +141,8 @@ class SimLoan extends Component {
                             type="radio"
                             id="Moneda_U$S"
                             name="Moneda"
-                            value={this.state.Moneda_U$S}
+                            onChange={this.checkboxChange}
+                            checked={this.state.Moneda_U$S}
                         />
                         <label htmlFor="Moneda_U$S">U$S</label>
 
@@ -150,7 +151,8 @@ class SimLoan extends Component {
                                 type="radio"
                                 id="Moneda_$U"
                                 name="Moneda"
-                                value={this.state.Moneda_$U}
+                                onChange={this.checkboxChange}
+                                checked={this.state.Moneda_$U}
                             />
                             <label htmlFor="Moneda_$U">$U</label>
                         </div>
@@ -166,14 +168,13 @@ class SimLoan extends Component {
                             required /><br />
 
                         <p>Años de financiación*</p>
-                        <select className="inputAños" name="financiacion">
+                        <select className="inputAños" name="financiacion" value={this.state.financiacion} onChange={this.handleChange}>
                             <option hidden>Selecciona una opción</option>
                             <option value="1">10</option>
                             <option value="2">15</option>
                             <option value="3">20</option>
                             <option value="4">25</option>
                             <option value="5">30</option>
-                            value={this.state.financiacion}
                         </select>
                         <label htmlFor=""></label>
 
@@ -181,28 +182,31 @@ class SimLoan extends Component {
                         <input className="inputTipo"
                             type="checkbox"
                             id="Inmuebles"
-                            name="TipoDePrestamo"
-                            value={this.state.Inmuebles}
+                            name="TipoDePrestamoInmueble"
+                            onChange={this.checkboxChange}
+                            checked={this.state.TipoDePrestamoInmueble}
                         />
                         <label htmlFor="Inmuebles">Inmuebles</label><br></br>
 
                         <input className="inputTipo"
                             type="checkbox"
                             id="Automotor"
-                            name="TipoDePrestamo"
-                            value={this.state.Automotor}
+                            name="TipoDePrestamoAutomotor"
+                            onChange={this.checkboxChange}
+                            checked={this.state.TipoDePrestamoAutomotor}
                         />
                         <label htmlFor="Automotor">Automotor</label><br></br>
 
                         <input className="inputTipo"
                             type="checkbox"
                             id="Otros"
-                            name="TipoDePrestamo"
-                            value={this.state.Otros}
+                            name="TipoDePrestamoOtros"
+                            onChange={this.checkboxChange}
+                            checked={this.state.TipoDePrestamoOtros}
                         />
                         <label htmlFor="Otros">Otros</label><br></br>
 
-                        <button type="submit" className="btnPrimario">Simular Prestamo</button>
+                        <button  className="btnPrimario">Simular prestamo</button>
 
                     </form>
                 </div>
