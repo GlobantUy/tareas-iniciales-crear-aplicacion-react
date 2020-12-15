@@ -20,6 +20,12 @@ class Table extends Component {
           isDisabled: true
         });
  } 
+ 
+ volverSimular=()=> {
+    sessionStorage.setItem('volverBoton', true);
+    window.location.href = 'http://localhost:3000'
+
+}
 
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
