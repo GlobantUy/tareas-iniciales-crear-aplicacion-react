@@ -18,6 +18,8 @@
     "react-material-table": "^1.0.1",
     "react-router-dom": "^5.2.0",
     "react-table": "^7.6.2",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "formik": "^2.2.5",
+    "react-hook-form": "^6.11.5"
   }
 }

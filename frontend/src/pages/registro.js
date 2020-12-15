@@ -1,15 +1,13 @@
-import SimLogin from '../components/formLogin' 
 
 export default function Registro() {
-    return (
-      <div >
-      <header>
-        <h1>STB Bank Logo </h1>
+  return (
+    <div >
+      <header className="header">
+        <img className="logoheader" src="/logo.jpg" />
       </header>
-      <SimLogin />
       <footer>
 
       </footer>
     </div>
-      )
+  )
 }
