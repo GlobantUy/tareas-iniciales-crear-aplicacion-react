@@ -26,7 +26,7 @@ class SimLoan extends Component {
         this.handleSumbit = this.handleSumbit.bind(this)
     }
 
-    handleChange = (e) => {
+    handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -127,15 +127,37 @@ class SimLoan extends Component {
                 <div className="form">
                     <form onSubmit={this.handleSumbit}>
                         <h1 className="titleForm">Simulador de prestamos</h1>
-                        <p>Ingreso($U)</p>
-                        <input className="inputIngreso"
+                        <p>Ingreso($U)*</p>
+                        <input className="Ingreso"
+                            autoComplete="off"
                             type="number"
                             name="Ingreso" placeholder="Agregar en $U"
                             value={this.state.Ingreso}
                             onChange={this.handleChange}
                             required />
-                        <p>Monto a Pedir($U)</p>
+
+                        <p>Moneda del Préstamo</p>
+                        <input
+                            type="radio"
+                            id="Moneda_U$S"
+                            name="Moneda"
+                            value={this.state.Moneda_U$S}
+                        />
+                        <label htmlFor="Moneda_U$S">U$S</label>
+
+                        <div className="inputPesos">
+                            <input
+                                type="radio"
+                                id="Moneda_$U"
+                                name="Moneda"
+                                value={this.state.Moneda_$U}
+                            />
+                            <label htmlFor="Moneda_$U">$U</label>
+                        </div>
+
+                        <p>Monto a Pedir($U)*</p>
                         <input className="inputMonto"
+                            autoComplete="off"
                             type="number"
                             name="Monto_a_pedir"
                             placeholder="Agregar Monto"
@@ -143,35 +165,15 @@ class SimLoan extends Component {
                             onChange={this.handleChange}
                             required /><br />
 
-                        <p>Moneda del Préstamo</p>
-                        <input className="inputPesos"
-                            type="radio"
-                            id="Moneda_U$S"
-                            name="Moneda"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Moneda_U$S}
-
-                        />
-                        <label htmlFor="Moneda_U$S">U$S</label>
-
-                        <input className="inputPesos"
-                            type="radio"
-                            id="Moneda_$U"
-                            name="Moneda"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Moneda_$U}
-
-                        />
-                        <label htmlFor="Moneda_$U">$U</label><br />
-
-                        <p>Años de financiación</p>
-                        <select className="inputAños" name="financiacion" value={this.state.financiacion} onChange={this.handleChange}>
+                        <p>Años de financiación*</p>
+                        <select className="inputAños" name="financiacion">
                             <option hidden>Selecciona una opción</option>
                             <option value="1">10</option>
                             <option value="2">15</option>
                             <option value="3">20</option>
                             <option value="4">25</option>
                             <option value="5">30</option>
+                            value={this.state.financiacion}
                         </select>
                         <label htmlFor=""></label>
 
@@ -179,37 +181,34 @@ class SimLoan extends Component {
                         <input className="inputTipo"
                             type="checkbox"
                             id="Inmuebles"
-                            name="TipoDePrestamoInmueble"
-                            onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoInmueble}
+                            name="TipoDePrestamo"
+                            value={this.state.Inmuebles}
                         />
                         <label htmlFor="Inmuebles">Inmuebles</label><br></br>
 
                         <input className="inputTipo"
                             type="checkbox"
                             id="Automotor"
-                            name="TipoDePrestamoAutomotor"
-                            onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoAutomotor}
-
+                            name="TipoDePrestamo"
+                            value={this.state.Automotor}
                         />
                         <label htmlFor="Automotor">Automotor</label><br></br>
 
                         <input className="inputTipo"
                             type="checkbox"
                             id="Otros"
-                            name="TipoDePrestamoOtros"
-                            onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            name="TipoDePrestamo"
+                            value={this.state.Otros}
                         />
                         <label htmlFor="Otros">Otros</label><br></br>
 
-                        <button  className="btnPrimario">Simular prestamo</button>
-                    </form>
+                        <button type="submit" className="btnPrimario">Simular Prestamo</button>
 
+                    </form>
                 </div>
             </div>
         )
     }
 }
+
 export default SimLoan;

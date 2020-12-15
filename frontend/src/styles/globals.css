@@ -12,9 +12,10 @@ a {
     text-decoration: none
 }
 
-body {}
+/* body {} */
 
 h1 {
+    width: 100%;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -100,8 +101,13 @@ select:focus {
 .btnHeader:hover {
     cursor: pointer;
 }
-
-.titleForm {}
+.titleForm {
+    font-size: 10px;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    white-space: pre;
+}
 
 .form {
     width: 168px;
@@ -116,16 +122,25 @@ select:focus {
 .inputIngreso {
     margin-top: 4px;
     height: 40px;
+    width: 190px;
+}
+
+.Ingreso {
+    margin-top: 4px;
+    height: 40px;
     width: 167px;
 }
 
 .inputMonto {
+    margin-top: 4px;
     height: 40px;
     width: 167px;
 }
 
 .inputPesos {
     margin-top: 4px;
+    margin-top: -20px;
+    text-align: right;
 }
 
 .inputTipo {
@@ -133,7 +148,7 @@ select:focus {
     text-align: right;
 }
 
-input[type='radio'] {}
+/* input[type='radio'] {} */
 
 .inputAños {
     margin-top: 4px;
@@ -141,17 +156,29 @@ input[type='radio'] {}
     width: 167px;
 }
 
-input[type='checkbox'] {}
+/* input[type='checkbox'] {}
+    height: 46px;
+    width: 175px;
+} */
+
+input[type='checkbox'] {
+    margin-top: 4px;
+}
 
 /* Ingreso */
 
 .formLogin {
     width: 168px;
+    width: 190px;
     position: absolute;
     left: 50%;
     margin-left: -82px;
     margin-top: 118px;
     text-align: center;
+}
+
+.error {
+    color: #E2331F;
 }
 
 .recContr {
@@ -185,6 +212,7 @@ input[type='checkbox'] {}
     border: 1px solid #F07E1A;
     color: #F07E1A;
     background-color: transparent;
+    margin-top: 15px;
 }
 
 .btnSecundario:hover {
