@@ -9,6 +9,16 @@ class SimLoan extends Component {
         this.state = {
             Ingreso: '',
             Monto_a_pedir: '',
+
+            Moneda_$U: false,
+            Moneda_U$S: false,
+
+            financiacion: '',
+
+            TipoDePrestamoInmueble: false,
+            TipoDePrestamoAutomotor: false,
+            TipoDePrestamoOtros: false,
+
             registrationErrors: ''
         }
 
@@ -22,17 +32,64 @@ class SimLoan extends Component {
         })
     }
 
+    checkboxChange = (e) => {
+        switch (e.target.name) {
+            case 'TipoDePrestamoInmueble':
+                this.setState({
+                    TipoDePrestamoInmueble: !this.state.TipoDePrestamoInmueble
+                })
+                break;
+            case 'TipoDePrestamoAutomotor':
+                this.setState({
+                    TipoDePrestamoAutomotor: !this.state.TipoDePrestamoAutomotor
+                })
+                break;
+            case 'TipoDePrestamoOtros':
+                this.setState({
+                    TipoDePrestamoOtros: !this.state.TipoDePrestamoOtros
+                })
+                break;
+            case 'Moneda':
+                if (e.target.id == 'Moneda_$U') {
+                    this.setState({
+                        Moneda_$U: !this.state.Moneda_$U,
+                        Moneda_U$S: false
+                    })
+                } else {
+                    this.setState({
+                        Moneda_U$S: !this.state.Moneda_U$S,
+                        Moneda_$U: false
+                    })
+                }
+
+                break;
+            default:
+                break;
+        }
+
+    }
+
     handleSumbit(e) {
         e.preventDefault();
+        sessionStorage.setItem('prestamoValues', JSON.stringify(this.state));
+        sessionStorage.setItem('volverBoton', false);
         const {
             Ingreso,
             Monto_a_pedir,
+            financiacion,
+            TipoDePrestamoInmueble,
+            TipoDePrestamoAutomotor,
+            TipoDePrestamoOtros
         } = this.state;
 
         axios.post('http://localhost:3000/api/hello', {
             user: {
                 Ingreso: this.state.Ingreso,
                 Monto_a_pedir: this.state.Monto_a_pedir,
+                financiacion: this.state.financiacion,
+                TipoDePrestamoInmueble: this.state.TipoDePrestamoInmueble,
+                TipoDePrestamoAutomotor: this.state.TipoDePrestamoAutomotor,
+                TipoDePrestamoOtros: this.state.TipoDePrestamoOtros,
 
             }
         },
@@ -40,10 +97,28 @@ class SimLoan extends Component {
         )
             .then(Response => {
                 console.log("registration res", Response)
-            })
+                window.location.href = 'http://localhost:3000/Descuento'            })
             .catch(error => {
                 console.log("registration error", error)
             });
+    }
+    componentDidMount() {
+        const volverTue = JSON.parse(sessionStorage.getItem('volverBoton'));
+        if (volverTue) {
+            this.setState({
+                Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
+                Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
+
+                Moneda_$U: JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U,
+                Moneda_U$S: JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_U$S,
+
+                financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
+
+                TipoDePrestamoInmueble: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoInmueble,
+                TipoDePrestamoAutomotor: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoAutomotor,
+                TipoDePrestamoOtros: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoOtros,
+            })
+        }
     }
 
     render() {
