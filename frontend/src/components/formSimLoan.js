@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-
+const validate = values => {
+    const errors = {}
+    if () {
+    
+    }
+    }
 class SimLoan extends Component {
     constructor(props) {
         super(props)
@@ -19,7 +24,9 @@ class SimLoan extends Component {
             TipoDePrestamoAutomotor: false,
             TipoDePrestamoOtros: false,
 
-            registrationErrors: ''
+            registrationErrors: '',
+
+            errors: {}
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -81,6 +88,12 @@ class SimLoan extends Component {
             TipoDePrestamoAutomotor,
             TipoDePrestamoOtros
         } = this.state;
+
+        const { errors, ...sinErrors } = this.state
+        const {result} = validate(sinErrors)
+        if (object.keys(result)) {
+        return this.setState({ errors: result })
+        }
 
         axios.post('http://localhost:3000/api/hello', {
             user: {
