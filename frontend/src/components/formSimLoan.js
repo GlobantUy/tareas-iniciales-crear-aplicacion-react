@@ -3,10 +3,20 @@ import axios from 'axios';
 
 const validate = values => {
     const errors = {}
-    if () {
-    
+    if (!values.Ingreso) {
+        errors.Ingreso = 'este campo es obligatorio'
     }
+    if (!values.Monto_a_pedir) {
+        errors.Monto_a_pedir = 'este campo es obligatorio'
     }
+
+    let porsentaje = (0.2) * (values.Ingreso)
+    let monto = values.Monto_a_pedir
+    if ( monto > porsentaje) {
+        errors.Monto_a_pedir = 'El monto a solicitar supera el 20% de su sueldo, por favor intente con un monto menor'
+    } 
+    return errors
+}
 class SimLoan extends Component {
     constructor(props) {
         super(props)
@@ -88,11 +98,12 @@ class SimLoan extends Component {
             TipoDePrestamoAutomotor,
             TipoDePrestamoOtros
         } = this.state;
-
+       
         const { errors, ...sinErrors } = this.state
-        const {result} = validate(sinErrors)
-        if (object.keys(result)) {
-        return this.setState({ errors: result })
+        const result = validate(sinErrors)
+        this.setState({errors: result})
+        if (!Object.keys(result).length) {
+            console.log('enviar formulario')
         }
 
         axios.post('http://localhost:3000/api/hello', {
@@ -110,7 +121,10 @@ class SimLoan extends Component {
         )
             .then(Response => {
                 console.log("registration res", Response)
-                window.location.href = 'http://localhost:3000/Descuento'            })
+                if (!Object.keys(result).length){
+                window.location.href = 'http://localhost:3000/Descuento'
+            }
+            })
             .catch(error => {
                 console.log("registration error", error)
             });
@@ -135,19 +149,24 @@ class SimLoan extends Component {
     }
 
     render() {
+        const { errors } = this.state
         return (
             <div>
                 <div className="form">
                     <form onSubmit={this.handleSumbit}>
                         <h1 className="titleForm">Simulador de prestamos</h1>
+
                         <p>Ingreso($U)*</p>
                         <input className="Ingreso"
                             autoComplete="off"
                             type="number"
-                            name="Ingreso" placeholder="Agregar en $U"
+                            name="Ingreso"
+                            placeholder="Agregar en $U"
                             value={this.state.Ingreso}
                             onChange={this.handleChange}
-                            required />
+                        //required 
+                        />
+                        <label className="error">{errors.Ingreso}</label>
 
                         <p>Moneda del Préstamo</p>
                         <input
@@ -157,6 +176,8 @@ class SimLoan extends Component {
                             onChange={this.checkboxChange}
                             checked={this.state.Moneda_U$S}
                         />
+
+
                         <label htmlFor="Moneda_U$S">U$S</label>
 
                         <div className="inputPesos">
@@ -178,7 +199,11 @@ class SimLoan extends Component {
                             placeholder="Agregar Monto"
                             value={this.state.Monto_a_pedir}
                             onChange={this.handleChange}
-                            required /><br />
+                        //required 
+                        />
+                        <label className="error">{errors.Monto_a_pedir}</label>
+
+                        <br />
 
                         <p>Años de financiación*</p>
                         <select className="inputAños" name="financiacion" value={this.state.financiacion} onChange={this.handleChange}>
@@ -219,7 +244,7 @@ class SimLoan extends Component {
                         />
                         <label htmlFor="Otros">Otros</label><br></br>
 
-                        <button  className="btnPrimario">Simular prestamo</button>
+                        <button className="btnPrimario">Simular prestamo</button>
 
                     </form>
                 </div>
