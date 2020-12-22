@@ -192,7 +192,7 @@ input[type='checkbox'] {
     background: #F07E1A;
     border: none;
     height: 40px;
-    width: 168px;
+    width: 196px;
     margin-top: 24px;
 }
 
@@ -201,13 +201,17 @@ input[type='checkbox'] {
     background: rgba(240, 126, 26, 0.8);
 }
 
-.btnPrimario:disabled {
+.btnPrimarioDisabled {
     color: #636363;
     background: #E0E0E0;
+    border: none;
+    height: 40px;
+    width: 196px;
+    margin-top: 24px;
 }
 
 .btnSecundario {
-    width: 168px;
+    width: 196px;
     height: 40px;
     border: 1px solid #F07E1A;
     color: #F07E1A;
