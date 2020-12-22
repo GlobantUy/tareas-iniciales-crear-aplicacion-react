@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     }
     if (req.method === 'POST') {
         try {
-            loanSearch = await collectionT.find({ _id: req.body.email }).toArray();
+            loanSearch = await collectionT.find({ userName: req.body.email }).toArray();
 
             for (i = 0; i < loanSearch.length; i++) {
                 if (loanSearch[i].state == undefined) {
