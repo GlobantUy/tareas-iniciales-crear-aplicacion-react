@@ -36,14 +36,7 @@ module.exports = async (req, res) => {
                 try {
                     req.body.amount.parseFloat()
                 } catch {
-                    return res.json({
-                        _links: {
-                            self: {
-                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
-                            }
-                        },
-                        message: "Provided amount is not a number",
-                    })
+
                 }
 
             }
