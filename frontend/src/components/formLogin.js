@@ -16,7 +16,7 @@ class SimLogin extends Component {
 
     redireccionar() {
         if (rol == "CUSTOMER") {
-            //window.location.href = "/"
+            window.location.href = "/"
             
             this.guardarStorage(emaill,passwordd)
 
