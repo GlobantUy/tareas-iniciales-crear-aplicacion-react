@@ -21,7 +21,12 @@ module.exports = async (req, res) => {
         try {
             loanSearch = await collectionT.find({ userName: req.body.email }).toArray();
 
-           
+            for (i = 0; i < loanSearch.length; i++) {
+                if (loanSearch[i].state == undefined) {
+                    conf = false
+                }
+            }
+
             if (conf == true) {
                 const newLoan = new Loan({
 
@@ -35,24 +40,18 @@ module.exports = async (req, res) => {
                     stateDate: cDate
                 })
                 try {
-                    let conf2 = true
-                    db.collection("loans").insertOne(newLoan, function (err, res) {
-                        if (err) {
-                            throw err,
-                            conf2 = false
 
-                        }
+                    db.collection("loans").insertOne(newLoan)
+
+                    return res.json({
+                        _links: {
+                            self: {
+                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                            }
+                        },
+                        message: "Mabye it worked"
                     })
-                    if (conf2 == true) {
-                        return res.json({
-                            _links: {
-                                self: {
-                                    href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
-                                }
-                            },
-                            message: "Mabye it worked"
-                        })
-                    }
+
                 } catch {
                     return res.json({
                         _links: {
@@ -77,7 +76,7 @@ module.exports = async (req, res) => {
                 })
             }
         } catch (err) {
-            return res.status(500).json({ error: console.log(err) })
+            return res.status(500).json({ error: console.log("Test") })
         }
     }
 
