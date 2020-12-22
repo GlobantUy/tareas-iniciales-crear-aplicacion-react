@@ -21,12 +21,7 @@ module.exports = async (req, res) => {
         try {
             loanSearch = await collectionT.find({ userName: req.body.email }).toArray();
 
-            for (i = 0; i < loanSearch.length; i++) {
-                if (loanSearch[i].state == undefined) {
-                    conf = false
-                }
-            }
-
+           
             if (conf == true) {
                 const newLoan = new Loan({
 
@@ -82,7 +77,7 @@ module.exports = async (req, res) => {
                 })
             }
         } catch (err) {
-            return res.status(500).json({ error: console.log("Test") })
+            return res.status(500).json({ error: console.log(err) })
         }
     }
 
