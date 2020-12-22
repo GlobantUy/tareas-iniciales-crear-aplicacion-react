@@ -4,15 +4,15 @@ import axios from 'axios';
 const validate = values => {
     const errors = {}
     if (!values.Ingreso) {
-        errors.Ingreso = 'este campo es obligatorio'
+        errors.Ingreso = 'Este campo es obligatorio'
     }
     if (!values.Monto_a_pedir) {
-        errors.Monto_a_pedir = 'este campo es obligatorio'
+        errors.Monto_a_pedir = 'Este campo es obligatorio'
     }
 
-    let porsentaje = (0.2) * (values.Ingreso)
+    let porCentaje = (0.2) * (values.Ingreso)
     let monto = values.Monto_a_pedir
-    if ( (monto > porsentaje) && (values.Ingreso > 0)) {
+    if ( (monto > porCentaje) && (values.Ingreso > 0)) {
         errors.Monto_a_pedir = 'El monto a solicitar supera el 20% de su sueldo, por favor intente con un monto menor'
     } 
     return errors
@@ -154,7 +154,7 @@ class SimLoan extends Component {
             <div>
                 <div className="form">
                     <form onSubmit={this.handleSumbit}>
-                        <h1 className="titleForm">Simulador de prestamos</h1>
+                        <h1 className="titleForm">Simulador de préstamos</h1>
 
                         <p>Ingreso($U)*</p>
                         <input className="Ingreso"
@@ -244,7 +244,7 @@ class SimLoan extends Component {
                         />
                         <label htmlFor="Otros">Otros</label><br></br>
 
-                        <button className="btnPrimario">Simular prestamo</button>
+                        <button className="btnPrimario">Simular préstamo</button>
 
                     </form>
                 </div>
