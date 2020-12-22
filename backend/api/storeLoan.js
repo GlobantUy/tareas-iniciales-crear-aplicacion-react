@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
                     date: cDate,
                     currency: req.body.currency,
                     payments: req.body.payments,
-                    state: true,
+                    state: undefined,
                     _id: req.body.email + cDate,
                     stateDate: cDate
                 })
