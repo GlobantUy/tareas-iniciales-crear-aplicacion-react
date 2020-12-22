@@ -44,7 +44,20 @@ module.exports = async (req, res) => {
                     _id: req.body.userEmail + cDate
                 })
                 try {
-                    await newLoan.save()
+                    db.collection("loans").insertOne(newLoan, function(err, res) {
+                        if (err) throw err
+                        return res.json({
+                            _links: {
+                                self: {
+                                    href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                }
+                            },
+                            message: "Mabye it worked"
+        
+                        })
+
+                        
+                    })
                 } catch {
                     return res.json({
                         _links: {
