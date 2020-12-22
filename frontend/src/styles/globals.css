@@ -306,6 +306,7 @@ a.button {
     width: 39%;
     position: absolute;
     top:40vh;
+    display: inline-block;
 }
 
 #clientes td, #clientes th {
