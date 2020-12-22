@@ -44,19 +44,21 @@ module.exports = async (req, res) => {
                     _id: req.body.userEmail + cDate
                 })
                 try {
-                    db.collection("loans").insertOne(newLoan, function(err, res) {
-                        if (err) throw err
-                        return res.json({
-                            _links: {
-                                self: {
-                                    href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
-                                }
-                            },
-                            message: "Mabye it worked"
-        
-                        })
+                    db.collection("loans").insertOne(newLoan, function (err, res) {
+                        if (err) {
+                            throw err
+                            console.log("Failure to insert")
+                        } else {
+                            return res.json({
+                                _links: {
+                                    self: {
+                                        href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                    }
+                                },
+                                message: "Mabye it worked"
 
-                        
+                            })
+                        }
                     })
                 } catch {
                     return res.json({
@@ -66,7 +68,7 @@ module.exports = async (req, res) => {
                             }
                         },
                         message: "Storage fail"
-    
+
                     })
                 }
 
