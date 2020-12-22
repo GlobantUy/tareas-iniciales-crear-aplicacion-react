@@ -44,22 +44,24 @@ module.exports = async (req, res) => {
                     _id: req.body.userEmail + cDate
                 })
                 try {
+                    let conf2 = true
                     db.collection("loans").insertOne(newLoan, function (err, res) {
                         if (err) {
-                            throw err
-                            console.log("Failure to insert")
-                        } else {
-                            return res.json({
-                                _links: {
-                                    self: {
-                                        href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
-                                    }
-                                },
-                                message: "Mabye it worked"
+                            throw err,
+                            conf2 = false
 
-                            })
                         }
                     })
+                    if (conf2 == true) {
+                        return res.json({
+                            _links: {
+                                self: {
+                                    href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                }
+                            },
+                            message: "Mabye it worked"
+                        })
+                    }
                 } catch {
                     return res.json({
                         _links: {
