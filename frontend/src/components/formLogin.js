@@ -6,6 +6,8 @@ let rol
 let errorPass = true
 let mailCorrecto = false
 let contraCorrecta = false
+let emaill
+let passwordd
 class SimLogin extends Component {
 
     constructor(props) {
@@ -14,7 +16,9 @@ class SimLogin extends Component {
 
     redireccionar() {
         if (rol == "CUSTOMER") {
-            window.location.href = "/"
+            //window.location.href = "/"
+            
+            this.guardarStorage(emaill,passwordd)
 
         } else if (rol == "ADMIN") {
             window.location.href = "/registro"
@@ -55,6 +59,16 @@ class SimLogin extends Component {
             });
     }
 
+             guardarStorage = (a, b) =>{
+            console.log('si')
+                this.values ={
+                    email: a,
+                    password: b
+                }
+
+                sessionStorage.setItem('Usuario-Values',  JSON.stringify(this.values) );
+
+            }
 
     render() {
         return (
@@ -81,6 +95,9 @@ class SimLogin extends Component {
                             }
 
                         } else {
+                            
+                            passwordd = values.password
+                            console.log(passwordd)
                             contraCorrecta = false
                             if (errorPass == false) {
                                 errors.password = "La contraseña o el Mail son incorrectos";
@@ -96,6 +113,8 @@ class SimLogin extends Component {
                                 mailCorrecto = true
                                 errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
                             } else {
+                                emaill = values.email
+                                
                                 mailCorrecto = false
                             }
                         }
