@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
     if (req.method === 'POST') {
         try {
             userSearch = await collectionU.find({ email: req.body.email }).toArray();
-
+            
             if (userSearch.length != 1) {
                 return res.json({
                     _links: {
@@ -33,75 +33,71 @@ module.exports = async (req, res) => {
                     message: "Provided email does not belong to a registered user",
                 })
             } else {
-                try {
-                    req.body.amount.parseFloat()
-                } catch {
+                
 
                 }
-
-            }
-            loanSearch = await collectionT.find({ userName: req.body.email }).toArray();
+                loanSearch = await collectionT.find({ userName: req.body.email }).toArray();
 
 
-            for (i = 0; i < loanSearch.length; i++) {
-                if (loanSearch[i].state == undefined) {
-                    conf = false
+                for (i = 0; i < loanSearch.length; i++) {
+                    if (loanSearch[i].state == undefined) {
+                        conf = false
+                    }
                 }
-            }
 
-            if (conf == true && req.body.email != undefined) {
+                if (conf == true && req.body.email != undefined) {
 
-                const newLoan = new Loan({
+                    const newLoan = new Loan({
 
-                    userName: req.body.email,
-                    amount: req.body.amount,
-                    date: cDate,
-                    currency: req.body.currency,
-                    payments: req.body.payments,
-                    state: undefined,
-                    _id: req.body.email + cDate,
-                    stateDate: cDate
-                })
-                try {
+                        userName: req.body.email,
+                        amount: req.body.amount,
+                        date: cDate,
+                        currency: req.body.currency,
+                        payments: req.body.payments,
+                        state: undefined,
+                        _id: req.body.email + cDate,
+                        stateDate: cDate
+                    })
+                    try {
 
-                    db.collection("loans").insertOne(newLoan)
+                        db.collection("loans").insertOne(newLoan)
 
+                        return res.json({
+                            _links: {
+                                self: {
+                                    href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                }
+                            },
+                            message: "Mabye it worked"
+                        })
+
+                    } catch {
+                        return res.json({
+                            _links: {
+                                self: {
+                                    href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                }
+                            },
+                            message: "Storage fail"
+
+                        })
+                    }
+
+                } else {
                     return res.json({
                         _links: {
                             self: {
                                 href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
                             }
                         },
-                        message: "Mabye it worked"
-                    })
-
-                } catch {
-                    return res.json({
-                        _links: {
-                            self: {
-                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
-                            }
-                        },
-                        message: "Storage fail"
+                        message: "The user already has a loan pending approval"
 
                     })
                 }
-
-            } else {
-                return res.json({
-                    _links: {
-                        self: {
-                            href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
-                        }
-                    },
-                    message: "The user already has a loan pending approval"
-
-                })
             }
-        }
         } catch (err) {
-        return res.status(500).json({ error: console.log("Test") })
+            return res.status(500).json({ error: console.log("Test") })
+        }
     }
-}
 
 }
