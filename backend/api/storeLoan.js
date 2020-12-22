@@ -3,11 +3,13 @@ const Loan = require('./models/table')
 
 module.exports = async (req, res) => {
     let loanSearch
+    let conf = true
     var date = new Date()
     var month = date.getUTCMonth() + 1; //months from 1-12
     var day = date.getUTCDate();
     var year = date.getUTCFullYear();
     var cDate = year + "/" + month + "/" + day
+    var i
 
 
     const db = await connectToDatabase();
@@ -17,29 +19,24 @@ module.exports = async (req, res) => {
     }
     if (req.method === 'POST') {
         try {
-            loanSearch = await collectionT.find({ _id: req.body.email + req.body.date }).toArray();
-            console.log(req.body.email)
-            console.log(req.body.date)
-            let conf = true
-            try {
-                loanSearch[0].date
-            } catch {
-                conf = false
-                console.log(req.body.email)
+            loanSearch = await collectionT.find({ _id: req.body.email }).toArray();
 
+            for (i = 0; i < loanSearch.length; i++) {
+                if (loanSearch[i].state == undefined) {
+                    conf = false
+                    return res.json({
+                        _links: {
+                            self: {
+                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                            }
+                        },
+                        message: "The user already has a loan pending approval"
+
+                    })
+                }
             }
 
             if (conf == true) {
-                return res.json({
-                    _links: {
-                        self: {
-                            href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
-                        }
-                    },
-                    message: "The user already has a loan pending approval"
-
-                })
-            } else {
                 const newLoan = new Loan({
 
                     userName: req.body.email,
