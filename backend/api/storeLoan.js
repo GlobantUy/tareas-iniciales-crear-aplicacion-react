@@ -22,15 +22,15 @@ module.exports = async (req, res) => {
     if (req.method === 'POST') {
         try {
             userSearch = await collectionU.find({ email: req.body.email }).toArray();
-            console.log(userSearch.lenght)
-            if (userSearch.lenght != 1) {
+            
+            if (userSearch.length != 1) {
                 return res.json({
                     _links: {
                         self: {
                             href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
                         }
                     },
-                    message: "Provided email does not belong to a registered user"
+                    message: "Provided email does not belong to a registered user",
                 })
             } else {
                 loanSearch = await collectionT.find({ userName: req.body.email }).toArray();
