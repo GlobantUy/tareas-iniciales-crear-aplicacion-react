@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
                     message: "Provided email does not belong to a registered user",
                 })
             } else {
-                if (Number(req.body.amount) == NaN) {
+                if (isNaN(req.body.amount)) {
                     return res.json({
                         _links: {
                             self: {
