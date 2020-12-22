@@ -95,7 +95,7 @@ module.exports = async (req, res) => {
                                                 href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
                                             }
                                         },
-                                        message: "Mabye it worked"
+                                        message: "Storage successful"
                                     })
 
                                 } catch {
