@@ -3,7 +3,12 @@ const Loan = require('./models/table')
 
 module.exports = async (req, res) => {
     let loanSearch
-    var cDate = new Date()
+    var Date = new Date()
+    var month = Date.getUTCMonth() + 1; //months from 1-12
+    var day = Date.getUTCDate();
+    var year = Date.getUTCFullYear();
+    var cDate = year + "/" + month + "/" + day
+
 
     const db = await connectToDatabase();
     const collectionT = await db.collection("loans");
