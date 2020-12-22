@@ -3,10 +3,10 @@ const Loan = require('./models/table')
 
 module.exports = async (req, res) => {
     let loanSearch
-    var Date = new Date()
-    var month = Date.getUTCMonth() + 1; //months from 1-12
-    var day = Date.getUTCDate();
-    var year = Date.getUTCFullYear();
+    var date = new Date()
+    var month = date.getUTCMonth() + 1; //months from 1-12
+    var day = date.getUTCDate();
+    var year = date.getUTCFullYear();
     var cDate = year + "/" + month + "/" + day
 
 
