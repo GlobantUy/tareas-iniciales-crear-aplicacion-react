@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
                         message: "Provided amount is not a number",
                     })
                 } else {
-
+                    console.log("Ineedtocommit")
                     loanSearch = await collectionT.find({ userName: req.body.email }).toArray();
 
 
