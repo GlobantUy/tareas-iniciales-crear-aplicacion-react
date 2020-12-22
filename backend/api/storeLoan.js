@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     }
     if (req.method === 'POST') {
         try {
-            loanSearch = await collectionT.find({ email: req.body.email, date: req.body.date }).toArray();
+            loanSearch = await collectionT.find({ _id: req.body.email + req.body.date }).toArray();
             let conf = true
             try {
                 loanSearch[0].date
