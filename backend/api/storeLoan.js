@@ -46,7 +46,8 @@ module.exports = async (req, res) => {
                     currency: req.body.currency,
                     payments: req.body.payments,
                     state: undefined,
-                    _id: req.body.userEmail + cDate
+                    _id: req.body.email + cDate,
+                    stateDate: cDate
                 })
                 try {
                     let conf2 = true

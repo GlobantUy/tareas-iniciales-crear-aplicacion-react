@@ -29,6 +29,10 @@ const tableSchema = new mongoose.Schema({
   _id: {
     type: String,
     required: true
+  },
+  stateDate: {
+    type: String,
+    required: true
   }
 })
 
