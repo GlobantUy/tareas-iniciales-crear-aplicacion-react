@@ -24,15 +24,6 @@ module.exports = async (req, res) => {
             for (i = 0; i < loanSearch.length; i++) {
                 if (loanSearch[i].state == undefined) {
                     conf = false
-                    return res.json({
-                        _links: {
-                            self: {
-                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
-                            }
-                        },
-                        message: "The user already has a loan pending approval"
-
-                    })
                 }
             }
 
@@ -79,6 +70,16 @@ module.exports = async (req, res) => {
                     })
                 }
 
+            } else {
+                return res.json({
+                    _links: {
+                        self: {
+                            href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                        }
+                    },
+                    message: "The user already has a loan pending approval"
+
+                })
             }
         } catch (err) {
             return res.status(500).json({ error: console.log(err) })
