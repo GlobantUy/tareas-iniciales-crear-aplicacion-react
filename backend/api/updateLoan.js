@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
                                 href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
                             }
                         },
-                        message: "IDK"
+                        message: "Missing stuff goes here"
 
                     })
                 }
