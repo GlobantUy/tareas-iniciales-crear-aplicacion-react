@@ -26,10 +26,8 @@ module.exports = async (req, res) => {
                     test: loanSearch.length
                 })
             } else {
-                trueloanSearch = await collectionT.find({ userName: req.body.email, state: true }).toArray();
-                falseloanSearch = await collectionT.find({ userName: req.body.email, state: false }).toArray();
-                let total = trueloanSearch.length + falseloanSearch.length
-                if (totalLoanSearch.length == total) {
+               
+                if (totalLoanSearch.length) {
                     return res.json({
                         _links: {
                             self: {
