@@ -12,6 +12,11 @@ class Table extends Component {
         abierto3: false,
 
     }
+
+    volverAceptarPres = () => {
+        sessionStorage.setItem('volverAceptarpress', false);
+    }
+
     abrirModal = () => {
         const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
         if (emailCargado) {
@@ -105,18 +110,13 @@ class Table extends Component {
                 <div>
                     <table id='clientes'>
                         <tbody>
-
                             <tr>{this.renderTableHeader()}</tr>
                             {this.renderTableData()}
-
                         </tbody>
                     </table>
                 </div>
                 <div className="Buttons">
-
                     <button onClick={this.volverSimular} type="submit" className="btnTerciario"> Volver a simular</button>
-
-
                     <button type="submit" className="btnCuarto" onClick={this.abrirModal}> Solicitar préstamo</button>
                 </div>
 
@@ -138,16 +138,14 @@ class Table extends Component {
                         <ModalBody className="modalBody">
                             <p className="subTitle">Necesita ingresar como usuario para <br></br> solicitar el préstamo</p>
                             <Button id="btnCR" onClick={this.cerrarModal3} > Cerrar </Button>
-                            <a href="/ingreso">
-                                <Button id="btnIN"> Ingresar </Button>
+                            <a href="/ingreso" >
+                                <Button id="btnIN" onClick={this.volverAceptarPres}> Ingresar </Button>
                             </a>
                         </ModalBody>
                     </ModalHeader>
                 </Modal>
 
             </div>
-
-
         )
     }
 }
