@@ -8,6 +8,7 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
+let URL = 'https://backendmain-lw9cfx37o.vercel.app/api/login'
 class SimLogin extends Component {
 
     constructor(props) {
@@ -31,7 +32,7 @@ class SimLogin extends Component {
     }
 
     post(email, pass) {
-        axios.post('https://backendmain-lw9cfx37o.vercel.app/api/login', {
+        axios.post(URL, {
             "email": email,
             "passwd": pass,
         },
@@ -125,7 +126,6 @@ class SimLogin extends Component {
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == false && contraCorrecta == false) {
                             this.post(values.email, values.password)
-                            this.redireccionar
                         }
                         setSubmitting(false);
                     }}
