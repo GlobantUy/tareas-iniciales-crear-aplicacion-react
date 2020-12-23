@@ -9,19 +9,29 @@ class Table extends Component {
     state = {
         abierto: false,
         abierto2: false,
+        abierto3: false,
 
     }
     abrirModal = () => {
-        this.setState({ abierto: !this.state.abierto });
+        const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
+        if(emailCargado){
+            this.setState({ abierto: !this.state.abierto });
+        }else{
+            this.setState({ abierto3: !this.state.abierto3 });
+        }
         console.log("funciona")
     }
 
     abrirModal2 = () => {
-        this.setState({ abierto2: !this.state.abierto2 });
+            this.setState({ abierto2: !this.state.abierto2 });  
     }
 
     cerrarModal = () => {
         this.setState({ abierto: !this.state.abierto });
+    }
+
+    cerrarModal3 = () => {
+        this.setState({ abierto3: !this.state.abierto3 });
     }
     /**/
     constructor(props) {
@@ -121,6 +131,19 @@ class Table extends Component {
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
                         <p className= 'textModal2'>Su préstamo ha sido registrado exitosamente y se encuentra pendiente de aprobación</p>
                         <a href="http://localhost:3000" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                </Modal>
+
+                <Modal isOpen = { this.state.abierto3 }className = "modalStyles" >
+                    <ModalHeader>
+                        <h1 className = "title">Ingresar</h1>
+                        <ModalBody className = "modalBody">
+                            <p className = "subTitle">Necesita ingresar como usuario para <br></br> solicitar el préstamo</p>
+                            <Button id = "btnCR" onClick = {this.cerrarModal3 } > Cerrar </Button> 
+                            <a href = "/ingreso"> 
+                                <Button id = "btnIN"> Ingresar </Button> 
+                            </a>
+                        </ModalBody>
+                    </ModalHeader> 
                 </Modal>
 
             </div>

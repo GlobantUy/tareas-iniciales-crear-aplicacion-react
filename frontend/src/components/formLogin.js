@@ -17,14 +17,14 @@ class SimLogin extends Component {
     redireccionar() {
         if (rol == "CUSTOMER") {
             window.location.href = "/"
-            
-            this.guardarStorage(emaill,passwordd)
+
+            this.guardarStorage(emaill, passwordd)
 
         } else if (rol == "ADMIN") {
             window.location.href = "/registro"
 
         } else {
-            if (mailCorrecto == false && contraCorrecta == false){
+            if (mailCorrecto == false && contraCorrecta == false) {
                 errorPass = false
             }
         }
@@ -59,16 +59,16 @@ class SimLogin extends Component {
             });
     }
 
-             guardarStorage = (a, b) =>{
-            console.log('si')
-                this.values ={
-                    email: a,
-                    password: b
-                }
+    guardarStorage = (a, b) => {
+        console.log('guardado correctamnete')
+        this.values = {
+            email: a,
+            password: b
+        }
 
-                sessionStorage.setItem('Usuario-Values',  JSON.stringify(this.values) );
+        sessionStorage.setItem('Usuario-Values', JSON.stringify(this.values));
 
-            }
+    }
 
     render() {
         return (
@@ -95,9 +95,8 @@ class SimLogin extends Component {
                             }
 
                         } else {
-                            
+
                             passwordd = values.password
-                            console.log(passwordd)
                             contraCorrecta = false
                             if (errorPass == false) {
                                 errors.password = "La contraseña o el Mail son incorrectos";
@@ -114,7 +113,7 @@ class SimLogin extends Component {
                                 errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
                             } else {
                                 emaill = values.email
-                                
+
                                 mailCorrecto = false
                             }
                         }
@@ -140,35 +139,35 @@ class SimLogin extends Component {
                         handleSubmit,
                         isSubmitting,
                     }) => (
-                            <form onSubmit={handleSubmit}>
-                                <p>Email *</p>
-                                <input className="inputIngreso"
-                                    type="text"
-                                    name="email"
-                                    autoComplete="off"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                />
-                                { touched.email && <label className="error">{errors.email}</label>}
+                        <form onSubmit={handleSubmit}>
+                            <p>Email *</p>
+                            <input className="inputIngreso"
+                                type="text"
+                                name="email"
+                                autoComplete="off"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.email}
+                            />
+                            { touched.email && <label className="error">{errors.email}</label>}
 
-                                <p>Contraseña *</p>
-                                <input className="inputIngreso"
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.password}
-                                />
-                                { touched.password && <label className="error">{errors.password}</label>}
+                            <p>Contraseña *</p>
+                            <input className="inputIngreso"
+                                type="password"
+                                name="password"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.password}
+                            />
+                            { touched.password && <label className="error">{errors.password}</label>}
 
 
-                                <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
-                                <button className="btnPrimario" type="submit" disabled={isSubmitting} onKeyDown={handleSubmit} onClick={handleSubmit}  >
-                                    Ingresar
+                            <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
+                            <button className="btnPrimario" type="submit" disabled={isSubmitting} onKeyDown={handleSubmit} onClick={handleSubmit}  >
+                                Ingresar
                         </button><br />
-                            </form>
-                        )}
+                        </form>
+                    )}
                 </Formik>
                 <a href="http://localhost:3000/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
 
