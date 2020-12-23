@@ -5,14 +5,20 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class Table extends Component {
 
-    /*popup usuario logueado*/
+    //popup usuario logueado//
     state = {
         abierto: false,
         abierto2: false,
+        abierto3: false,
 
     }
     abrirModal = () => {
-        this.setState({ abierto: !this.state.abierto });
+        const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
+        if (emailCargado) {
+            this.setState({ abierto: !this.state.abierto });
+        } else {
+            this.setState({ abierto3: !this.state.abierto3 });
+        }
         console.log("funciona")
     }
 
@@ -23,7 +29,10 @@ class Table extends Component {
     cerrarModal = () => {
         this.setState({ abierto: !this.state.abierto });
     }
-    /**/
+
+    cerrarModal3 = () => {
+        this.setState({ abierto3: !this.state.abierto3 });
+    }
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
         this.state = { //state is by default an object
@@ -41,15 +50,15 @@ class Table extends Component {
         this.setState({
             isDisabled: true
         });
- } 
- 
- volverSimular=()=> {
-    sessionStorage.setItem('volverBoton', true);
-    window.location.href = 'http://localhost:3000'
+    }
 
-}
+    volverSimular = () => {
+        sessionStorage.setItem('volverBoton', true);
+        window.location.href = 'http://localhost:3000/'
+
+    }
+
     
-
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
             const { Moneda, Tasa, Cuotas, Años, ValorCuota } = cliente //destructuring
@@ -79,10 +88,10 @@ class Table extends Component {
         })
     }
 
-    volverSimular=()=> {
+    volverSimular = () => {
         sessionStorage.setItem('volverBoton', true);
-        window.location.href = 'http://localhost:3000'
-    
+        window.location.href = 'http://localhost:3000/'
+
     }
 
 
@@ -105,9 +114,9 @@ class Table extends Component {
                 </div>
                 <div className="Buttons">
 
-                <button onClick={this.volverSimular} type="submit" className="btnTerciario"> Volver a simular</button>
+                    <button onClick={this.volverSimular} type="submit" className="btnTerciario"> Volver a simular</button>
 
-                    
+
                     <button type="submit" className="btnCuarto" onClick={this.abrirModal}> Solicitar préstamo</button>
                 </div>
 
@@ -119,8 +128,21 @@ class Table extends Component {
                 </Modal>
 
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
-                        <p className= 'textModal2'>Su préstamo ha sido registrado exitosamente y se encuentra pendiente de aprobación</p>
-                        <a href="http://localhost:3000" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                    <p className='textModal2'>Su préstamo ha sido registrado exitosamente y se encuentra pendiente de aprobación</p>
+                    <a href="http://localhost:3000/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                </Modal>
+
+                <Modal isOpen={this.state.abierto3} className="modalStyless" >
+                    <ModalHeader>
+                        <h1 className="titlee">Ingresar</h1>
+                        <ModalBody className="modalBody">
+                            <p className="subTitle">Necesita ingresar como usuario para <br></br> solicitar el préstamo</p>
+                            <Button id="btnCR" onClick={this.cerrarModal3} > Cerrar </Button>
+                            <a href="/ingreso">
+                                <Button id="btnIN"> Ingresar </Button>
+                            </a>
+                        </ModalBody>
+                    </ModalHeader>
                 </Modal>
 
             </div>
