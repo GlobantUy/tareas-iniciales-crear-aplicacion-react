@@ -1,10 +1,11 @@
 import { connectToDatabase } from '../lib/database'
 
 module.exports = async (req, res) => {
-    let loanSearch
 
-
-
+    let totalLoanSearch
+    let trueloanSearch
+    let falseloanSearch
+    let total
     const db = await connectToDatabase();
     const collectionT = await db.collection("loans");
     const collectionU = await db.collection("users");
@@ -13,10 +14,10 @@ module.exports = async (req, res) => {
     }
     if (req.method === 'POST') {
         try {
-            let totalLoanSearch = await collectionT.find({ userName: req.body.email }).toArray();
-            let trueloanSearch = await collectionT.find({ userName: req.body.email, state: true }).toArray();
-            let falseloanSearch = await collectionT.find({ userName: req.body.email, state: false }).toArray();
-            let total = trueloanSearch.length + falseloanSearch.length
+            totalLoanSearch = await collectionT.find({ userName: req.body.email }).toArray();
+            trueloanSearch = await collectionT.find({ userName: req.body.email, state: true }).toArray();
+            falseloanSearch = await collectionT.find({ userName: req.body.email, state: false }).toArray();
+            total = trueloanSearch.length + falseloanSearch.length
             if (totalLoanSearch.length == 0) {
                 return res.json({
                     _links: {
@@ -25,7 +26,6 @@ module.exports = async (req, res) => {
                         }
                     },
                     message: "User has no registered loans",
-                    test: loanSearch.length
                 })
             } else {
                 if (totalLoanSearch.length == total) {
@@ -36,7 +36,6 @@ module.exports = async (req, res) => {
                             }
                         },
                         message: "User has no loans pending review",
-                        test: loanSearch.length
                     })
                 } else {
                     return res.json({
