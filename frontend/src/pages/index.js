@@ -9,10 +9,15 @@ import SimLoan from '../components/formSimLoan'
 
     try {
       
-      if (sessionStorage.getItem('Usuario-Values')){
-        
-      } else {
+    let btnHeader = document.querySelector(".btnHeader");
+    let user = document.querySelector(".User");
 
+      if (sessionStorage.getItem('Usuario-Values')){
+        btnHeader.style.display= 'none';
+        user.style.display= 'block';
+      } else {
+        btnHeader.style.display= 'block';
+        user.style.display= 'none';
       }
 
     } catch (error) {
@@ -30,19 +35,8 @@ export default function Home() {
         <a href="http://localhost:3000/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a>
       
         <div className='User'>
-
-          <ul className='nav'>
-
-            <li><a href=''>Nombre</a>
-
-              <ul>
-              <li><a href=''>Log out</a></li>
-              </ul>
-
-            </li>
-
-          </ul>
-          <img className="logoheader" src="/Frame.png" />
+          <span>Nombre</span>
+          <img className="imgUser" src="/Frame.png" />
         </div>
 
       </header>
