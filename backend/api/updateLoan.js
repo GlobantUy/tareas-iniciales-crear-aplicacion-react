@@ -21,11 +21,11 @@ module.exports = async (req, res) => {
     }
     if (req.method === 'POST') {
         try {
-            TotalLoanSearch = await collectionT.find({ userName: req.body.email }).toArray();
-            TrueloanSearch = await collectionT.find({ userName: req.body.email, state: true }).toArray();
-            FalseloanSearch = await collectionT.find({ userName: req.body.email, state: false }).toArray();
-            let total = TrueloanSearch.length + FalseloanSearch.length
-            if (TotalLoanSearch.length == 0) {
+            totalLoanSearch = await collectionT.find({ userName: req.body.email }).toArray();
+            trueloanSearch = await collectionT.find({ userName: req.body.email, state: true }).toArray();
+            falseloanSearch = await collectionT.find({ userName: req.body.email, state: false }).toArray();
+            let total = trueloanSearch.length + falseloanSearch.length
+            if (totalLoanSearch.length == 0) {
                 return res.json({
                     _links: {
                         self: {
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
                     test: loanSearch.length
                 })
             } else {
-                if (TotalLoanSearch.length == total) {
+                if (totalLoanSearch.length == total) {
                     return res.json({
                         _links: {
                             self: {
