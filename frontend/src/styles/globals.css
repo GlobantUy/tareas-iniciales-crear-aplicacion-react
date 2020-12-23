@@ -96,6 +96,7 @@ select:focus {
     font-size: 16px;
     color: #F07E1A;
     outline: none;
+    display: none;
 }
 
 .btnHeader:hover {
