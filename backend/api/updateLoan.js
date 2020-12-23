@@ -1,16 +1,8 @@
 import { connectToDatabase } from '../lib/database'
-const Loan = require('./models/table')
 
 module.exports = async (req, res) => {
     let loanSearch
-    let userSearch
-    let conf = true
-    var date = new Date()
-    var month = date.getUTCMonth() + 1;
-    var day = date.getUTCDate();
-    var year = date.getUTCFullYear();
-    var cDate = year + "/" + month + "/" + day
-    var i
+
 
 
     const db = await connectToDatabase();
@@ -22,9 +14,7 @@ module.exports = async (req, res) => {
     if (req.method === 'POST') {
         try {
             totalLoanSearch = await collectionT.find({ userName: req.body.email }).toArray();
-            trueloanSearch = await collectionT.find({ userName: req.body.email, state: true }).toArray();
-            falseloanSearch = await collectionT.find({ userName: req.body.email, state: false }).toArray();
-            let total = trueloanSearch.length + falseloanSearch.length
+
             if (totalLoanSearch.length == 0) {
                 return res.json({
                     _links: {
@@ -36,6 +26,9 @@ module.exports = async (req, res) => {
                     test: loanSearch.length
                 })
             } else {
+                trueloanSearch = await collectionT.find({ userName: req.body.email, state: true }).toArray();
+                falseloanSearch = await collectionT.find({ userName: req.body.email, state: false }).toArray();
+                let total = trueloanSearch.length + falseloanSearch.length
                 if (totalLoanSearch.length == total) {
                     return res.json({
                         _links: {
@@ -46,7 +39,7 @@ module.exports = async (req, res) => {
                         message: "User has no loans pending review",
                         test: loanSearch.length
                     })
-                }else {
+                } else {
                     return res.json({
                         _links: {
                             self: {
@@ -54,7 +47,7 @@ module.exports = async (req, res) => {
                             }
                         },
                         message: "IDK"
-                      
+
                     })
                 }
 
