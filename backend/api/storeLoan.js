@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     var month = date.getUTCMonth() + 1; //months from 1-12
     var day = date.getUTCDate();
     var year = date.getUTCFullYear();
-    var cDate = year + "/" + month + "/" + day
+    var cDate = day + "/" + month + "/" + year
     var i
 
 
@@ -74,7 +74,14 @@ module.exports = async (req, res) => {
                             }
 
                             if (conf == true && req.body.email != undefined) {
-
+                                let dateId = new Date()
+                                let day = dateId.getUTCDate()
+                                let month = dateId.getUTCMonth()
+                                let year = dateId.getUTCFullYear()
+                                let hour = dateId.getHours()
+                                let minutes = dateId.getMinutes()
+                                let seconds = dateId.getSeconds()
+                                let id = day + "/" + month + "/" + year + "|" + hour + "/" + minutes + "/" + seconds
                                 const newLoan = new Loan({
 
                                     userName: req.body.email,
@@ -83,7 +90,8 @@ module.exports = async (req, res) => {
                                     currency: req.body.currency,
                                     payments: req.body.payments,
                                     state: undefined,
-                                    stateDate: cDate
+                                    stateDate: cDate,
+                                    _id: id 
                                 })
                                 try {
 
