@@ -21,9 +21,9 @@ module.exports = async (req, res) => {
     }
     if (req.method === 'POST') {
         try {
-            TotalLoanSearch = await collectionT.find({ email: req.body.email }).toArray();
-            TrueloanSearch = await collectionT.find({ email: req.body.email, state: true }).toArray();
-            FalseloanSearch = await collectionT.find({ email: req.body.email, state: false }).toArray();
+            TotalLoanSearch = await collectionT.find({ userName: req.body.email }).toArray();
+            TrueloanSearch = await collectionT.find({ userName: req.body.email, state: true }).toArray();
+            FalseloanSearch = await collectionT.find({ userName: req.body.email, state: false }).toArray();
             let total = TrueloanSearch.length + FalseloanSearch.length
             if (TotalLoanSearch.length == 0) {
                 return res.json({
