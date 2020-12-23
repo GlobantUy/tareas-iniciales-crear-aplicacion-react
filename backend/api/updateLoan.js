@@ -21,21 +21,32 @@ module.exports = async (req, res) => {
     }
     if (req.method === 'POST') {
         try {
-            TotalLoanSearch = await collectionT.find({email: req.body.email}).toArray();
-            TrueloanSearch = await collectionT.find({email: req.body.email, state: true}).toArray();
-            FalseloanSearch = await collectionT.find({email: req.body.email, state: false}).toArray();
-            let total =  TrueloanSearch.length +  FalseloanSearch.length
-            if (TotalLoanSearch.length == total) {
+            TotalLoanSearch = await collectionT.find({ email: req.body.email }).toArray();
+            TrueloanSearch = await collectionT.find({ email: req.body.email, state: true }).toArray();
+            FalseloanSearch = await collectionT.find({ email: req.body.email, state: false }).toArray();
+            let total = TrueloanSearch.length + FalseloanSearch.length
+            if (TotalLoanSearch.length == 0) {
                 return res.json({
                     _links: {
                         self: {
                             href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
                         }
                     },
-                    message: "User has no loans pending review",
+                    message: "User has no registered loans",
                     test: loanSearch.length
                 })
-            }else {
+            } else {
+                if (TotalLoanSearch.length == total) {
+                    return res.json({
+                        _links: {
+                            self: {
+                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                            }
+                        },
+                        message: "User has no loans pending review",
+                        test: loanSearch.length
+                    })
+                }
 
             }
         } catch {
