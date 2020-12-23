@@ -46,6 +46,16 @@ module.exports = async (req, res) => {
                         message: "User has no loans pending review",
                         test: loanSearch.length
                     })
+                }else {
+                    return res.json({
+                        _links: {
+                            self: {
+                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                            }
+                        },
+                        message: "IDK"
+                      
+                    })
                 }
 
             }
