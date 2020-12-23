@@ -31,9 +31,10 @@ module.exports = async (req, res) => {
                         }
                     },
                     message: "User has no loans pending review",
+                    test: loanSearch.length
                 })
             }else {
-                
+
             }
         } catch {
 
