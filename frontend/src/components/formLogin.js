@@ -10,6 +10,8 @@ let contraCorrecta = false
 let emaill
 let passwordd
 let URL = 'https://backendmain-lw9cfx37o.vercel.app/api/login'
+const volverSolicitar = {}
+
 class SimLogin extends Component {
 
     constructor(props) {
@@ -17,19 +19,25 @@ class SimLogin extends Component {
     }
 
     redireccionar() {
-        if (rol == "CUSTOMER") {
-            window.location.href = "/"
-
+        if (volverSolicitar) {
+            window.location.href = "/Descuento"
             this.guardarStorage(emaill, passwordd)
-
-        } else if (rol == "ADMIN") {
-            window.location.href = "/registro"
-
         } else {
-            if (mailCorrecto == false && contraCorrecta == false) {
-                errorPass = false
+            if (rol == "CUSTOMER") {
+                window.location.href = "/"
+
+                this.guardarStorage(emaill, passwordd)
+
+            } else if (rol == "ADMIN") {
+                window.location.href = "/registro"
+
+            } else {
+                if (mailCorrecto == false && contraCorrecta == false) {
+                    errorPass = false
+                }
             }
         }
+
     }
 
     post(email, pass) {
@@ -95,10 +103,8 @@ class SimLogin extends Component {
                             }
 
                         } else {
-
-
                             passwordd = values.password
-                            contraCorrecta = false
+                            contraCorrecta = false;
 
                             if (errorPass == false) {
                                 errors.password = "La contraseña o el Mail son incorrectos";
@@ -114,11 +120,8 @@ class SimLogin extends Component {
                                 errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
                                 mailCorrecto = true;
                             } else {
-
                                 emaill = values.email
-
-                                mailCorrecto = false
-
+                                mailCorrecto = false;
                             }
                         }
 
@@ -130,10 +133,10 @@ class SimLogin extends Component {
                         return errors;
                     }}
 
-
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == false && contraCorrecta == false) {
                             this.post(values.email, values.password)
+                            volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
                         }
                         setSubmitting(false);
                     }}
@@ -183,7 +186,7 @@ class SimLogin extends Component {
                         </form>
                     )}
                 </Formik>
-                <a href="http://localhost:3000/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
+                <a href="/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
 
             </div>
         )
