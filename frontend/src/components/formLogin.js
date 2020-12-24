@@ -2,6 +2,7 @@ import React, { Component, } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 
+var btn = "btnPrimarioDisabled";
 let rol
 let errorPass = true
 let mailCorrecto = false
@@ -79,46 +80,53 @@ class SimLogin extends Component {
                     initialValues={{ email: '', password: '' }}
                     validate={values => {
                         const errors = {};
-
                         if (!values.password) {
-                            contraCorrecta = true
-                            errors.password = 'Ingrese contraseña';
+                            errors.password = '';
+                            mailCorrecto = true;
                             if (!values.email) {
-                                mailCorrecto = true
                                 errors.email = 'Ingrese mail';
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
-                                mailCorrecto = true
                                 errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
+                                mailCorrecto = true;
                             } else {
-                                mailCorrecto = false
+                                mailCorrecto = true;
                             }
 
                         } else {
 
+
                             passwordd = values.password
                             contraCorrecta = false
+
                             if (errorPass == false) {
                                 errors.password = "La contraseña o el Mail son incorrectos";
                                 errorPass = true
                             }
 
                             if (!values.email) {
-                                mailCorrecto = true
                                 errors.email = 'Ingrese mail';
+                                mailCorrecto = true;
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
-                                mailCorrecto = true
                                 errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
+                                mailCorrecto = true;
                             } else {
+
                                 emaill = values.email
 
                                 mailCorrecto = false
+
                             }
                         }
 
+                        if (mailCorrecto && contraCorrecta == false) {
+                            btn = "btnPrimarioDisabled"
+                        } else {
+                            btn = "btnPrimario"
+                        }
                         return errors;
                     }}
 
@@ -163,7 +171,13 @@ class SimLogin extends Component {
 
 
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
-                            <button className="btnPrimario" type="submit" disabled={isSubmitting} onKeyDown={handleSubmit} onClick={handleSubmit}  >
+
+                            <button
+                                className={btn}
+                                type="submit"
+                                disabled={isSubmitting}
+                                onKeyDown={handleSubmit}
+                                onClick={handleSubmit}  >
                                 Ingresar
                         </button><br />
                         </form>
