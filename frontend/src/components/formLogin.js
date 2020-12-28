@@ -9,6 +9,7 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
+const volverSolicitar = {}
 class SimLogin extends Component {
 
     constructor(props) {
@@ -16,19 +17,25 @@ class SimLogin extends Component {
     }
 
     redireccionar() {
-        if (rol == "CUSTOMER") {
-            window.location.href = "/"
-            
-            this.guardarStorage(emaill,passwordd)
-
-        } else if (rol == "ADMIN") {
-            window.location.href = "/registro"
-
+        if (volverSolicitar) {
+            window.location.href = "/Descuento"
+            this.guardarStorage(emaill, passwordd)
         } else {
-            if (mailCorrecto == false && contraCorrecta == false) {
-                errorPass = false
+            if (rol == "CUSTOMER") {
+                window.location.href = "/"
+
+                this.guardarStorage(emaill, passwordd)
+
+            } else if (rol == "ADMIN") {
+                window.location.href = "/registro"
+
+            } else {
+                if (mailCorrecto == false && contraCorrecta == false) {
+                    errorPass = false
+                }
             }
         }
+
     }
 
     post(email, pass) {
@@ -60,16 +67,16 @@ class SimLogin extends Component {
             });
     }
 
-             guardarStorage = (a, b) =>{
-            console.log('si')
-                this.values ={
-                    email: a,
-                    password: b
-                }
+    guardarStorage = (a, b) => {
+        console.log('si')
+        this.values = {
+            email: a,
+            password: b
+        }
 
-                sessionStorage.setItem('Usuario-Values',  JSON.stringify(this.values) );
+        sessionStorage.setItem('Usuario-Values', JSON.stringify(this.values));
 
-            }
+    }
 
     render() {
         return (
@@ -94,6 +101,7 @@ class SimLogin extends Component {
                             }
 
                         } else {
+                            passwordd = values.password
                             contraCorrecta = false;
 
                             if (errorPass == false) {
@@ -110,6 +118,7 @@ class SimLogin extends Component {
                                 errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
                                 mailCorrecto = true;
                             } else {
+                                emaill = values.email
                                 mailCorrecto = false;
                             }
                         }
@@ -126,7 +135,7 @@ class SimLogin extends Component {
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == false && contraCorrecta == false) {
                             this.post(values.email, values.password)
-                            this.redireccionar
+                            volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
                         }
                         setSubmitting(false);
                     }}
