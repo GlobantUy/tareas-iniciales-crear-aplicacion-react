@@ -208,11 +208,11 @@ class SimLoan extends Component {
                         <p>Años de financiación*</p>
                         <select className="inputAños" name="financiacion" value={this.state.financiacion} onChange={this.handleChange}>
                             <option hidden>Selecciona una opción</option>
-                            <option value="1">10</option>
-                            <option value="2">15</option>
-                            <option value="3">20</option>
-                            <option value="4">25</option>
-                            <option value="5">30</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
                         </select>
                         <label htmlFor=""></label>
 
