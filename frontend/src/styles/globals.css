@@ -106,8 +106,7 @@ select:focus {
     font-size: 10px;
     text-align: center;
     width: 100%;
-    overflow: hidden;
-    white-space: pre;
+
 }
 
 .form {
@@ -122,19 +121,19 @@ select:focus {
 
 .inputIngreso {
     margin-top: 4px;
-    height: 40px;
+    height: 32px;
     width: 190px;
 }
 
 .Ingreso {
     margin-top: 4px;
-    height: 40px;
+    height: 32px;
     width: 167px;
 }
 
 .inputMonto {
     margin-top: 4px;
-    height: 40px;
+    height: 32px;
     width: 167px;
 }
 
@@ -153,8 +152,8 @@ select:focus {
 
 .inputAños {
     margin-top: 4px;
-    height: 40px;
-    width: 167px;
+    height: 38px;
+    width: 175px;
 }
 
 /* input[type='checkbox'] {}
@@ -193,7 +192,7 @@ input[type='checkbox'] {
     background: #F07E1A;
     border: none;
     height: 40px;
-    width: 196px;
+    width: 168px;
     margin-top: 24px;
 }
 
@@ -207,12 +206,12 @@ input[type='checkbox'] {
     background: #E0E0E0;
     border: none;
     height: 40px;
-    width: 196px;
+    width: 168px;
     margin-top: 24px;
 }
 
 .btnSecundario {
-    width: 196px;
+    width: 168px;
     height: 40px;
     border: 1px solid #F07E1A;
     color: #F07E1A;

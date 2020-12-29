@@ -3,7 +3,7 @@ export default function Registro() {
   return (
     <div >
       <header className="header">
-        <img className="logoheader" src="/logo.jpg" />
+        <a href="http://localhost:3000"><img className="logoheader" src="/logo.jpg" /></a>
       </header>
       <footer>
 
