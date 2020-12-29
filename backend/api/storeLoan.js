@@ -86,11 +86,11 @@ module.exports = async (req, res) => {
 
                                     userName: req.body.email,
                                     amount: req.body.amount,
-                                    date: cDate,
+                                    date: date,
                                     currency: req.body.currency,
                                     payments: req.body.payments,
                                     state: undefined,
-                                    stateDate: cDate,
+                                    stateDate: date,
                                     _id: id 
                                 })
                                 try {
