@@ -19,7 +19,8 @@ const validate = values => {
 }
 
 let URL = "https://backendmain-jgqj8r35e.vercel.app/api/storeLoan"
-let email
+let emailFromStorage
+let currency = ''
 class SimLoan extends Component {
     constructor(props) {
         super(props)
@@ -30,9 +31,9 @@ class SimLoan extends Component {
 
             Moneda_$U: false,
             Moneda_U$S: false,
-            Moneda: '',
 
             financiacion: '',
+            payments: '',
 
             TipoDePrestamoInmueble: false,
             TipoDePrestamoAutomotor: false,
@@ -75,16 +76,16 @@ class SimLoan extends Component {
                     this.setState({
                         Moneda_$U: !this.state.Moneda_$U,
                         Moneda_U$S: false,
-                        Moneda: '$U'
                     })
+                    currency = '$U'
                 } else {
                     this.setState({
                         Moneda_U$S: !this.state.Moneda_U$S,
                         Moneda_$U: false,
-                        Moneda: 'U$S'
                     })
+                    currency = 'U$S'
                 }
-
+                console.log(currency)
                 break;
             default:
                 break;
@@ -116,14 +117,17 @@ class SimLoan extends Component {
         const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
         if (emailCargado) {
 
-            email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+            emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
 
+            console.log(emailFromStorage)
+            console.log(this.state.Monto_a_pedir)
+            console.log(currency)
+            console.log(this.state.financiacion)
+            /*axios.post(URL, {
 
-            axios.post(URL, {
-
-                email,
+                emailFromStorage,
                 'amount': this.state.Monto_a_pedir,
-                'currency': this.state.Moneda,
+                'currency': currency,
                 'payments': this.state.financiacion,
         }
             )
@@ -132,7 +136,7 @@ class SimLoan extends Component {
                 })
                 .catch(error => {
                     console.log("registration error", error)
-                });
+                });*/
         }
     }
     componentDidMount() {

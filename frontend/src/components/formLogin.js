@@ -2,6 +2,7 @@ import React, { Component, } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 
+let emailFromStorage
 var btn = "btnPrimarioDisabled";
 let rol
 let errorPass = true
@@ -9,8 +10,7 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-let URL = 'https://backendmain-lw9cfx37o.vercel.app/api/login'
-const volverSolicitar = {}
+let URL = "https://backendmain-8gwcdkmst.vercel.app/api/login"
 
 class SimLogin extends Component {
 
@@ -19,9 +19,36 @@ class SimLogin extends Component {
     }
 
     redireccionar() {
+        const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
-            window.location.href = "/Descuento"
+            
             this.guardarStorage(emaill, passwordd)
+
+            /*const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
+            if (emailCargado) {
+    
+                emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+    
+    
+                axios.post(URL, {
+    
+                    emailFromStorage,
+                    'amount': JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
+                    'currency': JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda,
+                    'payments': JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
+            }
+                )
+                    .then(Response => {
+                        console.log("registration res", Response)
+                    })
+                    .catch(error => {
+                        console.log("registration error", error)
+                    });
+            }*/
+
+            window.location.href = "/Descuento"
+            sessionStorage.setItem('volverAceptarpress', false);
+
         } else {
             if (rol == "CUSTOMER") {
                 window.location.href = "/"
@@ -30,6 +57,7 @@ class SimLogin extends Component {
 
             } else if (rol == "ADMIN") {
                 window.location.href = "/registro"
+                this.guardarStorage(emaill, passwordd)
 
             } else {
                 if (mailCorrecto == false && contraCorrecta == false) {
@@ -136,7 +164,7 @@ class SimLogin extends Component {
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == false && contraCorrecta == false) {
                             this.post(values.email, values.password)
-                            volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
+                            
                         }
                         setSubmitting(false);
                     }}

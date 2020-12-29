@@ -14,27 +14,21 @@ class Table extends Component {
     }
 
     volverAceptarPres = () => {
-        sessionStorage.setItem('volverAceptarpress', false);
+        sessionStorage.setItem('volverAceptarpress', true);
     }
 
     abrirModal = () => {
         const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
-<<<<<<< HEAD
-        if(emailCargado){
-            this.setState({ abierto: !this.state.abierto });
-        }else{
-=======
         if (emailCargado) {
             this.setState({ abierto: !this.state.abierto });
         } else {
->>>>>>> dbb5e51164ffed2ea9f18e82263625a7290fe13f
             this.setState({ abierto3: !this.state.abierto3 });
         }
         console.log("funciona")
     }
 
     abrirModal2 = () => {
-            this.setState({ abierto2: !this.state.abierto2 });  
+        this.setState({ abierto2: !this.state.abierto2 });
     }
 
     cerrarModal = () => {
@@ -44,10 +38,6 @@ class Table extends Component {
     cerrarModal3 = () => {
         this.setState({ abierto3: !this.state.abierto3 });
     }
-<<<<<<< HEAD
-    /**/
-=======
->>>>>>> dbb5e51164ffed2ea9f18e82263625a7290fe13f
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
         this.state = { //state is by default an object
@@ -73,7 +63,7 @@ class Table extends Component {
 
     }
 
-    
+
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
             const { Moneda, Tasa, Cuotas, Años, ValorCuota } = cliente //destructuring
@@ -142,23 +132,6 @@ class Table extends Component {
                     <a href="http://localhost:3000/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
-<<<<<<< HEAD
-                <Modal isOpen = { this.state.abierto3 }className = "modalStyles" >
-                    <ModalHeader>
-                        <h1 className = "title">Ingresar</h1>
-                        <ModalBody className = "modalBody">
-                            <p className = "subTitle">Necesita ingresar como usuario para <br></br> solicitar el préstamo</p>
-                            <Button id = "btnCR" onClick = {this.cerrarModal3 } > Cerrar </Button> 
-                            <a href = "/ingreso"> 
-                                <Button id = "btnIN"> Ingresar </Button> 
-                            </a>
-                        </ModalBody>
-                    </ModalHeader> 
-                </Modal>
-
-            </div>
-
-=======
                 <Modal isOpen={this.state.abierto3} className="modalStyless" >
                     <ModalHeader>
                         <h1 className="titlee">Ingresar</h1>
@@ -171,7 +144,6 @@ class Table extends Component {
                         </ModalBody>
                     </ModalHeader>
                 </Modal>
->>>>>>> dbb5e51164ffed2ea9f18e82263625a7290fe13f
 
             </div>
         )
