@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
                                 href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
                             }
                         },
-                        result: arrayTest2
+                        message: "Loan state modified successfully"
 
                     })
                 }
