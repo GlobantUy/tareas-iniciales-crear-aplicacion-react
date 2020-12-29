@@ -1,7 +1,7 @@
 import { connectToDatabase } from '../lib/database'
 
 module.exports = async (req, res) => {
-
+    const arrayTest
     let totalLoanSearch
     let trueloanSearch
     let falseloanSearch
@@ -38,13 +38,14 @@ module.exports = async (req, res) => {
                         message: "User has no loans pending review",
                     })
                 } else {
+                    arrayTest = totalLoanSearch.find({email: req.body.email}, {"sort" : ['date', 'asc']} ).toArray(function(err,docs) {});
                     return res.json({
                         _links: {
                             self: {
                                 href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
                             }
                         },
-                        message: "Missing stuff goes here"
+                        message: arrayTest
 
                     })
                 }
