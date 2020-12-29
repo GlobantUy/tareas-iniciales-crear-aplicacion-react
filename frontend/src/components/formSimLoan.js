@@ -31,9 +31,9 @@ class SimLoan extends Component {
 
             Moneda_$U: false,
             Moneda_U$S: false,
+            TipoMoneda: '',
 
             financiacion: '',
-            payments: '',
 
             TipoDePrestamoInmueble: false,
             TipoDePrestamoAutomotor: false,
@@ -73,19 +73,21 @@ class SimLoan extends Component {
                 break;
             case 'Moneda':
                 if (e.target.id == 'Moneda_$U') {
+                    currency = '$U'
                     this.setState({
                         Moneda_$U: !this.state.Moneda_$U,
                         Moneda_U$S: false,
+                        TipoMoneda: currency
                     })
-                    currency = '$U'
+                    
                 } else {
+                    currency = 'U$S'
                     this.setState({
                         Moneda_U$S: !this.state.Moneda_U$S,
                         Moneda_$U: false,
+                        TipoMoneda: currency
                     })
-                    currency = 'U$S'
                 }
-                console.log(currency)
                 break;
             default:
                 break;
@@ -111,7 +113,7 @@ class SimLoan extends Component {
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
             console.log('enviar formulario')
-            window.location.href = '/Descuento'
+            //window.location.href = '/Descuento'
         }
 
         const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
@@ -121,11 +123,11 @@ class SimLoan extends Component {
 
             console.log(emailFromStorage)
             console.log(this.state.Monto_a_pedir)
-            console.log(currency)
+            console.log(this.state.TipoMoneda)
             console.log(this.state.financiacion)
-            /*axios.post(URL, {
+            axios.post(URL, {
 
-                emailFromStorage,
+                'email': emailFromStorage,
                 'amount': this.state.Monto_a_pedir,
                 'currency': currency,
                 'payments': this.state.financiacion,
@@ -136,7 +138,7 @@ class SimLoan extends Component {
                 })
                 .catch(error => {
                     console.log("registration error", error)
-                });*/
+                });
         }
     }
     componentDidMount() {

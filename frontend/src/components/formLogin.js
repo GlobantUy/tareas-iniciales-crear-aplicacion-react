@@ -11,6 +11,7 @@ let contraCorrecta = false
 let emaill
 let passwordd
 let URL = "https://backendmain-8gwcdkmst.vercel.app/api/login"
+let URLpres = "https://backendmain-jgqj8r35e.vercel.app/api/storeLoan"
 
 class SimLogin extends Component {
 
@@ -24,17 +25,17 @@ class SimLogin extends Component {
             
             this.guardarStorage(emaill, passwordd)
 
-            /*const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
+            const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
             if (emailCargado) {
     
                 emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
     
     
-                axios.post(URL, {
+                axios.post(URLpres, {
     
-                    emailFromStorage,
+                    'email': emailFromStorage,
                     'amount': JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
-                    'currency': JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda,
+                    'currency': JSON.parse(sessionStorage.getItem('prestamoValues')).TipoMoneda,
                     'payments': JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
             }
                 )
@@ -44,9 +45,9 @@ class SimLogin extends Component {
                     .catch(error => {
                         console.log("registration error", error)
                     });
-            }*/
+            }
 
-            window.location.href = "/Descuento"
+            //window.location.href = "/Descuento"
             sessionStorage.setItem('volverAceptarpress', false);
 
         } else {
@@ -56,7 +57,7 @@ class SimLogin extends Component {
                 this.guardarStorage(emaill, passwordd)
 
             } else if (rol == "ADMIN") {
-                window.location.href = "/registro"
+                window.location.href = "/"
                 this.guardarStorage(emaill, passwordd)
 
             } else {
