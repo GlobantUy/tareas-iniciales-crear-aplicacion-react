@@ -40,14 +40,15 @@ module.exports = async (req, res) => {
                 } else {
                     arrayTest = await collectionT.find({userName: req.body.email}).sort({date: -1}).toArray();
                     let loanId = arrayTest[0]._id
-                   
+                    await collectionT.updateOne({_id: loanId}, {$set: {state: req.body.state}})
+                    let arrayTest2 = await collectionT.find({_id: loanId}).toArray();
                     return res.json({
                         _links: {
                             self: {
                                 href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
                             }
                         },
-                        result: loanId
+                        result: arrayTest2
 
                     })
                 }
