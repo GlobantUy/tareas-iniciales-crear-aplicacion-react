@@ -39,6 +39,7 @@ module.exports = async (req, res) => {
                     })
                 } else {
                     arrayTest = await collectionT.find({userName: req.body.email}).sort({date: -1}).toArray();
+                    let loanId = arrayTest[0]._id
                    
                     return res.json({
                         _links: {
@@ -46,7 +47,7 @@ module.exports = async (req, res) => {
                                 href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
                             }
                         },
-                        result: arrayTest
+                        result: loanId
 
                     })
                 }
