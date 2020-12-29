@@ -58,8 +58,7 @@ module.exports = async (req, res) => {
                                     href: 'https://vercelworking-ej6t36ecv.vercel.app/api/returnLoans'
                                 }
                             },
-                            loans: loanSearch,
-                            test: loanSearch[0].state
+                            loans: loanSearch
 
                         })
                     }
