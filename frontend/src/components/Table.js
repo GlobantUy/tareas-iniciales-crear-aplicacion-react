@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
+
 class Table extends Component {
 
     //popup usuario logueado//
@@ -154,7 +155,7 @@ class Table extends Component {
                     <h1 id='Monto' >  Monto  solicitado </h1>
                     <h1 id='Montoss'> {this.state.Moneda + this.state.Monto_a_pedir} </h1>
                     <h1 id='seleccionar'>Seleccione la fila deseada para solicitar su préstamo</h1>
-                    <div>
+                    <div class="table-responsive-">
                         <table id='clientes'>
                             <tbody>
                                 <tr>{this.renderTableHeader()}</tr>
