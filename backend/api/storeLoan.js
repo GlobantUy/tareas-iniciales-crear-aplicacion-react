@@ -9,7 +9,6 @@ module.exports = async (req, res) => {
     var month = date.getUTCMonth() + 1; //months from 1-12
     var day = date.getUTCDate();
     var year = date.getUTCFullYear();
-    var cDate = year + "/" + month + "/" + day
     var i
 
 

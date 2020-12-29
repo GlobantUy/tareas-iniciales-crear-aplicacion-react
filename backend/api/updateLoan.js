@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
     const db = await connectToDatabase();
     const collectionT = await db.collection("loans");
     const collectionU = await db.collection("users");
+    var date = new Date()
     if (req.method === 'OPTIONS') {
         return res.status(200).send('ok');
     }
@@ -40,7 +41,7 @@ module.exports = async (req, res) => {
                 } else {
                     arrayTest = await collectionT.find({userName: req.body.email}).sort({date: -1}).toArray();
                     let loanId = arrayTest[0]._id
-                    await collectionT.updateOne({_id: loanId}, {$set: {state: req.body.state}})
+                    await collectionT.updateOne({_id: loanId}, {$set: {state: req.body.state, stateDate: date}})
                     let arrayTest2 = await collectionT.find({_id: loanId}).toArray();
                     return res.json({
                         _links: {
