@@ -116,13 +116,12 @@ select:focus {
 
 }
 .imgUser{
+    padding-left: 10px;
     position: absolute;
-    left: 1254px;
+    left: 92.67%;
     right: 0%;
     top: 38.53%;
     bottom: 5.26%;
-    display: inline-flex;
-
 }
 
 .btnHeader:hover {
