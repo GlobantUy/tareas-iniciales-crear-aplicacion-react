@@ -89,7 +89,7 @@ module.exports = async (req, res) => {
                                     date: date,
                                     currency: req.body.currency,
                                     payments: req.body.payments,
-                                    state: true,
+                                    state: false,
                                     stateDate: date,
                                     _id: id 
                                 })
