@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
                         message: "User has no loans pending review",
                     })
                 } else {
-                    arrayTest = await collectionT.find({userName: req.body.email}).sort({date: 1}).toArray();
+                    arrayTest = await collectionT.find({userName: req.body.email}).sort({date: -1}).toArray();
                    
                     return res.json({
                         _links: {
