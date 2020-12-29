@@ -18,8 +18,8 @@ class SimLogin extends Component {
     redireccionar() {
         if (rol == "CUSTOMER") {
             window.location.href = "/"
-            
-            this.guardarStorage(emaill,passwordd)
+
+            this.guardarStorage(emaill, passwordd)
 
         } else if (rol == "ADMIN") {
             window.location.href = "/registro"
@@ -60,16 +60,16 @@ class SimLogin extends Component {
             });
     }
 
-             guardarStorage = (a, b) =>{
-            console.log('si')
-                this.values ={
-                    email: a,
-                    password: b
-                }
+    guardarStorage = (a, b) => {
+        console.log('si')
+        this.values = {
+            email: a,
+            password: b
+        }
 
-                sessionStorage.setItem('Usuario-Values',  JSON.stringify(this.values) );
+        sessionStorage.setItem('Usuario-Values', JSON.stringify(this.values));
 
-            }
+    }
 
     render() {
         return (
