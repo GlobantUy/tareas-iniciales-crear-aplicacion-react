@@ -32,9 +32,10 @@ import React, { Component } from 'react';
    }
    changeState (){
      try {
-       let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
-      this.setState({
-        email: email
+      let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+      let arroba = email.indexOf("@");
+     this.setState({
+       email: email = email.substring(0, arroba)
        })
      } catch (error) {
        
