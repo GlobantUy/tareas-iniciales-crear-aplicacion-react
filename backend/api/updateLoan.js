@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
                         message: "User has no loans pending review",
                     })
                 } else {
-                    arrayTest = totalLoanSearch.find({email: req.body.email}, {"sort" : ['date', 'asc']} ).toArray(function(err,docs) {});
+                    arrayTest = totalLoanSearch.find({email: req.body.email}, {"sort" : ['date', 'asc']} ).toArray();
                     return res.json({
                         _links: {
                             self: {
