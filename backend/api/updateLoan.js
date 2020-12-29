@@ -1,7 +1,7 @@
 import { connectToDatabase } from '../lib/database'
 
 module.exports = async (req, res) => {
-    const arrayTest
+    let arrayTest
     let totalLoanSearch
     let trueloanSearch
     let falseloanSearch
