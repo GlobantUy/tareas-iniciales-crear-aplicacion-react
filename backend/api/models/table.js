@@ -11,7 +11,7 @@ const tableSchema = new mongoose.Schema({
     required: true
   },
   date: {
-    type: String,
+    type: Date,
     required: true
   },
   currency: {
@@ -31,7 +31,7 @@ const tableSchema = new mongoose.Schema({
     required: true
   },
   stateDate: {
-    type: String,
+    type: Date,
     required: true
   }
 })
