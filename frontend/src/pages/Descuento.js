@@ -1,14 +1,11 @@
 import Table from '../components/Table'
+import Header from '../components/Header'
 
 export default function Descuentoo() {
   return (
     <div >
-      <header className="header">
-      <img className="logoheader" src="/logo.jpg"/>
-      
-      <a href="http://localhost:3000/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a>
-      </header>
-<div className="tablea">
+      <Header/>
+      <div className="tablea">
       <Table/>
       </div>
       <footer>
