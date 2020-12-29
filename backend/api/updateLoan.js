@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
                         message: "User has no loans pending review",
                     })
                 } else {
-                    if (req.body.state != true || req.body.state != false) {
+                    if (req.body.state != true && req.body.state != false) {
                         return res.json({
                             _links: {
                                 self: {
