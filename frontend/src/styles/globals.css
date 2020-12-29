@@ -96,6 +96,41 @@ select:focus {
     font-size: 16px;
     color: #F07E1A;
     outline: none;
+    display: block;
+}
+.User{
+    float: right;
+    display: none;
+    display: block;
+    position: absolute;
+    width: 192px;
+    height: 19px;
+    left: 988px;
+    top: 31px;
+}
+.User span{
+    
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #000000;
+    text-align: left;
+    height: 0;
+    position: absolute;
+    left: 0%;
+    right: 13.46%;
+    top: 0%;
+    bottom: 0%;
+    text-align: right;
+    color: #000000;
+
+}
+.imgUser{
+    position: absolute;
+    left: 91.67%;
+    right: 0%;
+    top: 5.53%; 
+    bottom: 5.26%;
+    
 }
 
 .btnHeader:hover {
