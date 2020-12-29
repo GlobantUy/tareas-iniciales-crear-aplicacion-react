@@ -285,88 +285,91 @@ a.button {
     color: initial;
 }
 
-#title {
-    text-align: center;
+#titleee {
     position: absolute;
-    height: 40%;
-    right: 40%;
-    Top: 15vh;
-    font-family: 'Roboto';
+    top:17%;
+    left:41%;
+    font-size: 24px;
+    font-family: 'Roboto' sans-serif;
     font-style: normal;
     font-weight: normal;
     color: #000000;
-    
+    line-height: 28px;  
 }
 
+   
 #clientes {
     text-align: center;
-    font-family: 'Heebo';
-    font-style: normal;
+    font-family: 'Heebo' sans-serif;
     font-weight: normal;
     border-collapse: collapse;
     border: 1px solid #8F8F8F;
-    margin: auto;
     right: 30%;
     width: 39%;
     position: absolute;
-    top:40vh;
-    display: inline-block;
+    top:40%;
 }
 
-#clientes td, #clientes th {
-    background: #FFFFFF;
+ #clientes tr{
     border: 1px solid #8F8F8F;
-    color: #000000;
     box-sizing: border-box;
-    font-family: Heebo;
-    font-style: normal;
+    padding: .35em;
+ }
+#clientes td, #clientes th{
+    border: 1px solid #8F8F8F;
+    box-sizing: border-box;
+    font-family: 'Heebo',  sans-serif;
+    font-style:normal ;
     font-weight: normal;
     font-size: 16px;
-    line-height: 23px;
+    line-height: 25px;
     align-items: center;
     text-align: center;
-    
+    position: relative;
+	
 }
 
-#clientes tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
 
 #clientes tr:hover {
-    background-color: #ddd;
+    cursor: pointer;
+    background: #FFF2EF;
 }
 
 #clientes th {
-    padding-top: 5px;
-    padding-bottom: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     text-align: center;
     background-color: #F07E1A;
-    font-family: Heebo;
+    font-family: 'Heebo',  sans-serif;
     color: #000000;
 }
 
 #seleccionar {
     position: absolute;
-    font-family: 'Heebo';
+    font-family: 'Heebo',  sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 21px;
     display: flex;
     height: 48%;
-    top: 12vh;
-    right: 48%;
+    top: 12%;
+    left:31%;
     align-items: center;
     color: #000000;
 }
 
 .celda {
-    width: 20%;
+    width: 15%;
 }
 
-.Buttons {
-    display: flex;
+
+
+
+.selected{
+ background-color:#FFF2EF  ;
 }
+
 
 #ingresos {
     text-align:center;
@@ -374,13 +377,27 @@ a.button {
     font-family: 'Heebo';
     font-style: normal;
     font-weight: normal;
-    top:25%;
-    right: 59%;
+    top:24%;
+    right: 17%;
     font-size: 16px;
 line-height: 23px;
 
 
 }
+
+
+#ingresoss{
+    text-align:center;
+    position: absolute;
+    font-family: 'Heebo';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    top:28%;
+    right: 16%;
+}
+
 
 #Monto {
     text-align:center;
@@ -388,11 +405,23 @@ line-height: 23px;
     font-family: 'Heebo';
     font-style: normal;
     font-weight: normal;
-    top:25%;
-    right: 30%;
+    top:24%;
+    right:5%;
     font-size: 16px;
-line-height: 23px;
+    line-height: 23px;
 }
+
+#Montoss{
+    text-align:center;
+    position: absolute;
+    font-family: 'Heebo';
+    font-style: normal;
+    font-weight: normal;
+    top:28%;
+    right:7%;
+    font-size: 19px;
+}
+
 
 /*modal usuario logueado*/
 .modalStyles {
@@ -406,15 +435,7 @@ line-height: 23px;
     box-sizing: border-box;
     text-align: center;
 }
-.title {
-    margin-top: 30px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 28px;
-    display: flex;
-}
+
 
 .text{
     margin-top: 24px;
