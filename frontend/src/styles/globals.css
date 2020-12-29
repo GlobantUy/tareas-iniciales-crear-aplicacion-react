@@ -99,10 +99,14 @@ select:focus {
     display: block;
 }
 .User{
-    margin-top: 30px;
-    margin-right: 102px;
     float: right;
     display: none;
+    display: block;
+    position: absolute;
+    width: 192px;
+    height: 19px;
+    left: 988px;
+    top: 31px;
 }
 .User span{
     
@@ -111,17 +115,22 @@ select:focus {
     color: #000000;
     text-align: left;
     height: 0;
-    
+    position: absolute;
+    left: 0%;
+    right: 13.46%;
+    top: 0%;
+    bottom: 0%;
+    text-align: right;
     color: #000000;
 
 }
 .imgUser{
-    padding-left: 10px;
     position: absolute;
-    left: 92.67%;
+    left: 91.67%;
     right: 0%;
-    top: 38.53%;
+    top: 5.53%; 
     bottom: 5.26%;
+    
 }
 
 .btnHeader:hover {
