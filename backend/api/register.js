@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     }
     if (req.method === 'POST') {
         try {
-            if (req.body.email != undefined) {
+            if (req.body.email != undefined && req.body.email.length != 0) {
                 userSearch = await collectionU.find({ email: req.body.email }).toArray();
                 if (userSearch.length != 0) {
                     return res.json({
@@ -25,8 +25,8 @@ module.exports = async (req, res) => {
                         message: "Email belongs to an existing account",
                     })
                 } else {
-                    if (req.body.userName != undefined) {
-                        if (req.body.passwd != undefined) {
+                    if (req.body.userName != undefined && req.body.userName.length != 0) {
+                        if (req.body.passwd != undefined && req.body.passwd.length != 0) {
                             const userN = new User ({
                                 email: req.body.email,
                                 userName: req.body.userName,
