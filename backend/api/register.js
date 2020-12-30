@@ -1,5 +1,5 @@
 import { connectToDatabase } from '../lib/database'
-const user = require('./models/user')
+const User = require('./models/user')
 
 
 module.exports = async (req, res) => {
@@ -25,9 +25,30 @@ module.exports = async (req, res) => {
                         message: "Email belongs to an existing account",
                     })
                 } else {
-                    if (req.body.userName != undefined){
+                    if (req.body.userName != undefined) {
+                        if (req.body.passwd != undefined) {
+                            const userN = new User ({
+                                email: req.body.email,
+                                userName: req.body.userName,
+                                passwd: req.body.passwd,
+                                userType: "CUSTOMER",
+                                _id: req.body.email
+                                
 
-                    }else {
+                            })
+
+                        } else {
+                            return res.json({
+                                _links: {
+                                    self: {
+                                        href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                                    }
+                                },
+                                message: "Must provide a 'passwd' property"
+                            })
+                        }
+
+                    } else {
                         return res.json({
                             _links: {
                                 self: {
