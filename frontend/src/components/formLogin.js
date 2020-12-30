@@ -18,21 +18,14 @@ class SimLogin extends Component {
     constructor(props) {
         super(props)
     }
-
     redireccionar() {
         const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
-            
             this.guardarStorage(emaill, passwordd)
-
             const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
             if (emailCargado) {
-    
                 emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
-    
-    
                 axios.post(URLpres, {
-    
                     'email': emailFromStorage,
                     'amount': JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
                     'currency': JSON.parse(sessionStorage.getItem('prestamoValues')).TipoMoneda,
@@ -46,16 +39,12 @@ class SimLogin extends Component {
                         console.log("registration error", error)
                     });
             }
-
             window.location.href = "/Descuento"
             sessionStorage.setItem('volverAceptarpress', false);
-
         } else {
             if (rol == "CUSTOMER") {
                 window.location.href = "/"
-
                 this.guardarStorage(emaill, passwordd)
-
             } else if (rol == "ADMIN") {
                 window.location.href = "/"
                 this.guardarStorage(emaill, passwordd)
@@ -76,9 +65,7 @@ class SimLogin extends Component {
         },
         )
             .then(Response => {
-
                 console.log("post realizado correctamente", Response)
-
                 if (Response.data.found == undefined) {
                     rol = Response.data.rol;
                     if (rol == "CUSTOMER") {
@@ -104,9 +91,7 @@ class SimLogin extends Component {
             email: a,
             password: b
         }
-
         sessionStorage.setItem('Usuario-Values', JSON.stringify(this.values));
-
     }
 
     render() {
@@ -139,7 +124,6 @@ class SimLogin extends Component {
                                 errors.password = "La contraseña o el Mail son incorrectos";
                                 errorPass = true
                             }
-
                             if (!values.email) {
                                 errors.email = 'Ingrese mail';
                                 mailCorrecto = true;

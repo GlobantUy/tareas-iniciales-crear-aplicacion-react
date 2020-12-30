@@ -24,7 +24,6 @@ let currency = ''
 class SimLoan extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             Ingreso: '',
             Monto_a_pedir: '',
@@ -43,7 +42,6 @@ class SimLoan extends Component {
 
             errors: {}
         }
-
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
     }
@@ -92,7 +90,6 @@ class SimLoan extends Component {
             default:
                 break;
         }
-
     }
 
     handleSumbit(e) {
@@ -115,18 +112,10 @@ class SimLoan extends Component {
             console.log('enviar formulario')
             window.location.href = '/Descuento'
         }
-
         const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
         if (emailCargado) {
-
             emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
-
-            console.log(emailFromStorage)
-            console.log(this.state.Monto_a_pedir)
-            console.log(this.state.TipoMoneda)
-            console.log(this.state.financiacion)
             axios.post(URL, {
-
                 'email': emailFromStorage,
                 'amount': this.state.Monto_a_pedir,
                 'currency': currency,
@@ -141,6 +130,7 @@ class SimLoan extends Component {
                 });
         }
     }
+
     componentDidMount() {
         const volverTue = JSON.parse(sessionStorage.getItem('volverBoton'));
         if (volverTue) {
@@ -158,9 +148,8 @@ class SimLoan extends Component {
                 TipoDePrestamoOtros: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoOtros,
             })
         }
-
     }
-
+    
     render() {
         const { errors } = this.state
         return (
@@ -189,7 +178,6 @@ class SimLoan extends Component {
                             onChange={this.checkboxChange}
                             checked={this.state.Moneda_U$S}
                         />
-
 
                         <label htmlFor="Moneda_U$S">U$S</label>
 
