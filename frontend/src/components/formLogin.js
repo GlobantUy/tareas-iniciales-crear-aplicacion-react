@@ -19,6 +19,7 @@ class SimLogin extends Component {
         super(props)
     }
     redireccionar() {
+        const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
             this.guardarStorage(emaill, passwordd)
             const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
@@ -148,6 +149,7 @@ class SimLogin extends Component {
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == false && contraCorrecta == false) {
                             this.post(values.email, values.password)
+
                         }
                         setSubmitting(false);
                     }}
