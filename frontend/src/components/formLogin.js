@@ -2,6 +2,7 @@ import React, { Component, } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 
+let emailFromStorage
 var btn = "btnPrimarioDisabled";
 let rol
 let errorPass = true
@@ -9,25 +10,44 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-const volverSolicitar = {}
+let URL = "https://backendmain-8gwcdkmst.vercel.app/api/login"
+let URLpres = "https://backendmain-jgqj8r35e.vercel.app/api/storeLoan"
+
 class SimLogin extends Component {
 
     constructor(props) {
         super(props)
     }
-
     redireccionar() {
+        const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
-            window.location.href = "/Descuento"
             this.guardarStorage(emaill, passwordd)
+            const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
+            if (emailCargado) {
+                emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+                axios.post(URLpres, {
+                    'email': emailFromStorage,
+                    'amount': JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
+                    'currency': JSON.parse(sessionStorage.getItem('prestamoValues')).TipoMoneda,
+                    'payments': JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
+            }
+                )
+                    .then(Response => {
+                        console.log("registration res", Response)
+                    })
+                    .catch(error => {
+                        console.log("registration error", error)
+                    });
+            }
+            window.location.href = "/Descuento"
+            sessionStorage.setItem('volverAceptarpress', false);
         } else {
             if (rol == "CUSTOMER") {
                 window.location.href = "/"
-
                 this.guardarStorage(emaill, passwordd)
-
             } else if (rol == "ADMIN") {
-                window.location.href = "/registro"
+                window.location.href = "/"
+                this.guardarStorage(emaill, passwordd)
 
             } else {
                 if (mailCorrecto == false && contraCorrecta == false) {
@@ -39,15 +59,13 @@ class SimLogin extends Component {
     }
 
     post(email, pass) {
-        axios.post('https://backendmain-lw9cfx37o.vercel.app/api/login', {
+        axios.post(URL, {
             "email": email,
             "passwd": pass,
         },
         )
             .then(Response => {
-
                 console.log("post realizado correctamente", Response)
-
                 if (Response.data.found == undefined) {
                     rol = Response.data.rol;
                     if (rol == "CUSTOMER") {
@@ -68,14 +86,12 @@ class SimLogin extends Component {
     }
 
     guardarStorage = (a, b) => {
-        console.log('si')
+        console.log('guardado correctamnete')
         this.values = {
             email: a,
             password: b
         }
-
         sessionStorage.setItem('Usuario-Values', JSON.stringify(this.values));
-
     }
 
     render() {
@@ -108,7 +124,6 @@ class SimLogin extends Component {
                                 errors.password = "La contraseña o el Mail son incorrectos";
                                 errorPass = true
                             }
-
                             if (!values.email) {
                                 errors.email = 'Ingrese mail';
                                 mailCorrecto = true;
@@ -131,11 +146,10 @@ class SimLogin extends Component {
                         return errors;
                     }}
 
-
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == false && contraCorrecta == false) {
                             this.post(values.email, values.password)
-                            volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
+                            
                         }
                         setSubmitting(false);
                     }}
@@ -173,6 +187,7 @@ class SimLogin extends Component {
 
 
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
+
                             <button
                                 className={btn}
                                 type="submit"
@@ -184,7 +199,7 @@ class SimLogin extends Component {
                         </form>
                     )}
                 </Formik>
-                <a href="http://localhost:3000/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
+                <a href="/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
 
             </div>
         )

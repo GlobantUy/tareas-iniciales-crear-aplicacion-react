@@ -12,21 +12,25 @@ const validate = values => {
 
     let porcentaje = (0.2) * (values.Ingreso)
     let monto = values.Monto_a_pedir
-    if ( (monto > porcentaje) && (values.Ingreso > 0)) {
+    if ((monto > porcentaje) && (values.Ingreso > 0)) {
         errors.Monto_a_pedir = 'El monto a solicitar supera el 20% de su sueldo, por favor intente con un monto menor'
-    } 
+    }
     return errors
 }
+
+let URL = "https://backendmain-jgqj8r35e.vercel.app/api/storeLoan"
+let emailFromStorage
+let currency = ''
 class SimLoan extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             Ingreso: '',
             Monto_a_pedir: '',
 
             Moneda_$U: false,
             Moneda_U$S: false,
+            TipoMoneda: '',
 
             financiacion: '',
 
@@ -38,7 +42,6 @@ class SimLoan extends Component {
 
             errors: {}
         }
-
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
     }
@@ -68,22 +71,25 @@ class SimLoan extends Component {
                 break;
             case 'Moneda':
                 if (e.target.id == 'Moneda_$U') {
+                    currency = '$U'
                     this.setState({
                         Moneda_$U: !this.state.Moneda_$U,
-                        Moneda_U$S: false
+                        Moneda_U$S: false,
+                        TipoMoneda: currency
                     })
+                    
                 } else {
+                    currency = 'U$S'
                     this.setState({
                         Moneda_U$S: !this.state.Moneda_U$S,
-                        Moneda_$U: false
+                        Moneda_$U: false,
+                        TipoMoneda: currency
                     })
                 }
-
                 break;
             default:
                 break;
         }
-
     }
 
     handleSumbit(e) {
@@ -98,37 +104,33 @@ class SimLoan extends Component {
             TipoDePrestamoAutomotor,
             TipoDePrestamoOtros
         } = this.state;
-       
+
         const { errors, ...sinErrors } = this.state
         const result = validate(sinErrors)
-        this.setState({errors: result})
+        this.setState({ errors: result })
         if (!Object.keys(result).length) {
             console.log('enviar formulario')
+            window.location.href = '/Descuento'
         }
-
-        axios.post('http://localhost:3000/api/hello', {
-            user: {
-                Ingreso: this.state.Ingreso,
-                Monto_a_pedir: this.state.Monto_a_pedir,
-                financiacion: this.state.financiacion,
-                TipoDePrestamoInmueble: this.state.TipoDePrestamoInmueble,
-                TipoDePrestamoAutomotor: this.state.TipoDePrestamoAutomotor,
-                TipoDePrestamoOtros: this.state.TipoDePrestamoOtros,
-
-            }
-        },
-            { withCredentials: true }
-        )
-            .then(Response => {
-                console.log("registration res", Response)
-                if (!Object.keys(result).length){
-                window.location.href = 'http://localhost:3000/Descuento'
-            }
-            })
-            .catch(error => {
-                console.log("registration error", error)
-            });
+        const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
+        if (emailCargado) {
+            emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+            axios.post(URL, {
+                'email': emailFromStorage,
+                'amount': this.state.Monto_a_pedir,
+                'currency': currency,
+                'payments': this.state.financiacion,
+        }
+            )
+                .then(Response => {
+                    console.log("registration res", Response)
+                })
+                .catch(error => {
+                    console.log("registration error", error)
+                });
+        }
     }
+
     componentDidMount() {
         const volverTue = JSON.parse(sessionStorage.getItem('volverBoton'));
         if (volverTue) {
@@ -147,7 +149,7 @@ class SimLoan extends Component {
             })
         }
     }
-
+    
     render() {
         const { errors } = this.state
         return (
@@ -176,7 +178,6 @@ class SimLoan extends Component {
                             onChange={this.checkboxChange}
                             checked={this.state.Moneda_U$S}
                         />
-
 
                         <label htmlFor="Moneda_U$S">U$S</label>
 
