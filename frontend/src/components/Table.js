@@ -15,7 +15,7 @@ class Table extends Component {
     }
 
     volverAceptarPres = () => {
-        sessionStorage.setItem('volverAceptarpress', false);
+        sessionStorage.setItem('volverAceptarpress', true);
     }
 
     abrirModal = () => {
