@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     if (req.method === 'POST') {
         try {
             if (req.body.email != undefined) {
-                userSearch = await collection.find({ email: req.body.email }).toArray();
+                userSearch = await collectionU.find({ email: req.body.email }).toArray();
                 if (userSearch.length != 0) {
                     return res.json({
                         _links: {
