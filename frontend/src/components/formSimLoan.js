@@ -113,7 +113,7 @@ class SimLoan extends Component {
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
             console.log('enviar formulario')
-            //window.location.href = '/Descuento'
+            window.location.href = '/Descuento'
         }
 
         const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));

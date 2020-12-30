@@ -47,7 +47,7 @@ class SimLogin extends Component {
                     });
             }
 
-            //window.location.href = "/Descuento"
+            window.location.href = "/Descuento"
             sessionStorage.setItem('volverAceptarpress', false);
 
         } else {
