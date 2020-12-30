@@ -19,18 +19,30 @@ module.exports = async (req, res) => {
                     return res.json({
                         _links: {
                             self: {
-                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
                             }
                         },
                         message: "Email belongs to an existing account",
                     })
                 } else {
+                    if (req.body.userName =! undefined){
+
+                    }else {
+                        return res.json({
+                            _links: {
+                                self: {
+                                    href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                                }
+                            },
+                            message: "Must provide a 'userName' property"
+                        })
+                    }
                 }
             } else {
                 return res.json({
                     _links: {
                         self: {
-                            href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                            href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
                         }
                     },
                     message: "Must provide an 'email' property"

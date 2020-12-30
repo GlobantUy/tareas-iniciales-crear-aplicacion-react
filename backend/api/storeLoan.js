@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
                 return res.json({
                     _links: {
                         self: {
-                            href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                            href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                         }
                     },
                     message: "Provided email does not belong to a registered user",
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
                     return res.json({
                         _links: {
                             self: {
-                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                             }
                         },
                         message: "Provided amount is not a number",
@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
                         return res.json({
                             _links: {
                                 self: {
-                                    href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                    href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                                 }
                             },
                             message: "Invalid currency type",
@@ -57,7 +57,7 @@ module.exports = async (req, res) => {
                             return res.json({
                                 _links: {
                                     self: {
-                                        href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                        href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                                     }
                                 },
                                 message: "Amount of payments is not a number",
@@ -99,7 +99,7 @@ module.exports = async (req, res) => {
                                     return res.json({
                                         _links: {
                                             self: {
-                                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                                href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                                             }
                                         },
                                         message: "Storage successful"
@@ -109,7 +109,7 @@ module.exports = async (req, res) => {
                                     return res.json({
                                         _links: {
                                             self: {
-                                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                                href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                                             }
                                         },
                                         message: "Storage fail"
@@ -121,7 +121,7 @@ module.exports = async (req, res) => {
                                 return res.json({
                                     _links: {
                                         self: {
-                                            href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                            href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                                         }
                                     },
                                     message: "The user already has a loan pending approval"

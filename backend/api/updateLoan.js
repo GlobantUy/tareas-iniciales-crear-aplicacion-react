@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
                 return res.json({
                     _links: {
                         self: {
-                            href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                            href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                         }
                     },
                     message: "User has no registered loans",
@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
                     return res.json({
                         _links: {
                             self: {
-                                href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                             }
                         },
                         message: "User has no loans pending review",
@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
                         return res.json({
                             _links: {
                                 self: {
-                                    href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                    href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                                 }
                             },
                             message: "Invalid state"
@@ -56,7 +56,7 @@ module.exports = async (req, res) => {
                         return res.json({
                             _links: {
                                 self: {
-                                    href: 'https://vercelworking-ej6t36ecv.vercel.app/api/storeLoan'
+                                    href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
                                 }
                             },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                             message: "Loan state modified successfully"
