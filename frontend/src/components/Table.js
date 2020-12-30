@@ -15,7 +15,7 @@ class Table extends Component {
     }
 
     volverAceptarPres = () => {
-        sessionStorage.setItem('volverAceptarpress', false);
+        sessionStorage.setItem('volverAceptarpress', true);
     }
 
     abrirModal = () => {
@@ -108,7 +108,7 @@ class Table extends Component {
 
     }
 
-    
+
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
             const { Moneda, Tasa, Cuotas, Años, ValorCuota } = cliente //destructuring
