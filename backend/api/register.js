@@ -33,8 +33,16 @@ module.exports = async (req, res) => {
                                 passwd: req.body.passwd,
                                 userType: "CUSTOMER",
                                 _id: req.body.email
-                                
+                            })
+                            db.collection("users").insertOne(userN)
 
+                            return res.json({
+                                _links: {
+                                    self: {
+                                        href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                                    }
+                                },
+                                message: "User registered successfully"
                             })
 
                         } else {
