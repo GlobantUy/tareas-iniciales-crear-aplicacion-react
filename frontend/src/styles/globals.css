@@ -57,6 +57,7 @@ header {
     height: 78px;
     position: fixed;
     width: 100%;
+    margin-left: -8px;
 }
 
 input {
@@ -150,7 +151,6 @@ select:focus {
     left: 50%;
     margin-left: -82px;
     margin-top: 118px;
-    text-align: center;
     margin-bottom: 82px;
 }
 
@@ -179,8 +179,8 @@ select:focus {
 }
 
 .inputTipo {
-    margin-top: 4px;
-    text-align: right;
+    margin-top: 10px;
+    text-align: left;
 }
 
 /* input[type='radio'] {} */
@@ -260,11 +260,6 @@ input[type='checkbox'] {
     border: 1px solid rgba(240, 126, 26, 0.8);
 }
 
-.btnSecundario:disabled {
-    color: #636363;
-    border: 1px solid #636363;
-}
-
 .btnCuarto {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -282,7 +277,6 @@ input[type='checkbox'] {
 }
 
 .btnCuarto:hover {
-    cursor: pointer;
     background: rgba(240, 126, 26, 0.8);
 }
 
@@ -292,15 +286,14 @@ input[type='checkbox'] {
 }
 
 .btnTerciario {
-    text-align: center;
+    left: 36%;
+    top: 71vh;
+    position: absolute;
     width: 168px;
     height: 40px;
     border: 1px solid #F07E1A;
     color: #F07E1A;
     background-color: transparent;
-    left: 36%;
-    top: 71vh;
-    position: absolute;
 }
 
 

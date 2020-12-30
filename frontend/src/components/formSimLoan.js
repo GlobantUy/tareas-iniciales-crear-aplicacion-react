@@ -12,9 +12,9 @@ const validate = values => {
 
     let porcentaje = (0.2) * (values.Ingreso)
     let monto = values.Monto_a_pedir
-    if ( (monto > porcentaje) && (values.Ingreso > 0)) {
+    if ((monto > porcentaje) && (values.Ingreso > 0)) {
         errors.Monto_a_pedir = 'El monto a solicitar supera el 20% de su sueldo, por favor intente con un monto menor'
-    } 
+    }
     return errors
 }
 class SimLoan extends Component {
@@ -98,10 +98,10 @@ class SimLoan extends Component {
             TipoDePrestamoAutomotor,
             TipoDePrestamoOtros
         } = this.state;
-       
+
         const { errors, ...sinErrors } = this.state
         const result = validate(sinErrors)
-        this.setState({errors: result})
+        this.setState({ errors: result })
         if (!Object.keys(result).length) {
             console.log('enviar formulario')
         }
@@ -121,9 +121,9 @@ class SimLoan extends Component {
         )
             .then(Response => {
                 console.log("registration res", Response)
-                if (!Object.keys(result).length){
-                window.location.href = 'http://localhost:3000/Descuento'
-            }
+                if (!Object.keys(result).length) {
+                    window.location.href = 'http://localhost:3000/Descuento'
+                }
             })
             .catch(error => {
                 console.log("registration error", error)
@@ -164,7 +164,6 @@ class SimLoan extends Component {
                             placeholder="Agregar en $U"
                             value={this.state.Ingreso}
                             onChange={this.handleChange}
-                        //required 
                         />
                         <label className="error">{errors.Ingreso}</label>
 
@@ -199,11 +198,9 @@ class SimLoan extends Component {
                             placeholder="Agregar Monto"
                             value={this.state.Monto_a_pedir}
                             onChange={this.handleChange}
-                        //required 
                         />
                         <label className="error">{errors.Monto_a_pedir}</label>
 
-                        <br />
 
                         <p>Años de financiación*</p>
                         <select className="inputAños" name="financiacion" value={this.state.financiacion} onChange={this.handleChange}>
