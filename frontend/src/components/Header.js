@@ -61,7 +61,7 @@ class Header extends React.Component {
 
           <div className='User'>
             <span id='user-name' >{this.state.email}</span>
-            <div className="mengitu">
+            <div className="menu">
               <img className="imgUser" src="/Frame.png" />
               <ul>
                 <li>
