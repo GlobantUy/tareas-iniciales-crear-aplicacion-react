@@ -199,6 +199,7 @@ select:focus {
 
 input[type='checkbox'] {
     margin-top: 4px;
+    background-color: tomato;
 }
 
 /* Ingreso */
@@ -391,14 +392,13 @@ a.button {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    line-height: 21px;
     display: flex;
-    height: 48%;
-    top: 12%;
+    top: 36%;
     left: 31%;
     align-items: center;
     color: #000000;
 }
+
 
 .celda {
     width: 15%;
@@ -615,4 +615,141 @@ a.button {
     box-sizing: border-box;
     bottom: -100px;
     border: 1px solid #F07E1A;
+}
+
+#titulo {
+    position: absolute;
+    top: 17%;
+    left: 41%;
+    font-size: 24px;
+    font-family: 'Roboto' sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    color: #000000;
+    line-height: 28px;
+}
+
+#Administrador {
+    text-align: center;
+    font-family: 'Heebo' sans-serif;
+    font-weight: normal;
+    border: 1px solid #8F8F8F;
+    left: 15%;
+    width: 70%;
+    position: absolute;
+    top: 40%;
+    display: inline-table;
+    
+}
+
+#Administrador tr {
+    border: 1px solid #8F8F8F;
+    
+}
+
+#Administrador td, #Administrador th {
+    border: 1px solid #8F8F8F;
+    box-sizing: border-box;
+    font-family: 'Heebo', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    height: 38px;
+    font-size: 16px;
+    line-height: 25px;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+ 
+#Administrador tr:hover {
+    cursor: pointer;
+    background: #FFF2EF;
+}
+
+#Administrador th {
+    padding-top: 2px;
+    text-align: center;
+    background-color: #F07E1A;
+    font-family: 'Heebo', sans-serif;
+    color: #000000;
+    
+  
+}
+
+.btnOctavo {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    color: #000000;
+    background: #F07E1A;
+    border: none;
+    width: 168px;
+    height: 40px;
+    Top: 71vh;
+    right: 15%;
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+}
+
+.btnOctavo:hover {
+    cursor: pointer;
+    background: rgba(240, 126, 26, 0.8);
+}
+
+.btnOctavo:disabled {
+    color: #636363;
+    background: #E0E0E0;
+}
+
+.btnSeptimo {
+    text-align: center;
+    width: 168px;
+    height: 40px;
+    border: 1px solid #F07E1A;
+    color: #F07E1A;
+    background-color: transparent;
+    left: 55%;
+    top: 71vh;
+    position: absolute;
+    visibility: hidden;
+}
+
+
+
+.btnSeptimo:hover {
+    cursor: pointer;
+    color: rgba(240, 126, 26, 0.8);
+    border: 1px solid rgba(240, 126, 26, 0.8);
+}
+
+.btnSeptimo:disabled {
+    color: #636363;
+    border: 1px solid #636363;
+}
+
+#Filtro{
+    position: absolute;
+    font-family: 'Heebo', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    height: 48%;
+    top: 6%;
+    left: 15%;
+    align-items: center;
+    color: #000000;
+}
+
+#nombredelmenuu{
+    font-family: 'Heebo', sans-serif;
+    position: absolute;
+    display: inline-block;
+    top: 33%;
+    padding:4px;
+    left: 15%;
+    border: 1px solid #000000;
+    box-sizing: border-box; 
 }
