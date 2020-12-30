@@ -99,7 +99,8 @@ select:focus {
     outline: none;
     display: block;
 }
-.User{
+
+.User {
     float: right;
     display: none;
     display: block;
@@ -109,8 +110,8 @@ select:focus {
     left: 988px;
     top: 31px;
 }
-.User span{
-    
+
+.User span {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: #000000;
@@ -123,15 +124,14 @@ select:focus {
     bottom: 0%;
     text-align: right;
     color: #000000;
-
 }
-.imgUser{
+
+.imgUser {
     position: absolute;
     left: 91.67%;
     right: 0%;
-    top: 5.53%; 
+    top: 5.53%;
     bottom: 5.26%;
-    
 }
 
 .btnHeader:hover {
@@ -142,7 +142,6 @@ select:focus {
     font-size: 10px;
     text-align: center;
     width: 100%;
-
 }
 
 .form {
@@ -182,6 +181,8 @@ select:focus {
     margin-top: 10px;
     text-align: left;
 }
+
+
 
 /* input[type='radio'] {} */
 
@@ -296,8 +297,6 @@ input[type='checkbox'] {
     background-color: transparent;
 }
 
-
-
 .btnTerciario:hover {
     cursor: pointer;
     color: rgba(240, 126, 26, 0.8);
@@ -329,7 +328,6 @@ a.button {
     line-height: 28px;
 }
 
-
 #clientes {
     text-align: center;
     font-family: 'Heebo' sans-serif;
@@ -340,12 +338,10 @@ a.button {
     position: absolute;
     top: 40%;
     display: inline-table;
-    
 }
 
 #clientes tr {
     border: 1px solid #8F8F8F;
-    
 }
 
 #clientes td, #clientes th {
@@ -360,7 +356,7 @@ a.button {
     text-align: center;
     position: relative;
 }
- 
+
 #clientes tr:hover {
     cursor: pointer;
     background: #FFF2EF;
@@ -373,8 +369,6 @@ a.button {
     background-color: #F07E1A;
     font-family: 'Heebo', sans-serif;
     color: #000000;
-    
-  
 }
 
 #seleccionar {
@@ -427,7 +421,7 @@ a.button {
 #Monto {
     text-align: center;
     position: absolute;
-    font-family: 'Heebo',sans-serif;
+    font-family: 'Heebo', sans-serif;
     font-style: normal;
     font-weight: normal;
     top: 24%;
@@ -439,7 +433,7 @@ a.button {
 #Montoss {
     text-align: center;
     position: absolute;
-    font-family: 'Heebo',sans-serif;
+    font-family: 'Heebo', sans-serif;
     font-style: normal;
     font-weight: normal;
     top: 28%;
