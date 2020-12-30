@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
                         message: "Email belongs to an existing account",
                     })
                 } else {
-                    if (req.body.userName =! undefined){
+                    if (req.body.userName != undefined){
 
                     }else {
                         return res.json({
