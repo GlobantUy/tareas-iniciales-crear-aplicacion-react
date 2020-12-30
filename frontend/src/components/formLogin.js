@@ -29,7 +29,7 @@ class SimLogin extends Component {
                     'amount': JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
                     'currency': JSON.parse(sessionStorage.getItem('prestamoValues')).TipoMoneda,
                     'payments': JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
-            }
+                }
                 )
                     .then(Response => {
                         console.log("registration res", Response)
@@ -148,7 +148,6 @@ class SimLogin extends Component {
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == false && contraCorrecta == false) {
                             this.post(values.email, values.password)
-                            
                         }
                         setSubmitting(false);
                     }}

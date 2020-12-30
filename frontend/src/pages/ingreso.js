@@ -5,7 +5,7 @@ export default function Ingreso() {
   return (
     <div >
       <header className="header">
-        <a href="http://localhost:3000"><img className="logoheader" src="/logo.jpg"/></a>
+        <img className="logoheader" src="/logo.jpg"/>
       </header>
       <SimLogin />
 
