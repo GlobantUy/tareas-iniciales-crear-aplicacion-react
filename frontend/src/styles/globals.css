@@ -178,12 +178,55 @@ select:focus {
     text-align: right;
 }
 
-.inputTipo {
+
+
+input[type=checkbox]+label {
     margin-top: 10px;
     text-align: left;
 }
 
 
+
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox]+label:before {
+    content: "\2714";
+    border: 0.1em solid #000;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    padding-left: 0.2em;
+    padding-bottom: 0.3em;
+    margin-right: 0.2em;
+    vertical-align: bottom;
+    color: transparent;
+    transition: 0.2s;
+    margin-top: 5px;
+    color-interpolation-filters: auto;
+}
+
+input[type=checkbox]+label:active:before {
+    transform: scale(0);
+}
+
+input[type=checkbox]:checked+label:before {
+    background-color: white;
+    border-color: #F07E1A;
+    color: #F07E1A;
+}
+
+input[type=checkbox]:disabled+label:before {
+    transform: scale(1);
+    border-color: #aaa;
+}
+
+input[type=checkbox]:checked:disabled+label:before {
+    transform: scale(1);
+    background-color: white;
+    border-color: #F07E1A;
+}
 
 /* input[type='radio'] {} */
 
@@ -388,7 +431,6 @@ a.button {
     align-items: center;
     color: #000000;
 }
-
 
 .celda {
     width: 15%;
@@ -629,12 +671,10 @@ a.button {
     position: absolute;
     top: 40%;
     display: inline-table;
-    
 }
 
 #Administrador tr {
     border: 1px solid #8F8F8F;
-    
 }
 
 #Administrador td, #Administrador th {
@@ -650,7 +690,7 @@ a.button {
     text-align: center;
     position: relative;
 }
- 
+
 #Administrador tr:hover {
     cursor: pointer;
     background: #FFF2EF;
@@ -662,8 +702,6 @@ a.button {
     background-color: #F07E1A;
     font-family: 'Heebo', sans-serif;
     color: #000000;
-    
-  
 }
 
 .btnOctavo {
@@ -705,8 +743,6 @@ a.button {
     visibility: hidden;
 }
 
-
-
 .btnSeptimo:hover {
     cursor: pointer;
     color: rgba(240, 126, 26, 0.8);
@@ -718,7 +754,7 @@ a.button {
     border: 1px solid #636363;
 }
 
-#Filtro{
+#Filtro {
     position: absolute;
     font-family: 'Heebo', sans-serif;
     font-style: normal;
@@ -733,13 +769,13 @@ a.button {
     color: #000000;
 }
 
-#nombredelmenuu{
+#nombredelmenuu {
     font-family: 'Heebo', sans-serif;
     position: absolute;
     display: inline-block;
     top: 33%;
-    padding:4px;
+    padding: 4px;
     left: 15%;
     border: 1px solid #000000;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
