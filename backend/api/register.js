@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     return res.status(200).send('ok')
   }
   if (req.method === 'POST') {
-    try {
+
       if (req.body.email != undefined && req.body.email.length != 0) {
         userSearch = await collectionU.find({ email: req.body.email }).toArray()
         if (userSearch.length != 0) {
@@ -110,15 +110,5 @@ module.exports = async (req, res) => {
           message: "Must provide an 'email' property and value"
         })
       }
-    } catch (err){
-      return res.json({
-        _links: {
-          self: {
-            href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
-          }
-        },
-        message: err
-      })
-    }
   }
 }
