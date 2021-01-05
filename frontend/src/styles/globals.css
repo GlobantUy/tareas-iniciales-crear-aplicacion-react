@@ -218,6 +218,10 @@ input[type='checkbox'] {
     color: #E2331F;
 }
 
+.dtin{
+    margin-top: 10px;
+}
+
 .recContr {
     text-decoration: underline;
     color: black;
