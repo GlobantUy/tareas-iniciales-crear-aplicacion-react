@@ -77,7 +77,7 @@ class SimLoan extends Component {
                         Moneda_U$S: false,
                         TipoMoneda: currency
                     })
-                    
+
                 } else {
                     currency = 'U$S'
                     this.setState({
@@ -120,7 +120,7 @@ class SimLoan extends Component {
                 'amount': this.state.Monto_a_pedir,
                 'currency': currency,
                 'payments': this.state.financiacion,
-        }
+            }
             )
                 .then(Response => {
                     console.log("registration res", Response)
@@ -172,14 +172,15 @@ class SimLoan extends Component {
             })
         }
     }
-    
+
     render() {
         const { errors } = this.state
         return (
             <div>
+                <h1 className="titleForm">Simulador de préstamos</h1>
+
                 <div className="form">
                     <form onSubmit={this.handleSumbit}>
-                        <h1 className="titleForm">Simulador de préstamos</h1>
 
                         <p>Ingreso($U)*</p>
                         <input className="Ingreso"

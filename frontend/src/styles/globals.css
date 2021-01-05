@@ -139,12 +139,13 @@ select:focus {
 }
 
 .titleForm {
-    font-size: 10px;
     text-align: center;
-    width: 100%;
+    position: fixed;
+    margin-top: 114px;
 }
 
 .form {
+    top: 7%;
     width: 168px;
     position: absolute;
     left: 50%;
@@ -210,7 +211,7 @@ input[type='checkbox'] {
     position: absolute;
     left: 50%;
     margin-left: -82px;
-    margin-top: 118px;
+    margin-top: 114px;
     text-align: center;
 }
 
@@ -325,12 +326,11 @@ a.button {
     position: absolute;
     top: 17%;
     left: 41%;
-    font-size: 24px;
-    font-family: 'Roboto' sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
+    font-size: 24px;
     color: #000000;
-    line-height: 28px;
 }
 
 #clientes {
