@@ -11,8 +11,10 @@ footer {
 a {
     text-decoration: none
 }
+ body {
+     margin: 0px;
 
-/* body {} */
+ } 
 
 h1 {
     width: 100%;
@@ -54,7 +56,7 @@ button {
 
 header {
     border-bottom-style: solid;
-    height: 78px;
+    height: 11vh;
     position: fixed;
     width: 100%;
 }
@@ -160,6 +162,13 @@ select:focus {
     .menu:hover ul{
         display: block; 
         left: 100px; 
+    }
+    .containerDescuento ul{
+        margin-top: 15px;
+
+    }
+    .containerIndex header{
+        height: 11vh;
     }
 
 .btnHeader:hover {
