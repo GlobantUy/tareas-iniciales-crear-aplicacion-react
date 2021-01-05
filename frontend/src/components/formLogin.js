@@ -103,14 +103,14 @@ class SimLogin extends Component {
                     validate={values => {
                         const errors = {};
                         if (!values.password) {
-                            errors.password = '';
+                            errors.password = 'Necesario';
                             mailCorrecto = true;
                             if (!values.email) {
-                                errors.email = 'Ingrese mail';
+                                errors.email = 'Necesario';
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
-                                errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
+                                errors.email = 'Formato invalido';
                                 mailCorrecto = true;
                             } else {
                                 mailCorrecto = true;
@@ -121,11 +121,11 @@ class SimLogin extends Component {
                             contraCorrecta = false;
 
                             if (errorPass == false) {
-                                errors.password = "La contraseña o el Mail son incorrectos";
+                                errors.password = "Los datos ingresados no son correctos, por favor verifique";
                                 errorPass = true
                             }
                             if (!values.email) {
-                                errors.email = 'Ingrese mail';
+                                errors.email = '';
                                 mailCorrecto = true;
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
@@ -183,10 +183,10 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.password}
                             />
-                            { touched.password && <label className="error">{errors.password}</label>}
-
+                            { touched.password && <label className="error-login">{errors.password}</label>}
 
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
+
 
                             <button
                                 className={btn}

@@ -217,6 +217,10 @@ input[type='checkbox'] {
     color: #E2331F;
 }
 
+.error-login {
+    color: #E2331F;
+}
+
 .recContr {
     text-decoration: underline;
     color: black;
