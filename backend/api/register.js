@@ -110,14 +110,14 @@ module.exports = async (req, res) => {
           message: "Must provide an 'email' property and value"
         })
       }
-    } catch {
+    } catch (err){
       return res.json({
         _links: {
           self: {
             href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
           }
         },
-        message: 'Internal error (004)'
+        message: err
       })
     }
   }
