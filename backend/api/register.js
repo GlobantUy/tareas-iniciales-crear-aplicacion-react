@@ -53,6 +53,15 @@ module.exports = async (req, res) => {
                           },
                           message: 'User registered successfully'
                         })
+                      }else {
+                        return res.json({
+                          _links: {
+                            self: {
+                              href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                            }
+                          },
+                          message: "Must provide a 'preferences' property and value"
+                        })
                       }
                     } else {
                       return res.json({
