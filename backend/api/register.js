@@ -23,25 +23,62 @@ module.exports = async (req, res) => {
             message: 'Email belongs to an existing account'
           })
         } else {
-          if (req.body.userName != undefined && req.body.userName.length != 0) {
-            if (req.body.passwd != undefined && req.body.passwd.length != 0) {
-              const userN = new User({
-                email: req.body.email,
-                userName: req.body.userName,
-                passwd: req.body.passwd,
-                userType: 'CUSTOMER',
-                _id: req.body.email
-              })
-              db.collection('users').insertOne(userN)
+          if (req.body.name != undefined && req.body.name.length != 0) {
+            if (req.body.lName != undefined && req.body.lName.length != 0) {
+              if (req.body.dateOfBirth != undefined && req.body.dateOfBirth.length != 0) {
+                if (req.body.department != undefined && req.body.department.length != 0) {
+                  if (req.body.passwd != undefined && req.body.passwd.length != 0) {
+                    const userN = new User({
+                      name: req.body.name,
+                      lName: req.body.lName,
+                      dateOfBirth: req.body,dateOfBirth,
+                      email: req.body.email,
+                      department: req.body.department,
+                      userName: req.body.name + " " + req.body.lName,
+                      passwd: req.body.passwd,
+                      userType: 'CUSTOMER',
+                      _id: req.body.email
+                    })
+                    db.collection('users').insertOne(userN)
 
-              return res.json({
-                _links: {
-                  self: {
-                    href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                    return res.json({
+                      _links: {
+                        self: {
+                          href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                        }
+                      },
+                      message: 'User registered successfully'
+                    })
+                  } else {
+                    return res.json({
+                      _links: {
+                        self: {
+                          href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                        }
+                      },
+                      message: "Must provide a 'passwd' property and value"
+                    })
                   }
-                },
-                message: 'User registered successfully'
-              })
+                }else {
+                  return res.json({
+                    _links: {
+                      self: {
+                        href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                      }
+                    },
+                    message: "Must provide a 'department' property and value"
+                  })
+                }
+              } else {
+                return res.json({
+                  _links: {
+                    self: {
+                      href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                    }
+                  },
+                  message: "Must provide a 'dateOfBirth' property and value"
+                })
+              }
             } else {
               return res.json({
                 _links: {
@@ -49,7 +86,7 @@ module.exports = async (req, res) => {
                     href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
                   }
                 },
-                message: "Must provide a 'passwd' property"
+                message: "Must provide a 'lName' property and value"
               })
             }
           } else {
@@ -59,7 +96,7 @@ module.exports = async (req, res) => {
                   href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
                 }
               },
-              message: "Must provide a 'userName' property"
+              message: "Must provide a 'name' property and value"
             })
           }
         }
@@ -70,7 +107,7 @@ module.exports = async (req, res) => {
               href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
             }
           },
-          message: "Must provide an 'email' property"
+          message: "Must provide an 'email' property and value"
         })
       }
     } catch {
