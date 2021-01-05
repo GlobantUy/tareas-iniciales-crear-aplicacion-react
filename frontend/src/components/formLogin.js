@@ -130,7 +130,7 @@ class SimLogin extends Component {
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
-                                errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
+                                errors.email = 'Formato invalido';
                                 mailCorrecto = true;
                             } else {
                                 emaill = values.email
