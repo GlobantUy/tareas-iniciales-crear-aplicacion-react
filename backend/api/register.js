@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
   const db = await connectToDatabase()
   const collectionU = await db.collection('users')
 
+  
   if (req.method === 'OPTIONS') {
     return res.status(200).send('ok')
   }
