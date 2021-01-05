@@ -149,12 +149,12 @@ class Table extends Component {
     render() {
         return (
             <div className="container">
-                <h1 id='titleee'>Resultado de préstamo</h1>
+                <h2 id='titleee'>Resultado de préstamo</h2>
                     <h1 id='ingresos'>  Ingresos </h1>
                     <h1 id='ingresoss'> {this.state.Moneda + this.state.Ingreso} </h1>
                     <h1 id='Monto' >  Monto  solicitado </h1>
                     <h1 id='Montoss'> {this.state.Moneda + this.state.Monto_a_pedir} </h1>
-                    <h1 id='seleccionar'>Seleccione la fila deseada para solicitar su préstamo</h1>
+                    <h2 id='seleccionar'>Seleccione la fila deseada para solicitar su préstamo</h2>
                     <div class="table-responsive-">
                         <table id='clientes'>
                             <tbody>
