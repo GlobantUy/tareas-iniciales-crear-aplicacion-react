@@ -28,27 +28,42 @@ module.exports = async (req, res) => {
               if (req.body.dateOfBirth != undefined && req.body.dateOfBirth.length != 0) {
                 if (req.body.department != undefined && req.body.department.length != 0) {
                   if (req.body.passwd != undefined && req.body.passwd.length != 0) {
-                    const userN = new User({
-                      name: req.body.name,
-                      lName: req.body.lName,
-                      dateOfBirth: req.body.dateOfBirth,
-                      email: req.body.email,
-                      department: req.body.department,
-                      userName: req.body.name + " " + req.body.lName,
-                      passwd: req.body.passwd,
-                      userType: 'CUSTOMER',
-                      _id: req.body.email
-                    })
-                    db.collection('users').insertOne(userN)
+                    if (req.body.gender != undefined && req.body.gender.length != 0) {
+                      if (req.body.preferences != undefined && req.body.preferences.length != 0) {
+                        const userN = new User({
+                          name: req.body.name,
+                          lName: req.body.lName,
+                          dateOfBirth: req.body.dateOfBirth,
+                          email: req.body.email,
+                          department: req.body.department,
+                          gender: req.body.gender,
+                          preferences: req.body.preferences,
+                          userName: req.body.name + " " + req.body.lName,
+                          passwd: req.body.passwd,
+                          userType: 'CUSTOMER',
+                          _id: req.body.email
+                        })
+                        db.collection('users').insertOne(userN)
 
-                    return res.json({
-                      _links: {
-                        self: {
-                          href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
-                        }
-                      },
-                      message: 'User registered successfully'
-                    })
+                        return res.json({
+                          _links: {
+                            self: {
+                              href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                            }
+                          },
+                          message: 'User registered successfully'
+                        })
+                      }
+                    } else {
+                      return res.json({
+                        _links: {
+                          self: {
+                            href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                          }
+                        },
+                        message: "Must provide a 'gender' property and value"
+                      })
+                    }
                   } else {
                     return res.json({
                       _links: {
@@ -59,7 +74,7 @@ module.exports = async (req, res) => {
                       message: "Must provide a 'passwd' property and value"
                     })
                   }
-                }else {
+                } else {
                   return res.json({
                     _links: {
                       self: {
@@ -110,7 +125,7 @@ module.exports = async (req, res) => {
           message: "Must provide an 'email' property and value"
         })
       }
-    } catch (err){
+    } catch (err) {
       return res.json({
         _links: {
           self: {
