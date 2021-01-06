@@ -1,12 +1,9 @@
 import { connectToDatabase } from '../lib/database'
 const User = require('./models/user')
-
 module.exports = async (req, res) => {
   let userSearch
   const db = await connectToDatabase()
   const collectionU = await db.collection('users')
-
-  
   if (req.method === 'OPTIONS') {
     return res.status(200).send('ok')
   }
@@ -39,7 +36,7 @@ module.exports = async (req, res) => {
                           department: req.body.department,
                           gender: req.body.gender,
                           preferences: req.body.preferences,
-                          userName: req.body.name + " " + req.body.lName,
+                          userName: req.body.name + ' ' + req.body.lName,
                           passwd: req.body.passwd,
                           userType: 'CUSTOMER',
                           _id: req.body.email
@@ -54,7 +51,7 @@ module.exports = async (req, res) => {
                           },
                           message: 'User registered successfully'
                         })
-                      }else {
+                      } else {
                         return res.json({
                           _links: {
                             self: {
