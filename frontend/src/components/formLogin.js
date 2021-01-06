@@ -185,7 +185,7 @@ class SimLogin extends Component {
                             />
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
 
-                            { touched.password && <label className="error dtin">{errors.password}</label>}
+                            { touched.password && <p className="error dt-in">{errors.password}</p>}
 
                             <button
                                 className={btn}
