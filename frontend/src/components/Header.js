@@ -63,13 +63,13 @@ class Header extends React.Component {
           <div className='User'>
             <span id='user-name' >{this.state.email}</span>
             <div className="menu">
-            <img className="imgUser" src="/Frame.png" />
+              <img className="imgUser" src="/Frame.png" />
               <ul>
                 <li>
                   <a href='http://localhost:3000/ingreso' onClick={this.logout}>Log out </a>
                 </li>
               </ul>
-            </div>           
+            </div>
           </div>
 
         </header>
@@ -77,7 +77,7 @@ class Header extends React.Component {
         <footer>
 
         </footer>
-      </div>
+      </div >
     )
 
   }

@@ -4,9 +4,9 @@ import Header from '../components/Header'
 export default function Descuentoo() {
   return (
     <div className='containerDescuento'>
-      <Header/>
+      <Header />
       <div className="tablea">
-      <Table/>
+        <Table />
       </div>
       <footer>
 

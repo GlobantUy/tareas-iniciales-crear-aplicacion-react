@@ -22,8 +22,8 @@ class Tableadmin extends Component {
             clientes: [{ checkbox: "", Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
 
             isDisabled: true,
-            
-            hidden:false
+
+            hidden: false
         }
     }
 
@@ -55,7 +55,7 @@ class Tableadmin extends Component {
             this.setState({
                 isDisabled: false,
                 rowSelected: true,
-                hidden:false
+                hidden: false
 
             });
 
@@ -65,7 +65,7 @@ class Tableadmin extends Component {
                 this.setState({
                     isDisabled: true,
                     rowSelected: false,
-                    hidden:true
+                    hidden: true
                 });
             }
         }
@@ -73,8 +73,8 @@ class Tableadmin extends Component {
 
     handleChange(checked) {
         this.setState({ checked });
-      }
-   
+    }
+
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
             const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas } = cliente //destructuring
@@ -139,7 +139,7 @@ class Tableadmin extends Component {
                     </table>
                 </div>
                 <div className="Buttons">
-                    <button type="submit" className="btnSeptimo"   hidden={this.state.hidden}> Limpiar</button>
+                    <button type="submit" className="btnSeptimo" hidden={this.state.hidden}> Limpiar</button>
                     <button type="submit" className="btnOctavo" disabled={this.state.isDisabled} > Aplicar cambios</button>
                 </div>
 
