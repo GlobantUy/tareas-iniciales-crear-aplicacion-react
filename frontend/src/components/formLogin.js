@@ -10,8 +10,8 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-let URL = "https://backendmain-8gwcdkmst.vercel.app/api/login"
-let URLpres = "https://backendmain-jgqj8r35e.vercel.app/api/storeLoan"
+let URL = "https://backendmain-pdz54353z.vercel.app/api/login"
+let URLpres = "https://backendmain-pdz54353z.vercel.app/api/storeLoan"
 
 class SimLogin extends Component {
 
