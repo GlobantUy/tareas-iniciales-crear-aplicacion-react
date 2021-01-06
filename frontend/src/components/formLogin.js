@@ -121,7 +121,7 @@ class SimLogin extends Component {
                             contraCorrecta = false;
 
                             if (errorPass == false) {
-                                errors.password = "La contraseña o el Mail son incorrectos";
+                                errors.password = "Los datos ingresados no son correctos, por favor verifique";
                                 errorPass = true
                             }
                             if (!values.email) {
@@ -183,10 +183,9 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.password}
                             />
-                            { touched.password && <label className="error">{errors.password}</label>}
-
-
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
+
+                            { touched.password && <p className="error dt-in">{errors.password}</p>}
 
                             <button
                                 className={btn}

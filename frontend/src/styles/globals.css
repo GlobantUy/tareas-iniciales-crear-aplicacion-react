@@ -211,14 +211,23 @@ input[type='checkbox'] {
     left: 50%;
     margin-left: -82px;
     margin-top: 118px;
-    text-align: center;
+    text-align: center;  
 }
 
 .error {
     color: #E2331F;
 }
 
+.dt-in{
+    color: #E2331F;
+    margin-top: 26px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    text-align: center;
+}
+
 .recContr {
+    
     text-decoration: underline;
     color: black;
     text-align: right;
