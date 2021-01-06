@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
+
 class Tableadmin extends Component {
 
     constructor(props) {
@@ -19,11 +20,12 @@ class Tableadmin extends Component {
             rowSelected: false,
 
 
-            clientes: [{ checkbox: "", Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
+            clientes: [{  Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
 
             isDisabled: true,
             
-            hidden:false
+            hidden:true
+
         }
     }
 
@@ -34,10 +36,10 @@ class Tableadmin extends Component {
         this.setState({
 
             clientes: [
-                { "": "", Usuario: '10%', Montosolicitado: monto_a_pedir, Fecha: 60, Moneda: moneda, Cuotas: 60, Estado: "" },
-                { "": "", Usuario: '15%', Montosolicitado: monto_a_pedir, Fecha: 120, Moneda: moneda, Cuotas: 120, Estado: "" },
-                { "": "", Usuario: '18%', Montosolicitado: monto_a_pedir, Fecha: 180, Moneda: moneda, Cuotas: 180, Estado: "" },
-                { "": "", Usuario: '20%', Montosolicitado: monto_a_pedir, Fecha: 240, Moneda: moneda, Cuotas: 240, Estado: "" }
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 60, Estado: "" },
+                {  Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 120, Estado: "" },
+                {  Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 180, Estado: "" },
+                {  Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 240, Estado: "" }
             ],
 
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
@@ -80,21 +82,20 @@ class Tableadmin extends Component {
             const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas } = cliente //destructuring
             return (
                 <tr id={index} key={Moneda}>
-                    <td> <input type="checkbox" onClick={(() => this.handleSubmitClicked(index))} />&nbsp;</td>
                     <td className="celda">{Usuario}</td>
                     <td className="celda">{Montosolicitado}</td>
                     <td className="celda">{Fecha}</td>
                     <td className="celda">{Moneda}</td>
                     <td className="celda">{Cuotas}</td>
-                    <td>  <select name="nombredelmenu">
-
-                        <option value="option1"> Opción 1 </ option>
-
-                        <option value="option2" selected="selected"> Opción 2 </ option>
-
-                        <option value="opción3"> Opción 3 </ option>
-
-                    </ select> </td>
+                    <td class="dropdown">
+                 <form action="" name="FILTER">
+                     <select id='menudelatabla' size="1">
+                         <option value="Aprobado">Aprobado</option>
+                         <option value="Rechazado"> Rechazado</option>
+                         <option value="Pendiente">Pendiente</option>
+                     </select>
+                     </form>
+             </td>
                 </tr>
             )
         })
@@ -120,11 +121,11 @@ class Tableadmin extends Component {
                 <select id='nombredelmenuu' >
 
                     <option value="">   </option>
-                    <option value="option1">Aprobado  </ option>
+                    <option value="option1" onClick={(() => this.handleSubmitClicked(index))}>Aprobado  </ option>
 
-                    <option value="option2" > Rechazado </ option>
+                    <option value="option2" onClick={(() => this.handleSubmitClicked(index))}> Rechazado </ option>
 
-                    <option value="opción3">Pendiente  </ option>
+                    <option value="opción3" onClick={(() => this.handleSubmitClicked(index))}>Pendiente  </ option>
 
                     <option value="opción4"> Todos </ option>
 
@@ -139,7 +140,7 @@ class Tableadmin extends Component {
                     </table>
                 </div>
                 <div className="Buttons">
-                    <button type="submit" className="btnSeptimo"   hidden={this.state.hidden}> Limpiar</button>
+                    <button type="submit" className="btnSeptimo" hidden={this.state.hidden} onclick > Limpiar</button>
                     <button type="submit" className="btnOctavo" disabled={this.state.isDisabled} > Aplicar cambios</button>
                 </div>
 

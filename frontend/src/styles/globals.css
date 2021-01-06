@@ -405,7 +405,11 @@ a.button {
 }
 
 .selected {
-    background-color: #FFF2EF;
+    background-color: #ffca9b;
+}
+
+.selected:hover{
+    background-color: #ffca9b;
 }
 
 #ingresos {
@@ -685,7 +689,7 @@ a.button {
     border: none;
     width: 168px;
     height: 40px;
-    Top: 71vh;
+    Top: 74vh;
     right: 15%;
     position: absolute;
     display: inline-block;
@@ -710,9 +714,9 @@ a.button {
     color: #F07E1A;
     background-color: transparent;
     left: 55%;
-    top: 71vh;
+    top: 74vh;
     position: absolute;
-    visibility: hidden;
+
 }
 
 
@@ -752,4 +756,18 @@ a.button {
     left: 15%;
     border: 1px solid #000000;
     box-sizing: border-box; 
+}
+
+
+.dropdown-content  {
+    position: absolute;
+    padding: 12px 16px;
+    min-width: 160px;
+  }
+
+#menudelatabla{
+
+    position: absolute;
+    left:13%;
+    padding: 12px 16px;
 }
