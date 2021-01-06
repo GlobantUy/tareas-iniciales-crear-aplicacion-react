@@ -77,7 +77,7 @@ class SimLoan extends Component {
                         Moneda_U$S: false,
                         TipoMoneda: currency
                     })
-                    
+
                 } else {
                     currency = 'U$S'
                     this.setState({
@@ -120,7 +120,7 @@ class SimLoan extends Component {
                 'amount': this.state.Monto_a_pedir,
                 'currency': currency,
                 'payments': this.state.financiacion,
-        }
+            }
             )
                 .then(Response => {
                     console.log("registration res", Response)
@@ -129,6 +129,29 @@ class SimLoan extends Component {
                     console.log("registration error", error)
                 });
         }
+
+        axios.post('http://localhost:3000/api/hello', {
+            user: {
+                Ingreso: this.state.Ingreso,
+                Monto_a_pedir: this.state.Monto_a_pedir,
+                financiacion: this.state.financiacion,
+                TipoDePrestamoInmueble: this.state.TipoDePrestamoInmueble,
+                TipoDePrestamoAutomotor: this.state.TipoDePrestamoAutomotor,
+                TipoDePrestamoOtros: this.state.TipoDePrestamoOtros,
+
+            }
+        },
+            { withCredentials: true }
+        )
+            .then(Response => {
+                console.log("registration res", Response)
+                if (!Object.keys(result).length) {
+                    window.location.href = 'http://localhost:3000/Descuento'
+                }
+            })
+            .catch(error => {
+                console.log("registration error", error)
+            });
     }
 
     componentDidMount() {
@@ -149,14 +172,15 @@ class SimLoan extends Component {
             })
         }
     }
-    
+
     render() {
         const { errors } = this.state
         return (
             <div>
+                <h1 className="titleForm">Simulador de préstamos</h1>
+
                 <div className="form">
                     <form onSubmit={this.handleSumbit}>
-                        <h1 className="titleForm">Simulador de préstamos</h1>
 
                         <p>Ingreso($U)*</p>
                         <input className="Ingreso"
@@ -166,7 +190,6 @@ class SimLoan extends Component {
                             placeholder="Agregar en $U"
                             value={this.state.Ingreso}
                             onChange={this.handleChange}
-                        //required 
                         />
                         <label className="error">{errors.Ingreso}</label>
 
@@ -200,11 +223,9 @@ class SimLoan extends Component {
                             placeholder="Agregar Monto"
                             value={this.state.Monto_a_pedir}
                             onChange={this.handleChange}
-                        //required 
                         />
                         <label className="error">{errors.Monto_a_pedir}</label>
 
-                        <br />
 
                         <p>Años de financiación*</p>
                         <select className="inputAños" name="financiacion" value={this.state.financiacion} onChange={this.handleChange}>
@@ -225,7 +246,7 @@ class SimLoan extends Component {
                             onChange={this.checkboxChange}
                             checked={this.state.TipoDePrestamoInmueble}
                         />
-                        <label htmlFor="Inmuebles">Inmuebles</label><br></br>
+                        <label className="label-tipo" htmlFor="Inmuebles">Inmuebles</label><br></br>
 
                         <input className="inputTipo"
                             type="checkbox"
@@ -234,7 +255,7 @@ class SimLoan extends Component {
                             onChange={this.checkboxChange}
                             checked={this.state.TipoDePrestamoAutomotor}
                         />
-                        <label htmlFor="Automotor">Automotor</label><br></br>
+                        <label className="label-tipo" htmlFor="Automotor">Automotor</label><br></br>
 
                         <input className="inputTipo"
                             type="checkbox"
@@ -243,7 +264,7 @@ class SimLoan extends Component {
                             onChange={this.checkboxChange}
                             checked={this.state.TipoDePrestamoOtros}
                         />
-                        <label htmlFor="Otros">Otros</label><br></br>
+                        <label className="label-tipo" htmlFor="Otros">Otros</label><br></br>
 
                         <button className="btnPrimario">Simular préstamo</button>
 

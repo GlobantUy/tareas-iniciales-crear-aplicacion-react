@@ -12,7 +12,10 @@ a {
     text-decoration: none
 }
 
-/* body {} */
+ body {
+    margin: 0px;
+
+}
 
 h1 {
     width: 100%;
@@ -54,9 +57,10 @@ button {
 
 header {
     border-bottom-style: solid;
-    height: 78px;
+    height: 11vh;
     position: fixed;
     width: 100%;
+    margin-left: -8px;
 }
 
 input {
@@ -98,7 +102,8 @@ select:focus {
     outline: none;
     display: block;
 }
-.User{
+
+.User {
     float: right;
     display: none;
     display: block;
@@ -108,8 +113,8 @@ select:focus {
     left: 988px;
     top: 31px;
 }
-.User span{
-    
+
+.User span {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: #000000;
@@ -122,74 +127,194 @@ select:focus {
     bottom: 0%;
     text-align: right;
     color: #000000;
-
 }
-.imgUser{
+
+.imgUser {
     position: absolute;
     left: 91.67%;
     right: 0%;
-    top: 5.53%; 
+    top: 5.53%;
     bottom: 5.26%;
-    
 }
+.menu {
+    position:relative;
+    }
+
+    .menu ul { 
+        list-style-type: none; 
+        display:none;
+        top: 10px;
+        padding-left: 65px;
+        padding-top: 10px;
+    }
+    .menu ul li a {
+        width: 120px;
+        padding: 10px 0px 10px 10px; 
+        border-top-color: #000;
+        position: absolute;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        color: #000000;   
+     }
+    .menu:hover{
+        position: unset;
+     }
+    .menu:hover ul{
+        display: block; 
+        left: 100px; 
+    }
+    .containerDescuento ul{
+        margin-top: 15px;
+
+    }
+    .containerIndex header{
+        height: 11vh;
+    }
 
 .btnHeader:hover {
     cursor: pointer;
 }
 
 .titleForm {
-    font-size: 10px;
     text-align: center;
-    width: 100%;
-    overflow: hidden;
-    white-space: pre;
+    position: fixed;
+    margin-top: 114px;
 }
 
 .form {
+    top: 4%;
     width: 168px;
     position: absolute;
     left: 50%;
     margin-left: -82px;
     margin-top: 118px;
-    text-align: center;
     margin-bottom: 82px;
 }
 
 .inputIngreso {
     margin-top: 4px;
-    height: 40px;
+    height: 32px;
     width: 190px;
 }
 
 .Ingreso {
     margin-top: 4px;
-    height: 40px;
+    height: 32px;
     width: 167px;
 }
 
 .inputMonto {
     margin-top: 4px;
-    height: 40px;
+    height: 32px;
     width: 167px;
 }
 
 .inputPesos {
     margin-top: 4px;
-    margin-top: -20px;
+    margin-top: -28px;
     text-align: right;
 }
 
-.inputTipo {
-    margin-top: 4px;
-    text-align: right;
+input[type=radio]+label {
+    display: block;
+    margin: 0.2em;
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+input[type=radio] {
+    display: none;
+}
+
+input[type=radio]+label:before {
+    content: "\2688";
+    border: 0.1em solid #000;
+    border-radius: 2em;
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    padding-left: 0.2em;
+    padding-bottom: 0.3em;
+    margin-right: 0.2em;
+    vertical-align: bottom;
+    color: transparent;
+}
+
+input[type=radio]+label:active:before {
+    transform: scale(0);
+}
+
+input[type=radio]:checked+label:before {
+    background-color: white;
+    border-color: #F07E1A;
+    color: #F07E1A;
+}
+
+input[type=radio]:disabled+label:before {
+    transform: scale(1);
+    border-color: #aaa;
+}
+
+input[type=radio]:checked:disabled+label:before {
+    transform: scale(1);
+    background-color: white;
+    border-color: #F07E1A;
+}
+
+input[type=checkbox]+label {
+    margin-top: 10px;
+    text-align: left;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox]+label:before {
+    content: "\2714";
+    border: 0.1em solid #000;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    padding-left: 0.2em;
+    padding-bottom: 0.3em;
+    margin-right: 0.2em;
+    vertical-align: bottom;
+    color: transparent;
+    transition: 0.2s;
+    margin-top: 5px;
+    color-interpolation-filters: auto;
+}
+
+input[type=checkbox]+label:active:before {
+    transform: scale(0);
+}
+
+input[type=checkbox]:checked+label:before {
+    background-color: white;
+    border-color: #F07E1A;
+    color: #F07E1A;
+}
+
+input[type=checkbox]:disabled+label:before {
+    transform: scale(1);
+    border-color: #aaa;
+}
+
+input[type=checkbox]:checked:disabled+label:before {
+    transform: scale(1);
+    background-color: white;
+    border-color: #F07E1A;
 }
 
 /* input[type='radio'] {} */
 
 .inputAños {
     margin-top: 4px;
-    height: 40px;
-    width: 167px;
+    height: 38px;
+    width: 175px;
 }
 
 /* input[type='checkbox'] {}
@@ -210,12 +335,20 @@ input[type='checkbox'] {
     position: absolute;
     left: 50%;
     margin-left: -82px;
-    margin-top: 118px;
+    margin-top: 114px;
     text-align: center;
 }
 
 .error {
     color: #E2331F;
+}
+
+.dt-in{
+    color: #E2331F;
+    margin-top: 26px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    text-align: center;
 }
 
 .recContr {
@@ -229,7 +362,7 @@ input[type='checkbox'] {
     background: #F07E1A;
     border: none;
     height: 40px;
-    width: 196px;
+    width: 168px;
     margin-top: 24px;
 }
 
@@ -243,12 +376,12 @@ input[type='checkbox'] {
     background: #E0E0E0;
     border: none;
     height: 40px;
-    width: 196px;
+    width: 168px;
     margin-top: 24px;
 }
 
 .btnSecundario {
-    width: 196px;
+    width: 168px;
     height: 40px;
     border: 1px solid #F07E1A;
     color: #F07E1A;
@@ -260,11 +393,6 @@ input[type='checkbox'] {
     cursor: pointer;
     color: rgba(240, 126, 26, 0.8);
     border: 1px solid rgba(240, 126, 26, 0.8);
-}
-
-.btnSecundario:disabled {
-    color: #636363;
-    border: 1px solid #636363;
 }
 
 .btnCuarto {
@@ -284,7 +412,6 @@ input[type='checkbox'] {
 }
 
 .btnCuarto:hover {
-    cursor: pointer;
     background: rgba(240, 126, 26, 0.8);
 }
 
@@ -294,18 +421,15 @@ input[type='checkbox'] {
 }
 
 .btnTerciario {
-    text-align: center;
+    left: 36%;
+    top: 71vh;
+    position: absolute;
     width: 168px;
     height: 40px;
     border: 1px solid #F07E1A;
     color: #F07E1A;
     background-color: transparent;
-    left: 36%;
-    top: 71vh;
-    position: absolute;
 }
-
-
 
 .btnTerciario:hover {
     cursor: pointer;
@@ -330,14 +454,12 @@ a.button {
     position: absolute;
     top: 17%;
     left: 41%;
-    font-size: 24px;
-    font-family: 'Roboto' sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
+    font-size: 24px;
     color: #000000;
-    line-height: 28px;
 }
-
 
 #clientes {
     text-align: center;
@@ -349,12 +471,10 @@ a.button {
     position: absolute;
     top: 40%;
     display: inline-table;
-    
 }
 
 #clientes tr {
     border: 1px solid #8F8F8F;
-    
 }
 
 #clientes td, #clientes th {
@@ -369,7 +489,7 @@ a.button {
     text-align: center;
     position: relative;
 }
- 
+
 #clientes tr:hover {
     cursor: pointer;
     background: #FFF2EF;
@@ -382,8 +502,6 @@ a.button {
     background-color: #F07E1A;
     font-family: 'Heebo', sans-serif;
     color: #000000;
-    
-  
 }
 
 #seleccionar {
@@ -398,7 +516,6 @@ a.button {
     align-items: center;
     color: #000000;
 }
-
 
 .celda {
     width: 15%;
@@ -439,7 +556,7 @@ a.button {
 #Monto {
     text-align: center;
     position: absolute;
-    font-family: 'Heebo',sans-serif;
+    font-family: 'Heebo', sans-serif;
     font-style: normal;
     font-weight: normal;
     top: 24%;
@@ -451,7 +568,7 @@ a.button {
 #Montoss {
     text-align: center;
     position: absolute;
-    font-family: 'Heebo',sans-serif;
+    font-family: 'Heebo', sans-serif;
     font-style: normal;
     font-weight: normal;
     top: 28%;
@@ -643,12 +760,10 @@ a.button {
     position: absolute;
     top: 40%;
     display: inline-table;
-    
 }
 
 #Administrador tr {
     border: 1px solid #8F8F8F;
-    
 }
 
 #Administrador td, #Administrador th {
@@ -664,7 +779,7 @@ a.button {
     text-align: center;
     position: relative;
 }
- 
+
 #Administrador tr:hover {
     cursor: pointer;
     background: #FFF2EF;
@@ -676,8 +791,6 @@ a.button {
     background-color: #F07E1A;
     font-family: 'Heebo', sans-serif;
     color: #000000;
-    
-  
 }
 
 .btnOctavo {
@@ -719,8 +832,6 @@ a.button {
 
 }
 
-
-
 .btnSeptimo:hover {
     cursor: pointer;
     color: rgba(240, 126, 26, 0.8);
@@ -732,7 +843,7 @@ a.button {
     border: 1px solid #636363;
 }
 
-#Filtro{
+#Filtro {
     position: absolute;
     font-family: 'Heebo', sans-serif;
     font-style: normal;
@@ -747,12 +858,12 @@ a.button {
     color: #000000;
 }
 
-#nombredelmenuu{
+#nombredelmenuu {
     font-family: 'Heebo', sans-serif;
     position: absolute;
     display: inline-block;
     top: 33%;
-    padding:4px;
+    padding: 4px;
     left: 15%;
     border: 1px solid #000000;
     box-sizing: border-box; 
