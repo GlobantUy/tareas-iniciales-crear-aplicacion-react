@@ -46,61 +46,60 @@ class Table extends Component {
             Ingreso: '',
             Monto_a_pedir: '',
 
-            Moneda:'' ,
+            Moneda: '',
 
             financiacion: '',
 
             rowSelected: false,
 
 
-            clientes: [  { Moneda:'', Tasa: '', Cuotas: '', Años: '', ValorCuota: '' }] ,
+            clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Años: '', ValorCuota: '' }],
 
             isDisabled: true
         }
     }
 
     componentDidMount() {
-        let moneda = ( JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U)? "$U" : "U$S"
-        let Año= (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
+        let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
+        let Año = (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
         let monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
         this.setState({
 
-            clientes:[
-            { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5 , ValorCuota: (monto_a_pedir*(monto_a_pedir*0.1)/60).toFixed(3)},
-            { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: (monto_a_pedir*(monto_a_pedir*0.15)/120).toFixed(3)},
-            { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: (monto_a_pedir*(monto_a_pedir*0.18)/180).toFixed(3)},
-            { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: (monto_a_pedir*(monto_a_pedir*0.2)/240).toFixed(3)},
-            { Moneda: moneda, Tasa: '25%', Cuotas: 300, Años: 25,ValorCuota: (monto_a_pedir*(monto_a_pedir*0.25)/300).toFixed(3)}
+            clientes: [
+                { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5, ValorCuota: (monto_a_pedir * (monto_a_pedir * 0.1) / 60).toFixed(3) },
+                { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: (monto_a_pedir * (monto_a_pedir * 0.15) / 120).toFixed(3) },
+                { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: (monto_a_pedir * (monto_a_pedir * 0.18) / 180).toFixed(3) },
+                { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: (monto_a_pedir * (monto_a_pedir * 0.2) / 240).toFixed(3) },
+                { Moneda: moneda, Tasa: '25%', Cuotas: 300, Años: 25, ValorCuota: (monto_a_pedir * (monto_a_pedir * 0.25) / 300).toFixed(3) }
             ],
-        
+
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
             Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
-            Moneda: moneda, 
+            Moneda: moneda,
             financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion
-         
-        })     
-}
+
+        })
+    }
 
     handleSubmitClicked(index) {
         let element = document.getElementById(index.toString())
-        if (this.state.rowSelected == false){
-                element.className +='selected'; 
-                this.setState({
-                  isDisabled: false,
-                  rowSelected:true   
-                });
-           
-            }else 
-                {
-                if (element.className != ''){
+        if (this.state.rowSelected == false) {
+            element.className += 'selected';
+            this.setState({
+                isDisabled: false,
+                rowSelected: true
+            });
+
+        } else {
+            if (element.className != '') {
                 element.className = ''
                 this.setState({
                     isDisabled: true,
-                    rowSelected:false    
-                  });
-         }
-      }
-     }
+                    rowSelected: false
+                });
+            }
+        }
+    }
 
     volverSimular = () => {
         sessionStorage.setItem('volverBoton', true);
@@ -149,6 +148,7 @@ class Table extends Component {
     render() {
         return (
             <div className="container">
+
                 <h2 id='titleee'>Resultado de préstamo</h2>
                     <h1 id='ingresos'>  Ingresos </h1>
                     <h1 id='ingresoss'> {this.state.Moneda + this.state.Ingreso} </h1>

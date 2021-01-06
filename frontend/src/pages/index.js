@@ -6,12 +6,17 @@ import Header from '../components/Header'
 export default function Home() {
   return (
     <div>
+      <header className="header">
+        <a href="http://localhost:3000"><img className="logoheader" src="/logo.jpg" /></a>
+        <a href="http://localhost:3000/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a>
+      </header>
 
-      <Header />      
+      <Header />
       <SimLoan />
-        <footer>
 
-        </footer>
+      <footer>
+
+      </footer>
     </div>
   )
 }
