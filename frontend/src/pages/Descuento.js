@@ -3,7 +3,7 @@ import Header from '../components/Header'
 
 export default function Descuentoo() {
   return (
-    <div >
+    <div className='containerDescuento'>
       <Header/>
       <div className="tablea">
       <Table/>
