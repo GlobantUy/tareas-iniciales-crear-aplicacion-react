@@ -1,23 +1,24 @@
 
-import React, { Component } from 'react';
+import  React, { Component } from 'react';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-</style>
+
 const userLogin = () => {
   try {
     let btnHeader = document.querySelector(".btnHeader");
     let user = document.querySelector(".User");
     if (sessionStorage.getItem('Usuario-Values')) {
-      btnHeader.style.display = 'none';
-      user.style.display = 'block';
+      return true;
+      // btnHeader.style.display = 'none';
+      // user.style.display = 'block';
     } else {
-      btnHeader.style.display = 'block';
-      user.style.display = 'none';
+      return false
+      // btnHeader.style.display = 'block';
+      // user.style.display = 'none';
     }
 
   } catch (error) {
-    console.log(error)
+    // console.log(error)
   }
 
 }
@@ -52,9 +53,33 @@ class Header extends React.Component {
   }
 
   render() {
-    userLogin();
-    this.changeState()
-    return (
+    const isLoggedIn = userLogin();
+    this.changeState();
+    const topHeader =  '<div> <header className="header"> <img className="logoheader" src="/logo.jpg" />';
+    // const topHeader = ReactDOM. .parse(htmlString); // , "text/html");
+    const bottomHeader = '</header> </div >';
+    if (isLoggedIn) {
+      return ( ReactHtmlParser(topHeader).toString() + 
+      <div className='User'>
+        <span id='user-name' >{this.state.email}</span>
+        <div className="menu">
+          <img className="imgUser" src="/Frame.png" />
+          <ul>
+            <li>
+              <a href='http://localhost:3000/ingreso' onClick={this.logout}>Log out </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      +  ReactHtmlParser(bottomHeader) );
+    ;
+
+    } else {
+      return ( ReactHtmlParser(topHeader).toString()   + <a href="http://localhost:3000/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a> +  ReactHtmlParser(bottomHeader)) ;
+
+    }
+    // this.changeState()
+    /*return (
       <div>
         <header className="header">
           <img className="logoheader" src="/logo.jpg" />
@@ -78,7 +103,7 @@ class Header extends React.Component {
 
         </footer>
       </div >
-    )
+    ) */
 
   }
 }
