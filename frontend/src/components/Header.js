@@ -59,7 +59,7 @@ class Header extends React.Component {
     // const topHeader = ReactDOM. .parse(htmlString); // , "text/html");
     const bottomHeader = '</header> </div >';
     if (isLoggedIn) {
-      return ( ReactHtmlParser(topHeader).toString() + 
+      return ( ReactHtmlParser(topHeader). + 
       <div className='User'>
         <span id='user-name' >{this.state.email}</span>
         <div className="menu">
