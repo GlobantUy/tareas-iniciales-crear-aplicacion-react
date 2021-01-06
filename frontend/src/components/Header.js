@@ -43,6 +43,14 @@ class Header extends React.Component {
 
   }
 
+  logout() {
+    try {
+      sessionStorage.removeItem('Usuario-Values');
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   render() {
     userLogin();
     this.changeState()
@@ -54,7 +62,14 @@ class Header extends React.Component {
 
           <div className='User'>
             <span id='user-name' >{this.state.email}</span>
-            <img className="imgUser" src="/Frame.png" />
+            <div className="menu">
+              <img className="imgUser" src="/Frame.png" />
+              <ul>
+                <li>
+                  <a href='http://localhost:3000/ingreso' onClick={this.logout}>Log out </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
         </header>
@@ -62,7 +77,7 @@ class Header extends React.Component {
         <footer>
 
         </footer>
-      </div>
+      </div >
     )
 
   }

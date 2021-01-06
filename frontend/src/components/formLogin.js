@@ -183,10 +183,9 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.password}
                             />
-                            { touched.password && <label className="error-login">{errors.password}</label>}
-
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
 
+                            { touched.password && <p className="error dt-in">{errors.password}</p>}
 
                             <button
                                 className={btn}
