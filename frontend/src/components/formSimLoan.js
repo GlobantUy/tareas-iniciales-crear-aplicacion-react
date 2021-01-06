@@ -18,7 +18,7 @@ const validate = values => {
     return errors
 }
 
-let URL = "https://backendmain-jgqj8r35e.vercel.app/api/storeLoan"
+let URL = "https://backendmain-pdz54353z.vercel.app/api/storeLoan"
 let emailFromStorage
 let currency = ''
 class SimLoan extends Component {
