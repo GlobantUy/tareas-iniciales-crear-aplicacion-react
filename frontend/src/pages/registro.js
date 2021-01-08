@@ -1,3 +1,4 @@
+import RegisterContent from '../components/Register'
 
 export default function Registro() {
   return (
@@ -5,9 +6,8 @@ export default function Registro() {
       <header className="header">
         <img className="logoheader" src="/logo.jpg" />
       </header>
-      <footer>
+      <RegisterContent/>
 
-      </footer>
     </div>
   )
 }
