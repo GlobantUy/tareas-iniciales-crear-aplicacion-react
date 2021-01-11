@@ -66,13 +66,13 @@ class Table extends Component {
         this.setState({
 
             clientes:[
-            { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5 , ValorCuota: (monto_a_pedir*(monto_a_pedir*0.1)/60).toFixed(3)},
-            { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: (monto_a_pedir*(monto_a_pedir*0.15)/120).toFixed(3)},
-            { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: (monto_a_pedir*(monto_a_pedir*0.18)/180).toFixed(3)},
-            { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: (monto_a_pedir*(monto_a_pedir*0.2)/240).toFixed(3)},
-            { Moneda: moneda, Tasa: '25%', Cuotas: 300, Años: 25,ValorCuota: (monto_a_pedir*(monto_a_pedir*0.25)/300).toFixed(3)}
+            { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5 , ValorCuota: ((monto_a_pedir/60)*0.1).toFixed(3)},
+            { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: ((monto_a_pedir/120)*0.15).toFixed(3)},
+            { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: ((monto_a_pedir/180)*0.18).toFixed(3)},
+            { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: ((monto_a_pedir/240)*0.2).toFixed(3)},
+            { Moneda: moneda, Tasa: '25%', Cuotas: 300, Años: 25,ValorCuota: ((monto_a_pedir/300)*0.25).toFixed(3)}
             ],
-        
+
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
             Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
             Moneda: moneda, 

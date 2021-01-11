@@ -10,8 +10,8 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-let URL = "https://backendmain-8gwcdkmst.vercel.app/api/login"
-let URLpres = "https://backendmain-jgqj8r35e.vercel.app/api/storeLoan"
+let URL = "https://backendmain-pdz54353z.vercel.app/api/login"
+let URLpres = "https://backendmain-pdz54353z.vercel.app/api/storeLoan"
 
 class SimLogin extends Component {
 
@@ -30,7 +30,7 @@ class SimLogin extends Component {
                     'amount': JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
                     'currency': JSON.parse(sessionStorage.getItem('prestamoValues')).TipoMoneda,
                     'payments': JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
-            }
+                }
                 )
                     .then(Response => {
                         console.log("registration res", Response)
@@ -103,14 +103,14 @@ class SimLogin extends Component {
                     validate={values => {
                         const errors = {};
                         if (!values.password) {
-                            errors.password = '';
+                            errors.password = 'Necesario';
                             mailCorrecto = true;
                             if (!values.email) {
-                                errors.email = 'Ingrese mail';
+                                errors.email = 'Necesario';
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
-                                errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
+                                errors.email = 'Formato invalido';
                                 mailCorrecto = true;
                             } else {
                                 mailCorrecto = true;
@@ -121,16 +121,16 @@ class SimLogin extends Component {
                             contraCorrecta = false;
 
                             if (errorPass == false) {
-                                errors.password = "La contraseña o el Mail son incorrectos";
+                                errors.password = "Los datos ingresados no son correctos, por favor verifique";
                                 errorPass = true
                             }
                             if (!values.email) {
-                                errors.email = 'Ingrese mail';
+                                errors.email = '';
                                 mailCorrecto = true;
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
-                                errors.email = 'El formato del email ingresado no es correcto, por favor verifique';
+                                errors.email = 'Formato invalido';
                                 mailCorrecto = true;
                             } else {
                                 emaill = values.email
@@ -149,7 +149,7 @@ class SimLogin extends Component {
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == false && contraCorrecta == false) {
                             this.post(values.email, values.password)
-                            
+
                         }
                         setSubmitting(false);
                     }}
@@ -183,10 +183,9 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.password}
                             />
-                            { touched.password && <label className="error">{errors.password}</label>}
-
-
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
+
+                            { touched.password && <p className="error dt-in">{errors.password}</p>}
 
                             <button
                                 className={btn}
