@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         return res.json({
           _links: {
             self: {
-              href:  "https://" + JSON.stringify(req.headers) + req.url
+              href:  "https://" + req.headers.host + req.url
             }
           },
           found: 'false'
