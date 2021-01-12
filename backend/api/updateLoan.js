@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
 
             })
           } else {
-            arrayTest = await collectionT.find({ userName: req.body.email }).sort({ date: -1 }).toArray()
+            arrayTest = await collectionT.find({ userEmail: req.body.email }).sort({ date: -1 }).toArray()
             const loanId = arrayTest[0]._id
             await collectionT.updateOne({ _id: loanId }, { $set: { state: req.body.state, stateDate: date } })
             return res.json({
