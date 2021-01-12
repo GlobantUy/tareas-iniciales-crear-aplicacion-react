@@ -7,7 +7,8 @@ export default function Registro() {
         <a href="http://localhost:3000"><img className="logoheader" src="/logo.png" /></a>
       </header>
       <RegisterContent/>
-
+      <footer>
+      </footer>
     </div>
   )
 }

@@ -47,9 +47,6 @@ class RegisterContent extends Component {
                             <div className="row">
                                 <div className="col-4">
 
-
-
-
                                     <p>Nombres*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -62,8 +59,6 @@ class RegisterContent extends Component {
 
                                 </div>
                                 <div className="col-4">
-
-
 
                                     <p>Apellidos*</p>
                                     <input className="inp-registro"
@@ -78,8 +73,6 @@ class RegisterContent extends Component {
                                 </div>
                                 <div className="col-4">
 
-
-
                                     <p>Fecha de nacimiento*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -91,8 +84,6 @@ class RegisterContent extends Component {
                                     />
                                 </div>
                             </div>
-
-
 
                             <div className="row">
                                 <div className="col-4">
@@ -166,7 +157,7 @@ class RegisterContent extends Component {
                             </div>
 
                             <div className="row">
-                                <div className="col-4">
+                                <div className="col-3">
                                     <p>Género*</p>
                                     <input
                                         type="radio"
@@ -195,12 +186,9 @@ class RegisterContent extends Component {
                                         onChange={this.handleChange}
                                     />
                                     <label htmlFor="Otro">Otro</label>
-
                                 </div>
-                            </div>
 
-                            <div className="row">
-                                <div className="col-4">
+                                <div className="col-3">
                                     <p>Preferencias</p>
                                     <input className="inputTipo"
                                         type="checkbox"
@@ -231,6 +219,10 @@ class RegisterContent extends Component {
                                     />
                                     <label htmlFor="Entretenimiento">Entretenimiento</label><br></br>
 
+                                </div>
+
+                                <div className="col-3">
+
                                     <input className="inputTipo"
                                         type="checkbox"
                                         id="Autos"
@@ -238,61 +230,63 @@ class RegisterContent extends Component {
                                     />
                                     <label htmlFor="Autos">Autos</label><br></br>
 
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Opticas"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Opticas">Opticas</label><br></br>
+
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Salud_belleza"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Salud_belleza">Salud y belleza</label><br></br>
+
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Comida"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Comida">Comida</label><br></br>
                                 </div>
+
+                                <div className="col-3">
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Libros"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Libros">Libros</label><br></br>
+
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Viajes_turismo"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Viajes_turismo">Viajes y turismo</label><br></br>
+
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Vestimenta"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Vestimenta">Vestimenta</label><br></br>
+
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Joyas"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Joyas">Joyas</label><br></br>
+                                </div>
+
                             </div>
+
+                            <button type="submit" className="btnPrimario">Registrarse</button>
+
                         </div>
-
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Opticas"
-                            name="Preferencias"
-                        />
-
-                        <label htmlFor="Opticas">Opticas</label><br></br>
-
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Salud_belleza"
-                            name="Preferencias"
-                        />
-                        <label htmlFor="Salud_belleza">Salud y belleza</label><br></br>
-
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Comida"
-                            name="Preferencias"
-                        />
-                        <label htmlFor="Comida">Comida</label><br></br>
-
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Libros"
-                            name="Preferencias"
-                        />
-                        <label htmlFor="Libros">Libros</label><br></br>
-
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Viajes_turismo"
-                            name="Preferencias"
-                        />
-                        <label htmlFor="Viajes_turismo">Viajes y turismo</label><br></br>
-
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Vestimenta"
-                            name="Preferencias"
-                        />
-                        <label htmlFor="Vestimenta">Vestimenta</label><br></br>
-
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Joyas"
-                            name="Preferencias"
-                        />
-                        <label htmlFor="Joyas">Joyas</label><br></br>
-
-                        <button type="submit" className="btnPrimario">Registrarse</button>
 
                     </form>
                 </div >
