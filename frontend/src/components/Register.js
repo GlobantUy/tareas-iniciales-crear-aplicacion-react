@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class RegisterContent extends Component {
     constructor(props) {
@@ -19,188 +20,240 @@ class RegisterContent extends Component {
             errors: {}
         }
         this.handleChange = this.handleChange.bind(this)
-        //this.handleSumbit = this.handleSumbit.bind(this)
+        this.handleSumbit = this.handleSumbit.bind(this)
     }
 
     handleChange = (e) => {
-    this.setState({
-        [e.target.name]: e.target.value
-    })
-    console.log(this.state.Nombre)
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+        console.log(this.state.Nombre)
+    }
+
+    handleSumbit(e) {
+        e.preventDefault();
     }
 
     render() {
         const { errors } = this.state
         return (
-            <div>
-                <div className="form">
-                    <form onSubmit={this.handleSumbit}>
-                        <h1 className="titleForm">Registro</h1>
+            <Fragment>
+                <div className="algo">
+                    <form className="form registro" onSubmit={this.handleSumbit}>
 
-                        <p>Nombres*</p>
-                        <input className="Ingreso"
-                            autoComplete="off"
-                            type="text"
-                            name="Nombre"
-                            value={this.state.Nombre}
-                            onChange={this.handleChange}
-                            required
-                        />
+                        <h1 className="">Registro</h1>
 
-                        <p>Apellidos*</p>
-                        <input className="Ingreso"
-                            autoComplete="off"
-                            type="text"
-                            name="Apellido"
-                            value={this.state.Apellido}
-                            onChange={this.handleChange}
-                            required
-                        />
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-4">
 
-                        <p>Fecha de nacimiento*</p>
-                        <input className="Ingreso"
-                            autoComplete="off"
-                            type="date"
-                            name="FechaNacimiento"
-                            value={this.state.FechaNacimiento}
-                            onChange={this.handleChange}
-                            required
-                        />
 
-                        <p>Email*</p>
-                        <input className="Ingreso"
-                            autoComplete="off"
-                            type="text"
-                            name="Email"
-                            value={this.state.Email}
-                            onChange={this.handleChange}
-                            required
-                        />
 
-                        <p>Contraseña*</p>
-                        <input className="Ingreso"
-                            autoComplete="off"
-                            type="password"
-                            name="Password"
-                            value={this.state.Password}
-                            onChange={this.handleChange}
-                            required
-                        />
 
-                        <p>Confirmación de contraseña*</p>
-                        <input className="Ingreso"
-                            autoComplete="off"
-                            type="password"
-                            name="ConfirmPassword"
-                            value={this.state.ConfirmPassword}
-                            onChange={this.handleChange}
-                            required
-                        />
+                                    <p>Nombres*</p>
+                                    <input className="inp-registro"
+                                        autoComplete="off"
+                                        type="text"
+                                        name="Nombre"
+                                        value={this.state.Nombre}
+                                        onChange={this.handleChange}
+                                        required
+                                    />
 
-                        <p>Departamento*</p>
-                        <select className="inputAños" name="departamento" value={this.state.Departamento} onChange={this.handleChange}>
-                            <option hidden>Selecciona una opción</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                        </select>
-                        <label htmlFor=""></label>
+                                </div>
+                                <div className="col-4">
 
-                        <p>Género*</p>
-                        <input
-                            type="radio"
-                            id="Femenino"
-                            name="Genero"
-                            value="otro"
-                            onChange={this.handleChange}
-                            //checked={this.state.Moneda_U$S}
-                        />
 
-                        <label htmlFor="Femenino">Femenino</label>
 
-                        <input
-                            type="radio"
-                            id="Masculino"
-                            name="Genero"
-                            value="otro"
-                            onChange={this.handleChange}
-                            //checked={this.state.Moneda_$U}
-                        />
-                        <label htmlFor="Masculino">Masculino</label>
+                                    <p>Apellidos*</p>
+                                    <input className="inp-registro"
+                                        autoComplete="off"
+                                        type="text"
+                                        name="Apellido"
+                                        value={this.state.Apellido}
+                                        onChange={this.handleChange}
+                                        required
+                                    />
 
-                        <input
-                            type="radio"
-                            id="Otro"
-                            name="Genero"
-                            value="otro"
-                            onChange={this.handleChange}
-                            //checked={this.state.Moneda_$U}
-                        />
-                        <label htmlFor="Otro">Otro</label>
+                                </div>
+                                <div className="col-4">
 
-                        <p>Preferencias</p>
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Inmuebles"
-                            name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
-                        />
-                        <label htmlFor="Inmuebles">Inmuebles</label><br></br>
 
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Hogar_deco"
-                            name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
-                        />
-                        <label htmlFor="Hogar_deco">Hogar y decoración</label><br></br>
 
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Juguetes"
-                            name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
-                        />
-                        <label htmlFor="Juguetes">Juguetes</label><br></br>
+                                    <p>Fecha de nacimiento*</p>
+                                    <input className="inp-registro"
+                                        autoComplete="off"
+                                        type="date"
+                                        name="FechaNacimiento"
+                                        value={this.state.FechaNacimiento}
+                                        onChange={this.handleChange}
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Entretenimiento"
-                            name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
-                        />
-                        <label htmlFor="Entretenimiento">Entretenimiento</label><br></br>
 
-                        <input className="inputTipo"
-                            type="checkbox"
-                            id="Autos"
-                            name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
-                        />
-                        <label htmlFor="Autos">Autos</label><br></br>
+
+                            <div className="row">
+                                <div className="col-4">
+                                    <p>Email*</p>
+                                    <input className="inp-registro"
+                                        autoComplete="off"
+                                        type="text"
+                                        name="Email"
+                                        value={this.state.Email}
+                                        onChange={this.handleChange}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="col-4">
+
+                                    <p>Contraseña*</p>
+                                    <input className="inp-registro"
+                                        autoComplete="off"
+                                        type="password"
+                                        name="Password"
+                                        value={this.state.Password}
+                                        onChange={this.handleChange}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="col-4">
+
+                                    <p>Confirmación de contraseña*</p>
+                                    <input className="inp-registro"
+                                        autoComplete="off"
+                                        type="password"
+                                        name="ConfirmPassword"
+                                        value={this.state.ConfirmPassword}
+                                        onChange={this.handleChange}
+                                        required
+                                    />
+
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-4">
+
+                                    <p>Departamento*</p>
+
+                                    <select className="inp-registro" name="departamento" value={this.state.Departamento} onChange={this.handleChange}>
+                                        <option hidden>Selecciona una opción</option>
+                                        <option value="Artigas">Artigas</option>
+                                        <option value="Canelones">Canelones</option>
+                                        <option value="CerroLargo">Cerro Largo</option>
+                                        <option value="Colonia">Colonia</option>
+                                        <option value="Durazno">Durazno</option>
+                                        <option value="Flores">Flores</option>
+                                        <option value="Florida">Florida</option>
+                                        <option value="Lavalleja">Lavalleja</option>
+                                        <option value="Maldonado">Maldonado</option>
+                                        <option value="Montevideo">Montevideo</option>
+                                        <option value="Paysandu">Paysandú</option>
+                                        <option value="RioNegro">Río Negro</option>
+                                        <option value="Rivera">Rivera</option>
+                                        <option value="Rocha">Rocha</option>
+                                        <option value="SanJose">San José</option>
+                                        <option value="Salto">Salto</option>
+                                        <option value="Soriano">Soriano</option>
+                                        <option value="Tacuarembo">Tacuarembo</option>
+                                        <option value="TreintayTres">Treinta y Tres</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-4">
+                                    <p>Género*</p>
+                                    <input
+                                        type="radio"
+                                        id="Femenino"
+                                        name="Genero"
+                                        value="otro"
+                                        onChange={this.handleChange}
+                                    />
+
+                                    <label htmlFor="Femenino">Femenino</label>
+
+                                    <input
+                                        type="radio"
+                                        id="Masculino"
+                                        name="Genero"
+                                        value="otro"
+                                        onChange={this.handleChange}
+                                    />
+                                    <label htmlFor="Masculino">Masculino</label>
+
+                                    <input
+                                        type="radio"
+                                        id="Otro"
+                                        name="Genero"
+                                        value="otro"
+                                        onChange={this.handleChange}
+                                    />
+                                    <label htmlFor="Otro">Otro</label>
+
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-4">
+                                    <p>Preferencias</p>
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Inmuebles"
+                                        name="Preferencias"
+                                    />
+
+                                    <label htmlFor="Inmuebles">Inmuebles</label><br></br>
+
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Hogar_deco"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Hogar_deco">Hogar y decoración</label><br></br>
+
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Juguetes"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Juguetes">Juguetes</label><br></br>
+
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Entretenimiento"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Entretenimiento">Entretenimiento</label><br></br>
+
+                                    <input className="inputTipo"
+                                        type="checkbox"
+                                        id="Autos"
+                                        name="Preferencias"
+                                    />
+                                    <label htmlFor="Autos">Autos</label><br></br>
+
+                                </div>
+                            </div>
+                        </div>
 
                         <input className="inputTipo"
                             type="checkbox"
                             id="Opticas"
                             name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
                         />
+
                         <label htmlFor="Opticas">Opticas</label><br></br>
 
                         <input className="inputTipo"
                             type="checkbox"
                             id="Salud_belleza"
                             name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Salud_belleza">Salud y belleza</label><br></br>
 
@@ -208,8 +261,6 @@ class RegisterContent extends Component {
                             type="checkbox"
                             id="Comida"
                             name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Comida">Comida</label><br></br>
 
@@ -217,8 +268,6 @@ class RegisterContent extends Component {
                             type="checkbox"
                             id="Libros"
                             name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Libros">Libros</label><br></br>
 
@@ -226,8 +275,6 @@ class RegisterContent extends Component {
                             type="checkbox"
                             id="Viajes_turismo"
                             name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Viajes_turismo">Viajes y turismo</label><br></br>
 
@@ -235,8 +282,6 @@ class RegisterContent extends Component {
                             type="checkbox"
                             id="Vestimenta"
                             name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Vestimenta">Vestimenta</label><br></br>
 
@@ -244,17 +289,14 @@ class RegisterContent extends Component {
                             type="checkbox"
                             id="Joyas"
                             name="Preferencias"
-                            onChange={this.checkboxChange}
-                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Joyas">Joyas</label><br></br>
 
-
-                        <button className="btnPrimario">Registrarse</button>
+                        <button type="submit" className="btnPrimario">Registrarse</button>
 
                     </form>
-                </div>
-            </div>
+                </div >
+            </Fragment >
         )
     }
 }
