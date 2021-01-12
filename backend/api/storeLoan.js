@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
                       href: "https://" + req.headers.host + req.url
                     }
                   },
-                  message: 'Invalid "loanType" value'
+                  message: "Invalid 'loanType' value"
                 })
               } else {
                 loanSearch = await collectionT.find({ userName: req.body.email }).toArray()
