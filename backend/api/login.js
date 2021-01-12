@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
       return res.json({
         _links: {
           self: {
-            href:  req.url
+            href: req.protocol + "://" + req.headers.hostname + "/" + req.url
           }
         },
         message: 'Internal error (005)'
