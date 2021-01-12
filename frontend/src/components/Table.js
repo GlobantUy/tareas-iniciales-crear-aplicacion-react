@@ -66,11 +66,11 @@ class Table extends Component {
         this.setState({
 
             clientes:[
-            { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5 , ValorCuota: ((monto_a_pedir/60)*0.1).toFixed(3)},
-            { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: ((monto_a_pedir/120)*0.15).toFixed(3)},
-            { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: ((monto_a_pedir/180)*0.18).toFixed(3)},
-            { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: ((monto_a_pedir/240)*0.2).toFixed(3)},
-            { Moneda: moneda, Tasa: '25%', Cuotas: 300, Años: 25,ValorCuota: ((monto_a_pedir/300)*0.25).toFixed(3)}
+            { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5 , ValorCuota: this.valorCouta(monto_a_pedir, 0.1, 60)},
+            { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: this.valorCouta(monto_a_pedir, 0.15, 120)},
+            { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: this.valorCouta(monto_a_pedir, 0.18, 180)},
+            { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: this.valorCouta(monto_a_pedir, 0.2, 240)},
+            { Moneda: moneda, Tasa: '25%', Cuotas: 300, Años: 25,ValorCuota: this.valorCouta(monto_a_pedir, 0.25, 300)}
             ],
 
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
@@ -100,7 +100,7 @@ class Table extends Component {
                   });
          }
       }
-     }
+    }
 
     volverSimular = () => {
         sessionStorage.setItem('volverBoton', true);
@@ -108,12 +108,20 @@ class Table extends Component {
 
     }
 
+    valorCouta = (monto_a_pedir, porcentaje, cant_cuotas) => {
+        const total_con_interes = monto_a_pedir + (monto_a_pedir * porcentaje);
+
+        let cuota = total_con_interes / cant_cuotas;
+
+        return cuota.toFixed(3);
+    }
+
 
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
             const { Moneda, Tasa, Cuotas, Años, ValorCuota } = cliente //destructuring
             return (
-                <tr id={index} onClick={(() => this.handleSubmitClicked(index))} key={Moneda}>
+                <tr id={index} onClick={(() => this.handleSubmitClicked(index))} key={index}>
                     <td className="celda"> {Moneda}</td>
                     <td className="celda">{Tasa}</td>
                     <td className="celda">{Cuotas}</td>
@@ -155,7 +163,7 @@ class Table extends Component {
                     <h1 id='Monto' >  Monto  solicitado </h1>
                     <h1 id='Montoss'> {this.state.Moneda + this.state.Monto_a_pedir} </h1>
                     <h2 id='seleccionar'>Seleccione la fila deseada para solicitar su préstamo</h2>
-                    <div class="table-responsive-">
+                    <div className="table-responsive-">
                         <table id='clientes'>
                             <tbody>
                                 <tr>{this.renderTableHeader()}</tr>

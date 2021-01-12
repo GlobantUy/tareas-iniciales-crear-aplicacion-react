@@ -49,7 +49,7 @@ class User extends React.Component {
     return (
       <div>
         <header className="header">
-          <img className="logoheader" src="/logo.jpg" />
+          <img className="logoheader" src="/logo.png" />
           <div className='User'>
             <span id='user-name' >{this.state.email}</span>
             <img className="imgUser" src="/Frame.png" />
