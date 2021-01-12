@@ -58,16 +58,17 @@ module.exports = async (req, res) => {
                 message: 'Amount of payments is not a number'
               })
             } else {
-              if (req.body.loanType == undefined  || req.body.loanType.length < 4) {
+             /* if (req.body.loanType == undefined  || req.body.loanType.length < 4) {
                 return res.json({
                   _links: {
-                    self: {
+                   self: {
                       href: "https://" + req.headers.host + req.url
                     }
                   },
                   message: "Invalid 'loanType' value"
                 })
               } else {
+                */
                 loanSearch = await collectionT.find({ userName: req.body.email }).toArray()
 
                 for (i = 0; i < loanSearch.length; i++) {
@@ -129,7 +130,7 @@ module.exports = async (req, res) => {
 
                   })
                 }
-              }
+             // }
             }
           }
         }
