@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
                 message: 'Amount of payments is not a number'
               })
             } else {
-              if (req.body.loanType.length < 4) {
+              if (req.body.loanType == undefined  || req.body.loanType.length < 4) {
                 return res.json({
                   _links: {
                     self: {
