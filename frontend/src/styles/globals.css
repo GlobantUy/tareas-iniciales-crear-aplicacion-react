@@ -220,7 +220,6 @@ select:focus {
 input[type=radio]+label {
     display: block;
     margin: 0.2em;
-    cursor: pointer;
     padding: 0.2em;
 }
 
