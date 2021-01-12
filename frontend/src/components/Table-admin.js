@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
-
-
+const prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
 class Tableadmin extends Component {
 
     constructor(props) {
@@ -106,39 +105,50 @@ class Tableadmin extends Component {
     }
 
     render() {
-        return (
-            <div className="container">
-                <h2 id='titulo'>Solicitudes de préstamo</h2>
-                <h2 id='Filtro'>Filtro por estado</h2>
-                <select id='nombredelmenuu' >
 
-                    <option value="">   </option>
-                    <option value="option1" onClick={(() => this.handleSubmitClicked(index))}>Aprobado  </ option>
-
-                    <option value="option2" onClick={(() => this.handleSubmitClicked(index))}> Rechazado </ option>
-
-                    <option value="opción3" onClick={(() => this.handleSubmitClicked(index))}>Pendiente  </ option>
-
-                    <option value="opción4"> Todos </ option>
-
-
-                </ select>
+        
+        if (prestamosCargados) {
+            return (
+                <div className="container">
+                    <h2 id='titulo'>Solicitudes de préstamo</h2>
+                    <h2 id='Filtro'>Filtro por estado</h2>
+                    <select id='nombredelmenuu' >
+    
+                        <option value="">   </option>
+                        <option value="option1" onClick={(() => this.handleSubmitClicked(index))}>Aprobado  </ option>
+    
+                        <option value="option2" onClick={(() => this.handleSubmitClicked(index))}> Rechazado </ option>
+    
+                        <option value="opción3" onClick={(() => this.handleSubmitClicked(index))}>Pendiente  </ option>
+    
+                        <option value="opción4"> Todos </ option>
+    
+    
+                    </ select>
+                    <div>
+                        <table id='Administrador'>
+                            <tbody>
+                                <tr>{this.renderTableHeader()}</tr>
+                                {this.renderTableData()}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="Buttons">
+    
+                        <button type="submit" className="btnSeptimo" hidden={this.state.hidden} onclick > Limpiar</button>
+                        <button type="submit" className="btnOctavo" disabled={this.state.isDisabled} > Aplicar cambios</button>
+                    </div>
+    
+                </div>
+            )
+        } else {
+            return (
                 <div>
-                    <table id='Administrador'>
-                        <tbody>
-                            <tr>{this.renderTableHeader()}</tr>
-                            {this.renderTableData()}
-                        </tbody>
-                    </table>
+                    <img className="Tablet" src="/table.png"/>
+                    <p>No hay datos ingresados aún</p>
                 </div>
-                <div className="Buttons">
-
-                    <button type="submit" className="btnSeptimo" hidden={this.state.hidden} onclick > Limpiar</button>
-                    <button type="submit" className="btnOctavo" disabled={this.state.isDisabled} > Aplicar cambios</button>
-                </div>
-
-            </div>
-        )
+            )
+        }
     }
 }
 
