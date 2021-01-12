@@ -7,7 +7,6 @@ class Tableadmin extends Component {
 
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
-        this.handleSubmitClicked = this.handleSubmitClicked.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.state = { //state is by default an object
             Ingreso: '',
@@ -22,9 +21,9 @@ class Tableadmin extends Component {
 
             clientes: [{  Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
 
-            isDisabled: true,
+            isAplicarDisabled: true,
 
-            hidden: false
+            hidden: true
         }
     }
 
@@ -35,10 +34,10 @@ class Tableadmin extends Component {
         this.setState({
 
             clientes: [
-                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 60, Estado: "" },
-                {  Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 120, Estado: "" },
-                {  Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 180, Estado: "" },
-                {  Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 240, Estado: "" }
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 60, Estado: "Aprobado" },
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 120, Estado: "Aprobado" },
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 180, Estado: "Pendiente" },
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 240, Estado: "Rechazado" }
             ],
 
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
@@ -49,36 +48,81 @@ class Tableadmin extends Component {
         })
     }
 
-    handleSubmitClicked(index) {
-        let element = document.getElementById(index.toString())
-        if (this.state.rowSelected == false) {
-            element.className += 'selected';
-            this.setState({
-                isDisabled: false,
-                rowSelected: true,
-                hidden: false
+    crearestado(Estado, index) {
+        switch (Estado) {
+            case "Pendiente":
+                return (<select id={'menutabla'+ index} className="selectitem" onChange={(e)=> this.handleChange(index)}>
 
-            });
 
-        } else {
-            if (element.className != '') {
-                element.className = ''
-                this.setState({
-                    isDisabled: true,
-                    rowSelected: false,
-                    hidden: true
-                });
-            }
+                    <option value="option1" > Pendiente     </ option>
+
+                    <option value="option2" > Rechazado     </ option>
+
+                    <option value="option3" > Aprobado      </ option>
+
+                    
+
+                </ select>)
+                break
+
+            case "Aprobado":
+                return (<label>Aprobado </label>)
+                break
+            case "Rechazado":
+                return (<label>Rechazado </label>)
+                break
+
         }
     }
 
-    handleChange(checked) {
-        this.setState({ checked });
+
+    handleChange(index) {
+       var dropdown = document.getElementById('menutabla'+ index); 
+       console.log(dropdown.value)
+       var fila = document.getElementById(index.toString())
+       if (dropdown.value != "option1"){
+            this.setState({
+            isAplicarDisabled: false,
+            rowSelected: true,
+            hidden: false,
+        });
+           fila.className = 'selected';
+       } else {
+        this.setState({
+            isAplicarDisabled: true,
+            rowSelected: false,
+            hidden: true,
+        });
+           fila.className = '';
+       }
     }
+
+
+    handleSubmitClicked(index) {
+        let element = document.getElementById(index.toString())
+        if (this.state.rowSelected == false){
+                element.className +='selected'; 
+                this.setState({
+                  isDisabled: false,
+                  rowSelected:true   
+                });
+           
+            }else 
+                {
+                if (element.className != ''){
+                element.className = ''
+                this.setState({
+                    isDisabled: true,
+                    rowSelected:false    
+                  });
+         }
+      }
+     }
+   
 
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
-            const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas } = cliente //destructuring
+            const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas, Estado } = cliente //destructuring
             return (
                 <tr id={index} key={Moneda}>
                     <td className="celda">{Usuario}</td>
@@ -87,7 +131,8 @@ class Tableadmin extends Component {
                     <td className="celda">{Moneda}</td>
                     <td className="celda">{Cuotas}</td>
                     <td className="celda">
-             </td>
+                     {this.crearestado(Estado, index)}
+                    </td>
                 </tr>
             )
         })
@@ -112,17 +157,18 @@ class Tableadmin extends Component {
                 <h2 id='Filtro'>Filtro por estado</h2>
                 <select id='nombredelmenuu' >
 
-                    <option value="">   </option>
-                    <option value="option1" onClick={(() => this.handleSubmitClicked(index))}>Aprobado  </ option>
+                    <option value="option4"> Todos </ option>
+                    <option value="option1">Aprobado  </ option>
 
-                    <option value="option2" onClick={(() => this.handleSubmitClicked(index))}> Rechazado </ option>
+                    <option value="option2"> Rechazado </ option>
 
-                    <option value="opción3" onClick={(() => this.handleSubmitClicked(index))}>Pendiente  </ option>
+                    <option value="opción3" >Pendiente  </ option>
 
-                    <option value="opción4"> Todos </ option>
+
 
 
                 </ select>
+
                 <div>
                     <table id='Administrador'>
                         <tbody>
@@ -133,8 +179,8 @@ class Tableadmin extends Component {
                 </div>
                 <div className="Buttons">
 
-                    <button type="submit" className="btnSeptimo" hidden={this.state.hidden} onclick > Limpiar</button>
-                    <button type="submit" className="btnOctavo" disabled={this.state.isDisabled} > Aplicar cambios</button>
+                    <button type="submit" className="btnSeptimo" hidden={this.state.hidden} onClick={this.state.option} > Limpiar</button>
+                    <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} > Aplicar cambios</button>
                 </div>
 
             </div>
