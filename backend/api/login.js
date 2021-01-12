@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         return res.json({
           _links: {
             self: {
-              href:  req.get('host')
+              href:  req.url
             }
           },
           found: 'false'
@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
         return res.json({
           _links: {
             self: {
-              href: req.get('host')
+              href: req.url
             }
           },
           email: userSearch[0].email,
@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
       return res.json({
         _links: {
           self: {
-            href:  req.get('host')
+            href:  req.url
           }
         },
         message: 'Internal error (005)'
