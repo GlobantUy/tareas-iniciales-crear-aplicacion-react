@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         return res.json({
           _links: {
             self: {
-              href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+              href: "https://" + req.headers.host + req.url
             }
           },
           message: 'Provided email does not belong to a registered user'
@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
           return res.json({
             _links: {
               self: {
-                href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                href: "https://" + req.headers.host + req.url
               }
             },
             message: 'Provided amount is not a number'
@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
             return res.json({
               _links: {
                 self: {
-                  href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                  href: "https://" + req.headers.host + req.url
                 }
               },
               message: 'Invalid currency type'
@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
               return res.json({
                 _links: {
                   self: {
-                    href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                    href: "https://" + req.headers.host + req.url
                   }
                 },
                 message: 'Amount of payments is not a number'
@@ -62,7 +62,7 @@ module.exports = async (req, res) => {
                 return res.json({
                   _links: {
                     self: {
-                      href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                      href: "https://" + req.headers.host + req.url
                     }
                   },
                   message: 'Invalid "loanType" value'
