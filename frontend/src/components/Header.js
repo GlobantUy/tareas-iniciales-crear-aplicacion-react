@@ -73,7 +73,7 @@ class Header extends React.Component {
       return (
         <div>
           <header className="header">
-            <a href="http://localhost:3000/"><img className="logoheader" src="/logo.jpg" /></a>
+            <a href="http://localhost:3000/"><img className="logoheader" src="/logo.png" /></a>
             <a href="http://localhost:3000/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a>
           </header>
         </div >
