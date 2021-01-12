@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
         return res.json({
           _links: {
             self: {
-              href: 'https://backendmain-bt1v07u6c.vercel.app/api/returnLoans'
+              href: "https://" + req.headers.host + req.url
             }
           },
           message: 'User not found'
@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
             return res.json({
               _links: {
                 self: {
-                  href: 'https://backendmain-bt1v07u6c.vercel.app/api/returnLoans'
+                  href: "https://" + req.headers.host + req.url
                 }
               },
               message: 'No loans found'
@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
             return res.json({
               _links: {
                 self: {
-                  href: 'https://backendmain-bt1v07u6c.vercel.app/api/returnLoans'
+                  href: "https://" + req.headers.host + req.url
                 }
               },
               loans: loanSearch
@@ -63,7 +63,7 @@ module.exports = async (req, res) => {
           return res.json({
             _links: {
               self: {
-                href: 'https://backendmain-bt1v07u6c.vercel.app/api/returnLoans'
+                href: "https://" + req.headers.host + req.url
               }
             },
             message: 'Access denied'
@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
       return res.json({
         _links: {
           self: {
-            href: 'https://backendmain-bt1v07u6c.vercel.app/api/returnLoans'
+            href: "https://" + req.headers.host + req.url
           }
         },
         message: 'Internal error (003)'
