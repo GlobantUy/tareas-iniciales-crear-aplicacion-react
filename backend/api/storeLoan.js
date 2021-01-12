@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
                 message: 'Amount of payments is not a number'
               })
             } else {
-             /* if (req.body.loanType == undefined  || req.body.loanType.length < 4) {
+             /* if (req.body.loanType == undefined || req.body.loanType.length < 4) {
                 return res.json({
                   _links: {
                    self: {
@@ -88,7 +88,7 @@ module.exports = async (req, res) => {
                   const id = req.body.email + '/' + year + '/' + month + '/' + day + '|' + hour + '/' + minutes + '/' + seconds
                   const newLoan = new Loan({
 
-                    userName: req.body.email,
+                    userName: userSearch[0].name,
                     amount: req.body.amount,
                     date: date,
                     currency: req.body.currency,
