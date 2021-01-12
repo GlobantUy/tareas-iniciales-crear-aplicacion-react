@@ -5,23 +5,28 @@ class RegisterContent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Ingreso: '',
-            Monto_a_pedir: '',
+            Nombre: '',
+            Apellido: '',
+            FechaNacimiento: '',
+            Email: '',
+            Password: '',
+            ConfirmPassword: '',
 
-            Moneda_$U: false,
-            Moneda_U$S: false,
-            TipoMoneda: '',
-
-            financiacion: '',
-
-            TipoDePrestamoInmueble: false,
-            TipoDePrestamoAutomotor: false,
-            TipoDePrestamoOtros: false,
+            Departamento: '',
+            Genero: '',
+            Preferencias: '',
 
             errors: {}
         }
-        //this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this)
         //this.handleSumbit = this.handleSumbit.bind(this)
+    }
+
+    handleChange = (e) => {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+    console.log(this.state.Nombre)
     }
 
     render() {
@@ -30,14 +35,14 @@ class RegisterContent extends Component {
             <div>
                 <div className="form">
                     <form onSubmit={this.handleSumbit}>
-                        <h1 className="titleForm">Simulador de préstamos</h1>
+                        <h1 className="titleForm">Registro</h1>
 
                         <p>Nombres*</p>
                         <input className="Ingreso"
                             autoComplete="off"
                             type="text"
-                            name="Ingreso"
-                            //value={this.state.Ingreso}
+                            name="Nombre"
+                            value={this.state.Nombre}
                             onChange={this.handleChange}
                             required
                         />
@@ -46,8 +51,8 @@ class RegisterContent extends Component {
                         <input className="Ingreso"
                             autoComplete="off"
                             type="text"
-                            name="Ingreso"
-                            //value={this.state.Ingreso}
+                            name="Apellido"
+                            value={this.state.Apellido}
                             onChange={this.handleChange}
                             required
                         />
@@ -56,8 +61,8 @@ class RegisterContent extends Component {
                         <input className="Ingreso"
                             autoComplete="off"
                             type="date"
-                            name="Ingreso"
-                            //value={this.state.Ingreso}
+                            name="FechaNacimiento"
+                            value={this.state.FechaNacimiento}
                             onChange={this.handleChange}
                             required
                         />
@@ -66,8 +71,8 @@ class RegisterContent extends Component {
                         <input className="Ingreso"
                             autoComplete="off"
                             type="text"
-                            name="Ingreso"
-                            //value={this.state.Ingreso}
+                            name="Email"
+                            value={this.state.Email}
                             onChange={this.handleChange}
                             required
                         />
@@ -76,8 +81,8 @@ class RegisterContent extends Component {
                         <input className="Ingreso"
                             autoComplete="off"
                             type="password"
-                            name="Ingreso"
-                            //value={this.state.Ingreso}
+                            name="Password"
+                            value={this.state.Password}
                             onChange={this.handleChange}
                             required
                         />
@@ -85,15 +90,15 @@ class RegisterContent extends Component {
                         <p>Confirmación de contraseña*</p>
                         <input className="Ingreso"
                             autoComplete="off"
-                            type="number"
-                            name="Ingreso"
-                            //value={this.state.Ingreso}
+                            type="password"
+                            name="ConfirmPassword"
+                            value={this.state.ConfirmPassword}
                             onChange={this.handleChange}
                             required
                         />
 
                         <p>Departamento*</p>
-                        <select className="inputAños" name="financiacion" value={this.state.financiacion} onChange={this.handleChange}>
+                        <select className="inputAños" name="departamento" value={this.state.Departamento} onChange={this.handleChange}>
                             <option hidden>Selecciona una opción</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
@@ -108,7 +113,8 @@ class RegisterContent extends Component {
                             type="radio"
                             id="Femenino"
                             name="Genero"
-                            //onChange={this.checkboxChange}
+                            value="otro"
+                            onChange={this.handleChange}
                             //checked={this.state.Moneda_U$S}
                         />
 
@@ -118,7 +124,8 @@ class RegisterContent extends Component {
                             type="radio"
                             id="Masculino"
                             name="Genero"
-                            //onChange={this.checkboxChange}
+                            value="otro"
+                            onChange={this.handleChange}
                             //checked={this.state.Moneda_$U}
                         />
                         <label htmlFor="Masculino">Masculino</label>
@@ -127,24 +134,11 @@ class RegisterContent extends Component {
                             type="radio"
                             id="Otro"
                             name="Genero"
-                            //onChange={this.checkboxChange}
+                            value="otro"
+                            onChange={this.handleChange}
                             //checked={this.state.Moneda_$U}
                         />
                         <label htmlFor="Otro">Otro</label>
-
-                        <p>Monto a Pedir($U)*</p>
-                        <input className="inputMonto"
-                            autoComplete="off"
-                            type="number"
-                            name="Monto_a_pedir"
-                            placeholder="Agregar Monto"
-                            value={this.state.Monto_a_pedir}
-                            onChange={this.handleChange}
-                        //required 
-                        />
-                        <label className="error">{errors.Monto_a_pedir}</label>
-
-                        <br />
 
                         <p>Preferencias</p>
                         <input className="inputTipo"
@@ -152,7 +146,7 @@ class RegisterContent extends Component {
                             id="Inmuebles"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoInmueble}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Inmuebles">Inmuebles</label><br></br>
 
@@ -161,7 +155,7 @@ class RegisterContent extends Component {
                             id="Hogar_deco"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoAutomotor}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Hogar_deco">Hogar y decoración</label><br></br>
 
@@ -170,7 +164,7 @@ class RegisterContent extends Component {
                             id="Juguetes"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Juguetes">Juguetes</label><br></br>
 
@@ -179,7 +173,7 @@ class RegisterContent extends Component {
                             id="Entretenimiento"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Entretenimiento">Entretenimiento</label><br></br>
 
@@ -188,7 +182,7 @@ class RegisterContent extends Component {
                             id="Autos"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Autos">Autos</label><br></br>
 
@@ -197,7 +191,7 @@ class RegisterContent extends Component {
                             id="Opticas"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Opticas">Opticas</label><br></br>
 
@@ -206,7 +200,7 @@ class RegisterContent extends Component {
                             id="Salud_belleza"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Salud_belleza">Salud y belleza</label><br></br>
 
@@ -215,7 +209,7 @@ class RegisterContent extends Component {
                             id="Comida"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Comida">Comida</label><br></br>
 
@@ -224,7 +218,7 @@ class RegisterContent extends Component {
                             id="Libros"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Libros">Libros</label><br></br>
 
@@ -233,7 +227,7 @@ class RegisterContent extends Component {
                             id="Viajes_turismo"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Viajes_turismo">Viajes y turismo</label><br></br>
 
@@ -242,7 +236,7 @@ class RegisterContent extends Component {
                             id="Vestimenta"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Vestimenta">Vestimenta</label><br></br>
 
@@ -251,9 +245,10 @@ class RegisterContent extends Component {
                             id="Joyas"
                             name="Preferencias"
                             onChange={this.checkboxChange}
-                            checked={this.state.TipoDePrestamoOtros}
+                            checked={this.state.Preferencias}
                         />
                         <label htmlFor="Joyas">Joyas</label><br></br>
+
 
                         <button className="btnPrimario">Registrarse</button>
 
