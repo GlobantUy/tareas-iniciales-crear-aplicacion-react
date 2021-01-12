@@ -5,7 +5,6 @@ const tableSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-
   amount: {
     type: String,
     required: true
@@ -32,6 +31,10 @@ const tableSchema = new mongoose.Schema({
   },
   stateDate: {
     type: Date,
+    required: true
+  },
+  userEmail: {
+    type: String,
     required: true
   }
 })
