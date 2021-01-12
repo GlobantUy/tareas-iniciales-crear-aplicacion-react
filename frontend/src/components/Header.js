@@ -1,23 +1,19 @@
 
 import React, { Component } from 'react';
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-</style>
+
 const userLogin = () => {
   try {
-    let btnHeader = document.querySelector(".btnHeader");
-    let user = document.querySelector(".User");
+
     if (sessionStorage.getItem('Usuario-Values')) {
-      btnHeader.style.display = 'none';
-      user.style.display = 'block';
+
+      return true
     } else {
-      btnHeader.style.display = 'block';
-      user.style.display = 'none';
+
+      return false
     }
 
   } catch (error) {
-    console.log(error)
   }
 
 }
@@ -50,36 +46,39 @@ class Header extends React.Component {
       console.log(error)
     }
   }
-
   render() {
-    userLogin();
-    this.changeState()
-    return (
-      <div>
-        <header className="header">
-          <img className="logoheader" src="/logo.jpg" />
-          <a href="http://localhost:3000/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a>
-
-          <div className='User'>
-            <span id='user-name' >{this.state.email}</span>
-            <div className="menu">
-              <img className="imgUser" src="/Frame.png" />
-              <ul>
-                <li>
-                  <a href='http://localhost:3000/ingreso' onClick={this.logout}>Log out </a>
-                </li>
-              </ul>
+    const isLoggedIn = userLogin();
+    this.changeState();
+    if (isLoggedIn == true) {
+      return (
+        <div>
+          <header className="header">
+          <a href="http://localhost:3000/"><img className="logoheader" src="/logo.png" /></a>
+            <div className='User'>
+              <span id='user-name' >{this.state.email}</span>
+              <div className="menu">
+                <img className="imgUser" src="/Frame.png" />
+                <ul>
+                  <li>
+                    <a href='http://localhost:3000/ingreso' onClick={this.logout}>Log out </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
 
-        </header>
-
-        <footer>
-
-        </footer>
-      </div >
-    )
-
+          </header>
+        </div >
+      )
+    } else {
+      return (
+        <div>
+          <header className="header">
+            <a href="http://localhost:3000/"><img className="logoheader" src="/logo.png" /></a>
+            <a href="http://localhost:3000/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a>
+          </header>
+        </div >
+      )
+    }
   }
 }
 export default Header;
