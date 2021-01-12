@@ -187,7 +187,6 @@ class SimLoan extends Component {
                             autoComplete="off"
                             type="number"
                             min="1" 
-                            pattern="^[0-9]+"
                             name="Ingreso"
                             placeholder="Agregar en $U"
                             value={this.state.Ingreso}
