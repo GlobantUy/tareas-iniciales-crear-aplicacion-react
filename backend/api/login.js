@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         return res.json({
           _links: {
             self: {
-              href: 'https://backendmain-bt1v07u6c.vercel.app/api/login'
+              href:  "https://" + req.headers.host + req.url
             }
           },
           found: 'false'
@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
         return res.json({
           _links: {
             self: {
-              href: 'https://backendmain-bt1v07u6c.vercel.app/api/login'
+              href: "https://" + req.headers.host + req.url
             }
           },
           email: userSearch[0].email,
@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
       return res.json({
         _links: {
           self: {
-            href: 'https://backendmain-bt1v07u6c.vercel.app/api/login'
+            href: "https://" + req.headers.host + req.url
           }
         },
         message: 'Internal error (005)'
