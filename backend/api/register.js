@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
           return res.json({
             _links: {
               self: {
-                href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                href: "https://" + req.headers.host + req.url
               }
             },
             message: 'Email belongs to an existing account'
@@ -46,7 +46,7 @@ module.exports = async (req, res) => {
                         return res.json({
                           _links: {
                             self: {
-                              href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                              href: "https://" + req.headers.host + req.url
                             }
                           },
                           message: 'User registered successfully'
@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
                         return res.json({
                           _links: {
                             self: {
-                              href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                              href: "https://" + req.headers.host + req.url
                             }
                           },
                           message: "Must provide a 'preferences' property and value"
@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
                       return res.json({
                         _links: {
                           self: {
-                            href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                            href: "https://" + req.headers.host + req.url
                           }
                         },
                         message: "Must provide a 'gender' property and value"
@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
                     return res.json({
                       _links: {
                         self: {
-                          href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                          href: "https://" + req.headers.host + req.url
                         }
                       },
                       message: "Must provide a 'passwd' property and value"
@@ -85,7 +85,7 @@ module.exports = async (req, res) => {
                   return res.json({
                     _links: {
                       self: {
-                        href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                        href: "https://" + req.headers.host + req.url
                       }
                     },
                     message: "Must provide a 'department' property and value"
@@ -95,7 +95,7 @@ module.exports = async (req, res) => {
                 return res.json({
                   _links: {
                     self: {
-                      href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                      href: "https://" + req.headers.host + req.url
                     }
                   },
                   message: "Must provide a 'dateOfBirth' property and value"
@@ -105,7 +105,7 @@ module.exports = async (req, res) => {
               return res.json({
                 _links: {
                   self: {
-                    href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                    href: "https://" + req.headers.host + req.url
                   }
                 },
                 message: "Must provide a 'lName' property and value"
@@ -115,7 +115,7 @@ module.exports = async (req, res) => {
             return res.json({
               _links: {
                 self: {
-                  href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+                  href: "https://" + req.headers.host + req.url
                 }
               },
               message: "Must provide a 'name' property and value"
@@ -126,7 +126,7 @@ module.exports = async (req, res) => {
         return res.json({
           _links: {
             self: {
-              href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+              href: "https://" + req.headers.host + req.url
             }
           },
           message: "Must provide an 'email' property and value"
@@ -136,7 +136,7 @@ module.exports = async (req, res) => {
       return res.json({
         _links: {
           self: {
-            href: 'https://backendmain-bt1v07u6c.vercel.app/api/register'
+            href: "https://" + req.headers.host + req.url
           }
         },
         message: err
