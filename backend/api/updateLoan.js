@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         return res.json({
           _links: {
             self: {
-              href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+              href: "https://" + req.headers.host + req.url
             }
           },
           message: 'User has no registered loans'
@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
           return res.json({
             _links: {
               self: {
-                href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                href: "https://" + req.headers.host + req.url
               }
             },
             message: 'User has no loans pending review'
@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
             return res.json({
               _links: {
                 self: {
-                  href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                  href: "https://" + req.headers.host + req.url
                 }
               },
               message: 'Invalid state'
@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
             return res.json({
               _links: {
                 self: {
-                  href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                  href: "https://" + req.headers.host + req.url
                 }
               },
               message: 'Loan state modified successfully'
@@ -68,7 +68,7 @@ module.exports = async (req, res) => {
       return res.json({
         _links: {
           self: {
-            href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+            href: "https://" + req.headers.host + req.url
           }
         },
         message: 'Internal error (001)'

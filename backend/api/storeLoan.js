@@ -92,7 +92,7 @@ module.exports = async (req, res) => {
                   return res.json({
                     _links: {
                       self: {
-                        href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                        href: "https://" + req.headers.host + req.url
                       }
                     },
                     message: 'Storage successful'
@@ -101,7 +101,7 @@ module.exports = async (req, res) => {
                   return res.json({
                     _links: {
                       self: {
-                        href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                        href: "https://" + req.headers.host + req.url
                       }
                     },
                     message: 'Storage fail'
@@ -112,7 +112,7 @@ module.exports = async (req, res) => {
                 return res.json({
                   _links: {
                     self: {
-                      href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+                      href: "https://" + req.headers.host + req.url
                     }
                   },
                   message: 'The user already has a loan pending approval'
@@ -127,7 +127,7 @@ module.exports = async (req, res) => {
       return res.json({
         _links: {
           self: {
-            href: 'https://backendmain-bt1v07u6c.vercel.app/api/storeLoan'
+            href: "https://" + req.headers.host + req.url
           }
         },
         message: 'Internal error (002)'
