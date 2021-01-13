@@ -5,7 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 let emailFromStorage
 let monedaPost
-let añosPost
+let plazoPost
 let monto_a_pedir
 let URL = "https://backendmain-60tqle36e.vercel.app/api/storeLoan"
 class Table extends Component {
@@ -31,7 +31,7 @@ class Table extends Component {
                 'email': emailFromStorage,
                 'amount': monto_a_pedir,
                 'currency': monedaPost,
-                'payments': añosPost,
+                'payments': plazoPost,
             }
             )
                 .then(Response => {
@@ -124,8 +124,7 @@ class Table extends Component {
             var children = element.childNodes;
             for (var i = 0; i < children.length; i++) {
                 monedaPost = children[0].innerHTML;
-                añosPost = children[3].innerHTML;
-                console.log(monedaPost + " " + añosPost)
+                plazoPost = children[3].innerHTML;
             }
         }
     }
