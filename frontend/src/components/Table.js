@@ -8,7 +8,7 @@ let emailFromStorage
 let monedaPost
 let plazoPost
 let monto_a_pedir
-let URL = "https://backendmain-60tqle36e.vercel.app/api/storeLoan"
+let URL = "https://backendmain-k9bdl1wqe.vercel.app/api/storeLoan"
 class Table extends Component {
 
     //popup usuario logueado//
@@ -16,7 +16,7 @@ class Table extends Component {
         abierto: false,
         abierto2: false,
         abierto3: false,
-
+        abierto4: false,
     }
 
     volverAceptarPres = () => {
@@ -33,16 +33,21 @@ class Table extends Component {
     }
 
     abrirModal2 = () => {
-        this.setState({ abierto2: !this.state.abierto2 });
         emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
         axios.post(URL, {
             'email': emailFromStorage,
             'amount': monto_a_pedir,
             'currency': monedaPost,
             'payments': plazoPost,
+            //'loanType': ''
         }
         )
             .then(Response => {
+                if (Response.data.message == 'The user already has a loan pending approval') {
+                    this.setState({ abierto4: !this.state.abierto4 });
+                } else {
+                    this.setState({ abierto2: !this.state.abierto2 });
+                }
                 console.log("registration res", Response)
             })
             .catch(error => {
@@ -125,7 +130,7 @@ class Table extends Component {
             var children = element.childNodes;
             for (var i = 0; i < children.length; i++) {
                 monedaPost = children[0].innerHTML;
-                plazoPost = children[3].innerHTML;
+                plazoPost = children[2].innerHTML;
             }
         }
     }
@@ -211,6 +216,11 @@ class Table extends Component {
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
                     <p className='textModal2'>Su préstamo ha sido registrado exitosamente y se encuentra pendiente de aprobación</p>
                     <a href="http://localhost:3000/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                </Modal>
+
+                <Modal isOpen={this.state.abierto4} className='modalStyles'>
+                    <p className='textModal2'>Ya tienes un prestamo pendiente</p>
+                    <a href="/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto3} className="modalStyless" >
