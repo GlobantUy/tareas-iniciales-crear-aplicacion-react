@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
       falseloanSearch = await collectionT.find({ userEmail: req.body.email, state: false }).toArray()
       total = trueloanSearch.length + falseloanSearch.length
       if (totalLoanSearch.length == 0) {
-        return res.json({
+        return res.status(403).json({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
         })
       } else {
         if (totalLoanSearch.length == total) {
-          return res.json({
+          return res.status(403).json({
             _links: {
               self: {
                 href: "https://" + req.headers.host + req.url
@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
           })
         } else {
           if (req.body.state != true && req.body.state != false) {
-            return res.json({
+            return res.status(400).json({
               _links: {
                 self: {
                   href: "https://" + req.headers.host + req.url
@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
         }
       }
     } catch {
-      return res.json({
+      return  res.status(500).json({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
@@ -76,7 +76,7 @@ module.exports = async (req, res) => {
       })
     }
   } else if (req.method != 'OPTIONS'){
-    return res.json({
+    return  res.status(405).json({
       _links: {
         self: {
           href: "https://" + req.headers.host + req.url
