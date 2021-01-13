@@ -34,12 +34,12 @@ class Tableadmin extends Component {
         this.setState({
 
             clientes: [
-                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 60, Estado: "Aprobado" },
-                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 120, Estado: "Aprobado" },
-                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 180, Estado: "Pendiente" },
-                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 240, Estado: "Rechazado" }
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 60, Estado: "" },
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 120, Estado: "" },
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 180, Estado: "" },
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 240, Estado: "" }
             ],
-
+            
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
             Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
             Moneda: moneda,
@@ -98,27 +98,8 @@ class Tableadmin extends Component {
     }
 
 
-    handleSubmitClicked(index) {
-        let element = document.getElementById(index.toString())
-        if (this.state.rowSelected == false){
-                element.className +='selected'; 
-                this.setState({
-                  isDisabled: false,
-                  rowSelected:true   
-                });
-           
-            }else 
-                {
-                if (element.className != ''){
-                element.className = ''
-                this.setState({
-                    isDisabled: true,
-                    rowSelected:false    
-                  });
-         }
-      }
-     }
    
+
 
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
@@ -154,7 +135,7 @@ class Tableadmin extends Component {
         return (
             <div className="container">
                 <h2 id='titulo'>Solicitudes de préstamo</h2>
-                <h2 id='Filtro'>Filtro por estado</h2>
+                <h2 id='Filtro'>Filtro por estado </h2>
                 <select id='nombredelmenuu' >
 
                     <option value="option4"> Todos </ option>
@@ -179,7 +160,7 @@ class Tableadmin extends Component {
                 </div>
                 <div className="Buttons">
 
-                    <button type="submit" className="btnSeptimo" hidden={this.state.hidden} onClick={this.state.option} > Limpiar</button>
+                    <button type="submit" className="btnSeptimo" hidden={this.state.hidden}  > Limpiar</button>
                     <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} > Aplicar cambios</button>
                 </div>
 
