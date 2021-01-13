@@ -142,5 +142,15 @@ module.exports = async (req, res) => {
         message: err
       })
     }
+  } else if (req.method != 'OPTIONS'){
+    return res.json({
+      _links: {
+        self: {
+          href: "https://" + req.headers.host + req.url
+        }
+      },
+      message: 'Invalid method:' + ' "' + req.method + '"'
+
+    })
   }
 }
