@@ -76,7 +76,7 @@ class Table extends Component {
             rowSelected: false,
 
 
-            clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Años: '', ValorCuota: '' }],
+            clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Plazo: '', Años: '', ValorCuota: '' }],
 
             isDisabled: true
         }
@@ -84,12 +84,11 @@ class Table extends Component {
 
     componentDidMount() {
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
-        let Año = (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
         monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
         this.setState({
 
             clientes: [
-                { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5, ValorCuota: this.valorCouta(monto_a_pedir, 0.1, 60) },
+                { Moneda: moneda, Tasa: '10%', Cuotas: 60,Años: 5, ValorCuota: this.valorCouta(monto_a_pedir, 0.1, 60) },
                 { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: this.valorCouta(monto_a_pedir, 0.15, 120) },
                 { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: this.valorCouta(monto_a_pedir, 0.18, 180) },
                 { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: this.valorCouta(monto_a_pedir, 0.2, 240) },
