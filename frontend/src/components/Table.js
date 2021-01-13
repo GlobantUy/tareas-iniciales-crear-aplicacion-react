@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { Children, Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 let emailFromStorage
+let monedaPost
+let añosPost
+let monto_a_pedir
+let URL = "https://backendmain-60tqle36e.vercel.app/api/storeLoan"
 class Table extends Component {
 
     //popup usuario logueado//
@@ -25,9 +29,9 @@ class Table extends Component {
             emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
             axios.post(URL, {
                 'email': emailFromStorage,
-                'amount': this.state.Monto_a_pedir,
-                'currency': currency,
-                'payments': this.state.financiacion,
+                'amount': monto_a_pedir,
+                'currency': monedaPost,
+                'payments': añosPost,
             }
             )
                 .then(Response => {
@@ -39,7 +43,6 @@ class Table extends Component {
         } else {
             this.setState({ abierto3: !this.state.abierto3 });
         }
-        console.log("funciona")
     }
 
     abrirModal2 = () => {
@@ -76,7 +79,7 @@ class Table extends Component {
     componentDidMount() {
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
         let Año = (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
-        let monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
+        monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
         this.setState({
 
             clientes: [
@@ -103,13 +106,7 @@ class Table extends Component {
                 isDisabled: false,
                 rowSelected: true
             });
-
-            var table = document.getElementById('clientes');
-            for (var r = 0, n = table.rows.length; r < n; r++) {
-                for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-                    console.log(table.rows[r].cells[c].innerHTML);
-                }
-            }
+            this.getValuesTable(element);
 
         } else {
             if (element.className != '') {
@@ -118,6 +115,17 @@ class Table extends Component {
                     isDisabled: true,
                     rowSelected: false
                 });
+            }
+        }
+    }
+
+    getValuesTable (element){
+        if (element.hasChildNodes()) {
+            var children = element.childNodes;
+            for (var i = 0; i < children.length; i++) {
+                monedaPost = children[0].innerHTML;
+                añosPost = children[3].innerHTML;
+                console.log(monedaPost + " " + añosPost)
             }
         }
     }
