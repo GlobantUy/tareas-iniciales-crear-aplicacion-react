@@ -10,7 +10,9 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-let URL = "https://backendmain-60tqle36e.vercel.app/api/login"
+let URL = "https://backendmain-k9bdl1wqe.vercel.app/api/login"
+let URLreturnpres = "https://backendmain-k9bdl1wqe.vercel.app/api/returnLoans"
+
 class SimLogin extends Component {
 
     constructor(props) {
@@ -27,7 +29,7 @@ class SimLogin extends Component {
                 window.location.href = "/"
                 this.guardarStorage(emaill, passwordd)
             } else if (rol == "ADMIN") {
-                window.location.href = "/"
+                window.location.href = "/Tableadmin"
                 this.guardarStorage(emaill, passwordd)
             } else {
                 if (mailCorrecto == false && contraCorrecta == false) {
@@ -52,7 +54,19 @@ class SimLogin extends Component {
                         this.redireccionar()
                     } else {
                         console.log(rol)
-                        this.redireccionar()
+                        axios.post(URLreturnpres, {
+                            "email": emaill
+                        }).then(res => {
+                            console.log(res)
+                            if (res.data.loans == undefined) {
+                                sessionStorage.setItem('prestamosNull', false);
+                                this.redireccionar()
+                            } else {
+                                sessionStorage.setItem('prestamosNull', true);
+                                this.redireccionar()
+                            }
+                        })
+
                     }
                 } else {
                     console.log(Response.data.found)
