@@ -18,7 +18,6 @@ const validate = values => {
     return errors
 }
 
-let URL = "https://backendmain-pdz54353z.vercel.app/api/storeLoan"
 let emailFromStorage
 let currency = ''
 class SimLoan extends Component {
@@ -112,23 +111,6 @@ class SimLoan extends Component {
             console.log('enviar formulario')
             window.location.href = '/Descuento'
         }
-        const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
-        if (emailCargado) {
-            emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
-            axios.post(URL, {
-                'email': emailFromStorage,
-                'amount': this.state.Monto_a_pedir,
-                'currency': currency,
-                'payments': this.state.financiacion,
-            }
-            )
-                .then(Response => {
-                    console.log("registration res", Response)
-                })
-                .catch(error => {
-                    console.log("registration error", error)
-                });
-        }
 
         axios.post('http://localhost:3000/api/hello', {
             user: {
@@ -138,7 +120,6 @@ class SimLoan extends Component {
                 TipoDePrestamoInmueble: this.state.TipoDePrestamoInmueble,
                 TipoDePrestamoAutomotor: this.state.TipoDePrestamoAutomotor,
                 TipoDePrestamoOtros: this.state.TipoDePrestamoOtros,
-
             }
         },
             { withCredentials: true }
