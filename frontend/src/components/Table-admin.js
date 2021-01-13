@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
+let prestamosCargados
 class Tableadmin extends Component {
 
     constructor(props) {
@@ -19,7 +19,7 @@ class Tableadmin extends Component {
             rowSelected: false,
 
 
-            clientes: [{  Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
+            clientes: [{ Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
 
             isDisabled: true,
 
@@ -28,6 +28,7 @@ class Tableadmin extends Component {
     }
 
     componentDidMount() {
+        prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
         let Año = (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
         let monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
@@ -35,9 +36,9 @@ class Tableadmin extends Component {
 
             clientes: [
                 { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 60, Estado: "" },
-                {  Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 120, Estado: "" },
-                {  Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 180, Estado: "" },
-                {  Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 240, Estado: "" }
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 120, Estado: "" },
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 180, Estado: "" },
+                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 240, Estado: "" }
             ],
 
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
@@ -86,7 +87,7 @@ class Tableadmin extends Component {
                     <td className="celda">{Moneda}</td>
                     <td className="celda">{Cuotas}</td>
                     <td className="celda">
-             </td>
+                    </td>
                 </tr>
             )
         })
@@ -105,25 +106,23 @@ class Tableadmin extends Component {
     }
 
     render() {
-
-        
         if (prestamosCargados) {
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
                     <h2 id='Filtro'>Filtro por estado</h2>
                     <select id='nombredelmenuu' >
-    
+
                         <option value="">   </option>
                         <option value="option1" onClick={(() => this.handleSubmitClicked(index))}>Aprobado  </ option>
-    
+
                         <option value="option2" onClick={(() => this.handleSubmitClicked(index))}> Rechazado </ option>
-    
+
                         <option value="opción3" onClick={(() => this.handleSubmitClicked(index))}>Pendiente  </ option>
-    
+
                         <option value="opción4"> Todos </ option>
-    
-    
+
+
                     </ select>
                     <div>
                         <table id='Administrador'>
@@ -134,20 +133,38 @@ class Tableadmin extends Component {
                         </table>
                     </div>
                     <div className="Buttons">
-    
+
                         <button type="submit" className="btnSeptimo" hidden={this.state.hidden} onclick > Limpiar</button>
                         <button type="submit" className="btnOctavo" disabled={this.state.isDisabled} > Aplicar cambios</button>
                     </div>
-    
+
                 </div>
             )
         } else {
             return (
-                <div>
-                    <img className="Tablet" src="/table.png"/>
-                    <p>No hay datos ingresados aún</p>
-                </div>
+                <>
+                    <div className="container">
+                        <h2 id='titulo'>Solicitudes de préstamo</h2>
+                        <h2 id='Filtroo' disabled>Filtro por estado</h2>
+                        <select id='nombredelmenuuu' disabled>
+                            <option value="">   </option>
+                            <option value="option1" onClick={(() => this.handleSubmitClicked(index))}>Aprobado  </ option>
+
+                            <option value="option2" onClick={(() => this.handleSubmitClicked(index))}> Rechazado </ option>
+
+                            <option value="opción3" onClick={(() => this.handleSubmitClicked(index))}>Pendiente  </ option>
+
+                            <option value="opción4"> Todos </ option>
+                        </ select>
+                    </div>
+                    <div>
+                        <img className="Tablet" src="/table.png" />
+                        <p className="noDatos">No hay datos ingresados aún</p>
+                    </div>
+                </>
             )
+
+
         }
     }
 }
