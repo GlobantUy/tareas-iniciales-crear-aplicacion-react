@@ -76,8 +76,8 @@ class Table extends Component {
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
             Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
             Moneda: moneda, 
-            financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion
-         
+            financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
+            
         })     
 }
 
@@ -153,8 +153,7 @@ class Table extends Component {
 
     }
 
-
-    render() {
+    render() { 
         return (
             <div className="container">
                 <h2 id='titleee'>Resultado de préstamo</h2>
@@ -172,7 +171,6 @@ class Table extends Component {
                         </table>
                     </div>
 
-
                 <div className="Buttons">
                     <button onClick={this.volverSimular} type="submit" className="btnTerciario"> Volver a simular</button>
                     <button type="submit" className="btnCuarto" disabled={this.state.isDisabled} onClick={this.abrirModal}> Solicitar préstamo</button>
@@ -180,17 +178,17 @@ class Table extends Component {
 
                 <Modal isOpen={this.state.abierto} className='modalStyles'>
                     <h3 className='tittle'>Confirmar préstamo</h3>
-                    <p className='text'>Prestamo valor $120.940 en 18 cuotas</p>
+                    <p className='text'>Prestamo valor {this.state.Moneda + this.state.Monto_a_pedir + " en " + this.state.Cuotas} cuotas</p>
                     <Button id="btnCancelar" onClick={this.cerrarModal}>Cancelar</Button>
                     <Button id="btnSolicitar" onClick={this.abrirModal2}>Solicitar</Button>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
-                    <p className='textModal2'>Su préstamo ha sido registrado exitosamente y se encuentra pendiente de aprobación</p>
+                    <p className='textModal2'>Su préstamo ha sido registrado exitosamente <br></br> y se encuentra pendiente de aprobación</p>
                     <a href="http://localhost:3000/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
-                <Modal isOpen={this.state.abierto3} className="modalStyless" >
+                <Modal isOpen={this.state.abierto3} className="modalStyless">
                     <ModalHeader>
                         <h1 className="titlee">Ingresar</h1>
                         <ModalBody className="modalBody">
