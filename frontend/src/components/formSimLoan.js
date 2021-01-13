@@ -186,6 +186,7 @@ class SimLoan extends Component {
                         <input className="Ingreso"
                             autoComplete="off"
                             type="number"
+                            min="1" 
                             name="Ingreso"
                             placeholder="Agregar en $U"
                             value={this.state.Ingreso}
@@ -219,6 +220,7 @@ class SimLoan extends Component {
                         <input className="inputMonto"
                             autoComplete="off"
                             type="number"
+                            min="1" 
                             name="Monto_a_pedir"
                             placeholder="Agregar Monto"
                             value={this.state.Monto_a_pedir}
