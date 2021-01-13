@@ -63,7 +63,7 @@ class SimLogin extends Component {
                                 this.redireccionar()
                             } else {
                                 sessionStorage.setItem('prestamosNull', true);
-                               // this.redireccionar()//
+                               this.redireccionar()
                             }
                         })
 

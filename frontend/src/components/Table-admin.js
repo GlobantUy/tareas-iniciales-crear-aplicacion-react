@@ -19,7 +19,7 @@ class Tableadmin extends Component {
             rowSelected: false,
 
 
-            clientes: [{  Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
+            clientes: [{ Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
 
             isAplicarDisabled: true,
 
@@ -28,6 +28,7 @@ class Tableadmin extends Component {
     }
 
     componentDidMount() {
+        prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
         let Año = (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
         let monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
@@ -51,7 +52,7 @@ class Tableadmin extends Component {
     crearestado(Estado, index) {
         switch (Estado) {
             case "Pendiente":
-                return (<select id={'menutabla'+ index} className="selectitem" onChange={(e)=> this.handleChange(index)}>
+                return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.handleChange(index)}>
 
 
                     <option value="option1" > Pendiente     </ option>
@@ -60,7 +61,7 @@ class Tableadmin extends Component {
 
                     <option value="option3" > Aprobado      </ option>
 
-                    
+
 
                 </ select>)
                 break
@@ -77,28 +78,28 @@ class Tableadmin extends Component {
 
 
     handleChange(index) {
-       var dropdown = document.getElementById('menutabla'+ index); 
-       console.log(dropdown.value)
-       var fila = document.getElementById(index.toString())
-       if (dropdown.value != "option1"){
+        var dropdown = document.getElementById('menutabla' + index);
+        console.log(dropdown.value)
+        var fila = document.getElementById(index.toString())
+        if (dropdown.value != "option1") {
             this.setState({
-            isAplicarDisabled: false,
-            rowSelected: true,
-            hidden: false,
-        });
-           fila.className = 'selected';
-       } else {
-        this.setState({
-            isAplicarDisabled: true,
-            rowSelected: false,
-            hidden: true,
-        });
-           fila.className = '';
-       }
+                isAplicarDisabled: false,
+                rowSelected: true,
+                hidden: false,
+            });
+            fila.className = 'selected';
+        } else {
+            this.setState({
+                isAplicarDisabled: true,
+                rowSelected: false,
+                hidden: true,
+            });
+            fila.className = '';
+        }
     }
 
 
-   
+
 
 
     renderTableData() {
@@ -112,7 +113,7 @@ class Tableadmin extends Component {
                     <td className="celda">{Moneda}</td>
                     <td className="celda">{Cuotas}</td>
                     <td className="celda">
-                     {this.crearestado(Estado, index)}
+                        {this.crearestado(Estado, index)}
                     </td>
                 </tr>
             )
@@ -131,7 +132,8 @@ class Tableadmin extends Component {
         })
     }
 
-    render() {
+    render(){
+    if(prestamosCargados) 
         return (
             <div className="container">
                 <h2 id='titulo'>Solicitudes de préstamo</h2>
@@ -145,28 +147,55 @@ class Tableadmin extends Component {
 
                     <option value="opción3" >Pendiente  </ option>
 
+                </select>
 
-
-
-                </ select>
-
-                <div>
                     <table id='Administrador'>
                         <tbody>
                             <tr>{this.renderTableHeader()}</tr>
                             {this.renderTableData()}
                         </tbody>
                     </table>
-                </div>
+    
                 <div className="Buttons">
 
                     <button type="submit" className="btnSeptimo" hidden={this.state.hidden}  > Limpiar</button>
                     <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} > Aplicar cambios</button>
                 </div>
+            <div>    
+    )
+     else     
+          return (
+                <div className="container">
+                    <h2 id='titulo'>Solicitudes de préstamo</h2>
+                    <h2 id='Filtro'>Filtro por estado </h2>
+                    <select id='nombredelmenuu' >
 
-            </div>
-        )
-    }
-}
+                        <option value="option4"> Todos </ option>
+                        <option value="option1">Aprobado  </ option>
 
-export default Tableadmin
+                        <option value="option2"> Rechazado </ option>
+
+                        <option value="opción3" >Pendiente  </ option>
+
+                    </ select>
+
+
+                        <table id='Administrador'>
+                            <tbody>
+                                <tr>{this.renderTableHeader()}</tr>
+                                {this.renderTableData()}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="Buttons">
+
+                        <button type="submit" className="btnSeptimo" hidden={this.state.hidden}  > Limpiar</button>
+                        <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} > Aplicar cambios</button>
+                    </div>
+                    <img className="Tablet" src="/table.png" />
+                    <p className="noDatos">No hay datos ingresados aún</p>
+
+                </div>
+          
+           }
+export default Tableadmin;
