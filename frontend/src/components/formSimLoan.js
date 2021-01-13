@@ -138,7 +138,6 @@ class SimLoan extends Component {
                 TipoDePrestamoInmueble: this.state.TipoDePrestamoInmueble,
                 TipoDePrestamoAutomotor: this.state.TipoDePrestamoAutomotor,
                 TipoDePrestamoOtros: this.state.TipoDePrestamoOtros,
-
             }
         },
             { withCredentials: true }
