@@ -1,6 +1,7 @@
 import React, { Children, Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import axios from 'axios';
 
 
 let emailFromStorage
@@ -26,20 +27,6 @@ class Table extends Component {
         const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
         if (emailCargado) {
             this.setState({ abierto: !this.state.abierto });
-            emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
-            axios.post(URL, {
-                'email': emailFromStorage,
-                'amount': monto_a_pedir,
-                'currency': monedaPost,
-                'payments': plazoPost,
-            }
-            )
-                .then(Response => {
-                    console.log("registration res", Response)
-                })
-                .catch(error => {
-                    console.log("registration error", error)
-                });
         } else {
             this.setState({ abierto3: !this.state.abierto3 });
         }
@@ -47,6 +34,20 @@ class Table extends Component {
 
     abrirModal2 = () => {
         this.setState({ abierto2: !this.state.abierto2 });
+        emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+        axios.post(URL, {
+            'email': emailFromStorage,
+            'amount': monto_a_pedir,
+            'currency': monedaPost,
+            'payments': plazoPost,
+        }
+        )
+            .then(Response => {
+                console.log("registration res", Response)
+            })
+            .catch(error => {
+                console.log("registration error", error)
+            });
     }
 
     cerrarModal = () => {
@@ -119,7 +120,7 @@ class Table extends Component {
         }
     }
 
-    getValuesTable (element){
+    getValuesTable(element) {
         if (element.hasChildNodes()) {
             var children = element.childNodes;
             for (var i = 0; i < children.length; i++) {
@@ -148,7 +149,7 @@ class Table extends Component {
             const { Moneda, Tasa, Cuotas, Años, ValorCuota } = cliente //destructuring
             return (
                 <tr id={index} onClick={(() => this.handleSubmitClicked(index))} key={index}>
-                    <td className="celda"> {Moneda}</td>
+                    <td className="celda">{Moneda}</td>
                     <td className="celda">{Tasa}</td>
                     <td className="celda">{Cuotas}</td>
                     <td className="celda">{Años}</td>
