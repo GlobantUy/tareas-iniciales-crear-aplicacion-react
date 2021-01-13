@@ -214,15 +214,14 @@ select:focus {
 }
 
 .inputPesos {
-    margin-top: 4px;
-    margin-top: -28px;
+    margin-top: -35px;
     text-align: right;
 }
 
 input[type=radio]+label {
     display: block;
     margin: 0.2em;
-    padding: 0.2em;
+    padding: 7px;
 }
 
 input[type=radio] {
@@ -237,8 +236,8 @@ input[type=radio]+label:before {
     padding-left: 5.5px;
     padding-right: 5.5px;
     margin-right: 3.85px;
-    vertical-align: bottom;
     color: transparent;
+    transition: 0.2s;
 }
 
 input[type=radio]+label:active:before {
