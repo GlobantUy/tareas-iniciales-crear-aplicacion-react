@@ -10,6 +10,10 @@ const validate = values => {
         errors.Monto_a_pedir = 'Este campo es obligatorio'
     }
 
+    if (!values.financiacion) {
+        errors.financiacion = 'Este campo es obligatorio'
+    }
+
     let porcentaje = (0.2) * (values.Ingreso)
     let monto = values.Monto_a_pedir
     if ((monto > porcentaje) && (values.Ingreso > 0)) {
