@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
-
+let URL = 'https://backendmain-k9bdl1wqe.vercel.app/api/register'
 class RegisterContent extends Component {
     constructor(props) {
         super(props)
@@ -32,6 +32,7 @@ class RegisterContent extends Component {
 
     handleSumbit(e) {
         e.preventDefault();
+        console.log(this.state)
     }
 
     render() {
@@ -41,7 +42,9 @@ class RegisterContent extends Component {
                 <div className="algo">
                     <form className="form registro" onSubmit={this.handleSumbit}>
 
-                        <h1 className="">Registro</h1>
+                        <center>
+                            <h1 className="titlee-registro">Registro</h1>
+                        </center>
 
                         <div className="container">
                             <div className="row">
@@ -60,7 +63,7 @@ class RegisterContent extends Component {
                                 </div>
                                 <div className="col-4">
 
-                                    <p>Apellidos*</p>
+                                    <p className="mid">Apellidos*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
                                         type="text"
@@ -100,7 +103,7 @@ class RegisterContent extends Component {
 
                                 <div className="col-4">
 
-                                    <p>Contraseña*</p>
+                                    <p className="mid">Contraseña*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
                                         type="password"
@@ -160,6 +163,7 @@ class RegisterContent extends Component {
                                 <div className="col-3">
                                     <p>Género*</p>
                                     <input
+                                        className="rdbutons"
                                         type="radio"
                                         id="Femenino"
                                         name="Genero"
@@ -167,25 +171,27 @@ class RegisterContent extends Component {
                                         onChange={this.handleChange}
                                     />
 
-                                    <label htmlFor="Femenino">Femenino</label>
+                                    <label className="genero" htmlFor="Femenino">Femenino</label>
 
                                     <input
+                                        className="rdbutons"
                                         type="radio"
                                         id="Masculino"
                                         name="Genero"
                                         value="otro"
                                         onChange={this.handleChange}
                                     />
-                                    <label htmlFor="Masculino">Masculino</label>
+                                    <label className="genero" htmlFor="Masculino">Masculino</label>
 
                                     <input
+                                        className="rdbutons"
                                         type="radio"
                                         id="Otro"
                                         name="Genero"
                                         value="otro"
                                         onChange={this.handleChange}
                                     />
-                                    <label htmlFor="Otro">Otro</label>
+                                    <label className="genero" htmlFor="Otro">Otro</label>
                                 </div>
 
                                 <div className="col-3">
@@ -284,8 +290,10 @@ class RegisterContent extends Component {
 
                             </div>
 
-                            <button type="submit" className="btnPrimario">Registrarse</button>
-
+                            <center>
+                                <button type="submit" className="btnPrimario">Registrarse</button>
+                            </center>
+                             
                         </div>
 
                     </form>

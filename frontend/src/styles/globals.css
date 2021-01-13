@@ -859,7 +859,21 @@ a.button {
     align-items: center;
     color: #000000;
 }
-
+#Filtroo {
+    position: absolute;
+    font-family: 'Heebo', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    height: 48%;
+    top: 6%;
+    left: 15%;
+    align-items: center;
+    color:#636363;
+    ;
+}
 #nombredelmenuu {
     font-family: 'Heebo', sans-serif;
     position: absolute;
@@ -871,6 +885,16 @@ a.button {
     box-sizing: border-box; 
 }
 
+#nombredelmenuuu {
+    font-family: 'Heebo', sans-serif;
+    position: absolute;
+    display: inline-block;
+    top: 33%;
+    padding: 4px;
+    left: 15%;
+    border: 1px solid #636363;
+    box-sizing: border-box; 
+}
 
 .dropdown-content  {
     position: absolute;
@@ -892,15 +916,100 @@ a.button {
     margin-bottom: 8px;
 }
 
+.genero{
+    width: 174.76px;
+    height: 16px;
+    left: 19px;
+    top: calc(50% - 16px/2 + 0.5px);
+    margin-top: 13px;
+    margin-bottom: 13px;
+
+    
+    /* LABELS */
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    
+    color: #000000;
+    
+}
+
+.rdbutons{
+    width: 15.15px;
+    height: 15px;
+    left: 0px;
+    top: calc(50% - 15px/2);
+    margin-top: 14px;
+    margin-bottom: 14px;
+
+    border: 1px solid #000000;
+}
+
 .algo{
     width: 100%;
     height: 100%;
 }
 
 .form.registro{
-    left: 15%;
+    left: 0%;
+    width: 100%;
+    margin-right: 0%;
+    margin-left: 0%;
 }
 
-.row{
-    width: 1279px;
+.titlee-registro{
+width: 89px;
+height: 28px;
+left: 596px;
+top: 118px;
+margin-top: 38px;
+margin-bottom: 24px;
+
+/* TITULO */
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+
+color: #000000;
+}
+
+
+
+.Tablet {
+    position: absolute;
+    width: 118.4px;
+    height: 115.3px;
+    left: 690px;
+    top: 280px;
+    
+}
+
+.noDatos { 
+    position: absolute;
+    left: 40.7%;
+    right: 39.38%;
+    top: 58.33%;
+    bottom: 38.75%;
+
+    /* PARRAFO */
+    font-family: Heebo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    Width:  255px;
+    Height: 21px;
+    Top: 420px;
+    Left: 665px;
+
 }
