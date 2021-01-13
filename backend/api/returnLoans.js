@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
       } catch {
         conf = false
         console.log(req.body.email)
-        return res.json({
+        return res.status(404).json({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
             loanSearch[0].userName
           } catch (err) {
             conf = false
-            return res.json({
+            return res.status(200).json({
               _links: {
                 self: {
                   href: "https://" + req.headers.host + req.url
@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
           }
 
           if (conf == true) {
-            return res.json({
+            return res.status(200).json({
               _links: {
                 self: {
                   href: "https://" + req.headers.host + req.url
@@ -60,7 +60,7 @@ module.exports = async (req, res) => {
             })
           }
         } else {
-          return res.json({
+          return res.status(403).json({
             _links: {
               self: {
                 href: "https://" + req.headers.host + req.url
@@ -72,7 +72,7 @@ module.exports = async (req, res) => {
         }
       }
     } catch (err) {
-      return res.json({
+      return res.status(500).json({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
@@ -83,7 +83,7 @@ module.exports = async (req, res) => {
       })
     }
   } else if (req.method != 'OPTIONS'){
-    return res.json({
+    return res.status(405).json({
       _links: {
         self: {
           href: "https://" + req.headers.host + req.url

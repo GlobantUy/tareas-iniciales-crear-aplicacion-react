@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
       userSearch = await collectionU.find({ email: req.body.email }).toArray()
 
       if (userSearch.length != 1) {
-        return res.json({
+        return res.status(403).json({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
         })
       } else {
         if (isNaN(req.body.amount)) {
-          return res.json({
+          return res.status(400).json({
             _links: {
               self: {
                 href: "https://" + req.headers.host + req.url
@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
           })
         } else {
           if (req.body.currency != 'U$S' && req.body.currency != '$U') {
-            return res.json({
+            return res.status(400).json({
               _links: {
                 self: {
                   href: "https://" + req.headers.host + req.url
@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
             })
           } else {
             if (isNaN(req.body.payments)) {
-              return res.json({
+              return res.status(400).json({
                 _links: {
                   self: {
                     href: "https://" + req.headers.host + req.url
@@ -59,7 +59,7 @@ module.exports = async (req, res) => {
               })
             } else {
               /* if (req.body.loanType == undefined || req.body.loanType.length < 4) {
-                 return res.json({
+                 return res.status(400).json({
                    _links: {
                     self: {
                        href: "https://" + req.headers.host + req.url
@@ -101,7 +101,7 @@ module.exports = async (req, res) => {
                 try {
                   db.collection('loans').insertOne(newLoan)
 
-                  return res.json({
+                  return res.status(200).json({
                     _links: {
                       self: {
                         href: "https://" + req.headers.host + req.url
@@ -110,7 +110,7 @@ module.exports = async (req, res) => {
                     message: 'Storage successful'
                   })
                 } catch {
-                  return res.json({
+                  return res.status(500).json({
                     _links: {
                       self: {
                         href: "https://" + req.headers.host + req.url
@@ -121,7 +121,7 @@ module.exports = async (req, res) => {
                   })
                 }
               } else {
-                return res.json({
+                return res.status(403).json({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url
@@ -137,7 +137,7 @@ module.exports = async (req, res) => {
         }
       }
     } catch (err) {
-      return res.json({
+      return res.status(500).json({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
@@ -148,7 +148,7 @@ module.exports = async (req, res) => {
       })
     }
   } else if (req.method != 'OPTIONS'){
-    return res.json({
+    return res.status(405).json({
       _links: {
         self: {
           href: "https://" + req.headers.host + req.url
