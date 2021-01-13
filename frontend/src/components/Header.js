@@ -60,7 +60,7 @@ class Header extends React.Component {
                 <img className="imgUser" src="/Frame.png" />
                 <ul>
                   <li>
-                    <a href='http://localhost:3000/ingreso' onClick={this.logout}>Log out </a>
+                    <a href="http://localhost:3000/" onClick={this.logout}>Log out</a>
                   </li>
                 </ul>
               </div>
