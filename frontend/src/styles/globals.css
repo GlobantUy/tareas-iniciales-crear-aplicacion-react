@@ -859,7 +859,21 @@ a.button {
     align-items: center;
     color: #000000;
 }
-
+#Filtroo {
+    position: absolute;
+    font-family: 'Heebo', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    height: 48%;
+    top: 6%;
+    left: 15%;
+    align-items: center;
+    color:#636363;
+    ;
+}
 #nombredelmenuu {
     font-family: 'Heebo', sans-serif;
     position: absolute;
@@ -871,6 +885,16 @@ a.button {
     box-sizing: border-box; 
 }
 
+#nombredelmenuuu {
+    font-family: 'Heebo', sans-serif;
+    position: absolute;
+    display: inline-block;
+    top: 33%;
+    padding: 4px;
+    left: 15%;
+    border: 1px solid #636363;
+    box-sizing: border-box; 
+}
 
 .dropdown-content  {
     position: absolute;
@@ -883,4 +907,37 @@ a.button {
     position: absolute;
     left:13%;
     padding: 12px 16px;
+}
+
+.Tablet {
+    position: absolute;
+    width: 118.4px;
+    height: 115.3px;
+    left: 690px;
+    top: 280px;
+    
+}
+
+.noDatos { 
+    position: absolute;
+    left: 40.7%;
+    right: 39.38%;
+    top: 58.33%;
+    bottom: 38.75%;
+
+    /* PARRAFO */
+    font-family: Heebo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    Width:  255px;
+    Height: 21px;
+    Top: 420px;
+    Left: 665px;
+
 }
