@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
                 message: 'Amount of payments is not a number'
               })
             } else {
-             /* if (req.body.loanType == undefined  || req.body.loanType.length < 4) {
+             /* if (req.body.loanType == undefined || req.body.loanType.length < 4) {
                 return res.json({
                   _links: {
                    self: {
@@ -69,7 +69,7 @@ module.exports = async (req, res) => {
                 })
               } else {
                 */
-                loanSearch = await collectionT.find({ userName: req.body.email }).toArray()
+                loanSearch = await collectionT.find({ userEmail: req.body.email }).toArray()
 
                 for (i = 0; i < loanSearch.length; i++) {
                   if (loanSearch[i].state == undefined) {
@@ -88,7 +88,8 @@ module.exports = async (req, res) => {
                   const id = req.body.email + '/' + year + '/' + month + '/' + day + '|' + hour + '/' + minutes + '/' + seconds
                   const newLoan = new Loan({
 
-                    userName: req.body.email,
+                    userName: userSearch[0].name,
+                    userEmail: req.body.email,
                     amount: req.body.amount,
                     date: date,
                     currency: req.body.currency,
