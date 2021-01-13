@@ -10,9 +10,8 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-let URL = "https://backendmain-judbksvf1.vercel.app/api/login"
-let URLpres = "https://backendmain-pdz54353z.vercel.app/api/storeLoan"
-let URLreturnpres = "https://backendmain-judbksvf1.vercel.app/api/returnLoans"
+let URL = "https://backendmain-k9bdl1wqe.vercel.app/api/login"
+let URLreturnpres = "https://backendmain-k9bdl1wqe.vercel.app/api/returnLoans"
 
 class SimLogin extends Component {
 
@@ -23,23 +22,6 @@ class SimLogin extends Component {
         const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
             this.guardarStorage(emaill, passwordd)
-            const emailCargado = JSON.parse(sessionStorage.getItem('Usuario-Values'));
-            if (emailCargado) {
-                emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
-                axios.post(URLpres, {
-                    'email': emailFromStorage,
-                    'amount': JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
-                    'currency': JSON.parse(sessionStorage.getItem('prestamoValues')).TipoMoneda,
-                    'payments': JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
-                }
-                )
-                    .then(Response => {
-                        console.log("registration res", Response)
-                    })
-                    .catch(error => {
-                        console.log("registration error", error)
-                    });
-            }
             window.location.href = "/Descuento"
             sessionStorage.setItem('volverAceptarpress', false);
         } else {
@@ -49,14 +31,12 @@ class SimLogin extends Component {
             } else if (rol == "ADMIN") {
                 window.location.href = "/Tableadmin"
                 this.guardarStorage(emaill, passwordd)
-
             } else {
                 if (mailCorrecto == false && contraCorrecta == false) {
                     errorPass = false
                 }
             }
         }
-
     }
 
     post(email, pass) {
