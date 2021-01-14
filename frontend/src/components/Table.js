@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import React, { Children, Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import axios from 'axios';
 
 
-
+let emailFromStorage
+let monedaPost
+let plazoPost
+let monto_a_pedir
+let URL = "https://backendmain-k9bdl1wqe.vercel.app/api/storeLoan"
 class Table extends Component {
 
     //popup usuario logueado//
@@ -11,7 +16,7 @@ class Table extends Component {
         abierto: false,
         abierto2: false,
         abierto3: false,
-
+        abierto4: false,
     }
 
     volverAceptarPres = () => {
@@ -25,11 +30,29 @@ class Table extends Component {
         } else {
             this.setState({ abierto3: !this.state.abierto3 });
         }
-        console.log("funciona")
     }
 
     abrirModal2 = () => {
-        this.setState({ abierto2: !this.state.abierto2 });
+        emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+        axios.post(URL, {
+            'email': emailFromStorage,
+            'amount': monto_a_pedir,
+            'currency': monedaPost,
+            'payments': plazoPost,
+            //'loanType': ''
+        }
+        )
+            .then(Response => {
+                if (Response.data.message == 'The user already has a loan pending approval') {
+                    this.setState({ abierto4: !this.state.abierto4 });
+                } else {
+                    this.setState({ abierto2: !this.state.abierto2 });
+                }
+                console.log("registration res", Response)
+            })
+            .catch(error => {
+                console.log("registration error", error)
+            });
     }
 
     cerrarModal = () => {
@@ -46,60 +69,70 @@ class Table extends Component {
             Ingreso: '',
             Monto_a_pedir: '',
 
-            Moneda:'' ,
+            Moneda: '',
 
             financiacion: '',
 
             rowSelected: false,
 
 
-            clientes: [  { Moneda:'', Tasa: '', Cuotas: '', Años: '', ValorCuota: '' }] ,
+            clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Años: '', ValorCuota: '' }],
 
             isDisabled: true
         }
     }
 
     componentDidMount() {
-        let moneda = ( JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U)? "$U" : "U$S"
-        let Año= (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
-        let monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
+        let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
+        let Año = (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
+        monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
         this.setState({
 
-            clientes:[
-            { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5 , ValorCuota: this.valorCouta(monto_a_pedir, 0.1, 60)},
-            { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: this.valorCouta(monto_a_pedir, 0.15, 120)},
-            { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: this.valorCouta(monto_a_pedir, 0.18, 180)},
-            { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: this.valorCouta(monto_a_pedir, 0.2, 240)},
-            { Moneda: moneda, Tasa: '25%', Cuotas: 300, Años: 25,ValorCuota: this.valorCouta(monto_a_pedir, 0.25, 300)}
+            clientes: [
+                { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5, ValorCuota: this.valorCouta(monto_a_pedir, 0.1, 60) },
+                { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: this.valorCouta(monto_a_pedir, 0.15, 120) },
+                { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: this.valorCouta(monto_a_pedir, 0.18, 180) },
+                { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: this.valorCouta(monto_a_pedir, 0.2, 240) },
+                { Moneda: moneda, Tasa: '25%', Cuotas: 300, Años: 25, ValorCuota: this.valorCouta(monto_a_pedir, 0.25, 300) }
             ],
 
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
             Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
-            Moneda: moneda, 
+            Moneda: moneda,
             financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion
-         
-        })     
-}
+
+        })
+    }
 
     handleSubmitClicked(index) {
         let element = document.getElementById(index.toString())
-        if (this.state.rowSelected == false){
-                element.className +='selected'; 
-                this.setState({
-                  isDisabled: false,
-                  rowSelected:true   
-                });
-           
-            }else 
-                {
-                if (element.className != ''){
+        if (this.state.rowSelected == false) {
+            element.className += 'selected';
+            this.setState({
+                isDisabled: false,
+                rowSelected: true
+            });
+            this.getValuesTable(element);
+
+        } else {
+            if (element.className != '') {
                 element.className = ''
                 this.setState({
                     isDisabled: true,
-                    rowSelected:false    
-                  });
-         }
-      }
+                    rowSelected: false
+                });
+            }
+        }
+    }
+
+    getValuesTable(element) {
+        if (element.hasChildNodes()) {
+            var children = element.childNodes;
+            for (var i = 0; i < children.length; i++) {
+                monedaPost = children[0].innerHTML;
+                plazoPost = children[2].innerHTML;
+            }
+        }
     }
 
     volverSimular = () => {
@@ -116,13 +149,12 @@ class Table extends Component {
         return cuota.toFixed(3);
     }
 
-
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
             const { Moneda, Tasa, Cuotas, Años, ValorCuota } = cliente //destructuring
             return (
                 <tr id={index} onClick={(() => this.handleSubmitClicked(index))} key={index}>
-                    <td className="celda"> {Moneda}</td>
+                    <td className="celda">{Moneda}</td>
                     <td className="celda">{Tasa}</td>
                     <td className="celda">{Cuotas}</td>
                     <td className="celda">{Años}</td>
@@ -131,9 +163,6 @@ class Table extends Component {
             )
         })
     }
-
-
-
 
     renderTableHeader() {
         let header = Object.keys(this.state.clientes[0])
@@ -153,24 +182,23 @@ class Table extends Component {
 
     }
 
-
     render() {
         return (
             <div className="container">
                 <h2 id='titleee'>Resultado de préstamo</h2>
-                    <h1 id='ingresos'>  Ingresos </h1>
-                    <h1 id='ingresoss'> {this.state.Moneda + this.state.Ingreso} </h1>
-                    <h1 id='Monto' >  Monto  solicitado </h1>
-                    <h1 id='Montoss'> {this.state.Moneda + this.state.Monto_a_pedir} </h1>
-                    <h2 id='seleccionar'>Seleccione la fila deseada para solicitar su préstamo</h2>
-                    <div className="table-responsive-">
-                        <table id='clientes'>
-                            <tbody>
-                                <tr>{this.renderTableHeader()}</tr>
-                                {this.renderTableData()}
-                            </tbody>
-                        </table>
-                    </div>
+                <h1 id='ingresos'>  Ingresos </h1>
+                <h1 id='ingresoss'> {this.state.Moneda + this.state.Ingreso} </h1>
+                <h1 id='Monto' >  Monto  solicitado </h1>
+                <h1 id='Montoss'> {this.state.Moneda + this.state.Monto_a_pedir} </h1>
+                <h2 id='seleccionar'>Seleccione la fila deseada para solicitar su préstamo</h2>
+                <div className="table-responsive-">
+                    <table id='clientes'>
+                        <tbody>
+                            <tr>{this.renderTableHeader()}</tr>
+                            {this.renderTableData()}
+                        </tbody>
+                    </table>
+                </div>
 
 
                 <div className="Buttons">
@@ -188,6 +216,11 @@ class Table extends Component {
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
                     <p className='textModal2'>Su préstamo ha sido registrado exitosamente y se encuentra pendiente de aprobación</p>
                     <a href="http://localhost:3000/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                </Modal>
+
+                <Modal isOpen={this.state.abierto4} className='modalStyles'>
+                    <p className='textModal2'>Ya tienes un prestamo pendiente</p>
+                    <a href="/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto3} className="modalStyless" >
