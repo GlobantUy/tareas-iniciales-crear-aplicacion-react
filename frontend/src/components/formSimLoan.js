@@ -171,7 +171,7 @@ class SimLoan extends Component {
                         <input className="Ingreso"
                             autoComplete="off"
                             type="number"
-                            min="1" 
+                            min="1"
                             name="Ingreso"
                             placeholder="Agregar en $U"
                             value={this.state.Ingreso}
@@ -205,7 +205,7 @@ class SimLoan extends Component {
                         <input className="inputMonto"
                             autoComplete="off"
                             type="number"
-                            min="1" 
+                            min="1"
                             name="Monto_a_pedir"
                             placeholder="Agregar Monto"
                             value={this.state.Monto_a_pedir}
@@ -228,6 +228,7 @@ class SimLoan extends Component {
                         <p>Tipo de préstamo</p>
                         <input className="inputTipo"
                             type="checkbox"
+                            value="Inmuebles"
                             id="Inmuebles"
                             name="TipoDePrestamoInmueble"
                             onChange={this.checkboxChange}
@@ -237,6 +238,7 @@ class SimLoan extends Component {
 
                         <input className="inputTipo"
                             type="checkbox"
+                            value="Automotor"
                             id="Automotor"
                             name="TipoDePrestamoAutomotor"
                             onChange={this.checkboxChange}
@@ -246,6 +248,7 @@ class SimLoan extends Component {
 
                         <input className="inputTipo"
                             type="checkbox"
+                            value="Otros"
                             id="Otros"
                             name="TipoDePrestamoOtros"
                             onChange={this.checkboxChange}
