@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
       if (req.body.email != undefined && req.body.email.length != 0) {
         userSearch = await collectionU.find({ email: req.body.email }).toArray()
         if (userSearch.length != 0) {
-          return res.json({
+          return res.status(409).json({
             _links: {
               self: {
                 href: "https://" + req.headers.host + req.url
@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
                         })
                         db.collection('users').insertOne(userN)
 
-                        return res.json({
+                        return res.status(200).json({
                           _links: {
                             self: {
                               href: "https://" + req.headers.host + req.url
@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
                           message: 'User registered successfully'
                         })
                       } else {
-                        return res.json({
+                        return res.status(400).json({
                           _links: {
                             self: {
                               href: "https://" + req.headers.host + req.url
@@ -62,7 +62,7 @@ module.exports = async (req, res) => {
                         })
                       }
                     } else {
-                      return res.json({
+                      return res.status(400).json({
                         _links: {
                           self: {
                             href: "https://" + req.headers.host + req.url
@@ -72,7 +72,7 @@ module.exports = async (req, res) => {
                       })
                     }
                   } else {
-                    return res.json({
+                    return res.status(400).json({
                       _links: {
                         self: {
                           href: "https://" + req.headers.host + req.url
@@ -82,7 +82,7 @@ module.exports = async (req, res) => {
                     })
                   }
                 } else {
-                  return res.json({
+                  return res.status(400).json({
                     _links: {
                       self: {
                         href: "https://" + req.headers.host + req.url
@@ -92,7 +92,7 @@ module.exports = async (req, res) => {
                   })
                 }
               } else {
-                return res.json({
+                return res.status(400).json({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url
@@ -102,7 +102,7 @@ module.exports = async (req, res) => {
                 })
               }
             } else {
-              return res.json({
+              return res.status(400).json({
                 _links: {
                   self: {
                     href: "https://" + req.headers.host + req.url
@@ -112,7 +112,7 @@ module.exports = async (req, res) => {
               })
             }
           } else {
-            return res.json({
+            return res.status(400).json({
               _links: {
                 self: {
                   href: "https://" + req.headers.host + req.url
@@ -123,7 +123,7 @@ module.exports = async (req, res) => {
           }
         }
       } else {
-        return res.json({
+        return res.status(400).json({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
@@ -133,14 +133,24 @@ module.exports = async (req, res) => {
         })
       }
     } catch (err) {
-      return res.json({
+      return res.status(500).json({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
           }
         },
-        message: err
+        message: 'Internal server error (005)'
       })
     }
+  } else if (req.method != 'OPTIONS'){
+    return res.status(405).json({
+      _links: {
+        self: {
+          href: "https://" + req.headers.host + req.url
+        }
+      },
+      message: 'Invalid method:' + ' "' + req.method + '"'
+
+    })
   }
 }
