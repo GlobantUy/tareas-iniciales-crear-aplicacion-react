@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
-let URL = 'https://backendmain-k9bdl1wqe.vercel.app/api/register'
+let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
 
 const validate = values => {
     const errors = {}
-    if (!values.Ingreso) {
+    if (!values.Nombre) {
         errors.Ingreso = 'Este campo es obligatorio'
     }
     if (!values.Monto_a_pedir) {
@@ -34,7 +34,6 @@ class RegisterContent extends Component {
             Genero: '',
             Preferencias: [],
 
-            errors: {}
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
@@ -58,9 +57,37 @@ class RegisterContent extends Component {
 
     };
 
+    validate = () => {
+        /*
+        //let nameError = ""; 
+        //let apellidoError = ""; 
+        //let emailError = "";
+        //let passError = "";
+        //let passConfirmError = "";
+        //let generoError = "";
+        //let preferenciasError = "";
+
+        if (!this.state.Email.includes('@')) {
+            emailError = "invalid email"
+        }else{
+            emailError = ""
+        }
+
+        if (emailError) {
+            this.setState({
+                EmailError: emailError
+            });
+            return false
+        }*/
+        return true
+    }
+
     handleSumbit(e) {
         e.preventDefault();
-        console.log(this.state)
+        const isValid = this.validate();
+        if (isValid) {
+            console.log(this.state)
+        }
     }
 
     render() {
@@ -85,8 +112,8 @@ class RegisterContent extends Component {
                                         name="Nombre"
                                         value={this.state.Nombre}
                                         onChange={this.handleChange}
-
                                     />
+
 
                                 </div>
                                 <div className="col-4">
@@ -98,7 +125,6 @@ class RegisterContent extends Component {
                                         name="Apellido"
                                         value={this.state.Apellido}
                                         onChange={this.handleChange}
-
                                     />
 
                                 </div>
@@ -111,7 +137,6 @@ class RegisterContent extends Component {
                                         name="FechaNacimiento"
                                         value={this.state.FechaNacimiento}
                                         onChange={this.handleChange}
-
                                     />
                                 </div>
                             </div>
@@ -125,8 +150,11 @@ class RegisterContent extends Component {
                                         name="Email"
                                         value={this.state.Email}
                                         onChange={this.handleChange}
-
                                     />
+                                    <div className="error">
+                                        {this.state.EmailError}
+                                    </div>
+
                                 </div>
 
                                 <div className="col-4">
@@ -138,7 +166,6 @@ class RegisterContent extends Component {
                                         name="Password"
                                         value={this.state.Password}
                                         onChange={this.handleChange}
-
                                     />
                                 </div>
 
@@ -151,7 +178,6 @@ class RegisterContent extends Component {
                                         name="ConfirmPassword"
                                         value={this.state.ConfirmPassword}
                                         onChange={this.handleChange}
-
                                     />
 
                                 </div>

@@ -8,7 +8,7 @@ let emailFromStorage
 let monedaPost
 let cuotasPost
 let monto_a_pedir
-let URL = "https://backendmain-k9bdl1wqe.vercel.app/api/storeLoan"
+let URL = "https://backendmain-858cqrzs8.vercel.app/api/storeLoan"
 class Table extends Component {
 
     //popup usuario logueado//
