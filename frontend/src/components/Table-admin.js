@@ -30,7 +30,6 @@ class Tableadmin extends Component {
     componentDidMount() {
         prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
-        let Año = (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
         let monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
         this.setState({
 

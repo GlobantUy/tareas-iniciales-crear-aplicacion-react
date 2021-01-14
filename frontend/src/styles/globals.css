@@ -217,16 +217,14 @@ select:focus {
 }
 
 .inputPesos {
-    margin-top: 4px;
-    margin-top: -28px;
+    margin-top: -35px;
     text-align: right;
 }
 
 input[type=radio]+label {
     display: block;
     margin: 0.2em;
-    cursor: pointer;
-    padding: 0.2em;
+    padding: 7px;
 }
 
 input[type=radio] {
@@ -234,17 +232,16 @@ input[type=radio] {
 }
 
 input[type=radio]+label:before {
-    content: "\2688";
+    text-align: center;
+    content: "\25CF";
     border: 0.1em solid #000;
     border-radius: 2em;
-    display: inline-block;
-    width: 11px;
-    height: 11px;
-    padding-left: 0.2em;
-    padding-bottom: 0.3em;
-    margin-right: 0.2em;
-    vertical-align: bottom;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 3.85px;
     color: transparent;
+    transition: 0.2s;
+    background: radial-gradient(currentcolor 40%, rgba(255, 255, 255, 0) 50%);
 }
 
 input[type=radio]+label:active:before {
@@ -316,7 +313,7 @@ input[type=checkbox]:checked:disabled+label:before {
 
 /* input[type='radio'] {} */
 
-.inputAños {
+.inputPlazo {
     margin-top: 4px;
     height: 38px;
     width: 175px;
@@ -528,7 +525,10 @@ a.button {
 
 .selected {
     background-color: #FFF2EF;
-    ;
+}
+
+.selected:hover {
+    background-color: #ffca9b;
 }
 
 #ingresos {
@@ -853,6 +853,7 @@ a.button {
     align-items: center;
     color: #000000;
 }
+
 #Filtroo {
     position: absolute;
     font-family: 'Heebo', sans-serif;
@@ -865,9 +866,10 @@ a.button {
     top: 6%;
     left: 15%;
     align-items: center;
-    color:#636363;
+    color: #636363;
     ;
 }
+
 #nombredelmenuu {
     font-family: 'Heebo', sans-serif;
     position: absolute;
@@ -887,13 +889,19 @@ a.button {
     padding: 4px;
     left: 15%;
     border: 1px solid #636363;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
-.dropdown-content  {
+.dropdown-content {
     position: absolute;
     padding: 12px 16px;
     min-width: 160px;
+}
+
+#menudelatabla {
+    position: absolute;
+    left: 13%;
+    padding: 12px 16px;
 }
 
 .selectitem {
@@ -913,16 +921,14 @@ a.button {
     height: 115.3px;
     left: 690px;
     top: 280px;
-    
 }
 
-.noDatos { 
+.noDatos {
     position: absolute;
     left: 40.7%;
     right: 39.38%;
     top: 58.33%;
     bottom: 38.75%;
-
     /* PARRAFO */
     font-family: Heebo;
     font-style: normal;
@@ -933,9 +939,8 @@ a.button {
     align-items: center;
     text-align: center;
     color: #000000;
-    Width:  255px;
+    Width: 255px;
     Height: 21px;
     Top: 420px;
     Left: 665px;
-
 }
