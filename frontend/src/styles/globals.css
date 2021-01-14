@@ -313,7 +313,7 @@ input[type=checkbox]:checked:disabled+label:before {
 
 /* input[type='radio'] {} */
 
-.inputAños {
+.inputPlazo {
     margin-top: 4px;
     height: 38px;
     width: 175px;
