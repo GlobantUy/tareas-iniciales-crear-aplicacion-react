@@ -2,6 +2,23 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 let URL = 'https://backendmain-k9bdl1wqe.vercel.app/api/register'
+
+const validate = values => {
+    const errors = {}
+    if (!values.Ingreso) {
+        errors.Ingreso = 'Este campo es obligatorio'
+    }
+    if (!values.Monto_a_pedir) {
+        errors.Monto_a_pedir = 'Este campo es obligatorio'
+    }
+
+    let porcentaje = (0.2) * (values.Ingreso)
+    let monto = values.Monto_a_pedir
+    if ((monto > porcentaje) && (values.Ingreso > 0)) {
+        errors.Monto_a_pedir = 'El monto a solicitar supera el 20% de su sueldo, por favor intente con un monto menor'
+    }
+    return errors
+}
 class RegisterContent extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +32,7 @@ class RegisterContent extends Component {
 
             Departamento: '',
             Genero: '',
-            Preferencias: '',
+            Preferencias: [],
 
             errors: {}
         }
@@ -23,12 +40,23 @@ class RegisterContent extends Component {
         this.handleSumbit = this.handleSumbit.bind(this)
     }
 
-    handleChange = (e) => {
+    handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
-        console.log(this.state.Nombre)
     }
+
+    handleChangePreferencias = event => {
+        if (this.state.Preferencias.includes(event.target.value)) {
+            var index = this.state.Preferencias.indexOf(event.target.value);
+            this.state.Preferencias.splice(index, 1);
+        } else {
+            this.setState(state => {
+                state.Preferencias.push(event.target.value)
+            });
+        }
+
+    };
 
     handleSumbit(e) {
         e.preventDefault();
@@ -57,7 +85,7 @@ class RegisterContent extends Component {
                                         name="Nombre"
                                         value={this.state.Nombre}
                                         onChange={this.handleChange}
-                                        required
+
                                     />
 
                                 </div>
@@ -70,7 +98,7 @@ class RegisterContent extends Component {
                                         name="Apellido"
                                         value={this.state.Apellido}
                                         onChange={this.handleChange}
-                                        required
+
                                     />
 
                                 </div>
@@ -83,7 +111,7 @@ class RegisterContent extends Component {
                                         name="FechaNacimiento"
                                         value={this.state.FechaNacimiento}
                                         onChange={this.handleChange}
-                                        required
+
                                     />
                                 </div>
                             </div>
@@ -97,7 +125,7 @@ class RegisterContent extends Component {
                                         name="Email"
                                         value={this.state.Email}
                                         onChange={this.handleChange}
-                                        required
+
                                     />
                                 </div>
 
@@ -110,7 +138,7 @@ class RegisterContent extends Component {
                                         name="Password"
                                         value={this.state.Password}
                                         onChange={this.handleChange}
-                                        required
+
                                     />
                                 </div>
 
@@ -123,7 +151,7 @@ class RegisterContent extends Component {
                                         name="ConfirmPassword"
                                         value={this.state.ConfirmPassword}
                                         onChange={this.handleChange}
-                                        required
+
                                     />
 
                                 </div>
@@ -134,7 +162,7 @@ class RegisterContent extends Component {
 
                                     <p>Departamento*</p>
 
-                                    <select className="inp-registro" name="departamento" value={this.state.Departamento} onChange={this.handleChange}>
+                                    <select className="inp-registro" name="Departamento" value={this.state.Departamento} onChange={this.handleChange}>
                                         <option hidden>Selecciona una opción</option>
                                         <option value="Artigas">Artigas</option>
                                         <option value="Canelones">Canelones</option>
@@ -167,7 +195,7 @@ class RegisterContent extends Component {
                                         type="radio"
                                         id="Femenino"
                                         name="Genero"
-                                        value="otro"
+                                        value="Femenino"
                                         onChange={this.handleChange}
                                     />
 
@@ -178,7 +206,7 @@ class RegisterContent extends Component {
                                         type="radio"
                                         id="Masculino"
                                         name="Genero"
-                                        value="otro"
+                                        value="Masculino"
                                         onChange={this.handleChange}
                                     />
                                     <label className="genero" htmlFor="Masculino">Masculino</label>
@@ -195,19 +223,22 @@ class RegisterContent extends Component {
                                 </div>
 
                                 <div className="col-3">
-                                    <p>Preferencias</p>
+                                    <p>Preferencias*</p>
                                     <input className="inputTipo"
                                         type="checkbox"
                                         id="Inmuebles"
                                         name="Preferencias"
+                                        value="Inmuebles"
+                                        onChange={this.handleChangePreferencias}
                                     />
-
                                     <label htmlFor="Inmuebles">Inmuebles</label><br></br>
 
                                     <input className="inputTipo"
                                         type="checkbox"
                                         id="Hogar_deco"
                                         name="Preferencias"
+                                        value="Hogar_deco"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Hogar_deco">Hogar y decoración</label><br></br>
 
@@ -215,6 +246,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Juguetes"
                                         name="Preferencias"
+                                        value="Juguetes"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Juguetes">Juguetes</label><br></br>
 
@@ -222,6 +255,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Entretenimiento"
                                         name="Preferencias"
+                                        value="Entretenimiento"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Entretenimiento">Entretenimiento</label><br></br>
 
@@ -233,6 +268,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Autos"
                                         name="Preferencias"
+                                        value="Autos"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Autos">Autos</label><br></br>
 
@@ -240,6 +277,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Opticas"
                                         name="Preferencias"
+                                        value="Opticas"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Opticas">Opticas</label><br></br>
 
@@ -247,6 +286,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Salud_belleza"
                                         name="Preferencias"
+                                        value="Salud_belleza"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Salud_belleza">Salud y belleza</label><br></br>
 
@@ -254,6 +295,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Comida"
                                         name="Preferencias"
+                                        value="Comida"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Comida">Comida</label><br></br>
                                 </div>
@@ -263,6 +306,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Libros"
                                         name="Preferencias"
+                                        value="Libros"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Libros">Libros</label><br></br>
 
@@ -270,6 +315,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Viajes_turismo"
                                         name="Preferencias"
+                                        value="Viajes_turismo"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Viajes_turismo">Viajes y turismo</label><br></br>
 
@@ -277,6 +324,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Vestimenta"
                                         name="Preferencias"
+                                        value="Vestimenta"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Vestimenta">Vestimenta</label><br></br>
 
@@ -284,6 +333,8 @@ class RegisterContent extends Component {
                                         type="checkbox"
                                         id="Joyas"
                                         name="Preferencias"
+                                        value="Joyas"
+                                        onChange={this.handleChangePreferencias}
                                     />
                                     <label htmlFor="Joyas">Joyas</label><br></br>
                                 </div>
@@ -293,7 +344,7 @@ class RegisterContent extends Component {
                             <center>
                                 <button type="submit" className="btnPrimario">Registrarse</button>
                             </center>
-                             
+
                         </div>
 
                     </form>
