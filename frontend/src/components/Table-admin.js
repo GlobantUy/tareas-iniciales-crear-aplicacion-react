@@ -132,8 +132,8 @@ class Tableadmin extends Component {
         })
     }
 
-    render(){
-    if(prestamosCargados) 
+    render() {
+        if(prestamosCargados) {
         return (
             <div className="container">
                 <h2 id='titulo'>Solicitudes de préstamo</h2>
@@ -148,7 +148,7 @@ class Tableadmin extends Component {
                     <option value="opción3" >Pendiente  </ option>
 
                 </select>
-
+                <div>
                     <table id='Administrador'>
                         <tbody>
                             <tr>{this.renderTableHeader()}</tr>
@@ -161,10 +161,12 @@ class Tableadmin extends Component {
                     <button type="submit" className="btnSeptimo" hidden={this.state.hidden}  > Limpiar</button>
                     <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} > Aplicar cambios</button>
                 </div>
-            <div>    
-    )
-     else     
-          return (
+            </div> 
+        </div> 
+            )
+        } else {
+            return (
+                <>
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
                     <h2 id='Filtro'>Filtro por estado </h2>
@@ -178,24 +180,15 @@ class Tableadmin extends Component {
                         <option value="opción3" >Pendiente  </ option>
 
                     </ select>
-
-
-                        <table id='Administrador'>
-                            <tbody>
-                                <tr>{this.renderTableHeader()}</tr>
-                                {this.renderTableData()}
-                            </tbody>
-                        </table>
                     </div>
-                    <div className="Buttons">
-
-                        <button type="submit" className="btnSeptimo" hidden={this.state.hidden}  > Limpiar</button>
-                        <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} > Aplicar cambios</button>
-                    </div>
+                    <div>
                     <img className="Tablet" src="/table.png" />
                     <p className="noDatos">No hay datos ingresados aún</p>
+                    </div>
+                    </>
+            )
 
-                </div>
-          
-           }
-export default Tableadmin;
+        }
+    }
+}
+export default Tableadmin
