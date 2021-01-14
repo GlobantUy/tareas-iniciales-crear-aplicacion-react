@@ -6,9 +6,9 @@ import axios from 'axios';
 
 let emailFromStorage
 let monedaPost
-let plazoPost
+let cuotasPost
 let monto_a_pedir
-let URL = "https://backendmain-k9bdl1wqe.vercel.app/api/storeLoan"
+let URL = "https://backendmain-5v0t6ic18.vercel.app/api/storeLoan"
 class Table extends Component {
 
     //popup usuario logueado//
@@ -38,7 +38,7 @@ class Table extends Component {
             'email': emailFromStorage,
             'amount': monto_a_pedir,
             'currency': monedaPost,
-            'payments': plazoPost,
+            'payments': cuotasPost,
             //'loanType': ''
         }
         )
@@ -76,7 +76,7 @@ class Table extends Component {
             rowSelected: false,
 
 
-            clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Años: '', ValorCuota: '' }],
+            clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Plazo: '',ValorCuota: '' }],
 
             isDisabled: true
         }
@@ -84,16 +84,15 @@ class Table extends Component {
 
     componentDidMount() {
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
-        let Año = (JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion)
         monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
         this.setState({
 
             clientes: [
-                { Moneda: moneda, Tasa: '10%', Cuotas: 60, Años: 5, ValorCuota: this.valorCouta(monto_a_pedir, 0.1, 60) },
-                { Moneda: moneda, Tasa: '15%', Cuotas: 120, Años: 10, ValorCuota: this.valorCouta(monto_a_pedir, 0.15, 120) },
-                { Moneda: moneda, Tasa: '18%', Cuotas: 180, Años: 15, ValorCuota: this.valorCouta(monto_a_pedir, 0.18, 180) },
-                { Moneda: moneda, Tasa: '20%', Cuotas: 240, Años: 20, ValorCuota: this.valorCouta(monto_a_pedir, 0.2, 240) },
-                { Moneda: moneda, Tasa: '25%', Cuotas: 300, Años: 25, ValorCuota: this.valorCouta(monto_a_pedir, 0.25, 300) }
+                { Moneda: moneda, Tasa: '10%', Cuotas: 60, Plazo: 5, ValorCuota: this.valorCouta(monto_a_pedir, 0.1, 60) },
+                { Moneda: moneda, Tasa: '15%', Cuotas: 120, Plazo: 10, ValorCuota: this.valorCouta(monto_a_pedir, 0.15, 120) },
+                { Moneda: moneda, Tasa: '18%', Cuotas: 180, Plazo: 15, ValorCuota: this.valorCouta(monto_a_pedir, 0.18, 180) },
+                { Moneda: moneda, Tasa: '20%', Cuotas: 240, Plazo: 20, ValorCuota: this.valorCouta(monto_a_pedir, 0.2, 240) },
+                { Moneda: moneda, Tasa: '25%', Cuotas: 300, Plazo: 25, ValorCuota: this.valorCouta(monto_a_pedir, 0.25, 300) }
             ],
 
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
@@ -130,7 +129,7 @@ class Table extends Component {
             var children = element.childNodes;
             for (var i = 0; i < children.length; i++) {
                 monedaPost = children[0].innerHTML;
-                plazoPost = children[2].innerHTML;
+                cuotasPost = children[2].innerHTML;
             }
         }
     }
@@ -151,13 +150,13 @@ class Table extends Component {
 
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
-            const { Moneda, Tasa, Cuotas, Años, ValorCuota } = cliente //destructuring
+            const { Moneda, Tasa, Cuotas, Plazo, ValorCuota } = cliente //destructuring
             return (
                 <tr id={index} onClick={(() => this.handleSubmitClicked(index))} key={index}>
                     <td className="celda">{Moneda}</td>
                     <td className="celda">{Tasa}</td>
                     <td className="celda">{Cuotas}</td>
-                    <td className="celda">{Años}</td>
+                    <td className="celda">{Plazo}</td>
                     <td className="celda">{ValorCuota}</td>
                 </tr>
             )
@@ -200,7 +199,6 @@ class Table extends Component {
                     </table>
                 </div>
 
-
                 <div className="Buttons">
                     <button onClick={this.volverSimular} type="submit" className="btnTerciario"> Volver a simular</button>
                     <button type="submit" className="btnCuarto" disabled={this.state.isDisabled} onClick={this.abrirModal}> Solicitar préstamo</button>
@@ -208,13 +206,13 @@ class Table extends Component {
 
                 <Modal isOpen={this.state.abierto} className='modalStyles'>
                     <h3 className='tittle'>Confirmar préstamo</h3>
-                    <p className='text'>Prestamo valor $120.940 en 18 cuotas</p>
+                    <p className='text'>Prestamo valor {this.state.Moneda + this.state.Monto_a_pedir + " en " + cuotasPost} cuotas</p>
                     <Button id="btnCancelar" onClick={this.cerrarModal}>Cancelar</Button>
                     <Button id="btnSolicitar" onClick={this.abrirModal2}>Solicitar</Button>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
-                    <p className='textModal2'>Su préstamo ha sido registrado exitosamente y se encuentra pendiente de aprobación</p>
+                    <p className='textModal2'>Su préstamo ha sido registrado exitosamente <br></br> y se encuentra pendiente de aprobación</p>
                     <a href="http://localhost:3000/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 

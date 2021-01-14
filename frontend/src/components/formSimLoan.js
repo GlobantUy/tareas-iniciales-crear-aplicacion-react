@@ -10,6 +10,10 @@ const validate = values => {
         errors.Monto_a_pedir = 'Este campo es obligatorio'
     }
 
+    if (!values.financiacion) {
+        errors.financiacion = 'Este campo es obligatorio'
+    }
+
     let porcentaje = (0.2) * (values.Ingreso)
     let monto = values.Monto_a_pedir
     if ((monto > porcentaje) && (values.Ingreso > 0)) {
@@ -167,7 +171,7 @@ class SimLoan extends Component {
                         <input className="Ingreso"
                             autoComplete="off"
                             type="number"
-                            min="1" 
+                            min="1"
                             name="Ingreso"
                             placeholder="Agregar en $U"
                             value={this.state.Ingreso}
@@ -201,7 +205,7 @@ class SimLoan extends Component {
                         <input className="inputMonto"
                             autoComplete="off"
                             type="number"
-                            min="1" 
+                            min="1"
                             name="Monto_a_pedir"
                             placeholder="Agregar Monto"
                             value={this.state.Monto_a_pedir}
@@ -211,7 +215,7 @@ class SimLoan extends Component {
 
 
                         <p>Años de financiación*</p>
-                        <select className="inputAños" name="financiacion" value={this.state.financiacion} onChange={this.handleChange}>
+                        <select className="inputPlazo" name="financiacion" value={this.state.financiacion} onChange={this.handleChange}>
                             <option hidden>Selecciona una opción</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
@@ -224,6 +228,7 @@ class SimLoan extends Component {
                         <p>Tipo de préstamo</p>
                         <input className="inputTipo"
                             type="checkbox"
+                            value="Inmuebles"
                             id="Inmuebles"
                             name="TipoDePrestamoInmueble"
                             onChange={this.checkboxChange}
@@ -233,6 +238,7 @@ class SimLoan extends Component {
 
                         <input className="inputTipo"
                             type="checkbox"
+                            value="Automotor"
                             id="Automotor"
                             name="TipoDePrestamoAutomotor"
                             onChange={this.checkboxChange}
@@ -242,6 +248,7 @@ class SimLoan extends Component {
 
                         <input className="inputTipo"
                             type="checkbox"
+                            value="Otros"
                             id="Otros"
                             name="TipoDePrestamoOtros"
                             onChange={this.checkboxChange}
