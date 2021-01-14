@@ -241,7 +241,8 @@ class SimLoan extends Component {
                         <p>Tipo de préstamo</p>
                         <input className="inputTipo"
                             type="checkbox"
-                            id="Inmuebles"
+                            value="Inmuebles"
+                            id="tipoPrestamo"
                             name="TipoDePrestamoInmueble"
                             onChange={this.checkboxChange}
                             checked={this.state.TipoDePrestamoInmueble}
@@ -250,7 +251,8 @@ class SimLoan extends Component {
 
                         <input className="inputTipo"
                             type="checkbox"
-                            id="Automotor"
+                            value="Automotor"
+                            id="tipoPrestamo"
                             name="TipoDePrestamoAutomotor"
                             onChange={this.checkboxChange}
                             checked={this.state.TipoDePrestamoAutomotor}
@@ -259,7 +261,8 @@ class SimLoan extends Component {
 
                         <input className="inputTipo"
                             type="checkbox"
-                            id="Otros"
+                            value="Otros"
+                            id="tipoPrestamo"
                             name="TipoDePrestamoOtros"
                             onChange={this.checkboxChange}
                             checked={this.state.TipoDePrestamoOtros}
