@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
-
+let prestamosCargados
 class Tableadmin extends Component {
 
     constructor(props) {
