@@ -1,0 +1,10 @@
+# Use a lighter version of Node as a parent image
+FROM node:12.18.4-alpine3.11
+# Set the working directory to /api
+WORKDIR /api
+COPY . /api/
+# Install dependencies
+ENV NPM_CONFIG_LOGLEVEL warn
+RUN npm install 
+# && npm run build:webpack:prod && npm run build:pkg:prod
+CMD [ "tail -f /dev/null" ]
