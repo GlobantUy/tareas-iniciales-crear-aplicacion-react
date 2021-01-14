@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     if (req.method === 'POST') {
         try {
             userSearch = await collectionU.find({ email: req.body.email }).toArray()
-            loanSearch = await collectionT.find({ email: req.body.email}).toArray()
+            loanSearch = await collectionT.find({ userEmail: req.body.email}).toArray()
             let conf = true
             try {
                 userSearch[0].email
