@@ -4,19 +4,48 @@ import 'bootstrap/dist/css/bootstrap.css';
 let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
 
 const validate = values => {
+
+    let contra = values.Password
+    let confirmContra = values.ConfirmPassword
+
     const errors = {}
     if (!values.Nombre) {
-        errors.Ingreso = 'Este campo es obligatorio'
-    }
-    if (!values.Monto_a_pedir) {
-        errors.Monto_a_pedir = 'Este campo es obligatorio'
+        errors.Nombre = 'Este campo es obligatorio'
     }
 
-    let porcentaje = (0.2) * (values.Ingreso)
-    let monto = values.Monto_a_pedir
-    if ((monto > porcentaje) && (values.Ingreso > 0)) {
-        errors.Monto_a_pedir = 'El monto a solicitar supera el 20% de su sueldo, por favor intente con un monto menor'
+    if (!values.Apellido) {
+        errors.Apellido = 'Este campo es obligatorio'
     }
+
+    if (!values.FechaNacimiento) {
+        errors.FechaNacimiento = 'Este campo es obligatorio'
+    }
+
+    if (!values.Email) {
+        errors.Email = 'Este campo es obligatorio'
+    } else if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.Email)) {
+        errors.Email = 'formato incorrecto'
+    }
+
+    if (!values.Password) {
+        errors.Password = 'Este campo es obligatorio'
+    }
+
+    if (!values.ConfirmPassword) {
+        errors.ConfirmPassword = 'Este campo es obligatorio'
+    } else if (contra != confirmContra) {
+        errors.ConfirmPassword = 'Las contraseñas no coinciden'
+        console.log(contra + " y " + confirmContra)
+    }
+
+    if (!values.Departamento) {
+        errors.Departamento = 'Este campo es obligatorio'
+    }
+
+    if (!values.Genero && !values.Preferencias) {
+        errors.Genero = 'Este campo es obligatorio'
+    }
+
     return errors
 }
 class RegisterContent extends Component {
@@ -33,6 +62,8 @@ class RegisterContent extends Component {
             Departamento: '',
             Genero: '',
             Preferencias: [],
+
+            errors: {},
 
         }
         this.handleChange = this.handleChange.bind(this)
@@ -57,36 +88,14 @@ class RegisterContent extends Component {
 
     };
 
-    validate = () => {
-        /*
-        //let nameError = ""; 
-        //let apellidoError = ""; 
-        //let emailError = "";
-        //let passError = "";
-        //let passConfirmError = "";
-        //let generoError = "";
-        //let preferenciasError = "";
-
-        if (!this.state.Email.includes('@')) {
-            emailError = "invalid email"
-        }else{
-            emailError = ""
-        }
-
-        if (emailError) {
-            this.setState({
-                EmailError: emailError
-            });
-            return false
-        }*/
-        return true
-    }
-
     handleSumbit(e) {
         e.preventDefault();
-        const isValid = this.validate();
-        if (isValid) {
+        const { errors, ...sinErrors } = this.state
+        const result = validate(sinErrors)
+        this.setState({ errors: result })
+        if (!Object.keys(result).length) {
             console.log(this.state)
+            window.location.href = '/'
         }
     }
 
@@ -111,9 +120,10 @@ class RegisterContent extends Component {
                                         type="text"
                                         name="Nombre"
                                         value={this.state.Nombre}
+                                        //onTouchStart={}
                                         onChange={this.handleChange}
                                     />
-
+                                    <label className="error">{errors.Nombre}</label>
 
                                 </div>
                                 <div className="col-4">
@@ -126,6 +136,7 @@ class RegisterContent extends Component {
                                         value={this.state.Apellido}
                                         onChange={this.handleChange}
                                     />
+                                    <label className="error">{errors.Apellido}</label>
 
                                 </div>
                                 <div className="col-4">
@@ -138,6 +149,7 @@ class RegisterContent extends Component {
                                         value={this.state.FechaNacimiento}
                                         onChange={this.handleChange}
                                     />
+                                    <label className="error">{errors.FechaNacimiento}</label>
                                 </div>
                             </div>
 
@@ -151,10 +163,7 @@ class RegisterContent extends Component {
                                         value={this.state.Email}
                                         onChange={this.handleChange}
                                     />
-                                    <div className="error">
-                                        {this.state.EmailError}
-                                    </div>
-
+                                    <label className="error">{errors.Email}</label>
                                 </div>
 
                                 <div className="col-4">
@@ -167,6 +176,7 @@ class RegisterContent extends Component {
                                         value={this.state.Password}
                                         onChange={this.handleChange}
                                     />
+                                    <label className="error">{errors.Password}</label>
                                 </div>
 
                                 <div className="col-4">
@@ -179,6 +189,7 @@ class RegisterContent extends Component {
                                         value={this.state.ConfirmPassword}
                                         onChange={this.handleChange}
                                     />
+                                    <label className="error">{errors.ConfirmPassword}</label>
 
                                 </div>
                             </div>
@@ -210,12 +221,23 @@ class RegisterContent extends Component {
                                         <option value="Tacuarembo">Tacuarembo</option>
                                         <option value="TreintayTres">Treinta y Tres</option>
                                     </select>
+                                    <label className="error">{errors.Departamento}</label>
                                 </div>
                             </div>
 
-                            <div className="row">
+                            <div className="row row-name-genero">
                                 <div className="col-3">
                                     <p>Género*</p>
+                                </div>
+                                <div className="col-3">
+                                    <p>Preferencias*</p>
+                                </div>
+                            </div>
+
+
+                            <div className="row">
+                                <div className="col-3">
+
                                     <input
                                         className="rdbutons"
                                         type="radio"
@@ -249,7 +271,7 @@ class RegisterContent extends Component {
                                 </div>
 
                                 <div className="col-3">
-                                    <p>Preferencias*</p>
+
                                     <input className="inputTipo"
                                         type="checkbox"
                                         id="Inmuebles"
@@ -364,7 +386,6 @@ class RegisterContent extends Component {
                                     />
                                     <label htmlFor="Joyas">Joyas</label><br></br>
                                 </div>
-
                             </div>
 
                             <center>
