@@ -45,7 +45,6 @@ const validate = values => {
     if (!values.Genero && !values.Preferencias) {
         errors.Genero = 'Este campo es obligatorio'
     }
-
     return errors
 }
 class RegisterContent extends Component {
@@ -63,7 +62,6 @@ class RegisterContent extends Component {
             Genero: '',
             Preferencias: [],
 
-            //isDisable: true,
             errors: {},
 
         }
@@ -86,16 +84,7 @@ class RegisterContent extends Component {
                 state.Preferencias.push(event.target.value)
             });
         }
-
     };
-
-    handleOnBlur = (e) =>{
-        if (e.target.value == "") {
-            this.setState({isDisable: true })
-        }else{
-            this.setState({isDisable: false })
-        }
-    }
 
     handleSumbit(e) {
         e.preventDefault();
@@ -103,7 +92,7 @@ class RegisterContent extends Component {
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
-            //window.location.href = '/ingreso'
+            window.location.href = '/ingreso'
 
             axios.post(URL , {
                 "name": this.state.Nombre,
@@ -120,8 +109,6 @@ class RegisterContent extends Component {
     
             })
         }
-
-
     }
 
     render() {
@@ -145,7 +132,6 @@ class RegisterContent extends Component {
                                         type="text"
                                         name="Nombre"
                                         value={this.state.Nombre}
-                                        //onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                     />
                                     <label className="error">{errors.Nombre}</label>
@@ -180,6 +166,7 @@ class RegisterContent extends Component {
 
                             <div className="row">
                                 <div className="col-4">
+
                                     <p>Email*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -258,7 +245,6 @@ class RegisterContent extends Component {
                                     <p>Preferencias*</p>
                                 </div>
                             </div>
-
 
                             <div className="row">
                                 <div className="col-3">
