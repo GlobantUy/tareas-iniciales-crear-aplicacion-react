@@ -1,19 +1,22 @@
 # Use a lighter version of Node as a parent image
-FROM node:12.18.4-alpine3.11
+FROM node:12.18.4
 # Set the working directory to /api
 WORKDIR /api
 # Install dependencies
 ENV NPM_CONFIG_LOGLEVEL warn
 #RUN npm install 
 # && npm run build:webpack:prod && npm run build:pkg:prod
-COPY . /api/     
+
 #COPY package.json package.json
 
-RUN apk update && apk upgrade && apk add python && npm install && npm install -g vercel
+RUN apt update -y && apt upgrade -y && apt install python -y -f
+RUN npm install -g serverless 
+COPY . /api/     
+RUN npm install
 #  && npm install -g serverless-offline
 #COPY .npmignore serverless.yml webpack.config.js ./
 
 #RUN npm run install:dynamodb
-
-#CMD ["npm", "run", "start"]
-CMD [ "tail -f /dev/null" ]
+EXPOSE 3000
+CMD ["npm", "run", "start"]
+#CMD [ "tail -f /dev/null" ]
