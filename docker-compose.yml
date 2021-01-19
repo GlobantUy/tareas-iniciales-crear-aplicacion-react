@@ -44,12 +44,23 @@ services:
   frontend:
     image: ${PROJECT_NAME}_app_frontend
     restart: unless-stopped
-    container_name: ${PROJECT_NAME}-app-api
+    container_name: ${PROJECT_NAME}-app-frontend
     build: 
       context: ./frontend
       dockerfile: Dockerfile
     env_file:
       - ./frontend/.env
+    #environment:
+      #CONN_STRING: ${CONN_STRING}
+      #NODE_ENV: ${NODE_ENV}
+      #CORS_ORIGIN: ${DAE}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+      - api
+    networks:
+      - webappnetwork
 
 networks:
   webappnetwork:
