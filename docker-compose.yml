@@ -41,6 +41,16 @@ services:
     networks:
       - webappnetwork
 
+  frontend:
+    image: ${PROJECT_NAME}_app_frontend
+    restart: unless-stopped
+    container_name: ${PROJECT_NAME}-app-api
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    env_file:
+      - ./frontend/.env
+
 networks:
   webappnetwork:
     driver: bridge

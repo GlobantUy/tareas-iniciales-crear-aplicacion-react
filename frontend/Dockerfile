@@ -1,14 +1,10 @@
-FROM node:6-alpine
+FROM node:12.18.4-alpine3.11 
 
 WORKDIR /app
 
-COPY package.json package.json
+COPY . /app/
 
-RUN npm install
+RUN npm install && npm run build
 
-COPY src src
-COPY .babelrc .env karma.conf.js tests.webpack.js webpack.config.js ./
-
-VOLUME /app/src
-
+EXPOSE 3000
 CMD ["npm", "run", "start"]
