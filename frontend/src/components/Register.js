@@ -94,7 +94,7 @@ class RegisterContent extends Component {
         if (!Object.keys(result).length) {
             window.location.href = '/ingreso'
 
-            axios.post(URL , {
+            axios.post(URL, {
                 "name": this.state.Nombre,
                 "lName": this.state.Apellido,
                 "dateOfBirth": this.state.FechaNacimiento,
@@ -106,7 +106,7 @@ class RegisterContent extends Component {
             }).then(Response => {
                 console.log(Response)
             }).catch(error => {
-    
+                console.log(error)
             })
         }
     }
@@ -250,7 +250,6 @@ class RegisterContent extends Component {
                                 <div className="col-3">
 
                                     <input
-                                        className="rdbutons"
                                         type="radio"
                                         id="Femenino"
                                         name="Genero"
@@ -260,18 +259,18 @@ class RegisterContent extends Component {
 
                                     <label className="genero" htmlFor="Femenino">Femenino</label>
 
-                                    <input
-                                        className="rdbutons"
-                                        type="radio"
-                                        id="Masculino"
-                                        name="Genero"
-                                        value="Masculino"
-                                        onChange={this.handleChange}
-                                    />
-                                    <label className="genero" htmlFor="Masculino">Masculino</label>
+                                    <div className="rdbutons">
+                                        <input
+                                            type="radio"
+                                            id="Masculino"
+                                            name="Genero"
+                                            value="Masculino"
+                                            onChange={this.handleChange}
+                                        />
+                                        <label className="genero" htmlFor="Masculino">Masculino</label>
+                                    </div>
 
                                     <input
-                                        className="rdbutons"
                                         type="radio"
                                         id="Otro"
                                         name="Genero"

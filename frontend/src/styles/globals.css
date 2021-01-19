@@ -170,7 +170,7 @@ select:focus {
     left: 100px;
 }
 
-.containertablas ul {
+.containerDescuento ul {
     margin-top: 15px;
 }
 
@@ -946,12 +946,10 @@ margin-top: 16px;
 margin-bottom: 11px;
 }
 
-.rdbutons{
+div .rdbutons{
     left: 0px;
     margin-top: 14px;
     margin-bottom: 14px;
-    border: 1px solid #000000;
-    display: flex;
 }
 
 .body{
