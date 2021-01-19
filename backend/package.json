@@ -24,8 +24,8 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "serverless-offline": "^5.12.0",
     "serverless-dotenv": "^1.0.0-beta.2",
-    "serverless-dotenv-plugin": "^2.1.1"
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-offline": "^5.12.1"
   }
 }

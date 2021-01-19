@@ -10,7 +10,7 @@ provider:
 
 functions:
   prestamosAPI:
-    handler: api/login.index
+    handler: api/controllers/login.handler
     events:
         - http:
             path: /index
@@ -29,8 +29,9 @@ functions:
         - http:
             path: /{prestamoId}
             method: get
-
-
+custom:
+  serverless-offline:
+    host: 0.0.0.0
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin

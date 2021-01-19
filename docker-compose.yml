@@ -35,8 +35,15 @@ services:
       #NODE_ENV: ${NODE_ENV}
       #CORS_ORIGIN: ${DAE}
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - mongodb
     networks:
       - webappnetwork
+
+networks:
+  webappnetwork:
+    driver: bridge
+
+volumes:
+  data-node: {}

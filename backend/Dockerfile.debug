@@ -4,19 +4,12 @@ FROM node:12.18.4
 WORKDIR /api
 # Install dependencies
 ENV NPM_CONFIG_LOGLEVEL warn
-#RUN npm install 
-# && npm run build:webpack:prod && npm run build:pkg:prod
-
-#COPY package.json package.json
 
 RUN apt update -y && apt upgrade -y && apt install python -y -f
-RUN npm install -g serverless 
+RUN npm -g config set user root && npm install -g serverless 
 COPY . /api/     
 RUN npm install
-#  && npm install -g serverless-offline
-#COPY .npmignore serverless.yml webpack.config.js ./
 
-#RUN npm run install:dynamodb
 EXPOSE 3000
 CMD ["npm", "run", "start"]
-#CMD [ "tail -f /dev/null" ]
+#CMD ["tail -f /dev/null"]
