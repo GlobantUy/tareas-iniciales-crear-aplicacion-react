@@ -27,7 +27,6 @@ module.exports = async (req, res) => {
                         }
                     },
                     message: 'User not found'
-
                 })
             }
 
