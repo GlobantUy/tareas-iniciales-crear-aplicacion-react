@@ -62,6 +62,14 @@ class Table extends Component {
     cerrarModal3 = () => {
         this.setState({ abierto3: !this.state.abierto3 });
     }
+    cerrarModals = () => {
+        this.setState({
+            abierto: false,
+            abierto2: false,
+            abierto3: false,
+            abierto4: false
+        });
+    }
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
         this.handleSubmitClicked = this.handleSubmitClicked.bind(this);
@@ -76,7 +84,7 @@ class Table extends Component {
             rowSelected: false,
 
 
-            clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Plazo: '',ValorCuota: '' }],
+            clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Plazo: '', ValorCuota: '' }],
 
             isDisabled: true
         }
@@ -205,23 +213,28 @@ class Table extends Component {
                 </div>
 
                 <Modal isOpen={this.state.abierto} className='modalStyles'>
-                    <h3 className='tittle'>Confirmar préstamo</h3>
+                     <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
+                     <h3 className='tittle'>Confirmar préstamo</h3>
                     <p className='text'>Prestamo valor {this.state.Moneda + this.state.Monto_a_pedir + " en " + cuotasPost} cuotas</p>
                     <Button id="btnCancelar" onClick={this.cerrarModal}>Cancelar</Button>
-                    <Button id="btnSolicitar" onClick={this.abrirModal2}>Solicitar</Button>
+                    <Button id="btnSolicitar" onClick={this.abrirModal2} onChange={this.cerrarModal}>Solicitar</Button>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
+                <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <p className='textModal2'>Su préstamo ha sido registrado exitosamente <br></br> y se encuentra pendiente de aprobación</p>
                     <a href="http://localhost:3000/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto4} className='modalStyles'>
+                <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <p className='textModal2'>Ya tienes un prestamo pendiente</p>
+                    <Button id="btnCancelar2" onClick={this.cerrarModals}>Cancelar</Button>
                     <a href="/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto3} className="modalStyless" >
+                <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <ModalHeader>
                         <h1 className="titlee">Ingresar</h1>
                         <ModalBody className="modalBody">

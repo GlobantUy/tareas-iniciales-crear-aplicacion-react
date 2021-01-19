@@ -629,6 +629,26 @@ a.button {
     background: #FFFFFF;
     color: #F07E1A;
 }
+#btnCancelar2 {
+    position: absolute;
+    height: 40px;
+    width: 165px;
+    margin-left: 60px;
+    bottom: -100px;
+    border: 1px solid #F07E1A;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    color: #F07E1A;
+}
+
+.close-icon{
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    float: right;
+    margin-left: 29.6em;  
+    margin-top: 5px ;
+}
 
 #btnSolicitar {
     position: absolute;
@@ -645,7 +665,6 @@ a.button {
 
 #btnVolver {
     position: absolute;
-    left: 160px;
     bottom: -100px;
     width: 168px;
     height: 40px;
