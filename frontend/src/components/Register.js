@@ -63,6 +63,7 @@ class RegisterContent extends Component {
             Genero: '',
             Preferencias: [],
 
+            //isDisable: true,
             errors: {},
 
         }
@@ -88,22 +89,46 @@ class RegisterContent extends Component {
 
     };
 
+    handleOnBlur = (e) =>{
+        if (e.target.value == "") {
+            this.setState({isDisable: true })
+        }else{
+            this.setState({isDisable: false })
+        }
+    }
+
     handleSumbit(e) {
         e.preventDefault();
         const { errors, ...sinErrors } = this.state
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
-            console.log(this.state)
-            window.location.href = '/'
+            //window.location.href = '/ingreso'
+
+            axios.post(URL , {
+                "name": this.state.Nombre,
+                "lName": this.state.Apellido,
+                "dateOfBirth": this.state.FechaNacimiento,
+                "gender": this.state.Genero,
+                "preferences": this.state.Preferencias,
+                "email": this.state.Email,
+                "department": this.state.Departamento,
+                "passwd": this.state.Password
+            }).then(Response => {
+                console.log(Response)
+            }).catch(error => {
+    
+            })
         }
+
+
     }
 
     render() {
         const { errors } = this.state
         return (
             <Fragment>
-                <div className="algo">
+                <div className="body">
                     <form className="form registro" onSubmit={this.handleSumbit}>
 
                         <center>
@@ -120,7 +145,7 @@ class RegisterContent extends Component {
                                         type="text"
                                         name="Nombre"
                                         value={this.state.Nombre}
-                                        //onTouchStart={}
+                                        //onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                     />
                                     <label className="error">{errors.Nombre}</label>
@@ -389,7 +414,7 @@ class RegisterContent extends Component {
                             </div>
 
                             <center>
-                                <button type="submit" className="btnPrimario">Registrarse</button>
+                                <button type="submit" disabled={this.state.isDisable} className="btnPrimario">Registrarse</button>
                             </center>
 
                         </div>
