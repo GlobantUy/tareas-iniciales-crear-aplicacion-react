@@ -2,9 +2,18 @@
 FROM node:12.18.4-alpine3.11
 # Set the working directory to /api
 WORKDIR /api
-COPY . /api/
 # Install dependencies
 ENV NPM_CONFIG_LOGLEVEL warn
-RUN npm install 
+#RUN npm install 
 # && npm run build:webpack:prod && npm run build:pkg:prod
+COPY . /api/     
+#COPY package.json package.json
+
+RUN apk update && apk upgrade && apk add python && npm install && npm install -g vercel
+#  && npm install -g serverless-offline
+#COPY .npmignore serverless.yml webpack.config.js ./
+
+#RUN npm run install:dynamodb
+
+#CMD ["npm", "run", "start"]
 CMD [ "tail -f /dev/null" ]
