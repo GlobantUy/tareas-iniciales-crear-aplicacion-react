@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
+
 let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
 
 const errors = {}
@@ -8,7 +9,6 @@ const validate = values => {
 
     let contra = values.Password
     let confirmContra = values.ConfirmPassword
-
     errors
 
     if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.Email)) {
@@ -54,12 +54,11 @@ class RegisterContent extends Component {
 
             isDisable: true,
             errors: {},
-
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
     }
-
+    
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -120,7 +119,6 @@ class RegisterContent extends Component {
     }
 
     handleOnBlur = (e) => {
-
         const { name } = e.target;
         switch (name) {
             case "Nombre":
@@ -166,7 +164,6 @@ class RegisterContent extends Component {
                         EmailError: '',
                     })
                 }
-
                 break;
             case "Password":
                 if (!this.state.Password) {
@@ -256,8 +253,8 @@ class RegisterContent extends Component {
                                         onChange={this.handleChange}
                                     />
                                     <label className="error">{this.state.NombreError}</label>
-
                                 </div>
+
                                 <div className="col-4">
 
                                     <p className="mid">Apellidos*</p>
@@ -270,8 +267,8 @@ class RegisterContent extends Component {
                                         onChange={this.handleChange}
                                     />
                                     <label className="error">{this.state.ApellidoError}</label>
-
                                 </div>
+
                                 <div className="col-4">
 
                                     <p>Fecha de nacimiento*</p>
@@ -330,7 +327,6 @@ class RegisterContent extends Component {
                                     />
                                     <label className="error">{this.state.ConfirmPasswordError}</label>
                                     <label className="error">{errors.ConfirmPassword}</label>
-
                                 </div>
                             </div>
 
