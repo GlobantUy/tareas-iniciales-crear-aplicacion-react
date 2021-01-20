@@ -527,6 +527,9 @@ a.button {
     background-color: #ffca9b;
 }
 
+.selected:hover {
+    background-color: #ffca9b;
+}
 
 #ingresos {
     text-align: center;
