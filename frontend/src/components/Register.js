@@ -3,43 +3,20 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
 
+const errors = {}
 const validate = values => {
 
     let contra = values.Password
     let confirmContra = values.ConfirmPassword
 
-    const errors = {}
-    if (!values.Nombre) {
-        errors.Nombre = 'Este campo es obligatorio'
-    }
+    errors
 
-    if (!values.Apellido) {
-        errors.Apellido = 'Este campo es obligatorio'
-    }
-
-    if (!values.FechaNacimiento) {
-        errors.FechaNacimiento = 'Este campo es obligatorio'
-    }
-
-    if (!values.Email) {
-        errors.Email = 'Este campo es obligatorio'
-    } else if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.Email)) {
+    if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.Email)) {
         errors.Email = 'formato incorrecto'
     }
 
-    if (!values.Password) {
-        errors.Password = 'Este campo es obligatorio'
-    }
-
-    if (!values.ConfirmPassword) {
-        errors.ConfirmPassword = 'Este campo es obligatorio'
-    } else if (contra != confirmContra) {
+    if (contra != confirmContra) {
         errors.ConfirmPassword = 'Las contraseñas no coinciden'
-        console.log(contra + " y " + confirmContra)
-    }
-
-    if (!values.Departamento) {
-        errors.Departamento = 'Este campo es obligatorio'
     }
 
     if (!values.Genero && !values.Preferencias) {
@@ -52,16 +29,30 @@ class RegisterContent extends Component {
         super(props)
         this.state = {
             Nombre: '',
+            NombreError: '',
+
             Apellido: '',
+            ApellidoError: '',
+
             FechaNacimiento: '',
+            FechaNacimientoError: '',
+
             Email: '',
+            EmailError: '',
+
             Password: '',
+            PasswordError: '',
+
             ConfirmPassword: '',
+            ConfirmPasswordError: '',
 
             Departamento: '',
+            DepartamentoError: '',
+
             Genero: '',
             Preferencias: [],
 
+            isDisable: true,
             errors: {},
 
         }
@@ -73,6 +64,27 @@ class RegisterContent extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+
+        const { name } = e.target;
+        switch (name) {
+            case "Email":
+                if (this.state.Email) {
+                    errors.Email = ''
+                }
+                break;
+            case "Password":
+                if (this.state.Email) {
+                    errors.ConfirmPassword = ''
+                }
+                break;
+            case "ConfirmPassword":
+                if (this.state.Email) {
+                    errors.ConfirmPassword = ''
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     handleChangePreferencias = event => {
@@ -85,6 +97,114 @@ class RegisterContent extends Component {
             });
         }
     };
+
+    comprobarInputs = () => {
+        let nombre = this.state.Nombre
+        let apellido = this.state.Apellido
+        let fechaNac = this.state.FechaNacimiento
+        let email = this.state.Email
+        let pass = this.state.Password
+        let confirmPass = this.state.ConfirmPassword
+        let departamento = this.state.Departamento
+        let genero = this.state.Genero
+        let preferencias = this.state.Preferencias
+        if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '') {
+            this.setState({
+                isDisable: false
+            })
+        } else {
+            this.setState({
+                isDisable: true
+            })
+        }
+    }
+
+    handleOnBlur = (e) => {
+
+        const { name } = e.target;
+        switch (name) {
+            case "Nombre":
+                if (!this.state.Nombre) {
+                    this.setState({
+                        NombreError: 'Este campo es obligatorio'
+                    })
+                } else {
+                    this.setState({
+                        NombreError: '',
+                    })
+                }
+                break;
+            case "Apellido":
+                if (!this.state.Apellido) {
+                    this.setState({
+                        ApellidoError: 'Este campo es obligatorio'
+                    })
+                } else {
+                    this.setState({
+                        ApellidoError: '',
+                    })
+                }
+                break;
+            case "FechaNacimiento":
+                if (!this.state.FechaNacimiento) {
+                    this.setState({
+                        FechaNacimientoError: 'Este campo es obligatorio'
+                    })
+                } else {
+                    this.setState({
+                        FechaNacimientoError: '',
+                    })
+                }
+                break;
+            case "Email":
+                if (!this.state.Email) {
+                    this.setState({
+                        EmailError: 'Este campo es obligatorio'
+                    })
+                } else {
+                    this.setState({
+                        EmailError: '',
+                    })
+                }
+
+                break;
+            case "Password":
+                if (!this.state.Password) {
+                    this.setState({
+                        PasswordError: 'Este campo es obligatorio'
+                    })
+                } else {
+                    this.setState({
+                        PasswordError: '',
+                    })
+                }
+                break;
+            case "ConfirmPassword":
+                if (!this.state.ConfirmPassword) {
+                    this.setState({
+                        ConfirmPasswordError: 'Este campo es obligatorio'
+                    })
+                } else {
+                    this.setState({
+                        ConfirmPasswordError: '',
+                    })
+                }
+                break;
+            case "Departamento":
+                if (!this.state.Departamento) {
+                    this.setState({
+                        DepartamentoError: 'Este campo es obligatorio'
+                    })
+                } else {
+                    this.setState({
+                        DepartamentoError: '',
+                    })
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     handleSumbit(e) {
         e.preventDefault();
@@ -116,7 +236,7 @@ class RegisterContent extends Component {
         return (
             <Fragment>
                 <div className="body">
-                    <form className="form registro" onSubmit={this.handleSumbit}>
+                    <form className="form registro" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
 
                         <center>
                             <h1 className="titlee-registro">Registro</h1>
@@ -132,9 +252,10 @@ class RegisterContent extends Component {
                                         type="text"
                                         name="Nombre"
                                         value={this.state.Nombre}
+                                        onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                     />
-                                    <label className="error">{errors.Nombre}</label>
+                                    <label className="error">{this.state.NombreError}</label>
 
                                 </div>
                                 <div className="col-4">
@@ -145,9 +266,10 @@ class RegisterContent extends Component {
                                         type="text"
                                         name="Apellido"
                                         value={this.state.Apellido}
+                                        onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                     />
-                                    <label className="error">{errors.Apellido}</label>
+                                    <label className="error">{this.state.ApellidoError}</label>
 
                                 </div>
                                 <div className="col-4">
@@ -158,9 +280,10 @@ class RegisterContent extends Component {
                                         type="date"
                                         name="FechaNacimiento"
                                         value={this.state.FechaNacimiento}
+                                        onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                     />
-                                    <label className="error">{errors.FechaNacimiento}</label>
+                                    <label className="error">{this.state.FechaNacimientoError}</label>
                                 </div>
                             </div>
 
@@ -173,8 +296,10 @@ class RegisterContent extends Component {
                                         type="text"
                                         name="Email"
                                         value={this.state.Email}
+                                        onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                     />
+                                    <label className="error">{this.state.EmailError}</label>
                                     <label className="error">{errors.Email}</label>
                                 </div>
 
@@ -186,9 +311,10 @@ class RegisterContent extends Component {
                                         type="password"
                                         name="Password"
                                         value={this.state.Password}
+                                        onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                     />
-                                    <label className="error">{errors.Password}</label>
+                                    <label className="error">{this.state.PasswordError}</label>
                                 </div>
 
                                 <div className="col-4">
@@ -199,8 +325,10 @@ class RegisterContent extends Component {
                                         type="password"
                                         name="ConfirmPassword"
                                         value={this.state.ConfirmPassword}
+                                        onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                     />
+                                    <label className="error">{this.state.ConfirmPasswordError}</label>
                                     <label className="error">{errors.ConfirmPassword}</label>
 
                                 </div>
@@ -211,7 +339,7 @@ class RegisterContent extends Component {
 
                                     <p>Departamento*</p>
 
-                                    <select className="inp-registro" name="Departamento" value={this.state.Departamento} onChange={this.handleChange}>
+                                    <select className="inp-registro" name="Departamento" value={this.state.Departamento} onChange={this.handleChange} onBlur={this.handleOnBlur}>
                                         <option hidden>Selecciona una opción</option>
                                         <option value="Artigas">Artigas</option>
                                         <option value="Canelones">Canelones</option>
@@ -233,7 +361,7 @@ class RegisterContent extends Component {
                                         <option value="Tacuarembo">Tacuarembo</option>
                                         <option value="TreintayTres">Treinta y Tres</option>
                                     </select>
-                                    <label className="error">{errors.Departamento}</label>
+                                    <label className="error">{this.state.DepartamentoError}</label>
                                 </div>
                             </div>
 
@@ -399,7 +527,7 @@ class RegisterContent extends Component {
                             </div>
 
                             <center>
-                                <button type="submit" disabled={this.state.isDisable} className="btnPrimario">Registrarse</button>
+                                <button type="submit" disabled={this.state.isDisable} className="btn-registro">Registrarse</button>
                             </center>
 
                         </div>

@@ -983,7 +983,21 @@ line-height: 28px;
 color: #000000;
 }
 
+.btn-registro{
+    color: #000000;
+    background: #F07E1A;
+    border: none;
+    height: 40px;
+    width: 168px;
+    margin-top: 24px;
+}
 
+.btn-registro:disabled{
+    color: #636363;
+    background: #E0E0E0;
+}
+
+/* Fin Registro */
 
 .Tablet {
     position: absolute;
