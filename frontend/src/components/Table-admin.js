@@ -35,7 +35,7 @@ class Tableadmin extends Component {
 
     componentDidMount(){
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) =>   {0
-            //if (cliente.state === undefined) {}
+        
 
                 return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10,0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state}     
         
