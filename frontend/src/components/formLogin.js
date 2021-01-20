@@ -10,8 +10,8 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-let URL = "https://backendmain-p825alkxa.vercel.app/api/login"
-let URLreturnpres = "https://backendmain-p825alkxa.vercel.app/api/returnLoans"
+let URL = "https://backendmain.vercel.app/api/login"
+let URLreturnpres = "https://backendmain.vercel.app/api/returnLoans"
 
 class SimLogin extends Component {
 
@@ -57,12 +57,14 @@ class SimLogin extends Component {
                         axios.post(URLreturnpres, {
                             "email": emaill
                         }).then(res => {
-                            console.log(res)
+                            console.log(res.data.loans)
                             if (res.data.loans == undefined) {
                                 sessionStorage.setItem('prestamosNull', false);
                                 this.redireccionar()
                             } else {
                                 sessionStorage.setItem('prestamosNull', true);
+                                sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
+
                                 this.redireccionar()
                             }
                         })

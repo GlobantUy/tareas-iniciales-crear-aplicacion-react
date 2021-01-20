@@ -524,12 +524,9 @@ a.button {
 }
 
 .selected {
-    background-color: #FFF2EF;
-}
-
-.selected:hover {
     background-color: #ffca9b;
 }
+
 
 #ingresos {
     text-align: center;
@@ -799,7 +796,7 @@ a.button {
     border: none;
     width: 160px;
     height: 40px;
-    Top: 74vh;
+    bottom: 10vh;
     right: 15%;
     position: absolute;
     display: inline-block;
@@ -824,7 +821,7 @@ a.button {
     color: #F07E1A;
     background-color: transparent;
     left: 57%;
-    top: 74vh;
+    bottom: 10vh;
     position: absolute;
 }
 
@@ -881,23 +878,6 @@ a.button {
     box-sizing: border-box;
 }
 
-#nombredelmenuuu {
-    font-family: 'Heebo', sans-serif;
-    position: absolute;
-    display: inline-block;
-    top: 33%;
-    padding: 4px;
-    left: 15%;
-    border: 1px solid #636363;
-    box-sizing: border-box;
-}
-
-.dropdown-content {
-    position: absolute;
-    padding: 12px 16px;
-    min-width: 160px;
-}
-
 #menudelatabla {
     position: absolute;
     left: 13%;
@@ -914,7 +894,12 @@ a.button {
     font-size: 14px;
     background: transparent;
     border: transparent;
-     }
+}
+
+.selectitem:hover {
+   background-color:#FFF2EF ;
+}
+
 .Tablet {
     position: absolute;
     width: 118.4px;

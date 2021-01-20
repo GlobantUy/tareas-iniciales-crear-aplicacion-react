@@ -12,6 +12,8 @@ class Tableadmin extends Component {
             Ingreso: '',
             Monto_a_pedir: '',
 
+            Estadocambiados: [],
+
             Moneda: '',
 
             financiacion: '',
@@ -23,22 +25,28 @@ class Tableadmin extends Component {
 
             isAplicarDisabled: true,
 
-            hidden: true
+            hidden: true,
+
+           
         }
     }
 
-    componentDidMount() {
+
+
+    componentDidMount(){
+        let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) =>   {0
+            //if (cliente.state === undefined) {}
+
+                return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10,0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state}     
+        
+            })
+
         prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
         let monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
         this.setState({
 
-            clientes: [
-                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 60, Estado: "" },
-                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 120, Estado: "" },
-                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 180, Estado: "" },
-                { Usuario: '', Montosolicitado: monto_a_pedir, Fecha: '', Moneda: moneda, Cuotas: 240, Estado: "" }
-            ],
+            clientes: listaclientes,
 
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
             Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
@@ -47,6 +55,9 @@ class Tableadmin extends Component {
 
         })
     }
+
+  
+
 
     crearestado(Estado, index) {
         switch (Estado) {
@@ -76,17 +87,22 @@ class Tableadmin extends Component {
     }
 
 
+    
     handleChange(index) {
         var dropdown = document.getElementById('menutabla' + index);
         console.log(dropdown.value)
         var fila = document.getElementById(index.toString())
         if (dropdown.value != "option1") {
+            let listacambiados = this.state.Estadocambiados;
+            listacambiados.push({ cliente: index, value:dropdown.value })
             this.setState({
                 isAplicarDisabled: false,
                 rowSelected: true,
                 hidden: false,
+                Estadocambiados: listacambiados
             });
             fila.className = 'selected';
+            console.log(this.state.Estadocambiados)
         } else {
             this.setState({
                 isAplicarDisabled: true,
@@ -97,15 +113,14 @@ class Tableadmin extends Component {
         }
     }
 
-
-
-
+  //  handleLimpiar(index){}  
+    
 
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
             const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas, Estado } = cliente //destructuring
             return (
-                <tr id={index} key={Moneda}>
+                <tr id={index} key={index}>
                     <td className="celda">{Usuario}</td>
                     <td className="celda">{Montosolicitado}</td>
                     <td className="celda">{Fecha}</td>
@@ -132,40 +147,8 @@ class Tableadmin extends Component {
     }
 
     render() {
-        if(prestamosCargados) {
-        return (
-            <div className="container">
-                <h2 id='titulo'>Solicitudes de préstamo</h2>
-                <h2 id='Filtro'>Filtro por estado </h2>
-                <select id='nombredelmenuu' >
-
-                    <option value="option4"> Todos </ option>
-                    <option value="option1">Aprobado  </ option>
-
-                    <option value="option2"> Rechazado </ option>
-
-                    <option value="opción3" >Pendiente  </ option>
-
-                </select>
-                <div>
-                    <table id='Administrador'>
-                        <tbody>
-                            <tr>{this.renderTableHeader()}</tr>
-                            {this.renderTableData()}
-                        </tbody>
-                    </table>
-    
-                <div className="Buttons">
-
-                    <button type="submit" className="btnSeptimo" hidden={this.state.hidden}  > Limpiar</button>
-                    <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} > Aplicar cambios</button>
-                </div>
-            </div> 
-        </div> 
-            )
-        } else {
+        if (prestamosCargados) {
             return (
-                <>
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
                     <h2 id='Filtro'>Filtro por estado </h2>
@@ -178,13 +161,45 @@ class Tableadmin extends Component {
 
                         <option value="opción3" >Pendiente  </ option>
 
-                    </ select>
+                    </select>
+                    <div>
+                        <table id='Administrador'>
+                            <tbody>
+                                <tr>{this.renderTableHeader()}</tr>
+                                {this.renderTableData()}
+                            </tbody>
+                        </table>
+
+                        <div className="Buttons">
+
+                            <button type="submit" className="btnSeptimo" hidden={this.state.hidden}  > Limpiar</button>
+                            <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} > Aplicar cambios</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <>
+                    <div className="container">
+                        <h2 id='titulo'>Solicitudes de préstamo</h2>
+                        <h2 id='Filtro'>Filtro por estado </h2>
+                        <select id='nombredelmenuu' >
+
+                            <option value="option4"> Todos </ option>
+                            <option value="option1">Aprobado  </ option>
+
+                            <option value="option2"> Rechazado </ option>
+
+                            <option value="opción3" >Pendiente  </ option>
+
+                        </ select>
                     </div>
                     <div>
-                    <img className="Tablet" src="/table.png" />
-                    <p className="noDatos">No hay datos ingresados aún</p>
+                        <img className="Tablet" src="/table.png" />
+                        <p className="noDatos">No hay datos ingresados aún</p>
                     </div>
-                    </>
+                </>
             )
 
         }

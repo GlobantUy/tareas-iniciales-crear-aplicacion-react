@@ -168,7 +168,8 @@ class Table extends Component {
         return header.map((key, index) => {
             if (key == "ValorCuota") {
                 return <th key={index}>{"Valor Cuota"}</th>
-            } else {
+            } else { 
+                console.log(index)
                 return <th key={index}>{key}</th>
             }
 
