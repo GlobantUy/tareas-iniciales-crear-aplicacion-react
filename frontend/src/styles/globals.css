@@ -649,7 +649,10 @@ a.button {
     margin-left: 29.6em;  
     margin-top: 5px ;
 }
-
+.close-icon:hover{
+    transition:all  ease-in-out;
+    filter: invert(69%) sepia(39%) saturate(6378%) hue-rotate(351deg) brightness(98%) contrast(92%);
+}
 #btnSolicitar {
     position: absolute;
     margin-left: 270px;
