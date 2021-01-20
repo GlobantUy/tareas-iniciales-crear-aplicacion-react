@@ -170,7 +170,7 @@ select:focus {
     left: 100px;
 }
 
-.containertablas ul {
+.containerDescuento ul {
     margin-top: 15px;
 }
 
@@ -278,8 +278,8 @@ input[type=checkbox]+label:before {
     content: "\2714";
     border: 0.1em solid #000;
     display: inline-block;
-    width: 1em;
-    height: 1em;
+    width: 16px;
+    height: 16px;
     padding-left: 0.2em;
     padding-bottom: 0.3em;
     margin-right: 0.2em;
@@ -902,6 +902,96 @@ a.button {
 .selectitem:hover {
    background-color:#FFF2EF ;
 }
+
+/*Registro*/
+
+.inp-registro{
+    height: 40px;
+    width: 350px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.inputTipo{
+    height: 16px;
+    width: 16px;
+}
+
+.genero{
+    width: 174.76px;
+    height: 16px;
+    left: 19px;
+    top: calc(50% - 16px/2 + 0.5px);
+    margin-top: 13px;
+    margin-bottom: 13px;
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    
+    color: #000000;
+    
+}
+
+.row-name-genero{
+margin-top: 16px;
+margin-bottom: 11px;
+}
+
+div .rdbutons{
+    left: 0px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+.body{
+    width: 100%;
+    height: 100%;
+}
+
+.form.registro{
+    left: 0%;
+    width: 100%;
+    margin-right: 0%;
+    margin-left: 0%;
+}
+
+.titlee-registro{
+width: 89px;
+height: 28px;
+left: 596px;
+top: 118px;
+margin-top: 38px;
+margin-bottom: 24px;
+
+/* TITULO */
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+
+color: #000000;
+}
+
+.btn-registro{
+    color: #000000;
+    background: #F07E1A;
+    border: none;
+    height: 40px;
+    width: 168px;
+    margin-top: 24px;
+}
+
+.btn-registro:disabled{
+    color: #636363;
+    background: #E0E0E0;
+}
+
+/* Fin Registro */
 
 .Tablet {
     position: absolute;
