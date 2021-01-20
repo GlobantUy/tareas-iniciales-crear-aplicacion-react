@@ -2,7 +2,7 @@ import React, { Component, } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 
-let emailFromStorage
+let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique'
 var btn = "btnPrimarioDisabled";
 let rol
 let errorPass = true
@@ -10,8 +10,8 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-let URL = "https://backendmain-5v0t6ic18.vercel.app/api/login"
-let URLreturnpres = "https://backendmain-5v0t6ic18.vercel.app/api/returnLoans"
+let URL = "https://backendmain-o2ub8kmbw.vercel.app/api/login"
+let URLreturnpres = "https://backendmain-o2ub8kmbw.vercel.app/api/returnLoans"
 
 class SimLogin extends Component {
 
@@ -37,6 +37,11 @@ class SimLogin extends Component {
                 }
             }
         }
+    }
+
+    mostrarError = () => {
+        let element = document.getElementById("datosIncorrectos")
+        element.className += ' encontrado'
     }
 
     post(email, pass) {
@@ -70,7 +75,7 @@ class SimLogin extends Component {
                     }
                 } else {
                     console.log(Response.data.found)
-                    this.redireccionar()
+                    this.mostrarError()
                 }
             })
             .catch(error => {
@@ -114,7 +119,7 @@ class SimLogin extends Component {
                             contraCorrecta = false;
 
                             if (errorPass == false) {
-                                errors.password = "Los datos ingresados no son correctos, por favor verifique";
+                                datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique";
                                 errorPass = true
                             }
                             if (!values.email) {
@@ -176,9 +181,10 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.password}
                             />
+                            { touched.password && <label className="error">{errors.password}</label>}
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
 
-                            { touched.password && <p className="error dt-in">{errors.password}</p>}
+                            { touched.password && <p id="datosIncorrectos" className="no-encontrado ">{datosIncorrectos}</p>}
 
                             <button
                                 className={btn}
