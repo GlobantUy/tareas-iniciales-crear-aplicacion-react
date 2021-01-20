@@ -217,7 +217,7 @@ class Table extends Component {
                      <h3 className='tittle'>Confirmar préstamo</h3>
                     <p className='text'>Prestamo valor {this.state.Moneda + this.state.Monto_a_pedir + " en " + cuotasPost} cuotas</p>
                     <Button id="btnCancelar" onClick={this.cerrarModal}>Cancelar</Button>
-                    <Button id="btnSolicitar" onClick={this.abrirModal2} onChange={this.cerrarModal}>Solicitar</Button>
+                    <Button id="btnSolicitar" onClick={this.abrirModal2}>Solicitar</Button>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
@@ -226,7 +226,7 @@ class Table extends Component {
                     <a href="http://localhost:3000/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
-                <Modal isOpen={this.state.abierto4} className='modalStyles'>
+                <Modal isOpen={this.state.abierto4} className='modalStyles' id='modalPendiente'>
                 <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <p className='textModal2'>Ya tienes un prestamo pendiente</p>
                     <Button id="btnCancelar2" onClick={this.cerrarModals}>Cancelar</Button>

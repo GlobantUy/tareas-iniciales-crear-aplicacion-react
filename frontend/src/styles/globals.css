@@ -669,6 +669,7 @@ a.button {
 #btnVolver {
     position: absolute;
     bottom: -100px;
+    left: 160px;
     width: 168px;
     height: 40px;
     color: #000000;
@@ -676,6 +677,9 @@ a.button {
     box-sizing: border-box;
     border: 1px solid #F07E1A;
 }
+
+#modalPendiente #btnVolver{
+    left: 260px;}
 
 /* No logueado */
 
