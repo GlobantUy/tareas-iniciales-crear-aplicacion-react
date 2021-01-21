@@ -44,6 +44,15 @@ class SimLogin extends Component {
         element.className += ' encontrado'
     }
 
+    quitarError = () => {
+        try{
+            let element = document.getElementById("datosIncorrectos")
+            element.className = 'no-encontrado'
+        }catch{
+
+        }
+    }
+
     post(email, pass) {
         axios.post(URL, {
             "email": email,
@@ -54,6 +63,7 @@ class SimLogin extends Component {
                 console.log("post realizado correctamente", Response)
                 if (Response.data.found == undefined) {
                     rol = Response.data.rol;
+                    this.quitarError()
                     if (rol == "CUSTOMER") {
                         console.log(rol)
                         this.redireccionar()
