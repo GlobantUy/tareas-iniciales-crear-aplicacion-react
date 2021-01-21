@@ -169,7 +169,6 @@ class Table extends Component {
             if (key == "ValorCuota") {
                 return <th key={index}>{"Valor Cuota"}</th>
             } else { 
-                console.log(index)
                 return <th key={index}>{key}</th>
             }
 

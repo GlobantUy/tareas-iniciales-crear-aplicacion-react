@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
 
-
+let Estado
+let email
+let URLupdateLoan = "https://backendmain.vercel.app/api/updateLoan"
 let prestamosCargados
 class Tableadmin extends Component {
 
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
-        this.handleChange = this.handleChange.bind(this);
+        this.handleClicked = this.handleClicked.bind(this);
+        this.changeFilterDropdown = this.changeFilterDropdown.bind(this);
+        this.changeStateDropdown = this.changeStateDropdown.bind(this);
+        this.handleLimpiar = this.handleLimpiar.bind(this);
         this.state = { //state is by default an object
-            Ingreso: '',
-            Monto_a_pedir: '',
 
-            Estadocambiados: [],
-
-            Moneda: '',
-
-            financiacion: '',
+            estadocambiados: [],
 
             rowSelected: false,
 
@@ -27,42 +27,37 @@ class Tableadmin extends Component {
 
             hidden: true,
 
-           
+            filtro: 'Todos'
         }
     }
 
 
 
-    componentDidMount(){
-        let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) =>   {0
+    componentDidMount() {
         
-
-                return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10,0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state}     
-        
-            })
+        let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
+            0
+            email = cliente.userEmail
+            Estado = cliente.state
+            console.log(email, Estado)
+            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
+        })
 
         prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
-        let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
-        let monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
+
+
         this.setState({
+            clientes: listaclientes
 
-            clientes: listaclientes,
-
-            Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
-            Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
-            Moneda: moneda,
-            financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion
 
         })
+
     }
-
-  
-
 
     crearestado(Estado, index) {
         switch (Estado) {
-            case "Pendiente":
-                return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.handleChange(index)}>
+            default:
+                return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
 
 
                     <option value="option1" > Pendiente     </ option>
@@ -71,15 +66,13 @@ class Tableadmin extends Component {
 
                     <option value="option3" > Aprobado      </ option>
 
-
-
                 </ select>)
                 break
 
-            case "Aprobado":
+            case true:
                 return (<label>Aprobado </label>)
                 break
-            case "Rechazado":
+            case false:
                 return (<label>Rechazado </label>)
                 break
 
@@ -87,22 +80,51 @@ class Tableadmin extends Component {
     }
 
 
+
+    handleLimpiar() {
+        let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
+            0
+            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
+        })
+        let filas = document.getElementsByTagName('tr')
+
+        for (let i = 0; i < filas.length; i++) { filas[i].className = '' }
+        this.setState({
+            clientes: listaclientes,
+            hidden: true,
+            isAplicarDisabled: true
+
+        });
+    }
+
+    handleClicked() {
+            
+            axios.post(URLupdateLoan, {
+                "email": email,
+                "Estado": Estado
+            }).then(res => {
+          
+             }
+             
+            )
+                        
+        }
     
-    handleChange(index) {
-        var dropdown = document.getElementById('menutabla' + index);
-        console.log(dropdown.value)
-        var fila = document.getElementById(index.toString())
+    changeStateDropdown(index) {
+        let listaclientes = this.state.clientes
+        let dropdown = document.getElementById('menutabla' + index);
+        let fila = document.getElementById(index.toString())
         if (dropdown.value != "option1") {
-            let listacambiados = this.state.Estadocambiados;
-            listacambiados.push({ cliente: index, value:dropdown.value })
+            listaclientes[index].Estado = (dropdown.value == "option2") ? false : true;
+            let listacambiados = this.state.estadocambiados;
+            listacambiados.push({ cliente: index, value: dropdown.value })
             this.setState({
                 isAplicarDisabled: false,
                 rowSelected: true,
                 hidden: false,
-                Estadocambiados: listacambiados
+                estadocambiados: listacambiados
             });
             fila.className = 'selected';
-            console.log(this.state.Estadocambiados)
         } else {
             this.setState({
                 isAplicarDisabled: true,
@@ -113,24 +135,52 @@ class Tableadmin extends Component {
         }
     }
 
-  //  handleLimpiar(index){}  
-    
+    changeFilterDropdown() {
+        let dropdown = document.getElementById('menufiltro');
+        switch (dropdown.value) {
+            case 'option1':
+                this.setState({
+                    filtro: 'Todos'
+                })
+                break
 
-    renderTableData() {
+            case 'option2':
+                this.setState({
+                    filtro: true
+                })
+                break
+            case 'option3':
+                this.setState({
+                    filtro: false
+                })
+                break
+            default:
+                this.setState({
+                    filtro: undefined
+                })
+                break
+        }
+    }
+
+
+
+    renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {
-            const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas, Estado } = cliente //destructuring
-            return (
-                <tr id={index} key={index}>
-                    <td className="celda">{Usuario}</td>
-                    <td className="celda">{Montosolicitado}</td>
-                    <td className="celda">{Fecha}</td>
-                    <td className="celda">{Moneda}</td>
-                    <td className="celda">{Cuotas}</td>
-                    <td className="celda">
-                        {this.crearestado(Estado, index)}
-                    </td>
-                </tr>
-            )
+            const { Usuario, Montosolicitado, Fecha, moneda, Cuotas, Estado } = cliente //destructuring
+            if (Estado == Filtro || Filtro == 'Todos') {
+                return (
+                    <tr id={index} key={index}>
+                        <td className="celda">{Usuario}</td>
+                        <td className="celda">{Montosolicitado}</td>
+                        <td className="celda">{Fecha}</td>
+                        <td className="celda">{moneda}</td>
+                        <td className="celda">{Cuotas}</td>
+                        <td className="celda">
+                            {this.crearestado(Estado, index)}
+                        </td>
+                    </tr>
+                )
+            }
         })
     }
 
@@ -147,33 +197,33 @@ class Tableadmin extends Component {
     }
 
     render() {
-        if (prestamosCargados) {
+        if(prestamosCargados) {
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
                     <h2 id='Filtro'>Filtro por estado </h2>
-                    <select id='nombredelmenuu' >
+                    <select id='menufiltro' onChange={this.changeFilterDropdown} >
 
-                        <option value="option4"> Todos </ option>
-                        <option value="option1">Aprobado  </ option>
+                        <option value="option1"> Todos </ option>
+                        <option value="option2">Aprobado  </ option>
 
-                        <option value="option2"> Rechazado </ option>
+                        <option value="option3"> Rechazado </ option>
 
-                        <option value="opción3" >Pendiente  </ option>
+                        <option value="opción4" >Pendiente  </ option>
 
                     </select>
                     <div>
                         <table id='Administrador'>
                             <tbody>
                                 <tr>{this.renderTableHeader()}</tr>
-                                {this.renderTableData()}
+                                {this.renderTableData(this.state.filtro)}
                             </tbody>
                         </table>
 
                         <div className="Buttons">
 
-                            <button type="submit" className="btnSeptimo" hidden={this.state.hidden}  > Limpiar</button>
-                            <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} > Aplicar cambios</button>
+                            <button className="btnSeptimo" hidden={this.state.hidden} onClick={this.handleLimpiar} > Limpiar</button>
+                            <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled}  > Aplicar cambios</button>
                         </div>
                     </div>
                 </div>
@@ -184,14 +234,14 @@ class Tableadmin extends Component {
                     <div className="container">
                         <h2 id='titulo'>Solicitudes de préstamo</h2>
                         <h2 id='Filtro'>Filtro por estado </h2>
-                        <select id='nombredelmenuu' >
+                        <select id='menufiltro' onChange={this.changeFilterDropdown} >
 
-                            <option value="option4"> Todos </ option>
-                            <option value="option1">Aprobado  </ option>
+                            <option value="option1"> Todos </ option>
+                            <option value="option2">Aprobado  </ option>
 
-                            <option value="option2"> Rechazado </ option>
+                            <option value="option3"> Rechazado </ option>
 
-                            <option value="opción3" >Pendiente  </ option>
+                            <option value="opción4" >Pendiente  </ option>
 
                         </ select>
                     </div>
