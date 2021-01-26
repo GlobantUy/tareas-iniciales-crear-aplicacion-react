@@ -64,6 +64,7 @@ class SimLogin extends Component {
                             } else {
                                 sessionStorage.setItem('prestamosNull', true);
                                 sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
+                                
 
                                 this.redireccionar()
                             }
