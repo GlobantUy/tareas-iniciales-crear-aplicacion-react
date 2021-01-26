@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
+
 let Estado
 let email
 let URLupdateLoan = "https://backendmain.vercel.app/api/updateLoan"
@@ -17,6 +18,8 @@ class Tableadmin extends Component {
         this.state = { //state is by default an object
 
             estadocambiados: [],
+
+            data = [],
 
             rowSelected: false,
 
@@ -34,7 +37,7 @@ class Tableadmin extends Component {
 
 
     componentDidMount() {
-        
+
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
             0
             email = cliente.userEmail
@@ -98,10 +101,10 @@ class Tableadmin extends Component {
     }
 
     handleClicked() {
-            
+        
+            data = [email, Estado]
             axios.post(URLupdateLoan, {
-                "email": email,
-                "Estado": Estado
+            "data": data  
             }).then(res => {
           
              }
