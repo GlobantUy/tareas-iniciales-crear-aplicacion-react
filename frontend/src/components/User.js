@@ -52,7 +52,6 @@ class User extends React.Component {
           <img className="logoheader" src="/logo.png" />
           <div className='User'>
             <span id='user-name' >{this.state.email}</span>
-            <img className="imgUser" src="/Frame.png" />
           </div>
 
         </header>
