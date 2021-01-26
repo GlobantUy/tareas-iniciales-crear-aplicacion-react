@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
                 href: "https://" + req.headers.host + req.url
               }
             },
-            message: 'User "' + req.body.data[i].email + '" has no registered loans'
+            message: 'User ' + req.body.data[i].email + ' has no registered loans'
           })
         } else {
           if (totalLoanSearch.length == total) {
