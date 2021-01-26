@@ -423,6 +423,7 @@ input[type='checkbox'] {
 }
 
 .btnTerciario {
+    font-family: 'Roboto', sans-serif;
     left: 36%;
     top: 71vh;
     position: absolute;
