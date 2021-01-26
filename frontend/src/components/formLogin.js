@@ -182,8 +182,19 @@ class SimLogin extends Component {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.email}
+                                data-for="errormail"
+                                data-tip=""
                             />
-                            { touched.email && <label className="error">{errors.email}</label>}
+
+                            <ReactTooltip id="errormail"
+                                place="bottom"
+                                type="error"
+                                effect="solid"
+                                className="error-tooltip"
+                            >
+                                {touched.email && <label className="error">{errors.email}</label>}
+                            </ReactTooltip>
+
 
                             <p>Contraseña *</p>
                             <input className="inputIngreso"
@@ -193,15 +204,16 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.password}
                                 data-for="errorpsswd"
-                                data-tip
+                                data-tip=""
                             />
 
                             <ReactTooltip id="errorpsswd"
-                                place="left"
+                                place="bottom"
                                 type="error"
                                 effect="solid"
+                                className="error-tooltip"
                             >
-                                {<label className="error">{errors.password}</label>}
+                                {touched.email && <label className="error">{errors.password}</label>}
                             </ReactTooltip>
 
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>

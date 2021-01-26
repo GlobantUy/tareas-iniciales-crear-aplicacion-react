@@ -204,6 +204,10 @@ select:focus {
     width: 190px;
 }
 
+.error-tooltip{
+    /*agregar css al tooltip*/
+}
+
 .Ingreso {
     margin-top: 4px;
     height: 32px;
@@ -339,10 +343,6 @@ input[type='checkbox'] {
     margin-left: -82px;
     margin-top: 114px;
     text-align: center;
-}
-
-.error {
-    color: #E2331F;
 }
 
 .no-encontrado{
