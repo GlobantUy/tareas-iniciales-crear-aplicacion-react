@@ -20,75 +20,82 @@ module.exports = async (req, res) => {
             href: "https://" + req.headers.host + req.url
           }
         },
-        message: 'Must provide an array named "data" whose length must be greater than 0'
+        message: 'Must provide an array named data whose length must be greater than 0'
       })
     } else {
       var i
+      var x
+      let conf = true
       for (i = 0; i < req.body.data.length; i++) {
-
-        try {
-          totalLoanSearch = await collectionT.find({ userEmail: req.body.data[i].email }).toArray()
-          trueloanSearch = await collectionT.find({ userEmail: req.body.data[i].email, state: true }).toArray()
-          falseloanSearch = await collectionT.find({ userEmail: req.body.data[i].email, state: false }).toArray()
-          total = trueloanSearch.length + falseloanSearch.length
-          if (totalLoanSearch.length == 0) {
-            return res.status(403).json({
-              _links: {
-                self: {
-                  href: "https://" + req.headers.host + req.url
-                }
-              },
-              message: 'User ' + req.body.data[i].email + ' has no registered loans'
-            })
-          } else {
-            if (totalLoanSearch.length == total) {
+        for (x = 0; x < req.body.data.length; x++) {
+          if (req.body.data[x].email == undefined || req.body.data[x].state == undefined) {
+            conf = false
+          }
+        }
+        if (conf == true) {
+          try {
+            totalLoanSearch = await collectionT.find({ userEmail: req.body.data[i].email }).toArray()
+            trueloanSearch = await collectionT.find({ userEmail: req.body.data[i].email, state: true }).toArray()
+            falseloanSearch = await collectionT.find({ userEmail: req.body.data[i].email, state: false }).toArray()
+            total = trueloanSearch.length + falseloanSearch.length
+            if (totalLoanSearch.length == 0) {
               return res.status(403).json({
                 _links: {
                   self: {
                     href: "https://" + req.headers.host + req.url
                   }
                 },
-                message: 'User "' + req.body.data[i].email + '" has no loans pending review'
+                message: 'User ' + req.body.data[i].email + ' has no registered loans'
               })
             } else {
-              if (req.body.state != true && req.body.state != false) {
-                return res.status(400).json({
+              if (totalLoanSearch.length == total) {
+                return res.status(403).json({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url
                     }
                   },
-                  message: 'Invalid state for "' + req.body.data[i].email + '" / "' + req.body.data[i].state + '"'
-
+                  message: 'User ' + req.body.data[i].email + ' has no loans pending review'
                 })
               } else {
-                arrayTest = await collectionT.find({ userEmail: req.body.email }).sort({ date: -1 }).toArray()
-                const loanId = arrayTest[0]._id
-                await collectionT.updateOne({ _id: loanId }, { $set: { state: req.body.state, stateDate: date } })
-                return res.json({
-                  _links: {
-                    self: {
-                      href: "https://" + req.headers.host + req.url
-                    }
-                  },
-                  message: 'Loan state modified successfully'
+                if (req.body.state != true && req.body.state != false) {
+                  return res.status(400).json({
+                    _links: {
+                      self: {
+                        href: "https://" + req.headers.host + req.url
+                      }
+                    },
+                    message: 'Invalid state for ' + req.body.data[i].email + ' / ' + req.body.data[i].state
 
-                })
+                  })
+                } else {
+                  arrayTest = await collectionT.find({ userEmail: req.body.email }).sort({ date: -1 }).toArray()
+                  const loanId = arrayTest[0]._id
+                  await collectionT.updateOne({ _id: loanId }, { $set: { state: req.body.state, stateDate: date } })
+                  return res.json({
+                    _links: {
+                      self: {
+                        href: "https://" + req.headers.host + req.url
+                      }
+                    },
+                    message: 'Loan state modified successfully'
+
+                  })
+                }
               }
             }
+          } catch {
+            return res.status(500).json({
+              _links: {
+                self: {
+                  href: "https://" + req.headers.host + req.url
+                }
+              },
+              message: 'Internal error (001)'
+
+            })
           }
-        } catch {
-          return res.status(500).json({
-            _links: {
-              self: {
-                href: "https://" + req.headers.host + req.url
-              }
-            },
-            message: 'Internal error (001)'
-
-          })
         }
-
       }
     }
   } else if (req.method != 'OPTIONS') {
