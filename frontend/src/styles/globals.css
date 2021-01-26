@@ -345,12 +345,17 @@ input[type='checkbox'] {
     color: #E2331F;
 }
 
-.dt-in {
+.no-encontrado{
+    display: none;
+}
+
+.encontrado {
     color: #E2331F;
     margin-top: 26px;
     margin-bottom: 24px;
     font-size: 14px;
     text-align: center;
+    display: block;
 }
 
 .recContr {
@@ -984,7 +989,6 @@ div .rdbutons{
 }
 
 .titlee-registro{
-width: 89px;
 height: 28px;
 left: 596px;
 top: 118px;
