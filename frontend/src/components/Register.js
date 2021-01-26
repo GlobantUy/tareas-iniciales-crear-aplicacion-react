@@ -4,12 +4,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
 
-const errors = {}
+
 const validate = values => {
 
     let contra = values.Password
     let confirmContra = values.ConfirmPassword
-    errors
+    const errors = {}
 
     if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.Email)) {
         errors.Email = 'formato incorrecto'
@@ -63,27 +63,6 @@ class RegisterContent extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
-
-        const { name } = e.target;
-        switch (name) {
-            case "Email":
-                if (this.state.Email) {
-                    errors.Email = ''
-                }
-                break;
-            case "Password":
-                if (this.state.Email) {
-                    errors.ConfirmPassword = ''
-                }
-                break;
-            case "ConfirmPassword":
-                if (this.state.Email) {
-                    errors.ConfirmPassword = ''
-                }
-                break;
-            default:
-                break;
-        }
     }
 
     handleChangePreferencias = event => {
@@ -236,7 +215,7 @@ class RegisterContent extends Component {
                     <form className="form registro" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
 
                         <center>
-                            <h1 className="titlee-registro">Registro</h1>
+                            <h1 className="titlee-registro">Registro de usuario STB Bank</h1>
                         </center>
 
                         <div className="container">
