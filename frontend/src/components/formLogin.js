@@ -45,11 +45,9 @@ class SimLogin extends Component {
     }
 
     quitarError = () => {
-        try{
-            let element = document.getElementById("datosIncorrectos")
+        let element
+        if (element = document.getElementById("datosIncorrectos")) {
             element.className = 'no-encontrado'
-        }catch{
-
         }
     }
 

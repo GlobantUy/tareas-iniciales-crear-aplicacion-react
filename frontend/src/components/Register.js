@@ -215,7 +215,7 @@ class RegisterContent extends Component {
                     <form className="form registro" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
 
                         <center>
-                            <h1 className="titlee-registro">Registro</h1>
+                            <h1 className="titlee-registro">Registro de usuario STB Bank</h1>
                         </center>
 
                         <div className="container">
