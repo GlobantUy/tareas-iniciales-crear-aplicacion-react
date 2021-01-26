@@ -1,6 +1,8 @@
 import React, { Component, } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
+import ReactTooltip from 'react-tooltip';
+import ReactDOM from 'react-dom';
 
 let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique'
 var btn = "btnPrimarioDisabled";
@@ -190,8 +192,18 @@ class SimLogin extends Component {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.password}
+                                data-for="errorpsswd"
+                                data-tip
                             />
-                            { touched.password && <label className="error">{errors.password}</label>}
+
+                            <ReactTooltip id="errorpsswd"
+                                place="left"
+                                type="error"
+                                effect="solid"
+                            >
+                                {<label className="error">{errors.password}</label>}
+                            </ReactTooltip>
+
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
 
                             { touched.password && <p id="datosIncorrectos" className="no-encontrado ">{datosIncorrectos}</p>}
