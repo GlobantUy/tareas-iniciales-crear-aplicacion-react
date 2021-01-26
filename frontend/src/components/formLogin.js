@@ -70,12 +70,14 @@ class SimLogin extends Component {
                         axios.post(URLreturnpres, {
                             "email": emaill
                         }).then(res => {
-                            console.log(res)
+                            console.log(res.data.loans)
                             if (res.data.loans == undefined) {
                                 sessionStorage.setItem('prestamosNull', false);
                                 this.redireccionar()
                             } else {
                                 sessionStorage.setItem('prestamosNull', true);
+                                sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
+
                                 this.redireccionar()
                             }
                         })
