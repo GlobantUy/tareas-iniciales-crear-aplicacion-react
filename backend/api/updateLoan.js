@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
   }
   if (req.method === 'POST') {
     if (req.body.data == undefined || req.body.data.length == 0) {
-      return res.status(403).json({
+      return res.status(400).json({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
