@@ -31,6 +31,7 @@ module.exports = async (req, res) => {
       let conf = true
       let errorPosition
       let dupEmail
+      let conf3 = true
       for (i = 0; i < req.body.data.length; i++) {
         for (x = 0; x < req.body.data.length; x++) {
           if (req.body.data[x].email == undefined || req.body.data[x].state == undefined || (req.body.data[x].state != true && req.body.data[x].state != false)) {
@@ -56,6 +57,7 @@ module.exports = async (req, res) => {
             falseloanSearch = await collectionT.find({ userEmail: req.body.data[i].email, state: false }).toArray()
             total = trueloanSearch.length + falseloanSearch.length
             if (totalLoanSearch.length == 0) {
+              conf3 = false
               return res.status(403).json({
                 _links: {
                   self: {
@@ -66,6 +68,7 @@ module.exports = async (req, res) => {
               })
             } else {
               if (totalLoanSearch.length == total) {
+                conf3 = false
                 return res.status(403).json({
                   _links: {
                     self: {
@@ -76,6 +79,7 @@ module.exports = async (req, res) => {
                 })
               } else {
                 if (req.body.data[i].state != true && req.body.data[i].state != false) {
+                  conf3 = false
                   return res.status(400).json({
                     _links: {
                       self: {
@@ -89,19 +93,11 @@ module.exports = async (req, res) => {
                   arrayTest = await collectionT.find({ userEmail: req.body.data[i].email }).sort({ date: -1 }).toArray()
                   const loanId = arrayTest[0]._id
                   await collectionT.updateOne({ _id: loanId }, { $set: { state: req.body.data[i].state, stateDate: date } })
-                  return res.json({
-                    _links: {
-                      self: {
-                        href: "https://" + req.headers.host + req.url
-                      }
-                    },
-                    message: 'Loan state modified successfully'
-
-                  })
                 }
               }
             }
           } catch {
+            conf3 = false
             return res.status(500).json({
               _links: {
                 self: {
@@ -113,6 +109,7 @@ module.exports = async (req, res) => {
             })
           }
         } else if (conf2 == true) {
+          conf3 = false
           return res.status(400).json({
             _links: {
               self: {
@@ -123,6 +120,7 @@ module.exports = async (req, res) => {
 
           })
         } else {
+          conf3 = false
           return res.status(400).json({
             _links: {
               self: {
@@ -133,6 +131,17 @@ module.exports = async (req, res) => {
 
           })
         }
+      }
+      if (conf3 == true) {
+        return res.json({
+          _links: {
+            self: {
+              href: "https://" + req.headers.host + req.url
+            }
+          },
+          message: 'Loan state modified successfully'
+
+        })
       }
     }
   } else if (req.method != 'OPTIONS') {
