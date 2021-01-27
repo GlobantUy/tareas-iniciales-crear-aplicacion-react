@@ -233,10 +233,10 @@ class Tableadmin extends Component {
                 <>
                     <div className="container">
                         <h2 id='titulo'>Solicitudes de préstamo</h2>
-                        <h2 id='Filtro'>Filtro por estado </h2>
-                        <select id='menufiltro' onChange={this.changeFilterDropdown} >
+                        <h2 id='Filtroo'>Filtro por estado </h2>
+                        <select id='menufiltroo' disabled  >
 
-                            <option value="option1"> Todos </ option>
+                            <option value="option1">  </ option>
                             <option value="option2">Aprobado  </ option>
 
                             <option value="option3"> Rechazado </ option>
