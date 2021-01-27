@@ -48,6 +48,8 @@ module.exports = async (req, res) => {
             }
           }
         }
+        console.log(conf)
+        console.log(conf2)
         if (conf == true && conf2 == true) {
           try {
             totalLoanSearch = await collectionT.find({ userEmail: req.body.data[i].email }).toArray()
