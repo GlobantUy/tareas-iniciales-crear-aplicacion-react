@@ -127,7 +127,7 @@ module.exports = async (req, res) => {
                 href: "https://" + req.headers.host + req.url
               }
             },
-            message: 'Duplicate entry for email property in array (' + dupEmail + ')'
+            message: 'Duplicate entry for email property in array (' + dupEmail + ') '
 
           })
         }
