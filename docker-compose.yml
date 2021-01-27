@@ -48,11 +48,13 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile
-    env_file:
-      - ./frontend/.env
-    #environment:
+    #env_file:
+    #  - ./frontend/.env
+    environment:
       #CONN_STRING: ${CONN_STRING}
-      #NODE_ENV: ${NODE_ENV}
+      NODE_ENV: ${NODE_ENV}
+      VERCEL: ${VERCEL}
+      STAGING: ${STAGING}
       #CORS_ORIGIN: ${DAE}
     ports:
       - "3000:3000"

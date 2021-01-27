@@ -8,7 +8,8 @@ let emailFromStorage
 let monedaPost
 let cuotasPost
 let monto_a_pedir
-let URL = "https://backendmain-o2ub8kmbw.vercel.app/api/storeLoan"
+let URL = process.env.RESTURL_BACKEND + '/storeLoan'
+// "https://backendmain-o2ub8kmbw.vercel.app/api/storeLoan"
 class Table extends Component {
 
     //popup usuario logueado//
