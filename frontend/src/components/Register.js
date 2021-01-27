@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
 
-
 const validate = values => {
 
     let contra = values.Password
@@ -58,7 +57,7 @@ class RegisterContent extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
     }
-    
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -138,6 +137,10 @@ class RegisterContent extends Component {
                     this.setState({
                         EmailError: 'Este campo es obligatorio'
                     })
+                } else if (this.state.EmailError == 'Ya existe un usuario con este email') {
+                    this.setState({
+                        EmailError: 'Ya existe un usuario con este email',
+                    })
                 } else {
                     this.setState({
                         EmailError: '',
@@ -188,8 +191,6 @@ class RegisterContent extends Component {
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
-            window.location.href = '/ingreso'
-
             axios.post(URL, {
                 "name": this.state.Nombre,
                 "lName": this.state.Apellido,
@@ -201,8 +202,23 @@ class RegisterContent extends Component {
                 "passwd": this.state.Password
             }).then(Response => {
                 console.log(Response)
+                if (Response.data.message == "Email belongs to an existing account") {
+                    this.setState({
+                        EmailError: 'Ya existe un usuario con este email'
+                    })
+                } else {
+                    this.setState({
+                        EmailError: ''
+                    })
+                    window.location.href = '/ingreso'
+                }
             }).catch(error => {
                 console.log(error)
+            })
+
+        }else{
+            this.setState({
+                EmailError: ''
             })
         }
     }
