@@ -60,7 +60,7 @@ module.exports = async (req, res) => {
                   message: 'User ' + req.body.data[i].email + ' has no loans pending review'
                 })
               } else {
-                if (req.body.state != true && req.body.state != false) {
+                if (req.body.data[i].state != true && req.body.data[i].state != false) {
                   return res.status(400).json({
                     _links: {
                       self: {
@@ -71,9 +71,9 @@ module.exports = async (req, res) => {
 
                   })
                 } else {
-                  arrayTest = await collectionT.find({ userEmail: req.body.email }).sort({ date: -1 }).toArray()
+                  arrayTest = await collectionT.find({ userEmail: req.body.data[i].email }).sort({ date: -1 }).toArray()
                   const loanId = arrayTest[0]._id
-                  await collectionT.updateOne({ _id: loanId }, { $set: { state: req.body.state, stateDate: date } })
+                  await collectionT.updateOne({ _id: loanId }, { $set: { state: req.body.data[i].state, stateDate: date } })
                   return res.json({
                     _links: {
                       self: {
