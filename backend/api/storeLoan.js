@@ -88,7 +88,7 @@ module.exports = async (req, res) => {
                 const id = req.body.email + '/' + year + '/' + month + '/' + day + '|' + hour + '/' + minutes + '/' + seconds
                 const newLoan = new Loan({
 
-                  userName: userSearch[0].name,
+                  userName: userSearch[0].name + ' ' + userSearch[0].lName,
                   userEmail: req.body.email,
                   amount: req.body.amount,
                   date: date,
