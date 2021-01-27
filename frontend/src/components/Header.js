@@ -74,7 +74,7 @@ class Header extends React.Component {
         <div>
           <header className="header">
             <a href={process.env.RESTURL_FRONTEND}><img className="logoheader" src="/logo.png" /></a>
-            <a href="{process.env.RESTURL_FRONTEND}/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a>
+            <a href={process.env.RESTURL_FRONTEND + "/ingreso"} ><button className="btnHeader" type="submit"> Ingresar</button></a>
           </header>
         </div >
       )
