@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
+import ReactTooltip from 'react-tooltip';
+import ReactDOM from 'react-dom';
 
 let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
 
@@ -58,7 +60,7 @@ class RegisterContent extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
     }
-    
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -221,7 +223,6 @@ class RegisterContent extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-4">
-
                                     <p>Nombres*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -230,12 +231,20 @@ class RegisterContent extends Component {
                                         value={this.state.Nombre}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-name"
+                                        data-tip=""
                                     />
-                                    <label className="error">{this.state.NombreError}</label>
+                                    <ReactTooltip id="error-name"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                        <label className="error">{this.state.NombreError}</label>
+                                    </ReactTooltip>
                                 </div>
 
                                 <div className="col-4">
-
                                     <p className="mid">Apellidos*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -244,12 +253,20 @@ class RegisterContent extends Component {
                                         value={this.state.Apellido}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-apellido"
+                                        data-tip=""
                                     />
-                                    <label className="error">{this.state.ApellidoError}</label>
+                                    <ReactTooltip id="error-apellido"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                        <label className="error">{this.state.ApellidoError}</label>
+                                    </ReactTooltip>
                                 </div>
 
                                 <div className="col-4">
-
                                     <p>Fecha de nacimiento*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -258,14 +275,22 @@ class RegisterContent extends Component {
                                         value={this.state.FechaNacimiento}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-date"
+                                        data-tip=""
                                     />
-                                    <label className="error">{this.state.FechaNacimientoError}</label>
+                                    <ReactTooltip id="error-date"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                        <label className="error">{this.state.FechaNacimientoError}</label>
+                                    </ReactTooltip>
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col-4">
-
                                     <p>Email*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -274,13 +299,21 @@ class RegisterContent extends Component {
                                         value={this.state.Email}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-email"
+                                        data-tip=""
                                     />
-                                    <label className="error">{this.state.EmailError}</label>
-                                    <label className="error">{errors.Email}</label>
+                                    <ReactTooltip id="error-email"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                        <label className="error">{this.state.EmailError}</label>
+                                        <label className="error">{errors.Email}</label>
+                                    </ReactTooltip>
                                 </div>
 
                                 <div className="col-4">
-
                                     <p className="mid">Contraseña*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -289,12 +322,20 @@ class RegisterContent extends Component {
                                         value={this.state.Password}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-psswd"
+                                        data-tip=""
                                     />
-                                    <label className="error">{this.state.PasswordError}</label>
+                                    <ReactTooltip id="error-psswd"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                        <label className="error">{this.state.PasswordError}</label>
+                                    </ReactTooltip>
                                 </div>
 
                                 <div className="col-4">
-
                                     <p>Confirmación de contraseña*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -303,18 +344,32 @@ class RegisterContent extends Component {
                                         value={this.state.ConfirmPassword}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-confirmpsswd"
+                                        data-tip=""
                                     />
-                                    <label className="error">{this.state.ConfirmPasswordError}</label>
-                                    <label className="error">{errors.ConfirmPassword}</label>
+                                    <ReactTooltip id="error-confirmpsswd"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                        <label className="error">{this.state.ConfirmPasswordError}</label>
+                                        <label className="error">{errors.ConfirmPassword}</label>
+                                    </ReactTooltip>
+
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col-4">
-
                                     <p>Departamento*</p>
-
-                                    <select className="inp-registro" name="Departamento" value={this.state.Departamento} onChange={this.handleChange} onBlur={this.handleOnBlur}>
+                                    <select className="inp-registro"
+                                        name="Departamento"
+                                        value={this.state.Departamento}
+                                        onChange={this.handleChange}
+                                        onBlur={this.handleOnBlur}
+                                        data-for="error-departament"
+                                        data-tip="">
                                         <option hidden>Selecciona una opción</option>
                                         <option value="Artigas">Artigas</option>
                                         <option value="Canelones">Canelones</option>
@@ -336,7 +391,14 @@ class RegisterContent extends Component {
                                         <option value="Tacuarembo">Tacuarembo</option>
                                         <option value="TreintayTres">Treinta y Tres</option>
                                     </select>
-                                    <label className="error">{this.state.DepartamentoError}</label>
+                                    <ReactTooltip id="error-departament"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                        <label className="error">{this.state.DepartamentoError}</label>
+                                    </ReactTooltip>
                                 </div>
                             </div>
 
@@ -351,7 +413,6 @@ class RegisterContent extends Component {
 
                             <div className="row">
                                 <div className="col-3">
-
                                     <input
                                         type="radio"
                                         id="Femenino"
