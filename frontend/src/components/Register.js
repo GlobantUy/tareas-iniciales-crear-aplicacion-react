@@ -240,7 +240,7 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error">{this.state.NombreError}</label>
+                                        <label className="error-tooltip">{this.state.NombreError}</label>
                                     </ReactTooltip>
                                 </div>
 
@@ -262,7 +262,7 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error">{this.state.ApellidoError}</label>
+                                        <label className="error-tooltip">{this.state.ApellidoError}</label>
                                     </ReactTooltip>
                                 </div>
 
@@ -284,7 +284,7 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error">{this.state.FechaNacimientoError}</label>
+                                        <label className="error-tooltip">{this.state.FechaNacimientoError}</label>
                                     </ReactTooltip>
                                 </div>
                             </div>
@@ -308,8 +308,8 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error">{this.state.EmailError}</label>
-                                        <label className="error">{errors.Email}</label>
+                                        <label className="error-tooltip">{this.state.EmailError}</label>
+                                        <label className="error-tooltip">{errors.Email}</label>
                                     </ReactTooltip>
                                 </div>
 
@@ -331,7 +331,7 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error">{this.state.PasswordError}</label>
+                                        <label className="error-tooltip">{this.state.PasswordError}</label>
                                     </ReactTooltip>
                                 </div>
 
@@ -353,8 +353,8 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error">{this.state.ConfirmPasswordError}</label>
-                                        <label className="error">{errors.ConfirmPassword}</label>
+                                        <label className="error-tooltip">{this.state.ConfirmPasswordError}</label>
+                                        <label className="error-tooltip">{errors.ConfirmPassword}</label>
                                     </ReactTooltip>
 
                                 </div>
@@ -397,7 +397,7 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error">{this.state.DepartamentoError}</label>
+                                        <label className="error-tooltip">{this.state.DepartamentoError}</label>
                                     </ReactTooltip>
                                 </div>
                             </div>

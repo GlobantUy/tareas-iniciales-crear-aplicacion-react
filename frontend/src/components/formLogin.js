@@ -191,7 +191,7 @@ class SimLogin extends Component {
                                 effect="solid"
                                 className="error-tooltip"
                             >
-                                {touched.email && <label className="error">{errors.email}</label>}
+                                {touched.email && <label className="error-tooltip">{errors.email}</label>}
                             </ReactTooltip>
 
 
@@ -212,7 +212,7 @@ class SimLogin extends Component {
                                 effect="solid"
                                 className="error-tooltip"
                             >
-                                {touched.email && <label className="error">{errors.password}</label>}
+                                {touched.email && <label className="error-tooltip">{errors.password}</label>}
                             </ReactTooltip>
 
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>

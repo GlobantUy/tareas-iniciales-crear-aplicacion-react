@@ -205,7 +205,7 @@ select:focus {
 }
 
 .error-tooltip{
-    /*agregar css al tooltip*/
+    color: white;
 }
 
 .Ingreso {
