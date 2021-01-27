@@ -25,13 +25,27 @@ module.exports = async (req, res) => {
     } else {
       var i
       var x
+      var b
+      let conf2 = true
+      let emailRep = 0
       let conf = true
       let errorPosition
+      let dupEmail
       for (i = 0; i < req.body.data.length; i++) {
         for (x = 0; x < req.body.data.length; x++) {
           if (req.body.data[x].email == undefined || req.body.data[x].state == undefined || (req.body.data[x].state != true && req.body.data[x].state != false)) {
             conf = false
             errorPosition = x
+          }
+          let email = req.body.data[x].email
+          for (b = 0; b < req.body.data.length; b++) {
+            if (email == req.body.data[b].email) {
+              emailRep++
+              if (emailRep > 1) {
+                conf2 = false
+                dupEmail = req.body.data[b].email
+              }
+            }
           }
         }
         if (conf == true) {
@@ -97,7 +111,7 @@ module.exports = async (req, res) => {
 
             })
           }
-        } else {
+        } else if (conf2 == true) {
           return res.status(400).json({
             _links: {
               self: {
@@ -105,6 +119,16 @@ module.exports = async (req, res) => {
               }
             },
             message: 'Invalid value for state or email in array at position ' + errorPosition
+
+          })
+        } else {
+          return res.status(400).json({
+            _links: {
+              self: {
+                href: "https://" + req.headers.host + req.url
+              }
+            },
+            message: 'Duplicated entry for email property in array' + email
 
           })
         }
