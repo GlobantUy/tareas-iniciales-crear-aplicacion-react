@@ -135,7 +135,6 @@ class SimLogin extends Component {
                                 errorPass = true
                             }
                             if (!values.email) {
-                                errors.email = '';
                                 mailCorrecto = true;
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
@@ -187,8 +186,8 @@ class SimLogin extends Component {
                             />
 
                             <ReactTooltip id="errormail"
-                                place="bottom"
-                                type="error"
+                                place="right"
+                                type="info"
                                 effect="solid"
                                 className="error-tooltip"
                             >
@@ -208,8 +207,8 @@ class SimLogin extends Component {
                             />
 
                             <ReactTooltip id="errorpsswd"
-                                place="bottom"
-                                type="error"
+                                place="right"
+                                type="info"
                                 effect="solid"
                                 className="error-tooltip"
                             >
