@@ -20,16 +20,18 @@ module.exports = async (req, res) => {
             href: "https://" + req.headers.host + req.url
           }
         },
-        message: 'Must provide an array named data whose length must be greater than 0'
+        message: 'Must provide an array named data whose length must be greater than 0. Each object must have an email and state property'
       })
     } else {
       var i
       var x
       let conf = true
+      let errorPosition
       for (i = 0; i < req.body.data.length; i++) {
         for (x = 0; x < req.body.data.length; x++) {
-          if (req.body.data[x].email == undefined || req.body.data[x].state == undefined) {
+          if (req.body.data[x].email == undefined || req.body.data[x].state == undefined || (req.body.data[x].state != true && req.body.data[x].state != false)) {
             conf = false
+            errorPosition = x
           }
         }
         if (conf == true) {
@@ -95,6 +97,16 @@ module.exports = async (req, res) => {
 
             })
           }
+        } else {
+          return res.status(400).json({
+            _links: {
+              self: {
+                href: "https://" + req.headers.host + req.url
+              }
+            },
+            message: 'Invalid value for state or email in array at position ' + errorPosition
+
+          })
         }
       }
     }
