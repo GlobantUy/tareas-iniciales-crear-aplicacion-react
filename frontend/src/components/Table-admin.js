@@ -4,7 +4,7 @@ import axios from 'axios';
 
 let Estado
 let email
-let URLupdateLoan = "https://backendmain.vercel.app/api/updateLoan"
+let URLupdateLoan = "https://backendmain-4npwjkmus.vercel.app/api/updateLoan"
 let prestamosCargados
 class Tableadmin extends Component {
 
