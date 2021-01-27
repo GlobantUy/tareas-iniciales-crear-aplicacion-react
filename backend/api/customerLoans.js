@@ -2,6 +2,7 @@ import { connectToDatabase } from '../lib/database'
 
 module.exports = async (req, res) => {
     let loanSearch
+    
     let userSearch
 
     const db = await connectToDatabase()
