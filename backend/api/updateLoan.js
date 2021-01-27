@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
             }
           }
         }
-        if (conf == true) {
+        if (conf == true && conf2 == true) {
           try {
             totalLoanSearch = await collectionT.find({ userEmail: req.body.data[i].email }).toArray()
             trueloanSearch = await collectionT.find({ userEmail: req.body.data[i].email, state: true }).toArray()
@@ -128,7 +128,7 @@ module.exports = async (req, res) => {
                 href: "https://" + req.headers.host + req.url
               }
             },
-            message: 'Duplicated entry for email property in array' + email
+            message: 'Duplicated entry for email property in array' + dupEmail
 
           })
         }
