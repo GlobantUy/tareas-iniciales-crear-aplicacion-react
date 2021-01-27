@@ -19,6 +19,12 @@ const validate = values => {
         errors.ConfirmPassword = 'Las contraseñas no coinciden'
     }
 
+    if(contra.length < 8){
+        
+           errors.contra= 'La contraseña ingresada es menor a 8 caracteres'
+        
+    }
+
     if (!values.Genero && !values.Preferencias) {
         errors.Genero = 'Este campo es obligatorio'
     }

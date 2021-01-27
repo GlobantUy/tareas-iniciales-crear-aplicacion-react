@@ -115,10 +115,6 @@ class SimLogin extends Component {
                             passwordd = values.password
                             contraCorrecta = false;
 
-                            if (errorPass == false) {
-                                errors.password = "Los datos ingresados no son correctos, por favor verifique";
-                                errorPass = true
-                            }
                             if (!values.email) {
                                 errors.email = '';
                                 mailCorrecto = true;
@@ -131,6 +127,9 @@ class SimLogin extends Component {
                                 emaill = values.email
                                 mailCorrecto = false;
                             }
+                        }
+                        if (passwordd.length < 8) {
+                            errors.password = "la contraseña ingresada es menor a 8 caracteres";  
                         }
 
                         if (mailCorrecto && contraCorrecta == false) {
