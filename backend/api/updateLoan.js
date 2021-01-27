@@ -37,6 +37,7 @@ module.exports = async (req, res) => {
             conf = false
             errorPosition = x
           }
+          emailRep = 0
           let email = req.body.data[x].email
           for (b = 0; b < req.body.data.length; b++) {
             if (email == req.body.data[b].email) {
