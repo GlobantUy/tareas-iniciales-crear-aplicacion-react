@@ -4,12 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
 
-const errors = {}
 const validate = values => {
 
     let contra = values.Password
     let confirmContra = values.ConfirmPassword
-    errors
+    const errors = {}
 
     if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.Email)) {
         errors.Email = 'formato incorrecto'
@@ -17,12 +16,6 @@ const validate = values => {
 
     if (contra != confirmContra) {
         errors.ConfirmPassword = 'Las contraseñas no coinciden'
-    }
-
-    if(contra.length < 8){
-        
-           errors.contra= 'La contraseña ingresada es menor a 8 caracteres'
-        
     }
 
     if (!values.Genero && !values.Preferencias) {
@@ -64,32 +57,11 @@ class RegisterContent extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
     }
-    
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
-
-        const { name } = e.target;
-        switch (name) {
-            case "Email":
-                if (this.state.Email) {
-                    errors.Email = ''
-                }
-                break;
-            case "Password":
-                if (this.state.Email) {
-                    errors.ConfirmPassword = ''
-                }
-                break;
-            case "ConfirmPassword":
-                if (this.state.Email) {
-                    errors.ConfirmPassword = ''
-                }
-                break;
-            default:
-                break;
-        }
     }
 
     handleChangePreferencias = event => {
@@ -113,7 +85,7 @@ class RegisterContent extends Component {
         let departamento = this.state.Departamento
         let genero = this.state.Genero
         let preferencias = this.state.Preferencias
-        if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '') {
+        if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '' && pass.length >= 8) {
             this.setState({
                 isDisable: false
             })
@@ -165,6 +137,10 @@ class RegisterContent extends Component {
                     this.setState({
                         EmailError: 'Este campo es obligatorio'
                     })
+                } else if (this.state.EmailError == 'Ya existe un usuario con este email') {
+                    this.setState({
+                        EmailError: 'Ya existe un usuario con este email',
+                    })
                 } else {
                     this.setState({
                         EmailError: '',
@@ -176,7 +152,11 @@ class RegisterContent extends Component {
                     this.setState({
                         PasswordError: 'Este campo es obligatorio'
                     })
-                } else {
+                }else if (this.state.Password.length < 8){
+                    this.setState({
+                        PasswordError: 'La contraseña ingresada es menor a 8 caracteres'
+                    })
+                }else {
                     this.setState({
                         PasswordError: '',
                     })
@@ -215,8 +195,6 @@ class RegisterContent extends Component {
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
-            window.location.href = '/ingreso'
-
             axios.post(URL, {
                 "name": this.state.Nombre,
                 "lName": this.state.Apellido,
@@ -228,8 +206,23 @@ class RegisterContent extends Component {
                 "passwd": this.state.Password
             }).then(Response => {
                 console.log(Response)
+                if (Response.data.message == "Email belongs to an existing account") {
+                    this.setState({
+                        EmailError: 'Ya existe un usuario con este email'
+                    })
+                } else {
+                    this.setState({
+                        EmailError: ''
+                    })
+                    window.location.href = '/ingreso'
+                }
             }).catch(error => {
                 console.log(error)
+            })
+
+        }else{
+            this.setState({
+                EmailError: ''
             })
         }
     }
@@ -242,7 +235,7 @@ class RegisterContent extends Component {
                     <form className="form registro" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
 
                         <center>
-                            <h1 className="titlee-registro">Registro</h1>
+                            <h1 className="titlee-registro">Registro de usuario STB Bank</h1>
                         </center>
 
                         <div className="container">

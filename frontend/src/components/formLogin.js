@@ -2,7 +2,7 @@ import React, { Component, } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 
-let emailFromStorage
+let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique'
 var btn = "btnPrimarioDisabled";
 let rol
 let errorPass = true
@@ -10,8 +10,8 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-let URL = "https://backendmain.vercel.app/api/login"
-let URLreturnpres = "https://backendmain.vercel.app/api/returnLoans"
+let URL = "https://backendmain-o2ub8kmbw.vercel.app/api/login"
+let URLreturnpres = "https://backendmain-o2ub8kmbw.vercel.app/api/returnLoans"
 
 class SimLogin extends Component {
 
@@ -39,6 +39,18 @@ class SimLogin extends Component {
         }
     }
 
+    mostrarError = () => {
+        let element = document.getElementById("datosIncorrectos")
+        element.className += ' encontrado'
+    }
+
+    quitarError = () => {
+        let element
+        if (element = document.getElementById("datosIncorrectos")) {
+            element.className = 'no-encontrado'
+        }
+    }
+
     post(email, pass) {
         axios.post(URL, {
             "email": email,
@@ -49,6 +61,7 @@ class SimLogin extends Component {
                 console.log("post realizado correctamente", Response)
                 if (Response.data.found == undefined) {
                     rol = Response.data.rol;
+                    this.quitarError()
                     if (rol == "CUSTOMER") {
                         console.log(rol)
                         this.redireccionar()
@@ -72,7 +85,7 @@ class SimLogin extends Component {
                     }
                 } else {
                     console.log(Response.data.found)
-                    this.redireccionar()
+                    this.mostrarError()
                 }
             })
             .catch(error => {
@@ -99,7 +112,6 @@ class SimLogin extends Component {
                         const errors = {};
                         if (!values.password) {
                             errors.password = 'Necesario';
-                            mailCorrecto = true;
                             if (!values.email) {
                                 errors.email = 'Necesario';
                             } else if (
@@ -110,11 +122,15 @@ class SimLogin extends Component {
                             } else {
                                 mailCorrecto = true;
                             }
-
                         } else {
+
                             passwordd = values.password
                             contraCorrecta = false;
 
+                            if (errorPass == false) {
+                                datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique";
+                                errorPass = true
+                            }
                             if (!values.email) {
                                 errors.email = '';
                                 mailCorrecto = true;
@@ -122,20 +138,25 @@ class SimLogin extends Component {
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
                                 errors.email = 'Formato invalido';
-                                mailCorrecto = true;
+                                mailCorrecto = false;
                             } else {
                                 emaill = values.email
-                                mailCorrecto = false;
+                                mailCorrecto = true;
                             }
                         }
-                        if (passwordd.length < 8) {
-                            errors.password = "la contraseña ingresada es menor a 8 caracteres";  
+                        
+                        if (values.password.length < 8 && values.password.length >= 1 ){
+                            errors.password = 'La contraseña ingresada es menor a 8 caracteres'
+                            contraCorrecta = false;
+                        }
+                        else{
+                            contraCorrecta = true;
                         }
 
-                        if (mailCorrecto && contraCorrecta == false) {
-                            btn = "btnPrimarioDisabled"
-                        } else {
+                        if (mailCorrecto && contraCorrecta == true) {
                             btn = "btnPrimario"
+                        } else {
+                            btn = "btnPrimarioDisabled"
                         }
                         return errors;
                     }}
@@ -177,9 +198,10 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.password}
                             />
+                            { touched.password && <label className="error">{errors.password}</label>}
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
 
-                            { touched.password && <p className="error dt-in">{errors.password}</p>}
+                            { touched.password && <p id="datosIncorrectos" className="no-encontrado ">{datosIncorrectos}</p>}
 
                             <button
                                 className={btn}
