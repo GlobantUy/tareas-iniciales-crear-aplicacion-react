@@ -19,7 +19,7 @@ class Tableadmin extends Component {
 
             estadocambiados: [],
 
-            data = [],
+            data : [],
 
             rowSelected: false,
 
