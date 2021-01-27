@@ -89,10 +89,6 @@ module.exports = async (req, res) => {
                     message: 'Invalid state for ' + req.body.data[i].email + ' / ' + req.body.data[i].state
 
                   })
-                } else {
-                  arrayTest = await collectionT.find({ userEmail: req.body.data[i].email }).sort({ date: -1 }).toArray()
-                  const loanId = arrayTest[0]._id
-                  await collectionT.updateOne({ _id: loanId }, { $set: { state: req.body.data[i].state, stateDate: date } })
                 }
               }
             }
@@ -133,6 +129,11 @@ module.exports = async (req, res) => {
         }
       }
       if (conf3 == true) {
+        for (i = 0; i < req.body.data.length; i++) {
+          arrayTest = await collectionT.find({ userEmail: req.body.data[i].email }).sort({ date: -1 }).toArray()
+          const loanId = arrayTest[0]._id
+          await collectionT.updateOne({ _id: loanId }, { $set: { state: req.body.data[i].state, stateDate: date } })
+        }
         return res.json({
           _links: {
             self: {
