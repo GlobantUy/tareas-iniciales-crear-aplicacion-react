@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
             total = trueloanSearch.length + falseloanSearch.length
             if (totalLoanSearch.length == 0) {
               conf3 = false
-              return res.status(403).json({
+              return res.status(200).json({
                 _links: {
                   self: {
                     href: "https://" + req.headers.host + req.url
@@ -69,7 +69,7 @@ module.exports = async (req, res) => {
             } else {
               if (totalLoanSearch.length == total) {
                 conf3 = false
-                return res.status(403).json({
+                return res.status(200).json({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url

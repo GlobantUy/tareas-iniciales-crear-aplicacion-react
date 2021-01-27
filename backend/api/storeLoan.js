@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
       userSearch = await collectionU.find({ email: req.body.email }).toArray()
 
       if (userSearch.length != 1) {
-        return res.status(403).json({
+        return res.status(200).json({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
@@ -121,7 +121,7 @@ module.exports = async (req, res) => {
                   })
                 }
               } else {
-                return res.status(403).json({
+                return res.status(200).json({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url
