@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
+
 let Estado
 let email
 let URLupdateLoan = "https://backendmain-2yi8csclp.vercel.app/api/updateLoan"
@@ -17,6 +18,8 @@ class Tableadmin extends Component {
         this.state = { //state is by default an object
 
             estadocambiados: [],
+
+            data : [],
 
             rowSelected: false,
 
@@ -36,7 +39,7 @@ class Tableadmin extends Component {
 
 
     componentDidMount() {
-        
+
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
             return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state , Email: cliente.userEmail}
         })
@@ -98,6 +101,7 @@ class Tableadmin extends Component {
             let lista = this.state.listacambiados
              axios.post(URLupdateLoan, {
                  "data": [{"email": "devTest@test.com" , "state": false }] 
+    
             }).then(res => {
           
              }
@@ -229,10 +233,10 @@ class Tableadmin extends Component {
                 <>
                     <div className="container">
                         <h2 id='titulo'>Solicitudes de préstamo</h2>
-                        <h2 id='Filtro'>Filtro por estado </h2>
-                        <select id='menufiltro' onChange={this.changeFilterDropdown} >
+                        <h2 id='Filtroo'>Filtro por estado </h2>
+                        <select id='menufiltroo' disabled  >
 
-                            <option value="option1"> Todos </ option>
+                            <option value="option1">  </ option>
                             <option value="option2">Aprobado  </ option>
 
                             <option value="option3"> Rechazado </ option>
