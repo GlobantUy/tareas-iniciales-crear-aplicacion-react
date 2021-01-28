@@ -1,6 +1,6 @@
 # Welcome to Serverless!
-service: stb-backend
-app: prestamos-api
+service: stb
+app: api
 
 provider:
   name: aws
@@ -9,29 +9,35 @@ provider:
   region: us-east-1
 
 functions:
-  prestamosAPI:
-    handler: api/controllers/login.handler
+  index:
+    handler: api/controllers/index.handler
     events:
         - http:
-            path: /index
-            method: get
-
-
-        - http:
-            path: /
-            method: post
-
-
-        - http:
             path: /
             method: get
+  
+  login:
+    handler: api/login.handler
+  
+  register:
+    handler: api/register.handler
 
-        - http:
-            path: /{prestamoId}
-            method: get
+  storeLoan:
+    handler: api/storeLoan.handler
+  
+  returnLoans:
+    handler: api/returnLoans.handler
+
+  updateLoan:
+    handler: api/updateLoan.handler
+
+  customerLoans:
+    handler: api/customerLoans.handler
+    
 custom:
   serverless-offline:
     host: 0.0.0.0
+    port: 3001
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin

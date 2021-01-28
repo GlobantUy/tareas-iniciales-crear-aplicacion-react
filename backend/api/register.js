@@ -1,6 +1,8 @@
-import { connectToDatabase } from '../lib/database'
-const User = require('./models/user')
-module.exports = async (req, res) => {
+//import { connectToDatabase } from '../lib/database'
+const connectToDatabase = require('../lib/database');
+const User = require('./models/user');
+
+module.exports.handler = async (req, res) => {
   let userSearch
   const db = await connectToDatabase()
   const collectionU = await db.collection('users')

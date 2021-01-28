@@ -3,12 +3,13 @@ require('dotenv').config()
 
 let cachedDb = null
 
-export const connectToDatabase = async => {
+// export 
+const connectToDatabase = async () => {
   if (cachedDb) {
     console.log('Use previous connection')
     return Promise.resolve(cachedDb)
   } else {
-    return MongoClient.connect('mongodb+srv://test1:123@cluster0.e2axf.mongodb.net/database?retryWrites=true&w=majority', {
+    return MongoClient.connect(process.env.DATABASE_URL, {
       native_parser: true,
       useUnifiedTopology: true
     })
@@ -23,3 +24,4 @@ export const connectToDatabase = async => {
       })
   }
 }
+module.exports = connectToDatabase;

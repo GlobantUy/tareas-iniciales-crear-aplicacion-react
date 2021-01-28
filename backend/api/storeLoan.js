@@ -1,7 +1,8 @@
-import { connectToDatabase } from '../lib/database'
+//import { connectToDatabase } from '../lib/database'
+const connectToDatabase = require('../lib/database');
 const Loan = require('./models/table')
 
-module.exports = async (req, res) => {
+module.exports.handler = async (req, res) => {
   let loanSearch
   let userSearch
   let conf = true
