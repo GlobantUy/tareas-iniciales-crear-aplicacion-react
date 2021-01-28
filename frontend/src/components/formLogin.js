@@ -141,6 +141,7 @@ class SimLogin extends Component {
                         } 
                         else {
                             mailCorrecto = true;
+                            emaill = values.email;
                         }
 
                         if (errorPass == false) {
