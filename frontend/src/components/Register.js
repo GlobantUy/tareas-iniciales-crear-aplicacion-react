@@ -4,6 +4,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
 
+/*const data = new Date();
+let anio = data.getUTCFullYear() - 18
+let mes = data.getUTCMonth()+1
+let dia = data.getUTCDate()
+let fechaActual = anio +"-0"+ mes + "-" + dia
+console.log(fechaActual)*/
+
 const validate = values => {
 
     let contra = values.Password
@@ -285,6 +292,7 @@ class RegisterContent extends Component {
                                         value={this.state.FechaNacimiento}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                    //max={fechaActual}
                                     />
                                     <label className="error">{this.state.FechaNacimientoError}</label>
                                 </div>
