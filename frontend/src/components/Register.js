@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
-let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
+let URL = 'https://backendmain-2yi8csclp.vercel.app/api/register'
 
 const validate = values => {
 
