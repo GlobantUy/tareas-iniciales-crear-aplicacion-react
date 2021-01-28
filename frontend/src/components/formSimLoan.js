@@ -6,9 +6,11 @@ import ReactDOM from 'react-dom';
 
 const validate = values => {
     const errors = {}
-    if (!values.Ingreso) {
-        errors.Ingreso = 'Este campo es obligatorio'
-    }
+
+     if (!values.Ingreso) {
+         errors.Ingreso = 'Este campo es obligatorio'
+     }
+
     if (!values.Monto_a_pedir) {
         errors.Monto_a_pedir = 'Este campo es obligatorio'
     }
@@ -108,7 +110,6 @@ class SimLoan extends Component {
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
-            console.log('enviar formulario')
             window.location.href = '/Descuento'
         }
 

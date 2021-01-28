@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
       userSearch = await collectionU.find({ email: req.body.email }).toArray()
 
       if (userSearch.length != 1) {
-        return res.status(403).json({
+        return res.status(200).json({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
@@ -88,7 +88,7 @@ module.exports = async (req, res) => {
                 const id = req.body.email + '/' + year + '/' + month + '/' + day + '|' + hour + '/' + minutes + '/' + seconds
                 const newLoan = new Loan({
 
-                  userName: userSearch[0].name,
+                  userName: userSearch[0].name + ' ' + userSearch[0].lName,
                   userEmail: req.body.email,
                   amount: req.body.amount,
                   date: date,
@@ -121,7 +121,7 @@ module.exports = async (req, res) => {
                   })
                 }
               } else {
-                return res.status(403).json({
+                return res.status(200).json({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url
