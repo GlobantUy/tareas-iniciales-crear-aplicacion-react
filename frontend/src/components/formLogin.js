@@ -79,7 +79,7 @@ class SimLogin extends Component {
                             } else {
                                 sessionStorage.setItem('prestamosNull', true);
                                 sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
-                                
+
 
                                 this.redireccionar()
                             }
@@ -113,46 +113,43 @@ class SimLogin extends Component {
                     initialValues={{ email: '', password: '' }}
                     validate={values => {
                         const errors = {};
+
                         if (!values.password) {
                             errors.password = 'Necesario';
-                            if (!values.email) {
-                                errors.email = 'Necesario';
-                            } else if (
-                                !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
-                            ) {
-                                errors.email = 'Formato invalido';
-                                mailCorrecto = true;
-                            } else {
-                                mailCorrecto = true;
-                            }
-                        } else {
-                            passwordd = values.password
                             contraCorrecta = false;
-
-                            if (errorPass == false) {
-                                datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique";
-                                errorPass = true
-                            }
-                            if (!values.email) {
-                                errors.email = '';
-                                mailCorrecto = true;
-                            } else if (
-                                !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
-                            ) {
-                                errors.email = 'Formato invalido';
-                                mailCorrecto = false;
-                            } else {
-                                emaill = values.email
-                                mailCorrecto = true;
-                            }
-                        }
-                        if (values.password.length < 8 && values.password.length >= 1 ){
+                        } 
+                        else if (values.password.length < 8 && values.password.length >= 1) {
                             errors.password = 'La contraseña ingresada es menor a 8 caracteres'
                             contraCorrecta = false;
                         }
-                        else{
+                        else {
                             contraCorrecta = true;
+                            passwordd = values.password  
+                        }  
+
+                        if (!values.email) {
+                            errors.email = 'Necesario';
+                            mailCorrecto = false;
+                        } 
+                        else if (!values.email) {
+                            errors.email = '';
+                            mailCorrecto = false;
+                        } 
+                        else if (
+                            !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
+                        ) {
+                            errors.email = 'Formato invalido';
+                            mailCorrecto = false;
+                        } 
+                        else {
+                            mailCorrecto = true;
                         }
+
+                        if (errorPass == false) {
+                            datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique";
+                            errorPass = true
+                        }
+
                         if (mailCorrecto && contraCorrecta == true) {
                             btn = "btnPrimario"
                         } else {
@@ -160,7 +157,6 @@ class SimLogin extends Component {
                         }
                         return errors;
                     }}
-
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == true && contraCorrecta == true) {
                             this.post(values.email, values.password)
