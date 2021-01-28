@@ -5,18 +5,18 @@ import 'bootstrap/dist/css/bootstrap.css';
 let URL = 'https://backendmain-gktbdrcfz.vercel.app/api/register'
 
 const data = new Date();
-let anioMin = data.getUTCFullYear() - 100 
+let anioMin = data.getUTCFullYear() - 100
 let anio = data.getUTCFullYear() - 18
-let mes = data.getUTCMonth()+1
+let mes = data.getUTCMonth() + 1
 let dia = data.getUTCDate()
 let mesN
 if (mes >= 1 && mes <= 9) {
-    mesN = "0"+mes
-}else{
+    mesN = "0" + mes
+} else {
     mesN = mes
 }
-let fechaActual = anio +"-"+ mesN + "-" + dia
-let fechaMin = anioMin +"-"+ mesN + "-" + dia
+let fechaActual = anio + "-" + mesN + "-" + dia
+let fechaMin = anioMin + "-" + "01" + "-" + "01"
 
 const validate = values => {
 
@@ -94,6 +94,7 @@ class RegisterContent extends Component {
         let apellido = this.state.Apellido
         let nombreIncorrecto = this.state.NombreError
         let apellidoIncorrecto = this.state.ApellidoError
+        let fechaNacIncorrecta = this.state.FechaNacimientoError
         let fechaNac = this.state.FechaNacimiento
         let email = this.state.Email
         let pass = this.state.Password
@@ -102,7 +103,8 @@ class RegisterContent extends Component {
         let genero = this.state.Genero
         let preferencias = this.state.Preferencias
         if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '' &&
-            nombreIncorrecto != "Ingrese un nombre valido" && apellidoIncorrecto != "Ingrese un apellido valido" && pass.length >= 8) {
+            nombreIncorrecto != "Ingrese un nombre valido" && apellidoIncorrecto != "Ingrese un apellido valido" && pass.length >= 8 &&
+            fechaNacIncorrecta != "Solo nacidos el "+ dia +"/"+mesN+"/"+anio +" o antes" && fechaNacIncorrecta != "Solo nacidos despues del "+ anioMin) {
             this.setState({
                 isDisable: false
             })
@@ -151,6 +153,14 @@ class RegisterContent extends Component {
                     this.setState({
                         FechaNacimientoError: 'Este campo es obligatorio'
                     })
+                } else if (this.state.FechaNacimiento > fechaActual) {
+                    this.setState({
+                        FechaNacimientoError: 'Solo nacidos el '+ dia +"/"+mesN+"/"+anio +" o antes" 
+                    })
+                } else if (this.state.FechaNacimiento < fechaMin) {
+                    this.setState({
+                        FechaNacimientoError: 'Solo nacidos despues del '+ anioMin
+                    })
                 } else {
                     this.setState({
                         FechaNacimientoError: '',
@@ -177,11 +187,11 @@ class RegisterContent extends Component {
                     this.setState({
                         PasswordError: 'Este campo es obligatorio'
                     })
-                }else if (this.state.Password.length < 8){
+                } else if (this.state.Password.length < 8) {
                     this.setState({
                         PasswordError: 'La contraseña ingresada es menor a 8 caracteres'
                     })
-                }else {
+                } else {
                     this.setState({
                         PasswordError: '',
                     })
