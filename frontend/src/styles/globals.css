@@ -1060,3 +1060,23 @@ color: #000000;
     Top: 420px;
     Left: 665px;
 }
+
+input[type=date]::-webkit-datetime-edit-month-field {
+    cursor: text;
+  }
+  input[type=date]::-webkit-datetime-edit-day-field {
+    cursor: text;
+  }
+  input[type=date]::-webkit-datetime-edit-year-field {
+    cursor: text;
+  }
+  input[type=date]::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+  }
+  input[type=date]::-webkit-datetime-edit { 
+    padding: 1em; 
+  }
+  input[type=date]::-webkit-datetime-edit-text { 
+     padding: 0 0.3em; 
+  }
+
