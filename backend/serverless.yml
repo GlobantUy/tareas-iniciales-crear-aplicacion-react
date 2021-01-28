@@ -17,7 +17,12 @@ functions:
             method: get
   
   login:
-    handler: api/login.handler
+    handler: api/controllers/login.handler
+    events:
+        - http:
+            path: /api/login
+            method: post
+            cors: true
   
   register:
     handler: api/register.handler

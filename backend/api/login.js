@@ -1,13 +1,12 @@
-// import { connectToDatabase } from '../lib/database'
-const connectToDatabase = require('../lib/database')
+const connectToDatabase = require('../lib/database');
 
-module.exports.handler = async (req, res) => {
+module.exports.login = async (req, res) => {
   let userSearch
 
   const db = await connectToDatabase()
-  const collection = await db.collection('users')
+  const collection = await db.collection('users');
   if (req.method === 'OPTIONS') {
-    return res.status(200).send('ok')
+    return 'ok';
   }
   if (req.method === 'POST') {
     try {
@@ -18,7 +17,7 @@ module.exports.handler = async (req, res) => {
         userSearch[0].email
       } catch (err) {
         conf = false
-        return res.json({
+        return ({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
@@ -29,7 +28,7 @@ module.exports.handler = async (req, res) => {
         })
       }
       if (conf == true) {
-        return res.json({
+        return ({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
@@ -40,7 +39,7 @@ module.exports.handler = async (req, res) => {
         })
       }
     } catch (err) {
-      return res.json({
+      return ({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
@@ -51,7 +50,7 @@ module.exports.handler = async (req, res) => {
       })
     }
   } else if (req.method != 'OPTIONS'){
-    return res.json({
+    return ({
       _links: {
         self: {
           href: "https://" + req.headers.host + req.url
