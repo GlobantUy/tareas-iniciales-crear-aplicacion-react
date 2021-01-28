@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
-let URL = 'https://backendmain-858cqrzs8.vercel.app/api/register'
+let URL = 'https://backendmain-2yi8csclp.vercel.app/api/register'
 
 const validate = values => {
 
@@ -88,7 +88,7 @@ class RegisterContent extends Component {
         let genero = this.state.Genero
         let preferencias = this.state.Preferencias
         if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '' &&
-            nombreIncorrecto != "Ingrese un nombre valido" && apellidoIncorrecto != "Ingrese un apellido valido") {
+            nombreIncorrecto != "Ingrese un nombre valido" && apellidoIncorrecto != "Ingrese un apellido valido" && pass.length >= 8) {
             this.setState({
                 isDisable: false
             })
@@ -163,7 +163,11 @@ class RegisterContent extends Component {
                     this.setState({
                         PasswordError: 'Este campo es obligatorio'
                     })
-                } else {
+                }else if (this.state.Password.length < 8){
+                    this.setState({
+                        PasswordError: 'La contraseña ingresada es menor a 8 caracteres'
+                    })
+                }else {
                     this.setState({
                         PasswordError: '',
                     })
