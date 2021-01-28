@@ -4,7 +4,7 @@ import axios from 'axios';
 
 let Estado
 let email
-let URLupdateLoan = "https://backendmain-4npwjkmus.vercel.app/api/updateLoan"
+let URLupdateLoan = "https://backendmain-2yi8csclp.vercel.app/api/updateLoan"
 let prestamosCargados
 class Tableadmin extends Component {
 
@@ -19,6 +19,8 @@ class Tableadmin extends Component {
             estadocambiados: [],
 
             rowSelected: false,
+
+            clientesCambiados:[],
 
 
             clientes: [{ Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
@@ -36,11 +38,7 @@ class Tableadmin extends Component {
     componentDidMount() {
         
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
-            0
-            email = cliente.userEmail
-            Estado = cliente.state
-            console.log(email, Estado)
-            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
+            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state , Email: cliente.userEmail}
         })
 
         prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
@@ -83,8 +81,7 @@ class Tableadmin extends Component {
 
     handleLimpiar() {
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
-            0
-            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
+            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
         })
         let filas = document.getElementsByTagName('tr')
 
@@ -98,10 +95,9 @@ class Tableadmin extends Component {
     }
 
     handleClicked() {
-            
-            axios.post(URLupdateLoan, {
-                "email": email,
-                "Estado": Estado
+            let lista = this.state.listacambiados
+             axios.post(URLupdateLoan, {
+                 "data": [{"email": "devTest@test.com" , "state": false }] 
             }).then(res => {
           
              }
@@ -117,7 +113,7 @@ class Tableadmin extends Component {
         if (dropdown.value != "option1") {
             listaclientes[index].Estado = (dropdown.value == "option2") ? false : true;
             let listacambiados = this.state.estadocambiados;
-            listacambiados.push({ cliente: index, value: dropdown.value })
+            listacambiados.push({ email: listaclientes[index].Email, value: dropdown.value })
             this.setState({
                 isAplicarDisabled: false,
                 rowSelected: true,
@@ -166,14 +162,14 @@ class Tableadmin extends Component {
 
     renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {
-            const { Usuario, Montosolicitado, Fecha, moneda, Cuotas, Estado } = cliente //destructuring
+            const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas, Estado } = cliente //destructuring
             if (Estado == Filtro || Filtro == 'Todos') {
                 return (
                     <tr id={index} key={index}>
                         <td className="celda">{Usuario}</td>
                         <td className="celda">{Montosolicitado}</td>
                         <td className="celda">{Fecha}</td>
-                        <td className="celda">{moneda}</td>
+                        <td className="celda">{Moneda}</td>
                         <td className="celda">{Cuotas}</td>
                         <td className="celda">
                             {this.crearestado(Estado, index)}
@@ -189,7 +185,7 @@ class Tableadmin extends Component {
         return header.map((key, index) => {
             if (key == "Montosolicitado") {
                 return <th key={index}>{"Monto solicitado"}</th>
-            } else {
+            } else if(key != "Email") {
                 return <th key={index}>{key}</th>
             }
 
@@ -223,7 +219,7 @@ class Tableadmin extends Component {
                         <div className="Buttons">
 
                             <button className="btnSeptimo" hidden={this.state.hidden} onClick={this.handleLimpiar} > Limpiar</button>
-                            <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled}  > Aplicar cambios</button>
+                            <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} onClick={this.handleClicked} > Aplicar cambios</button>
                         </div>
                     </div>
                 </div>
