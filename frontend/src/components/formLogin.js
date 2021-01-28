@@ -124,6 +124,7 @@ class SimLogin extends Component {
                                 mailCorrecto = true;
                             } else {
                                 mailCorrecto = true;
+                                ReactTooltip.rebuild('errormail');
                             }
 
                         } else {
@@ -183,6 +184,8 @@ class SimLogin extends Component {
                                 value={values.email}
                                 data-for="errormail"
                                 data-tip=""
+                                event="change"
+                                eventOff={handleChange}
                             />
 
                             <ReactTooltip id="errormail"
