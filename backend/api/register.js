@@ -1,25 +1,25 @@
-//import { connectToDatabase } from '../lib/database'
 const connectToDatabase = require('../lib/database');
 const User = require('./models/user');
 
-module.exports.handler = async (req, res) => {
+module.exports.register = async (req, res) => {
   let userSearch
   const db = await connectToDatabase()
   const collectionU = await db.collection('users')
   if (req.method === 'OPTIONS') {
-    return res.status(200).send('ok')
+    return ({status:200, ok: 'ok'});
   }
   if (req.method === 'POST') {
     try {
       if (req.body.email != undefined && req.body.email.length != 0) {
         userSearch = await collectionU.find({ email: req.body.email }).toArray()
         if (userSearch.length != 0) {
-          return res.status(409).json({
+          return ({
             _links: {
               self: {
                 href: "https://" + req.headers.host + req.url
               }
             },
+            status: 409,
             message: 'Email belongs to an existing account'
           })
         } else {
@@ -45,112 +45,123 @@ module.exports.handler = async (req, res) => {
                         })
                         db.collection('users').insertOne(userN)
 
-                        return res.status(200).json({
+                        return ({
                           _links: {
                             self: {
                               href: "https://" + req.headers.host + req.url
                             }
                           },
+                          status: 200,
                           message: 'User registered successfully'
                         })
                       } else {
-                        return res.status(400).json({
+                        return ({
                           _links: {
                             self: {
                               href: "https://" + req.headers.host + req.url
                             }
                           },
+                          status: 400,
                           message: "Must provide a 'preferences' property and value"
                         })
                       }
                     } else {
-                      return res.status(400).json({
+                      return ({
                         _links: {
                           self: {
                             href: "https://" + req.headers.host + req.url
                           }
                         },
+                        status: 400,
                         message: "Must provide a 'gender' property and value"
                       })
                     }
                   } else {
-                    return res.status(400).json({
+                    return ({
                       _links: {
                         self: {
                           href: "https://" + req.headers.host + req.url
                         }
                       },
+                      status: 400,
                       message: "Must provide a 'passwd' property and value"
                     })
                   }
                 } else {
-                  return res.status(400).json({
+                  return ({
                     _links: {
                       self: {
                         href: "https://" + req.headers.host + req.url
                       }
                     },
+                    status: 400,
                     message: "Must provide a 'department' property and value"
                   })
                 }
               } else {
-                return res.status(400).json({
+                return ({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url
                     }
                   },
+                  status: 400,
                   message: "Must provide a 'dateOfBirth' property and value"
                 })
               }
             } else {
-              return res.status(400).json({
+              return ({
                 _links: {
                   self: {
                     href: "https://" + req.headers.host + req.url
                   }
                 },
+                status: 400,
                 message: "Must provide a 'lName' property and value"
               })
             }
           } else {
-            return res.status(400).json({
+            return ({
               _links: {
                 self: {
                   href: "https://" + req.headers.host + req.url
                 }
               },
+              status: 400,
               message: "Must provide a 'name' property and value"
             })
           }
         }
       } else {
-        return res.status(400).json({
+        return ({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
             }
           },
+          status: 400,
           message: "Must provide an 'email' property and value"
         })
       }
     } catch (err) {
-      return res.status(500).json({
+      return ({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
           }
         },
+        status: 500,
         message: 'Internal server error (005)'
       })
     }
   } else if (req.method != 'OPTIONS'){
-    return res.status(405).json({
+    return ({
       _links: {
         self: {
           href: "https://" + req.headers.host + req.url
         }
       },
+      status: 405,
       message: 'Invalid method:' + ' "' + req.method + '"'
 
     })

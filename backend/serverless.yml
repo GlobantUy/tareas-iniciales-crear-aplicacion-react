@@ -15,30 +15,48 @@ functions:
         - http:
             path: /
             method: get
-  
-  login:
-    handler: api/controllers/login.handler
-    events:
+  #login:
+  #  handler: api/controllers/index.handler
+  #  events:
         - http:
             path: /api/login
             method: post
+            cors: true  
+  # register:
+  #   handler: api/index.handler
+  #   events:
+        - http:
+            path: /api/register
+            method: post
             cors: true
-  
-  register:
-    handler: api/register.handler
-
-  storeLoan:
-    handler: api/storeLoan.handler
-  
-  returnLoans:
-    handler: api/returnLoans.handler
-
-  updateLoan:
-    handler: api/updateLoan.handler
-
-  customerLoans:
-    handler: api/customerLoans.handler
-    
+  # storeLoan:
+  #   handler: api/index.handler
+  #   events:
+        - http:
+            path: /api/storeLoan
+            method: post
+            cors: true  
+  # returnLoans:
+  #   handler: api/index.handler
+  #   events:
+        - http:
+            path: /api/returnLoans
+            method: post
+            cors: true
+  # updateLoan:
+  #   handler: api/index.handler
+  #   events:
+        - http:
+            path: /api/updateLoan
+            method: post
+            cors: true
+  # customerLoans:
+  #   handler: api/index.handler
+  #   events:
+        - http:
+            path: /api/customerLoans
+            method: post
+            cors: true
 custom:
   serverless-offline:
     host: 0.0.0.0

@@ -9,9 +9,10 @@ module.exports.login = async (req, res) => {
     return 'ok';
   }
   if (req.method === 'POST') {
+    console.log(req.body);
     try {
       userSearch = await collection.find({ email: req.body.email, passwd: req.body.passwd }).toArray()
-
+      console.log(userSearch);
       let conf = true
       try {
         userSearch[0].email
@@ -23,6 +24,7 @@ module.exports.login = async (req, res) => {
               href: "https://" + req.headers.host + req.url
             }
           },
+          status: 200,
           found: 'false'
 
         })
@@ -34,6 +36,7 @@ module.exports.login = async (req, res) => {
               href: "https://" + req.headers.host + req.url
             }
           },
+          status: 200,
           email: userSearch[0].email,
           rol: userSearch[0].userType
         })
@@ -45,6 +48,7 @@ module.exports.login = async (req, res) => {
             href: "https://" + req.headers.host + req.url
           }
         },
+        status: 500,
         message: 'Internal error (005)'
 
       })
@@ -56,6 +60,7 @@ module.exports.login = async (req, res) => {
           href: "https://" + req.headers.host + req.url
         }
       },
+      status: 400,
       message: 'Invalid method:' + ' "' + req.method + '"'
 
     })
