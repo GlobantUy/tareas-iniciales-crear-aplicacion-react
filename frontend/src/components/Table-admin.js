@@ -247,7 +247,7 @@ class Tableadmin extends Component {
                     </div>
                     <div>
                         <img className="Tablet" src="/table.png" />
-                        <p className="noDatos">No hay datos ingresados aún</p>
+                        <p id="noDatos">No hay datos ingresados aún</p>
                     </div>
                 </>
             )

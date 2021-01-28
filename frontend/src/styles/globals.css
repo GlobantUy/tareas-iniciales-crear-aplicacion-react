@@ -888,7 +888,7 @@ a.button {
 
 #Filtroo {
     position: absolute;
-    font-family: 'Heebo';
+    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -1042,13 +1042,13 @@ color: #000000;
     top: 280px;
 }
 
-.noDatos {
+#noDatos {
     position: absolute;
     left: 40.7%;
     right: 39.38%;
     top: 58.33%;
     bottom: 38.75%;
-    font-family: 'Heebo';
+    font-family: Heebo;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -1062,3 +1062,23 @@ color: #000000;
     Top: 420px;
     Left: 665px;
 }
+
+input[type=date]::-webkit-datetime-edit-month-field {
+    cursor: text;
+  }
+  input[type=date]::-webkit-datetime-edit-day-field {
+    cursor: text;
+  }
+  input[type=date]::-webkit-datetime-edit-year-field {
+    cursor: text;
+  }
+  input[type=date]::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+  }
+  input[type=date]::-webkit-datetime-edit { 
+    padding: 1em; 
+  }
+  input[type=date]::-webkit-datetime-edit-text { 
+     padding: 0 0.3em; 
+  }
+
