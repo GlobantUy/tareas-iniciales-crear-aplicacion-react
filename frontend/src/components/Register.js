@@ -2,14 +2,21 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
-let URL = 'https://backendmain-2yi8csclp.vercel.app/api/register'
+let URL = 'https://backendmain-gktbdrcfz.vercel.app/api/register'
 
-/*const data = new Date();
+const data = new Date();
+let anioMin = data.getUTCFullYear() - 100 
 let anio = data.getUTCFullYear() - 18
 let mes = data.getUTCMonth()+1
 let dia = data.getUTCDate()
-let fechaActual = anio +"-0"+ mes + "-" + dia
-console.log(fechaActual)*/
+let mesN
+if (mes >= 1 && mes <= 9) {
+    mesN = "0"+mes
+}else{
+    mesN = mes
+}
+let fechaActual = anio +"-"+ mesN + "-" + dia
+let fechaMin = anioMin +"-"+ mesN + "-" + dia
 
 const validate = values => {
 
@@ -296,7 +303,8 @@ class RegisterContent extends Component {
                                         value={this.state.FechaNacimiento}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
-                                    //max={fechaActual}
+                                        max={fechaActual}
+                                        min={fechaMin}
                                     />
                                     <label className="error">{this.state.FechaNacimientoError}</label>
                                 </div>
