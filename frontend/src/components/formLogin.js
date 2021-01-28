@@ -158,7 +158,6 @@ class SimLogin extends Component {
                         }
                         return errors;
                     }}
-
                     onSubmit={(values, { setSubmitting }) => {
                         if (mailCorrecto == true && contraCorrecta == true) {
                             this.post(values.email, values.password)
