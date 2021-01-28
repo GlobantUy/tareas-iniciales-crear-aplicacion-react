@@ -78,6 +78,8 @@ class RegisterContent extends Component {
     comprobarInputs = () => {
         let nombre = this.state.Nombre
         let apellido = this.state.Apellido
+        let nombreIncorrecto = this.state.NombreError
+        let apellidoIncorrecto = this.state.ApellidoError
         let fechaNac = this.state.FechaNacimiento
         let email = this.state.Email
         let pass = this.state.Password
@@ -85,7 +87,8 @@ class RegisterContent extends Component {
         let departamento = this.state.Departamento
         let genero = this.state.Genero
         let preferencias = this.state.Preferencias
-        if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '') {
+        if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '' &&
+            nombreIncorrecto != "Ingrese un nombre valido" && apellidoIncorrecto != "Ingrese un apellido valido") {
             this.setState({
                 isDisable: false
             })
@@ -104,6 +107,10 @@ class RegisterContent extends Component {
                     this.setState({
                         NombreError: 'Este campo es obligatorio'
                     })
+                } else if (!/[A-Z]$/i.test(this.state.Nombre)) {
+                    this.setState({
+                        NombreError: 'Ingrese un nombre valido',
+                    })
                 } else {
                     this.setState({
                         NombreError: '',
@@ -114,6 +121,10 @@ class RegisterContent extends Component {
                 if (!this.state.Apellido) {
                     this.setState({
                         ApellidoError: 'Este campo es obligatorio'
+                    })
+                } else if (!/[A-Z]$/i.test(this.state.Apellido)) {
+                    this.setState({
+                        ApellidoError: 'Ingrese un apellido valido',
                     })
                 } else {
                     this.setState({
@@ -216,7 +227,7 @@ class RegisterContent extends Component {
                 console.log(error)
             })
 
-        }else{
+        } else {
             this.setState({
                 EmailError: ''
             })
