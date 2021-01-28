@@ -113,7 +113,6 @@ class SimLogin extends Component {
                         const errors = {};
                         if (!values.password) {
                             errors.password = 'Necesario';
-                            mailCorrecto = true;
                             if (!values.email) {
                                 errors.email = 'Necesario';
                             } else if (
@@ -124,7 +123,6 @@ class SimLogin extends Component {
                             } else {
                                 mailCorrecto = true;
                             }
-
                         } else {
                             passwordd = values.password
                             contraCorrecta = false;
@@ -140,23 +138,29 @@ class SimLogin extends Component {
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
                                 errors.email = 'Formato invalido';
-                                mailCorrecto = true;
+                                mailCorrecto = false;
                             } else {
                                 emaill = values.email
-                                mailCorrecto = false;
+                                mailCorrecto = true;
                             }
                         }
-
-                        if (mailCorrecto && contraCorrecta == false) {
-                            btn = "btnPrimarioDisabled"
-                        } else {
+                        if (values.password.length < 8 && values.password.length >= 1 ){
+                            errors.password = 'La contraseña ingresada es menor a 8 caracteres'
+                            contraCorrecta = false;
+                        }
+                        else{
+                            contraCorrecta = true;
+                        }
+                        if (mailCorrecto && contraCorrecta == true) {
                             btn = "btnPrimario"
+                        } else {
+                            btn = "btnPrimarioDisabled"
                         }
                         return errors;
                     }}
 
                     onSubmit={(values, { setSubmitting }) => {
-                        if (mailCorrecto == false && contraCorrecta == false) {
+                        if (mailCorrecto == true && contraCorrecta == true) {
                             this.post(values.email, values.password)
 
                         }
