@@ -9,10 +9,8 @@ module.exports.login = async (req, res) => {
     return 'ok';
   }
   if (req.method === 'POST') {
-    console.log(req.body);
     try {
       userSearch = await collection.find({ email: req.body.email, passwd: req.body.passwd }).toArray()
-      console.log(userSearch);
       let conf = true
       try {
         userSearch[0].email

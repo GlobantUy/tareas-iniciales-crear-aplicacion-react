@@ -21,7 +21,7 @@ const {
       RESTURL_BACKEND: (() => {
         if (isDev && !isVercel) return 'http://localhost:3001/api'
         if (isProd) return 'http://api:3001/api'
-        if (isVercel) return 'https://backendmain-2yi8csclp.vercel.app/api/'
+        if (isVercel) return 'https://backendmain-2yi8csclp.vercel.app/api/login'
         if (isStaging) return 'http://localhost:33001/api'
         return 'RESTURL_BACKEND:not (isDev,isProd && !isStaging,isProd && isStaging)'
       })(),
