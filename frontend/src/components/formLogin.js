@@ -133,7 +133,7 @@ class SimLogin extends Component {
                             }
                             if (!values.email) {
                                 errors.email = '';
-                                mailCorrecto = true;
+                                mailCorrecto = false;
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
