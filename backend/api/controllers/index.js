@@ -5,6 +5,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const LoginService = require('../login');
 const RegisterService = require('../register');
+const ReturnService = require('../returnLoans');
+const StoreService = require('../storeLoan');
+const UpdateService = require('../updateLoan');
+const CustomerService = require('../customerLoans');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,9 +38,39 @@ app.post('/api/register', async (req, res) => {
  
 });
 
-app.post('/api/returnLoan', async (req, res) => {
+app.post('/api/returnLoans', async (req, res) => {
   try {
-      let ls = await ReturnService.returnLoan(req, res);
+      let ls = await ReturnService.returnLoans(req, res);
+      res.status(ls.status).json(ls);
+  } catch (error) {
+      res.status(500).json(error);
+  }
+ 
+});
+
+app.post('/api/storeLoan', async (req, res) => {
+  try {
+      let ls = await StoreService.store(req, res);
+      res.status(ls.status).json(ls);
+  } catch (error) {
+      res.status(500).json(error);
+  }
+ 
+});
+
+app.post('/api/updateLoan', async (req, res) => {
+  try {
+      let ls = await UpdateService.update(req, res);
+      res.status(ls.status).json(ls);
+  } catch (error) {
+      res.status(500).json(error);
+  }
+ 
+});
+
+app.post('/api/customerLoans', async (req, res) => {
+  try {
+      let ls = await CustomerService.customer(req, res);
       res.status(ls.status).json(ls);
   } catch (error) {
       res.status(500).json(error);

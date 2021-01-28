@@ -1,7 +1,6 @@
-//import { connectToDatabase } from '../lib/database'
 const connectToDatabase = require('../lib/database');
 
-module.exports.handler = async (req, res) => {
+module.exports.customer = async (req, res) => {
     let loanSearch
     
     let userSearch
@@ -10,7 +9,7 @@ module.exports.handler = async (req, res) => {
     const collectionT = await db.collection('loans')
     const collectionU = await db.collection('users')
     if (req.method === 'OPTIONS') {
-        return res.status(200).send('ok')
+        return {status: 200, ok: 'ok'};
     }
     if (req.method === 'POST') {
         try {
@@ -20,14 +19,14 @@ module.exports.handler = async (req, res) => {
             try {
                 userSearch[0].email
             } catch {
-                conf = false
-                console.log(req.body.email)
-                return res.status(404).json({
+                conf = false;
+                return ({
                     _links: {
                         self: {
                             href: "https://" + req.headers.host + req.url
                         }
                     },
+                    status: 404,
                     message: 'User not found'
                 })
             }
@@ -38,24 +37,26 @@ module.exports.handler = async (req, res) => {
                     loanSearch[0].userName
                 } catch (err) {
                     conf = false
-                    return res.status(200).json({
+                    return ({
                         _links: {
                             self: {
                                 href: "https://" + req.headers.host + req.url
                             }
                         },
+                        status:200,
                         message: 'No loans found'
 
                     })
                 }
 
                 if (conf == true) {
-                    return res.status(200).json({
+                    return ({
                         _links: {
                             self: {
                                 href: "https://" + req.headers.host + req.url
                             }
                         },
+                        status: 200,
                         loans: loanSearch
 
                     })
@@ -63,23 +64,25 @@ module.exports.handler = async (req, res) => {
 
             }
         } catch (err) {
-            return res.status(500).json({
+            return ({
                 _links: {
                     self: {
                         href: "https://" + req.headers.host + req.url
                     }
                 },
+                status: 500,
                 message: 'Internal error (003)'
 
             })
         }
     } else if (req.method != 'OPTIONS') {
-        return res.status(405).json({
+        return ({
             _links: {
                 self: {
                     href: "https://" + req.headers.host + req.url
                 }
             },
+            status: 405,
             message: 'Invalid method:' + ' "' + req.method + '"'
 
         })

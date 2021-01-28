@@ -1,8 +1,7 @@
-//import { connectToDatabase } from '../lib/database'
 const connectToDatabase = require('../lib/database');
 const Loan = require('./models/table')
 
-module.exports.handler = async (req, res) => {
+module.exports.store = async (req, res) => {
   let loanSearch
   let userSearch
   let conf = true
@@ -13,49 +12,53 @@ module.exports.handler = async (req, res) => {
   const collectionT = await db.collection('loans')
   const collectionU = await db.collection('users')
   if (req.method === 'OPTIONS') {
-    return res.status(200).send('ok')
+    return { status: 200, ok: 'ok'};
   }
   if (req.method === 'POST') {
     try {
       userSearch = await collectionU.find({ email: req.body.email }).toArray()
 
       if (userSearch.length != 1) {
-        return res.status(200).json({
+        return ({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
             }
           },
+          status: 200,
           message: 'Provided email does not belong to a registered user'
         })
       } else {
         if (isNaN(req.body.amount)) {
-          return res.status(400).json({
+          return ({
             _links: {
               self: {
                 href: "https://" + req.headers.host + req.url
               }
             },
+            status: 400,
             message: 'Provided amount is not a number'
           })
         } else {
           if (req.body.currency != 'U$S' && req.body.currency != '$U') {
-            return res.status(400).json({
+            return ({
               _links: {
                 self: {
                   href: "https://" + req.headers.host + req.url
                 }
               },
+              status: 400,
               message: 'Invalid currency type'
             })
           } else {
             if (isNaN(req.body.payments)) {
-              return res.status(400).json({
+              return ({
                 _links: {
                   self: {
                     href: "https://" + req.headers.host + req.url
                   }
                 },
+                status: 400,
                 message: 'Amount of payments is not a number'
               })
             } else {
@@ -102,32 +105,35 @@ module.exports.handler = async (req, res) => {
                 try {
                   db.collection('loans').insertOne(newLoan)
 
-                  return res.status(200).json({
+                  return ({
                     _links: {
                       self: {
                         href: "https://" + req.headers.host + req.url
                       }
                     },
+                    status: 200,
                     message: 'Storage successful'
                   })
                 } catch {
-                  return res.status(500).json({
+                  return ({
                     _links: {
                       self: {
                         href: "https://" + req.headers.host + req.url
                       }
                     },
+                    status:500,
                     message: 'Storage fail'
 
                   })
                 }
               } else {
-                return res.status(200).json({
+                return ({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url
                     }
                   },
+                  status: 200,
                   message: 'The user already has a loan pending approval'
 
                 })
@@ -138,23 +144,25 @@ module.exports.handler = async (req, res) => {
         }
       }
     } catch (err) {
-      return res.status(500).json({
+      return ({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
           }
         },
+        status: 500,
         message: 'Internal error (002)'
 
       })
     }
   } else if (req.method != 'OPTIONS'){
-    return res.status(405).json({
+    return ({
       _links: {
         self: {
           href: "https://" + req.headers.host + req.url
         }
       },
+      status: 405,
       message: 'Invalid method:' + ' "' + req.method + '"'
 
     })

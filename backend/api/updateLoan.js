@@ -1,7 +1,6 @@
-// import { connectToDatabase } from '../lib/database'
 const connectToDatabase = require('../lib/database');
 
-module.exports.handler = async (req, res) => {
+module.exports.update = async (req, res) => {
   let arrayTest
   let totalLoanSearch
   let trueloanSearch
@@ -11,16 +10,17 @@ module.exports.handler = async (req, res) => {
   const collectionT = await db.collection('loans')
   const date = new Date()
   if (req.method === 'OPTIONS') {
-    return res.status(200).send('ok')
+    return { status: 200, ok: 'ok'};
   }
   if (req.method === 'POST') {
     if (req.body.data == undefined || req.body.data.length == 0) {
-      return res.status(400).json({
+      return ({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
           }
         },
+        status: 400,
         message: 'Must provide an array named data whose length must be greater than 0. Each object must have an email and state property'
       })
     } else {
@@ -59,34 +59,37 @@ module.exports.handler = async (req, res) => {
             total = trueloanSearch.length + falseloanSearch.length
             if (totalLoanSearch.length == 0) {
               conf3 = false
-              return res.status(200).json({
+              return ({
                 _links: {
                   self: {
                     href: "https://" + req.headers.host + req.url
                   }
                 },
+                status: 200,
                 message: 'User ' + req.body.data[i].email + ' has no registered loans'
               })
             } else {
               if (totalLoanSearch.length == total) {
                 conf3 = false
-                return res.status(200).json({
+                return ({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url
                     }
                   },
+                  status:200,
                   message: 'User ' + req.body.data[i].email + ' has no loans pending review'
                 })
               } else {
                 if (req.body.data[i].state != true && req.body.data[i].state != false) {
                   conf3 = false
-                  return res.status(400).json({
+                  return ({
                     _links: {
                       self: {
                         href: "https://" + req.headers.host + req.url
                       }
                     },
+                    status: 400,
                     message: 'Invalid state for ' + req.body.data[i].email + ' / ' + req.body.data[i].state
 
                   })
@@ -95,35 +98,38 @@ module.exports.handler = async (req, res) => {
             }
           } catch {
             conf3 = false
-            return res.status(500).json({
+            return ({
               _links: {
                 self: {
                   href: "https://" + req.headers.host + req.url
                 }
               },
+              status: 500,
               message: 'Internal error (001)'
 
             })
           }
         } else if (conf2 == true) {
           conf3 = false
-          return res.status(400).json({
+          return ({
             _links: {
               self: {
                 href: "https://" + req.headers.host + req.url
               }
             },
+            status: 400,
             message: 'Invalid value for state or email in array at position ' + errorPosition
 
           })
         } else {
           conf3 = false
-          return res.status(400).json({
+          return ({
             _links: {
               self: {
                 href: "https://" + req.headers.host + req.url
               }
             },
+            status: 400,
             message: 'Duplicate entry for email property in array (' + dupEmail + ') '
 
           })
@@ -135,24 +141,26 @@ module.exports.handler = async (req, res) => {
           const loanId = arrayTest[0]._id
           await collectionT.updateOne({ _id: loanId }, { $set: { state: req.body.data[i].state, stateDate: date } })
         }
-        return res.json({
+        return ({
           _links: {
             self: {
               href: "https://" + req.headers.host + req.url
             }
           },
+          status: 200,
           message: 'Loan state modified successfully'
 
         })
       }
     }
   } else if (req.method != 'OPTIONS') {
-    return res.status(405).json({
+    return ({
       _links: {
         self: {
           href: "https://" + req.headers.host + req.url
         }
       },
+      status: 405,
       message: 'Invalid method:' + ' "' + req.method + '"'
 
     })
