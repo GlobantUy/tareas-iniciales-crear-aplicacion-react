@@ -8,8 +8,8 @@ let emailFromStorage
 let monedaPost
 let cuotasPost
 let monto_a_pedir
-let URL = process.env.RESTURL_BACKEND + '/storeLoan'
-// "https://backendmain-o2ub8kmbw.vercel.app/api/storeLoan"
+let URL = process.env.RESTURL_BACKEND + 'storeLoan'
+// "https://backendmain-2yi8csclp.vercel.app/api/storeLoan"
 class Table extends Component {
 
     //popup usuario logueado//
@@ -145,7 +145,7 @@ class Table extends Component {
 
     volverSimular = () => {
         sessionStorage.setItem('volverBoton', true);
-        window.location.href = 'http://localhost:3000/'
+        window.location.href = process.env.RESTURL_FRONTEND
 
     }
 
@@ -186,7 +186,7 @@ class Table extends Component {
 
     volverSimular = () => {
         sessionStorage.setItem('volverBoton', true);
-        window.location.href = 'http://localhost:3000/'
+        window.location.href = process.env.RESTURL_FRONTEND
 
     }
 
@@ -224,7 +224,7 @@ class Table extends Component {
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
                 <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <p className='textModal2'>Su préstamo ha sido registrado exitosamente <br></br> y se encuentra pendiente de aprobación</p>
-                    <a href="http://localhost:3000/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                    <a href={process.env.RESTURL_FRONTEND} target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto4} className='modalStyles' id='modalPendiente'>

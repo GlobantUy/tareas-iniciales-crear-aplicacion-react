@@ -21,7 +21,7 @@ const {
       RESTURL_BACKEND: (() => {
         if (isDev && !isVercel) return 'http://localhost:3001/api'
         if (isProd) return 'http://api:3001/api'
-        if (isVercel) return 'https://backendmain-4npwjkmus.vercel.app/api/'
+        if (isVercel) return 'https://backendmain-2yi8csclp.vercel.app/api/'
         if (isStaging) return 'http://localhost:33001/api'
         return 'RESTURL_BACKEND:not (isDev,isProd && !isStaging,isProd && isStaging)'
       })(),
@@ -33,6 +33,7 @@ const {
         return 'RESTURL_FRONTEND:not (isDev,isProd && !isStaging,isProd && isStaging)'
       })(),
       RESTURL_DATABASE: (() => {
+        //procces.env.RESTURL_DATABASE
         if (isDev && !isVercel) return 'mongodb+srv://admin:1234@mongodb:27017/stb_prestamos'
         if (isProd) return 'mongodb+srv://admin:1234@mongodb:27017/stb_prestamos'
         if (isVercel) return "mongodb+srv://test1:123@cluster0.e2axf.mongodb.net/database?retryWrites=true&w=majority"

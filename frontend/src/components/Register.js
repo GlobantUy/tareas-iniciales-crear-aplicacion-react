@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
-let URL = process.env.RESTURL_BACKEND + '/register'
+let URL = process.env.RESTURL_BACKEND + 'register'
 
 // 'https://backendmain-858cqrzs8.vercel.app/api/register'
 

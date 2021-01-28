@@ -10,7 +10,7 @@ let mailCorrecto = false
 let contraCorrecta = false
 let emaill
 let passwordd
-let URL = process.env.RESTURL_BACKEND + '/login'
+let URL = process.env.RESTURL_BACKEND + 'login'
 // "https://backendmain-o2ub8kmbw.vercel.app/api/login"
 let URLreturnpres = process.env.RESTURL_BACKEND + '/returnLoans'
 // "https://backendmain-o2ub8kmbw.vercel.app/api/returnLoans"
@@ -24,11 +24,11 @@ class SimLogin extends Component {
         const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
             this.guardarStorage(emaill, passwordd)
-            window.location.href = "/Descuento"
+            window.location.href = process.env.RESTURL_FRONTEND+"/Descuento"
             sessionStorage.setItem('volverAceptarpress', false);
         } else {
             if (rol == "CUSTOMER") {
-                window.location.href = "/"
+                window.location.href = process.env.RESTURL_FRONTEND
                 this.guardarStorage(emaill, passwordd)
             } else if (rol == "ADMIN") {
                 window.location.href = "/Tableadmin"
@@ -195,7 +195,7 @@ class SimLogin extends Component {
                                 value={values.password}
                             />
                             { touched.password && <label className="error">{errors.password}</label>}
-                            <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
+                            <a href={process.env.RESTURL_FRONTEND+"/empty"} type="submit"><p className="recContr"> Recuperar contraseña</p></a>
 
                             { touched.password && <p id="datosIncorrectos" className="no-encontrado ">{datosIncorrectos}</p>}
 
