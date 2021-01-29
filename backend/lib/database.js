@@ -15,15 +15,25 @@ const connectToDatabase = async () => {
   console.log('using new database connection');
   const database = await MongoClient.connect(process.env.MONGODB_URL, 
     {
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      native_parser: true,
+      useUnifiedTopology: true
     }).then((client) => {
       const db = client.db('database')
+      //const collection = 
+      db.collection('users');
+      //const loans = 
+      db.collection('loans');
+    // Query for a movie that has the title 'Back to the Future'
+    //const query = { title: 'Back to the Future' };
+    //const movie = await collection.findOne(query);
+
       console.log('New connection created')
       return Promise.resolve(db);
     }).catch((error) => {
       return Promise.reject(error);
     });
-  isConnected = database; // .connections[0].readyState;
+  isConnected = database;
   return database;
 };
 
