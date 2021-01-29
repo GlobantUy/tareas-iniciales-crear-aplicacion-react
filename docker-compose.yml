@@ -92,3 +92,4 @@ networks:
 
 volumes:
   data-node: {}
+  
