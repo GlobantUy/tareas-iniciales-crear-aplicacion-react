@@ -15,44 +15,32 @@ functions:
         - http:
             path: /
             method: get
-  #login:
-  #  handler: api/controllers/index.handler
-  #  events:
+
         - http:
             path: /api/login
             method: post
             cors: true  
-  # register:
-  #   handler: api/index.handler
-  #   events:
+
         - http:
             path: /api/register
             method: post
             cors: true
-  # storeLoan:
-  #   handler: api/index.handler
-  #   events:
+
         - http:
             path: /api/storeLoan
             method: post
             cors: true  
-  # returnLoans:
-  #   handler: api/index.handler
-  #   events:
+
         - http:
             path: /api/returnLoans
             method: post
             cors: true
-  # updateLoan:
-  #   handler: api/index.handler
-  #   events:
+
         - http:
             path: /api/updateLoan
             method: post
             cors: true
-  # customerLoans:
-  #   handler: api/index.handler
-  #   events:
+
         - http:
             path: /api/customerLoans
             method: post

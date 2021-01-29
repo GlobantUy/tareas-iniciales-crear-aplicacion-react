@@ -7,11 +7,6 @@ const connectToDatabase = async () => {
     console.log('using existing database connection');
     return Promise.resolve(isConnected);
   }
-  /*MongoClient.connect(process.env.DATABASE_URL, {
-    native_parser: true,
-    useUnifiedTopology: true
-  })*/
-
   console.log('using new database connection');
   const database = await MongoClient.connect(process.env.MONGODB_URL, 
     {
@@ -20,14 +15,8 @@ const connectToDatabase = async () => {
       useUnifiedTopology: true
     }).then((client) => {
       const db = client.db('database')
-      //const collection = 
-      db.collection('users');
-      //const loans = 
-      db.collection('loans');
-    // Query for a movie that has the title 'Back to the Future'
-    //const query = { title: 'Back to the Future' };
-    //const movie = await collection.findOne(query);
-
+      const collection = db.collection('users');
+      //const loans =  db.collection('loans');
       console.log('New connection created')
       return Promise.resolve(db);
     }).catch((error) => {
