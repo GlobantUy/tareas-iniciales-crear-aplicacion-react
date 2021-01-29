@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
-
 let Estado
 let email
-let URLupdateLoan = "https://backendmain-2yi8csclp.vercel.app/api/updateLoan"
+let URLupdateLoan = process.env.RESTURL_BACKEND + "/updateLoan";
 let prestamosCargados
 class Tableadmin extends Component {
 
@@ -23,7 +22,6 @@ class Tableadmin extends Component {
 
             rowSelected: false,
 
-
             clientes: [{ Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
 
             isAplicarDisabled: true,
@@ -33,8 +31,6 @@ class Tableadmin extends Component {
             filtro: 'Todos'
         }
     }
-
-
 
     componentDidMount() {
 
@@ -48,7 +44,6 @@ class Tableadmin extends Component {
 
         prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
 
-
         this.setState({
             clientes: listaclientes
 
@@ -61,17 +56,11 @@ class Tableadmin extends Component {
         switch (Estado) {
             default:
                 return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-
-
-                    <option value="option1" > Pendiente     </ option>
-
-                    <option value="option2" > Rechazado     </ option>
-
-                    <option value="option3" > Aprobado      </ option>
-
-                </ select>)
+                    <option value="option1" > Pendiente</ option>
+                    <option value="option2" > Rechazado</ option>
+                    <option value="option3" > Aprobado</ option>
+                </ select>);
                 break
-
             case true:
                 return (<label>Aprobado </label>)
                 break
@@ -81,8 +70,6 @@ class Tableadmin extends Component {
 
         }
     }
-
-
 
     handleLimpiar() {
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
@@ -164,8 +151,6 @@ class Tableadmin extends Component {
                 break
         }
     }
-
-
 
     renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {

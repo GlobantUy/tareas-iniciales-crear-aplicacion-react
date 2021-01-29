@@ -4,7 +4,7 @@ export default function Registro() {
   return (
     <div >
       <header className="header">
-        <a href="http://localhost:3000"><img className="logoheader" src="/logo.png" /></a>
+        <a href={process.env.RESTURL_FRONTEND}><img className="logoheader" src="/logo.png" /></a>
       </header>
       <RegisterContent/>
       <footer>

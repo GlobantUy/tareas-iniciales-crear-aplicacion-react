@@ -11,9 +11,7 @@ let contraCorrecta = false
 let emaill
 let passwordd
 let URL = process.env.RESTURL_BACKEND + '/login'
-// "https://backendmain-o2ub8kmbw.vercel.app/api/login"
 let URLreturnpres = process.env.RESTURL_BACKEND + '/returnLoans'
-// "https://backendmain-o2ub8kmbw.vercel.app/api/returnLoans"
 
 class SimLogin extends Component {
 

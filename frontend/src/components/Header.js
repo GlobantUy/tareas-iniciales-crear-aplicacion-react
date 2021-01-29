@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 
-
 const userLogin = () => {
   try {
 
@@ -14,10 +13,9 @@ const userLogin = () => {
     }
 
   } catch (error) {
-  }
+  }//error no manejado
 
 }
-
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -35,7 +33,7 @@ class Header extends React.Component {
       })
     } catch (error) {
 
-    }
+    }//error no manejado
 
   }
 
@@ -53,14 +51,14 @@ class Header extends React.Component {
       return (
         <div>
           <header className="header">
-          <a href="http://localhost:3000/"><img className="logoheader" src="/logo.png" /></a>
+          <a href={process.env.RESTURL_FRONTEND}><img className="logoheader" src="/logo.png" /></a>
             <div className='User'>
               <span id='user-name' >{this.state.email}</span>
               <div className="menu">
                 <img className="imgUser" src="/Frame.png" />
                 <ul>
                   <li>
-                    <a href="http://localhost:3000/" onClick={this.logout}>Log out</a>
+                    <a href={process.env.RESTURL_FRONTEND} onClick={this.logout}>Log out</a>
                   </li>
                 </ul>
               </div>
