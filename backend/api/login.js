@@ -4,9 +4,9 @@ module.exports.login = async (req, res) => {
   let userSearch
 
   const db = await connectToDatabase()
-  const collection = await db.collection('users');
+  const collection = db.collection('users');
   if (req.method === 'OPTIONS') {
-    return 'ok';
+    return {status: 200, ok: 'ok'};
   }
   if (req.method === 'POST') {
     try {
