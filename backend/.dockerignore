@@ -3,3 +3,4 @@ package-lock.json
 vercel.json
 .vercel/
 mongoclient/
+data-node/
