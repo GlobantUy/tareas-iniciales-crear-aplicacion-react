@@ -23,7 +23,6 @@ if (dia >= 1 && dia <= 9) {
 }
 let fechaActual = anio + "-" + mesActual + "-" + diaActual
 let fechaMin = anioMin + "-" + "01" + "-" + "01"
-console.log(fechaActual)
 
 const validate = values => {
 
@@ -32,15 +31,15 @@ const validate = values => {
     const errors = {}
 
     if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.Email)) {
-        errors.Email = 'formato incorrecto'
+        errors.Email = 'formato incorrecto.'
     }
 
     if (contra != confirmContra) {
-        errors.ConfirmPassword = 'Las contraseñas no coinciden'
+        errors.ConfirmPassword = 'Las contraseñas no coinciden.'
     }
 
     if (!values.Genero && !values.Preferencias) {
-        errors.Genero = 'Este campo es obligatorio'
+        errors.Genero = 'Este campo es obligatorio.'
     }
     return errors
 }
@@ -110,8 +109,8 @@ class RegisterContent extends Component {
         let genero = this.state.Genero
         let preferencias = this.state.Preferencias
         if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '' &&
-            nombreIncorrecto != "Ingrese un nombre valido" && apellidoIncorrecto != "Ingrese un apellido valido" && pass.length >= 8 &&
-            fechaNacIncorrecta != "Solo nacidos el "+ dia +"/"+mesN+"/"+anio +" o antes" && fechaNacIncorrecta != "Solo nacidos despues del "+ anioMin) {
+            nombreIncorrecto != "Ingrese un nombre valido." && apellidoIncorrecto != "Ingrese un apellido valido." && pass.length >= 8 &&
+            fechaNacIncorrecta != "Solo nacidos el "+ dia +"/"+mesActual+"/"+anio +" o antes." && fechaNacIncorrecta != "Solo nacidos despues del "+ anioMin+'.') {
             this.setState({
                 isDisable: false
             })
@@ -128,11 +127,11 @@ class RegisterContent extends Component {
             case "Nombre":
                 if (!this.state.Nombre) {
                     this.setState({
-                        NombreError: 'Este campo es obligatorio'
+                        NombreError: 'Este campo es obligatorio.'
                     })
                 } else if (!/[A-Z]$/i.test(this.state.Nombre)) {
                     this.setState({
-                        NombreError: 'Ingrese un nombre valido',
+                        NombreError: 'Ingrese un nombre valido.',
                     })
                 } else {
                     this.setState({
@@ -143,11 +142,11 @@ class RegisterContent extends Component {
             case "Apellido":
                 if (!this.state.Apellido) {
                     this.setState({
-                        ApellidoError: 'Este campo es obligatorio'
+                        ApellidoError: 'Este campo es obligatorio.'
                     })
                 } else if (!/[A-Z]$/i.test(this.state.Apellido)) {
                     this.setState({
-                        ApellidoError: 'Ingrese un apellido valido',
+                        ApellidoError: 'Ingrese un apellido valido.',
                     })
                 } else {
                     this.setState({
@@ -158,15 +157,15 @@ class RegisterContent extends Component {
             case "FechaNacimiento":
                 if (!this.state.FechaNacimiento) {
                     this.setState({
-                        FechaNacimientoError: 'Este campo es obligatorio'
+                        FechaNacimientoError: 'Este campo es obligatorio.'
                     })
                 } else if (this.state.FechaNacimiento > fechaActual) {
                     this.setState({
-                        FechaNacimientoError: 'Solo nacidos el '+ dia +"/"+mesN+"/"+anio +" o antes" 
+                        FechaNacimientoError: 'Solo nacidos el '+ diaActual +"/"+mesActual+"/"+anio +" o antes." 
                     })
                 } else if (this.state.FechaNacimiento < fechaMin) {
                     this.setState({
-                        FechaNacimientoError: 'Solo nacidos despues del '+ anioMin
+                        FechaNacimientoError: 'Solo nacidos despues del '+ anioMin +'.'
                     })
                 } else {
                     this.setState({
@@ -177,11 +176,11 @@ class RegisterContent extends Component {
             case "Email":
                 if (!this.state.Email) {
                     this.setState({
-                        EmailError: 'Este campo es obligatorio'
+                        EmailError: 'Este campo es obligatorio.'
                     })
-                } else if (this.state.EmailError == 'Ya existe un usuario con este email') {
+                } else if (this.state.EmailError == 'Ya existe un usuario con este email.') {
                     this.setState({
-                        EmailError: 'Ya existe un usuario con este email',
+                        EmailError: 'Ya existe un usuario con este email.',
                     })
                 } else {
                     this.setState({
@@ -192,11 +191,11 @@ class RegisterContent extends Component {
             case "Password":
                 if (!this.state.Password) {
                     this.setState({
-                        PasswordError: 'Este campo es obligatorio'
+                        PasswordError: 'Este campo es obligatorio.'
                     })
                 } else if (this.state.Password.length < 8) {
                     this.setState({
-                        PasswordError: 'La contraseña ingresada es menor a 8 caracteres'
+                        PasswordError: 'La contraseña ingresada es menor a 8 caracteres.'
                     })
                 } else {
                     this.setState({
@@ -207,7 +206,7 @@ class RegisterContent extends Component {
             case "ConfirmPassword":
                 if (!this.state.ConfirmPassword) {
                     this.setState({
-                        ConfirmPasswordError: 'Este campo es obligatorio'
+                        ConfirmPasswordError: 'Este campo es obligatorio.'
                     })
                 } else {
                     this.setState({
@@ -218,7 +217,7 @@ class RegisterContent extends Component {
             case "Departamento":
                 if (!this.state.Departamento) {
                     this.setState({
-                        DepartamentoError: 'Este campo es obligatorio'
+                        DepartamentoError: 'Este campo es obligatorio.'
                     })
                 } else {
                     this.setState({
