@@ -892,7 +892,7 @@ a.button {
 
 #Filtroo {
     position: absolute;
-    font-family: 'Heebo';
+    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -1038,13 +1038,13 @@ div .rdbutons {
     top: 280px;
 }
 
-.noDatos {
+#noDatos {
     position: absolute;
     left: 40.7%;
     right: 39.38%;
     top: 58.33%;
     bottom: 38.75%;
-    font-family: 'Heebo';
+    font-family: Heebo;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
