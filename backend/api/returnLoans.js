@@ -1,96 +1,94 @@
-import { connectToDatabase } from '../lib/database'
+const connectToDatabase = require('../lib/database');
 
-module.exports = async (req, res) => {
+module.exports.returnLoans = async (req, res) => {
   let loanSearch
   let userSearch
 
   const db = await connectToDatabase()
-  const collectionT = await db.collection('loans')
-  const collectionU = await db.collection('users')
+  const collectionT = db.collection('loans')
+  const collectionU = db.collection('users')
   if (req.method === 'OPTIONS') {
-    return res.status(200).send('ok')
+    return {status: 200, ok:'ok'};
   }
   if (req.method === 'POST') {
+    console.log(req.body);
     try {
       userSearch = await collectionU.find({ email: req.body.email }).toArray()
-      loanSearch = await collectionT.find({}).toArray()
-      let conf = true
-      try {
-        userSearch[0].email
-      } catch {
-        conf = false
-        console.log(req.body.email)
-        return res.status(404).json({
-          _links: {
-            self: {
-              href: "https://" + req.headers.host + req.url
-            }
-          },
-          message: 'User not found'
-
-        })
-      }
-
-      if (conf == true) {
-        if (userSearch[0].userType == 'ADMIN') {
-          try {
-            loanSearch[0].userName
-          } catch (err) {
-            conf = false
-            return res.status(200).json({
-              _links: {
-                self: {
-                  href: "https://" + req.headers.host + req.url
-                }
-              },
-              message: 'No loans found'
-
-            })
-          }
-
-          if (conf == true) {
-            return res.status(200).json({
-              _links: {
-                self: {
-                  href: "https://" + req.headers.host + req.url
-                }
-              },
-              loans: loanSearch
-
-            })
-          }
-        } else {
-          return res.status(403).json({
-            _links: {
-              self: {
-                href: "https://" + req.headers.host + req.url
-              }
-            },
-            message: 'Access denied'
-
-          })
-        }
-      }
-    } catch (err) {
-      return res.status(500).json({
+      console.log(userSearch);
+      
+    } catch (error) {
+      return ({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
           }
         },
-        message: 'Internal error (003)'
+        status: 400,
+        message: 'User not found'
+      });
+
+    }
+    if(userSearch[0].email === req.body.email) {
+      const type =  userSearch[0].userType;
+      switch (type) {
+        case 'ADMIN':
+
+          loanSearchAdm = await collectionT.find({}).toArray()
+          console.log(loanSearch);
+
+          output = {
+            _links: {
+              self: {
+                href: "https://" + req.headers.host + req.url
+              }
+            },
+            status: 200,
+            loans: loanSearchAdm
+
+          };            
+          break;
+        
+        case 'CUSTOMER':
+          loanSearchCust = await collectionT.find({userEmail: req.body.email }).toArray()
+          console.log(loanSearch);
+          output = {
+            _links: {
+              self: {
+                href: "https://" + req.headers.host + req.url
+              }
+            },
+            status:200,
+            loans: loanSearchCust
+
+          };
+          
+          break;
+      
+        default:
+          output = {
+            _links: {
+              self: {
+                href: "https://" + req.headers.host + req.url
+              }
+            },
+            status:200,
+            message: 'No loans found'
+
+          };
+          break;
+      }
+      return output;
+
+    }else{
+      return ({
+        _links: {
+          self: {
+            href: "https://" + req.headers.host + req.url
+          }
+        },
+        status: 403,
+        message: 'Access denied'
 
       })
     }
-  } else if (req.method != 'OPTIONS'){
-    return res.status(405).json({
-      _links: {
-        self: {
-          href: "https://" + req.headers.host + req.url
-        }
-      },
-      message: 'Invalid method:' + ' "' + req.method + '"'
-
-    })
-  }
-}
+  }}

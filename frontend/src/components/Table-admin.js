@@ -2,92 +2,94 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
-
 let Estado
 let email
-let URLupdateLoan = "https://backendmain-2yi8csclp.vercel.app/api/updateLoan"
+let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
+let URLupdateLoan = process.env.RESTURL_BACKEND + '/updateLoan';
 let prestamosCargados
 class Tableadmin extends Component {
 
     constructor(props) {
-        super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
+        //since we are extending class Table so we have to use super in order to override Component class constructor
+        super(props) 
         this.handleClicked = this.handleClicked.bind(this);
         this.changeFilterDropdown = this.changeFilterDropdown.bind(this);
         this.changeStateDropdown = this.changeStateDropdown.bind(this);
         this.handleLimpiar = this.handleLimpiar.bind(this);
-        this.state = { //state is by default an object
-
+        //state is by default an object
+        this.state = { 
             estadocambiados: [],
-
             data : [],
-
             rowSelected: false,
-
-
             clientes: [{ Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
-
             isAplicarDisabled: true,
-
             hidden: true,
-
             filtro: 'Todos'
         }
     }
 
-
+    getLoans() {
+        // data = [email, Estado]
+        const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
+            console.log(email);
+            console.log(resp);
+            return resp.data.loans;
+            
+        }).catch((error) => {
+            console.log(error);
+        });
+        
+        /*return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }*/
+    }
 
     componentDidMount() {
 
+        let clientes = this.getLoans()
+        console.log(clientes);
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
             0
             email = cliente.userEmail
             Estado = cliente.state
             console.log(email, Estado)
-            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
-        })
-
+            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
+        });
         prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
-
-
         this.setState({
             clientes: listaclientes
-
-
         })
-
     }
 
     crearestado(Estado, index) {
         switch (Estado) {
             default:
                 return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-
-
-                    <option value="option1" > Pendiente     </ option>
-
-                    <option value="option2" > Rechazado     </ option>
-
-                    <option value="option3" > Aprobado      </ option>
-
-                </ select>)
-                break
-
-            case true:
-                return (<label>Aprobado </label>)
+                    <option value="option1" > Pendiente</ option>
+                    <option value="option2" > Rechazado</ option>
+                    <option value="option3" > Aprobado</ option>
+                </ select>);
                 break
             case false:
-                return (<label>Rechazado </label>)
+                return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
+                    <option value="option1" > Pendiente</ option>
+                    <option value="option2" selected="selected"> Rechazado</ option>
+                    <option value="option3" > Aprobado</ option>
+                </ select>);
                 break
-
+            case true:
+                return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
+                    <option value="option1" > Pendiente</ option>
+                    <option value="option2" > Rechazado</ option>
+                    <option value="option3" selected="selected" > Aprobado</ option>
+                </ select>);
+                break
         }
     }
 
-
-
     handleLimpiar() {
+        // let listaclientes = this.getLoans();
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
             0
-            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
+            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
         })
         let filas = document.getElementsByTagName('tr')
 
@@ -165,18 +167,16 @@ class Tableadmin extends Component {
         }
     }
 
-
-
     renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {
-            const { Usuario, Montosolicitado, Fecha, moneda, Cuotas, Estado } = cliente //destructuring
+            const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas, Estado } = cliente //destructuring
             if (Estado == Filtro || Filtro == 'Todos') {
                 return (
                     <tr id={index} key={index}>
                         <td className="celda">{Usuario}</td>
                         <td className="celda">{Montosolicitado}</td>
                         <td className="celda">{Fecha}</td>
-                        <td className="celda">{moneda}</td>
+                        <td className="celda">{Moneda}</td>
                         <td className="celda">{Cuotas}</td>
                         <td className="celda">
                             {this.crearestado(Estado, index)}
@@ -201,19 +201,16 @@ class Tableadmin extends Component {
 
     render() {
         if(prestamosCargados) {
+            this.getLoans();
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
                     <h2 id='Filtro'>Filtro por estado </h2>
                     <select id='menufiltro' onChange={this.changeFilterDropdown} >
-
                         <option value="option1"> Todos </ option>
                         <option value="option2">Aprobado  </ option>
-
                         <option value="option3"> Rechazado </ option>
-
                         <option value="opción4" >Pendiente  </ option>
-
                     </select>
                     <div>
                         <table id='Administrador'>
@@ -236,16 +233,12 @@ class Tableadmin extends Component {
                 <>
                     <div className="container">
                         <h2 id='titulo'>Solicitudes de préstamo</h2>
-                        <h2 id='Filtroo'>Filtro por estado </h2>
-                        <select id='menufiltroo' disabled  >
-
+                        <h2 id='Filtro'>Filtro por estado </h2>
+                        <select id='menufiltro' disabled  >
                             <option value="option1">  </ option>
-                            <option value="option2">Aprobado  </ option>
-
-                            <option value="option3"> Rechazado </ option>
-
+                            <option value="option2">Aprobado  </option>
+                            <option value="option3"> Rechazado </option>
                             <option value="opción4" >Pendiente  </ option>
-
                         </ select>
                     </div>
                     <div>

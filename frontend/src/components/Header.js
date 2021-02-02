@@ -1,42 +1,53 @@
 
 import React, { Component } from 'react';
 
-
 const userLogin = () => {
   try {
-
     if (sessionStorage.getItem('Usuario-Values')) {
-
       return true
     } else {
-
       return false
     }
-
-  } catch (error) {
-  }
+  }catch (error) {
+    console.log(error);
+  }//error no manejado
 
 }
-
 class Header extends React.Component {
+ 
   constructor(props) {
     super(props)
-    this.state = {
+    this.userData = {
       email: '',
-      password: ''
+      password: '',
+      name: '',
+      role: '',
+      tabla: ''
     };
   }
-  changeState() {
+  getName() {
     try {
-      let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+      let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
       let arroba = email.indexOf("@");
-      this.setState({
-        email: email = email.substring(0, arroba)
-      })
+      this.userData.email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
+      this.userData.password =  JSON.parse(sessionStorage.getItem('Usuario-Values')).password,
+      this.userData.name =  email.substring(0, arroba),
+      this.userData.role = JSON.parse(sessionStorage.getItem('Usuario-Values')).role;
+      this.userData.tabla = this.getRole();
     } catch (error) {
-
+      console.log(error);
     }
 
+  }
+
+  getRole() {
+    let role = JSON.parse(sessionStorage.getItem('Usuario-Values')).role;
+      console.log(role);
+      if (role === 'ADMIN'){
+        return process.env.RESTURL_FRONTEND + "/Tableadmin";
+      }else{
+        return process.env.RESTURL_FRONTEND + "/Tableuser";
+      }
   }
 
   logout() {
@@ -46,37 +57,42 @@ class Header extends React.Component {
       console.log(error)
     }
   }
+
   render() {
     const isLoggedIn = userLogin();
-    this.changeState();
-    if (isLoggedIn == true) {
+    if (isLoggedIn) {
+      this.getName();
       return (
         <div>
           <header className="header">
-          <a href="http://localhost:3000/"><img className="logoheader" src="/logo.png" /></a>
+          <div>
+          <a href={process.env.RESTURL_FRONTEND}><img className="logoheader" src="/logo.png" /></a>
             <div className='User'>
-              <span id='user-name' >{this.state.email}</span>
+              <span id='user-name' >{this.userData.name}</span>
               <div className="menu">
                 <img className="imgUser" src="/Frame.png" />
                 <ul>
                   <li>
-                    <a href="http://localhost:3000/" onClick={this.logout}>Log out</a>
+                    <a href={this.userData.tabla}>Prestamos</a>
+                  </li>
+                  <li>
+                    <a href={process.env.RESTURL_FRONTEND} onClick={this.logout}>Cerrar Sesion</a>
                   </li>
                 </ul>
               </div>
             </div>
-
+            </div>
           </header>
-        </div >
+        </div>
       )
     } else {
       return (
         <div>
           <header className="header">
-            <a href="http://localhost:3000/"><img className="logoheader" src="/logo.png" /></a>
-            <a href="http://localhost:3000/ingreso" ><button className="btnHeader" type="submit"> Ingresar</button></a>
+            <a href={process.env.RESTURL_FRONTEND}><img className="logoheader" src="/logo.png" /></a>
+            <a href={process.env.RESTURL_FRONTEND + "/ingreso"} ><button className="btnHeader" type="submit">Ingresar</button></a>
           </header>
-        </div >
+        </div>
       )
     }
   }

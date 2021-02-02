@@ -1,0 +1,54 @@
+# Welcome to Serverless!
+service: stb
+app: api
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+
+functions:
+  index:
+    handler: api/controllers/index.handler
+    events:
+        - http:
+            path: /
+            method: get
+
+        - http:
+            path: /api/login
+            method: post
+            cors: true  
+
+        - http:
+            path: /api/register
+            method: post
+            cors: true
+
+        - http:
+            path: /api/storeLoan
+            method: post
+            cors: true  
+
+        - http:
+            path: /api/returnLoans
+            method: post
+            cors: true
+
+        - http:
+            path: /api/updateLoan
+            method: post
+            cors: true
+
+        - http:
+            path: /api/customerLoans
+            method: post
+            cors: true
+custom:
+  serverless-offline:
+    host: 0.0.0.0
+    port: 3001
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin

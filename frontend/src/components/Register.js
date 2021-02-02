@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
-let URL = 'https://backendmain-gktbdrcfz.vercel.app/api/register'
+let URL = process.env.RESTURL_BACKEND + '/register'
 
 const data = new Date();
 let anioMin = data.getUTCFullYear() - 100
@@ -31,7 +31,7 @@ const validate = values => {
     const errors = {}
 
     if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.Email)) {
-        errors.Email = 'formato incorrecto.'
+        errors.Email = 'Formato incorrecto.'
     }
 
     if (contra != confirmContra) {
