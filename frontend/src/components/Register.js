@@ -9,14 +9,21 @@ let anioMin = data.getUTCFullYear() - 100
 let anio = data.getUTCFullYear() - 18
 let mes = data.getUTCMonth() + 1
 let dia = data.getUTCDate()
-let mesN
+let mesActual
+let diaActual
 if (mes >= 1 && mes <= 9) {
-    mesN = "0" + mes
+    mesActual = "0" + mes
 } else {
-    mesN = mes
+    mesActual = mes
 }
-let fechaActual = anio + "-" + mesN + "-" + dia
+if (dia >= 1 && dia <= 9) {
+    diaActual = "0" + dia
+} else {
+    diaActual = dia
+}
+let fechaActual = anio + "-" + mesActual + "-" + diaActual
 let fechaMin = anioMin + "-" + "01" + "-" + "01"
+console.log(fechaActual)
 
 const validate = values => {
 
