@@ -11,7 +11,7 @@ const validate = values => {
     const errors = {}
 
     if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.Email)) {
-        errors.Email = 'formato incorrecto'
+        errors.Email = 'Formato incorrecto'
     }
 
     if (contra != confirmContra) {
@@ -88,7 +88,7 @@ class RegisterContent extends Component {
         let genero = this.state.Genero
         let preferencias = this.state.Preferencias
         if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '' &&
-            nombreIncorrecto != "Ingrese un nombre valido" && apellidoIncorrecto != "Ingrese un apellido valido" && pass.length >= 8) {
+            nombreIncorrecto != "Ingrese un nombre" && apellidoIncorrecto != "Ingrese un apellido" && pass.length >= 8) {
             this.setState({
                 isDisable: false
             })
@@ -105,11 +105,11 @@ class RegisterContent extends Component {
             case "Nombre":
                 if (!this.state.Nombre) {
                     this.setState({
-                        NombreError: 'Este campo es obligatorio'
+                        NombreError: 'Este campo es obligatorio.'
                     })
                 } else if (!/[A-Z]$/i.test(this.state.Nombre)) {
                     this.setState({
-                        NombreError: 'Ingrese un nombre valido',
+                        NombreError: 'Ingrese un nombre.',
                     })
                 } else {
                     this.setState({
@@ -120,11 +120,11 @@ class RegisterContent extends Component {
             case "Apellido":
                 if (!this.state.Apellido) {
                     this.setState({
-                        ApellidoError: 'Este campo es obligatorio'
+                        ApellidoError: 'Este campo es obligatorio.'
                     })
                 } else if (!/[A-Z]$/i.test(this.state.Apellido)) {
                     this.setState({
-                        ApellidoError: 'Ingrese un apellido valido',
+                        ApellidoError: 'Ingrese un apellido valido.',
                     })
                 } else {
                     this.setState({
