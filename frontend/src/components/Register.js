@@ -270,7 +270,7 @@ class RegisterContent extends Component {
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                         data-for="error-name"
-                                        data-tip=""
+                                        data-tip="Este campo es obligatorio"
                                     />
                                     <ReactTooltip id="error-name"
                                         place="bottom"

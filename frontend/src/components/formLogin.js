@@ -115,9 +115,9 @@ class SimLogin extends Component {
                         const errors = {};
 
                         if (!values.password) {
-                            errors.password = 'Necesario';
+                            errors.password = '';
                             if (!values.email) {
-                                errors.email = 'Necesario';
+                                errors.email = '';
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
@@ -160,7 +160,7 @@ class SimLogin extends Component {
                         }
 
                         if (!values.email) {
-                            errors.email = 'Necesario';
+                            errors.email = '';
                             // mailCorrecto = false;
                         }
                         else if (!values.email) {
@@ -217,9 +217,7 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.email}
                                 data-for="errormail"
-                                data-tip=""
-                                event="change"
-                                eventOff={handleChange}
+                                data-tip="Este campo es obligatorio"
                             />
 
                             <ReactTooltip id="errormail"
@@ -228,8 +226,8 @@ class SimLogin extends Component {
                                 effect="solid"
                                 className="error-tooltip"
                             >
-                                {touched.email && <label className="error-tooltip">{errors.email}</label>}
                             </ReactTooltip>
+                            {touched.email && <label className="errorMonto">{errors.email}</label>}
 
 
                             <p>Contraseña *</p>
@@ -240,7 +238,7 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.password}
                                 data-for="errorpsswd"
-                                data-tip=""
+                                data-tip="Este campo es obligatorio"
                             />
 
                             <ReactTooltip id="errorpsswd"
@@ -249,8 +247,8 @@ class SimLogin extends Component {
                                 effect="solid"
                                 className="error-tooltip"
                             >
-                                {touched.email && <label className="error-tooltip">{errors.password}</label>}
                             </ReactTooltip>
+                            {touched.email && <label className="errorMonto">{errors.password}</label>}
 
                             <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
 

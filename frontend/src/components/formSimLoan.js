@@ -10,10 +10,6 @@ const validate = values => {
      if (!values.Ingreso) {
          errors.Ingreso = 'Este campo es obligatorio'
      }
-
-    if (!values.Monto_a_pedir) {
-        errors.Monto_a_pedir = 'Este campo es obligatorio'
-    }
     if (!values.financiacion) {
         errors.financiacion = 'Este campo es obligatorio'
     }
@@ -184,7 +180,7 @@ class SimLoan extends Component {
                             data-background-color="yellow"
                             className="error-tooltip"
                         >
-                            <label className="error-tooltip">{errors.Ingreso}</label>
+                            <span className="error-tooltip">Este campo es obligatorio</span>
                         </ReactTooltip>
 
                         <p>Moneda del Préstamo*</p>
@@ -232,7 +228,7 @@ class SimLoan extends Component {
                             value={this.state.Monto_a_pedir}
                             onChange={this.handleChange}
                             data-for="solicitar-monto"
-                            data-tip=""
+                            data-tip="Este campo es obligatorio"
                         />
 
                         <ReactTooltip id="solicitar-monto"
@@ -241,9 +237,8 @@ class SimLoan extends Component {
                             effect="solid"
                             className="error-tooltip"
                         >
-                            <label className="error-tooltip">{errors.Monto_a_pedir}</label>
                         </ReactTooltip>
-
+                        <label className="errorMonto">{errors.Monto_a_pedir}</label>
 
                         <p>Años de financiación*</p>
                         <select className="inputPlazo"
@@ -267,7 +262,7 @@ class SimLoan extends Component {
                             data-background-color="yellow"
                             className="error-tooltip"
                         >
-                            <label className="error-tooltip">{errors.financiacion}</label>
+                            <span className="error-tooltip">Este campo es obligatorio</span>
                         </ReactTooltip>
 
                         <p>Tipo de préstamo</p>

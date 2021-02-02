@@ -36,7 +36,7 @@ p {
 
 label {
     font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+    font-size: 14errx;
     line-height: 19px;
     color: #000000;
 }
@@ -206,8 +206,13 @@ select:focus {
 
 .error-tooltip {
     color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
+.errorMonto{
+    color: red;
+    font-size: 14px;
+}
 .Ingreso {
     margin-top: 4px;
     height: 32px;
@@ -1061,20 +1066,24 @@ div .rdbutons {
 
 input[type=date]::-webkit-datetime-edit-month-field {
     cursor: text;
-  }
-  input[type=date]::-webkit-datetime-edit-day-field {
-    cursor: text;
-  }
-  input[type=date]::-webkit-datetime-edit-year-field {
-    cursor: text;
-  }
-  input[type=date]::-webkit-calendar-picker-indicator:hover {
-    cursor: pointer;
-  }
-  input[type=date]::-webkit-datetime-edit { 
-    padding: 1em; 
-  }
-  input[type=date]::-webkit-datetime-edit-text { 
-     padding: 0 0.3em; 
-  }
+}
 
+input[type=date]::-webkit-datetime-edit-day-field {
+    cursor: text;
+}
+
+input[type=date]::-webkit-datetime-edit-year-field {
+    cursor: text;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+}
+
+input[type=date]::-webkit-datetime-edit {
+    padding: 1em;
+}
+
+input[type=date]::-webkit-datetime-edit-text {
+    padding: 0 0.3em;
+}
