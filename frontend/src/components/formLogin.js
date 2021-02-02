@@ -21,16 +21,16 @@ class SimLogin extends Component {
     redireccionar() {
         const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
-            this.guardarStorage(emaill, passwordd)
+            this.guardarStorage(emaill, passwordd, rol)
             window.location.href = "/Descuento"
             sessionStorage.setItem('volverAceptarpress', false);
         } else {
             if (rol == "CUSTOMER") {
                 window.location.href = "/"
-                this.guardarStorage(emaill, passwordd)
+                this.guardarStorage(emaill, passwordd, rol)
             } else if (rol == "ADMIN") {
                 window.location.href = "/Tableadmin"
-                this.guardarStorage(emaill, passwordd)
+                this.guardarStorage(emaill, passwordd, rol)
             } else {
                 if (mailCorrecto == false && contraCorrecta == false) {
                     errorPass = false
@@ -94,12 +94,14 @@ class SimLogin extends Component {
             });
     }
 
-    guardarStorage = (a, b) => {
+    guardarStorage = (user, clave, type) => {
         console.log('guardado correctamnete')
         this.values = {
-            email: a,
-            password: b
+            email: user,
+            password: clave,
+            role: type
         }
+        sessionStorage.removeItem('Usuario-Values');
         sessionStorage.setItem('Usuario-Values', JSON.stringify(this.values));
     }
 
