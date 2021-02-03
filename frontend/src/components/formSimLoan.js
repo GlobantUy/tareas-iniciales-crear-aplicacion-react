@@ -109,7 +109,7 @@ class SimLoan extends Component {
             window.location.href = '/Descuento'
         }
 
-        axios.post('http://localhost:3000/api/hello', {
+        axios.post(process.env.RESTURL_FRONTEND + '/hello', {
             user: {
                 Ingreso: this.state.Ingreso,
                 Monto_a_pedir: this.state.Monto_a_pedir,
@@ -124,7 +124,7 @@ class SimLoan extends Component {
             .then(Response => {
                 console.log("registration res", Response)
                 if (!Object.keys(result).length) {
-                    window.location.href = 'http://localhost:3000/Descuento'
+                    window.location.href = process.env.RESTURL_FRONTEND + '/Descuento';
                 }
             })
             .catch(error => {

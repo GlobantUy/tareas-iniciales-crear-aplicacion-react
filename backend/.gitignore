@@ -1,0 +1,12 @@
+.vercel
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# Environment Variables
+#.env
+data-node/
+mongoclient/

@@ -1,4 +1,5 @@
-@import 'https://fonts.googleapis.com/css2?family=Roboto&display=swap';
+/*@import 'https://fonts.googleapis.com/css2?family=Roboto&display=swap';*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 footer {
     position: fixed;
     left: 0%;
@@ -148,7 +149,9 @@ select:focus {
     padding-left: 65px;
     padding-top: 10px;
 }
-
+.menu ul li {
+    padding-bottom: 30px;
+}
 .menu ul li a {
     width: 120px;
     padding: 10px 0px 10px 10px;
@@ -912,7 +915,7 @@ a.button {
 }
 
 #menufiltro {
-    font-family: 'Heebo';
+    /*font-family: 'Heebo';*/
     position: absolute;
     display: inline-block;
     top: 33%;

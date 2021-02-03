@@ -1,9 +1,6 @@
 
 import React, { Component } from 'react';
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-</style>
 const userLogin = () => {
   try {
     let btnHeader = document.querySelector(".btnHeader");

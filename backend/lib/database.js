@@ -1,25 +1,47 @@
 const MongoClient = require('mongodb').MongoClient
-require('dotenv').config()
+const User = require('../api/models/user');
+require("dotenv").config();
 
-let cachedDb = null
+const connectToDatabase = async () => {
 
-export const connectToDatabase = async => {
-  if (cachedDb) {
-    console.log('Use previous connection')
-    return Promise.resolve(cachedDb)
-  } else {
-    return MongoClient.connect('mongodb+srv://test1:123@cluster0.e2axf.mongodb.net/database?retryWrites=true&w=majority', {
+  const database = await MongoClient.connect(process.env.MONGODB_URL, 
+    {
+      useNewUrlParser: true,
       native_parser: true,
       useUnifiedTopology: true
+    }).then((client) => {
+      const dbdata = client.db('database');
+      return Promise.resolve(dbdata);
+    }).catch((error) => {
+      return Promise.reject(error);
+    });
+  const adminColl = database.collection('users');
+  const userAdmin = await adminColl.findOne(
+    { 
+      email: 'admin@test.com'
+    }).then((results) => {
+        return results;
+    }).catch((error) => {
+        return error;
+    });
+  if (!userAdmin) {
+    console.log('creando usuario Admin');
+    const userN = new User({
+      name: 'Admin',
+      lName: 'Admin',
+      dateOfBirth: Date.now(),
+      email: 'admin@test.com',
+      department: 'Montevideo',
+      gender: 'M',
+      preferences: [],
+      userName: 'Admin' + ' ' + 'Admin',
+      passwd: 12345678,
+      userType: 'ADMIN',
+      _id: 'admin@test.com'
     })
-      .then((client) => {
-        const db = client.db('database')
-        console.log('New connection created')
-        cachedDb = db
-        return cachedDb
-      }).catch((error) => {
-        console.log('DB connection error')
-        console.log(error)
-      })
+    adminColl.insertOne(userN); 
   }
-}
+  return database;
+};
+
+module.exports = connectToDatabase;
