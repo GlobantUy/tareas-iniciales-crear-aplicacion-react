@@ -927,25 +927,23 @@ a.button {
     box-sizing: border-box;
 }
 
-#menutabla:hover {
-    background: transparent;
-}
 
 .selectitem {
-    text-align: center;
     width: 100%;
     height: 100%;
-    border: 1px;
-    position: relative;
+    border-radius: 1px;
+    border: 1px solid;
+    position: static;
     display: block;
     font-size: 14px;
     background: transparent;
     border: transparent;
+    text-align-last: center;
+    padding-left: 10px;
 }
 
-.selectitem:hover {
-   background-color:#FFFFFF ;
-}
+
+
 
 /*Registro*/
 

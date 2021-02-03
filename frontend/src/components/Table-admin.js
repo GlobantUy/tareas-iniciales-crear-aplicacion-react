@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
-let Estado
-let email
+
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
 let URLupdateLoan = process.env.RESTURL_BACKEND + '/updateLoan';
 let prestamosCargados
@@ -47,10 +46,7 @@ class Tableadmin extends Component {
         let clientes = this.getLoans()
         console.log(clientes);
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
-            0
-            email = cliente.userEmail
-            Estado = cliente.state
-            console.log(email, Estado)
+    
             return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
         });
         prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
@@ -103,26 +99,29 @@ class Tableadmin extends Component {
     }
 
     handleClicked() {
-        
-            data = [email, Estado]
-            axios.post(URLupdateLoan, {
-            "data": data  
-            }).then(res => {
-          
-             }
-             
-            )
-                        
+        let lista = this.state.estadocambiados
+        let data = lista
+        axios.post(URLupdateLoan, {
+            data
+        }).then(res => {
+          this.getLoans()
+          location.reload()
         }
+
+        )
+
+    }
     
     changeStateDropdown(index) {
         let listaclientes = this.state.clientes
         let dropdown = document.getElementById('menutabla' + index);
         let fila = document.getElementById(index.toString())
         if (dropdown.value != "option1") {
-            listaclientes[index].Estado = (dropdown.value == "option2") ? false : true;
+            let estado = (dropdown.value == "option2") ? false : true;
+            listaclientes[index].Estado = estado
             let listacambiados = this.state.estadocambiados;
-            listacambiados.push({ cliente: index, value: dropdown.value })
+            let indice = listacambiados.findIndex(cliente => cliente.email == listaclientes[index].Email) 
+            indice === -1 ? listacambiados.push({ email: listaclientes[index].Email, state: estado }) : listacambiados[indice].state = estado 
             this.setState({
                 isAplicarDisabled: false,
                 rowSelected: true,
@@ -223,7 +222,7 @@ class Tableadmin extends Component {
                         <div className="Buttons">
 
                             <button className="btnSeptimo" hidden={this.state.hidden} onClick={this.handleLimpiar} > Limpiar</button>
-                            <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled}  > Aplicar cambios</button>
+                            <button type="submit" className="btnOctavo" disabled={this.state.isAplicarDisabled} onClick={this.handleClicked} > Aplicar cambios</button>
                         </div>
                     </div>
                 </div>
