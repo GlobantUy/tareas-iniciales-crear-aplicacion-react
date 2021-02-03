@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
-
+let email
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
 let URLupdateLoan = process.env.RESTURL_BACKEND + '/updateLoan';
 let prestamosCargados
@@ -47,7 +47,7 @@ class Tableadmin extends Component {
         console.log(clientes);
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
     
-            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
+            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state, Email: cliente.userEmail }
         });
         prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
         this.setState({
@@ -85,7 +85,7 @@ class Tableadmin extends Component {
         // let listaclientes = this.getLoans();
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
             0
-            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
+            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state, Email: cliente.userEmail }
         })
         let filas = document.getElementsByTagName('tr')
 
@@ -191,7 +191,7 @@ class Tableadmin extends Component {
         return header.map((key, index) => {
             if (key == "Montosolicitado") {
                 return <th key={index}>{"Monto solicitado"}</th>
-            } else {
+            } else if (key != "Email") {
                 return <th key={index}>{key}</th>
             }
 
