@@ -112,7 +112,7 @@ class RegisterContent extends Component {
         let preferencias = this.state.Preferencias
         if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '' &&
             nombreIncorrecto != "Ingrese un nombre valido." && apellidoIncorrecto != "Ingrese un apellido valido." && pass.length >= 8 &&
-            fechaNacIncorrecta != "Solo nacidos el "+ dia +"/"+mesActual+"/"+anio +" o antes." && fechaNacIncorrecta != "Solo nacidos despues del "+ anioMin+'.') {
+            fechaNacIncorrecta != "Solo nacidos el " + dia + "/" + mesActual + "/" + anio + " o antes." && fechaNacIncorrecta != "Solo nacidos despues del " + anioMin + '.') {
             this.setState({
                 isDisable: false
             })
@@ -129,7 +129,7 @@ class RegisterContent extends Component {
             case "Nombre":
                 if (!this.state.Nombre) {
                     this.setState({
-                        NombreError: 'Este campo es obligatorio.'
+                        NombreError: ''
                     })
                 } else if (!/[A-Z]$/i.test(this.state.Nombre)) {
                     this.setState({
@@ -144,7 +144,7 @@ class RegisterContent extends Component {
             case "Apellido":
                 if (!this.state.Apellido) {
                     this.setState({
-                        ApellidoError: 'Este campo es obligatorio.'
+                        ApellidoError: ''
                     })
                 } else if (!/[A-Z]$/i.test(this.state.Apellido)) {
                     this.setState({
@@ -163,11 +163,11 @@ class RegisterContent extends Component {
                     })
                 } else if (this.state.FechaNacimiento > fechaActual) {
                     this.setState({
-                        FechaNacimientoError: 'Solo nacidos el '+ diaActual +"/"+mesActual+"/"+anio +" o antes." 
+                        FechaNacimientoError: 'Solo nacidos el ' + diaActual + "/" + mesActual + "/" + anio + " o antes."
                     })
                 } else if (this.state.FechaNacimiento < fechaMin) {
                     this.setState({
-                        FechaNacimientoError: 'Solo nacidos despues del '+ anioMin +'.'
+                        FechaNacimientoError: 'Solo nacidos despues del ' + anioMin + '.'
                     })
                 } else {
                     this.setState({
@@ -193,7 +193,7 @@ class RegisterContent extends Component {
             case "Password":
                 if (!this.state.Password) {
                     this.setState({
-                        PasswordError: 'Este campo es obligatorio.'
+                        PasswordError: ''
                     })
                 } else if (this.state.Password.length < 8) {
                     this.setState({
@@ -293,7 +293,7 @@ class RegisterContent extends Component {
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                         data-for="error-name"
-                                        data-tip="Este campo es obligatorio"
+                                        data-tip="Este campo es obligatorio."
                                     />
                                     <ReactTooltip id="error-name"
                                         place="bottom"
@@ -301,8 +301,9 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error-tooltip">{this.state.NombreError}</label>
                                     </ReactTooltip>
+                                    <label className="error-bottom">{this.state.NombreError}</label>
+
                                 </div>
 
                                 <div className="col-4">
@@ -315,7 +316,7 @@ class RegisterContent extends Component {
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                         data-for="error-apellido"
-                                        data-tip=""
+                                        data-tip="Este campo es obligatorio."
                                     />
                                     <ReactTooltip id="error-apellido"
                                         place="bottom"
@@ -323,8 +324,9 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error-tooltip">{this.state.ApellidoError}</label>
                                     </ReactTooltip>
+                                    <label className="error-bottom">{this.state.ApellidoError}</label>
+
                                 </div>
 
                                 <div className="col-4">
@@ -337,7 +339,7 @@ class RegisterContent extends Component {
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                         data-for="error-date"
-                                        data-tip=""
+                                        data-tip="Este campo es obligatorio."
                                         max={fechaActual}
                                         min={fechaMin}
                                     />
@@ -347,7 +349,6 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error-tooltip">{this.state.FechaNacimientoError}</label>
                                     </ReactTooltip>
                                 </div>
                             </div>
@@ -363,7 +364,7 @@ class RegisterContent extends Component {
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                         data-for="error-email"
-                                        data-tip=""
+                                        data-tip="Este campo es obligatorio."
                                     />
                                     <ReactTooltip id="error-email"
                                         place="bottom"
@@ -371,9 +372,9 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error-tooltip">{this.state.EmailError}</label>
-                                        <label className="error-tooltip">{errors.Email}</label>
                                     </ReactTooltip>
+                                    <label className="error-bottom">{errors.Email}</label>
+
                                 </div>
 
                                 <div className="col-4">
@@ -386,7 +387,7 @@ class RegisterContent extends Component {
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                         data-for="error-psswd"
-                                        data-tip=""
+                                        data-tip="Este campo es obligatorio."
                                     />
                                     <ReactTooltip id="error-psswd"
                                         place="bottom"
@@ -394,8 +395,9 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error-tooltip">{this.state.PasswordError}</label>
                                     </ReactTooltip>
+                                    <label className="error-bottom">{this.state.PasswordError}</label>
+
                                 </div>
 
                                 <div className="col-4">
@@ -408,7 +410,7 @@ class RegisterContent extends Component {
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
                                         data-for="error-confirmpsswd"
-                                        data-tip=""
+                                        data-tip="Este campo es obligatorio."
                                     />
                                     <ReactTooltip id="error-confirmpsswd"
                                         place="bottom"
@@ -416,10 +418,8 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error-tooltip">{this.state.ConfirmPasswordError}</label>
-                                        <label className="error-tooltip">{errors.ConfirmPassword}</label>
                                     </ReactTooltip>
-
+                                    <label className="error-bottom">{errors.ConfirmPassword}</label>
                                 </div>
                             </div>
 
@@ -460,7 +460,7 @@ class RegisterContent extends Component {
                                         effect="solid"
                                         className="error-tooltip"
                                     >
-                                        <label className="error-tooltip">{this.state.DepartamentoError}</label>
+                                        <span className="error-tooltip">Este campo es obligatorio.</span>
                                     </ReactTooltip>
                                 </div>
                             </div>

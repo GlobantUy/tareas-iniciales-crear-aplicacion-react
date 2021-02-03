@@ -212,7 +212,7 @@ select:focus {
     font-family: 'Roboto', sans-serif;
 }
 
-.errorMonto{
+.error-bottom{
     color: red;
     font-size: 14px;
 }
@@ -229,7 +229,7 @@ select:focus {
 }
 
 .inputPesos {
-    margin-top: -35px;
+    margin-top: -36px;
     text-align: right;
 }
 

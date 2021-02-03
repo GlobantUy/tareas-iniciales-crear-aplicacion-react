@@ -7,16 +7,19 @@ import ReactDOM from 'react-dom';
 const validate = values => {
     const errors = {}
 
-     if (!values.Ingreso) {
-         errors.Ingreso = 'Este campo es obligatorio'
-     }
+    if (!values.Ingreso) {
+        errors.Ingreso = 'Este campo es obligatorio'
+    }
     if (!values.financiacion) {
         errors.financiacion = 'Este campo es obligatorio'
+    }
+    if (!values.Monto_a_pedir) {
+        errors.Monto_a_pedir = ''
     }
     let porcentaje = (0.2) * (values.Ingreso)
     let monto = values.Monto_a_pedir
     if ((monto > porcentaje) && (values.Ingreso > 0)) {
-        errors.Monto_a_pedir = 'El monto a solicitar supera el 20% de su sueldo, por favor intente con un monto menor'
+        errors.Monto_a_pedir = 'El monto solicitado excede el 20% de su salario, intente con un monto menor.'
     }
     return errors
 }
@@ -175,26 +178,24 @@ class SimLoan extends Component {
 
                         <ReactTooltip id="ingreso-pesos"
                             place="right"
-                            type="error"
+                            type="info"
                             effect="solid"
                             data-background-color="yellow"
                             className="error-tooltip"
                         >
-                            <span className="error-tooltip">Este campo es obligatorio</span>
+                            <span className="error-tooltip">Este campo es obligatorio.</span>
                         </ReactTooltip>
 
-                        <p>Moneda del Préstamo*</p>
+                        <p >Moneda del Préstamo*</p>
                         <input
                             type="radio"
                             id="Moneda_U$S"
                             name="Moneda"
                             onChange={this.checkboxChange}
                             checked={this.state.Moneda_U$S}
-                            data-for="moneda-prestamo"
-                            data-tip=""
                         />
-
-                        <label htmlFor="Moneda_U$S">U$S</label>
+                        <label data-for="moneda-prestamo"
+                            data-tip="" htmlFor="Moneda_U$S">U$S</label>
 
                         <div className="inputPesos">
                             <input
@@ -203,19 +204,19 @@ class SimLoan extends Component {
                                 name="Moneda"
                                 onChange={this.checkboxChange}
                                 checked={this.state.Moneda_$U}
-                                data-for="moneda-prestamo"
-                                data-tip=""
                             />
-                            <label htmlFor="Moneda_$U">$U</label>
+                            <label data-for="moneda-prestamo"
+                                data-tip="" htmlFor="Moneda_$U">$U</label>
                         </div>
 
                         <ReactTooltip id="moneda-prestamo"
                             place="right"
-                            type="error"
+                            type="info"
                             effect="solid"
-                            data-background-color="yellow"
                             className="error-tooltip"
                         >
+                            <span className="error-tooltip">Este campo es obligatorio.</span>
+
                         </ReactTooltip>
 
                         <p>Monto a Pedir($U)*</p>
@@ -228,17 +229,17 @@ class SimLoan extends Component {
                             value={this.state.Monto_a_pedir}
                             onChange={this.handleChange}
                             data-for="solicitar-monto"
-                            data-tip="Este campo es obligatorio"
+                            data-tip="Este campo es obligatorio."
                         />
 
                         <ReactTooltip id="solicitar-monto"
                             place="right"
-                            type="error"
+                            type="info"
                             effect="solid"
                             className="error-tooltip"
                         >
                         </ReactTooltip>
-                        <label className="errorMonto">{errors.Monto_a_pedir}</label>
+                        <label className="error-bottom">{errors.Monto_a_pedir}</label>
 
                         <p>Años de financiación*</p>
                         <select className="inputPlazo"
@@ -246,7 +247,7 @@ class SimLoan extends Component {
                             value={this.state.financiacion}
                             onChange={this.handleChange}
                             data-for="anios-financiacion"
-                            data-tip="Este campo es obligatorio">
+                            data-tip="">
                             <option hidden>Selecciona una opción</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
@@ -257,12 +258,12 @@ class SimLoan extends Component {
 
                         <ReactTooltip id="anios-financiacion"
                             place="right"
-                            type="error"
+                            type="info"
                             effect="solid"
                             data-background-color="yellow"
                             className="error-tooltip"
                         >
-                            <span className="error-tooltip">Este campo es obligatorio</span>
+                            <span className="error-tooltip">Este campo es obligatorio.</span>
                         </ReactTooltip>
 
                         <p>Tipo de préstamo</p>

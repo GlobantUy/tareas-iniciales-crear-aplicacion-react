@@ -4,7 +4,7 @@ import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import ReactDOM from 'react-dom';
 
-let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique'
+let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique.'
 var btn = "btnPrimarioDisabled";
 let rol
 let errorPass = true
@@ -134,7 +134,7 @@ class SimLogin extends Component {
                             contraCorrecta = false;
 
                             if (errorPass == false) {
-                                datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique";
+                                datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique.";
                                 errorPass = true
                             }
                             if (!values.email) {
@@ -142,7 +142,7 @@ class SimLogin extends Component {
                             } else if (
                                 !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                             ) {
-                                errors.email = 'Formato invalido';
+                                errors.email = 'Formato invalido.';
                                 mailCorrecto = false;
                             } else {
                                 emaill = values.email
@@ -151,15 +151,13 @@ class SimLogin extends Component {
                         }
                         if (values.password.length < 8 && values.password.length >= 1) {
                             contraCorrecta = false;
-                        }
-                        else if (values.password.length < 8 && values.password.length >= 1) {
-                            errors.password = 'La contraseña ingresada es menor a 8 caracteres'
-                            contraCorrecta = false;
-                        }
-                        else {
+                            errors.password = 'La contraseña ingresada es menor a 8 caracteres.'
+
+                        } else {
                             contraCorrecta = true;
                             passwordd = values.password
                         }
+
 
                         if (!values.email) {
                             errors.email = '';
@@ -172,7 +170,7 @@ class SimLogin extends Component {
                         else if (
                             !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                         ) {
-                            errors.email = 'Formato invalido';
+                            errors.email = 'Formato invalido.';
                             mailCorrecto = false;
                         }
                         else {
@@ -181,7 +179,7 @@ class SimLogin extends Component {
                         }
 
                         if (errorPass == false) {
-                            datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique";
+                            datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique.";
                             errorPass = true
                         }
 
@@ -219,7 +217,7 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.email}
                                 data-for="errormail"
-                                data-tip="Este campo es obligatorio"
+                                data-tip="Este campo es obligatorio."
                             />
 
                             <ReactTooltip id="errormail"
@@ -229,7 +227,7 @@ class SimLogin extends Component {
                                 className="error-tooltip"
                             >
                             </ReactTooltip>
-                            {touched.email && <label className="errorMonto">{errors.email}</label>}
+                            {touched.email && <label className="error-bottom">{errors.email}</label>}
 
 
                             <p>Contraseña *</p>
@@ -240,7 +238,7 @@ class SimLogin extends Component {
                                 onBlur={handleBlur}
                                 value={values.password}
                                 data-for="errorpsswd"
-                                data-tip="Este campo es obligatorio"
+                                data-tip="Este campo es obligatorio."
                             />
 
                             <ReactTooltip id="errorpsswd"
@@ -250,11 +248,11 @@ class SimLogin extends Component {
                                 className="error-tooltip"
                             >
                             </ReactTooltip>
-                            {touched.email && <label className="errorMonto">{errors.password}</label>}
+                            {touched.email && <label className="error-bottom">{errors.password}</label>}
 
-                            <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
+                            <a href="/empty" type="submit"><p className="recContr">Recuperar contraseña</p></a>
 
-                            { touched.password && <p id="datosIncorrectos" className="no-encontrado ">{datosIncorrectos}</p>}
+                            { touched.password && <p id="datosIncorrectos" className="no-encontrado">{datosIncorrectos}</p>}
 
                             <button
                                 className={btn}
@@ -268,7 +266,6 @@ class SimLogin extends Component {
                     )}
                 </Formik>
                 <a href="/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
-
             </div>
         )
     }
