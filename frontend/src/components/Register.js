@@ -111,8 +111,8 @@ class RegisterContent extends Component {
         let genero = this.state.Genero
         let preferencias = this.state.Preferencias
         if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '' &&
-            nombreIncorrecto != "Ingrese un nombre valido." && apellidoIncorrecto != "Ingrese un apellido valido." && pass.length >= 8 &&
-            fechaNacIncorrecta != "Solo nacidos el " + dia + "/" + mesActual + "/" + anio + " o antes." && fechaNacIncorrecta != "Solo nacidos despues del " + anioMin + '.') {
+            pass.length >= 8 && fechaNacIncorrecta != "Solo nacidos el " + dia + "/" + mesActual + "/" + anio + " o antes." &&
+            fechaNacIncorrecta != "Solo nacidos despues del " + anioMin + '.') {
             this.setState({
                 isDisable: false
             })
@@ -291,9 +291,7 @@ class RegisterContent extends Component {
                                         name="Nombre"
                                         value={this.state.Nombre}
                                         onBlur={this.handleOnBlur}
-                                        onChange={this.handleChange}
-                                        data-for="error-name"
-                                        data-tip="Este campo es obligatorio."
+                                        onChange={this.soloLetras}
                                     />
                                     <ReactTooltip id="error-name"
                                         place="bottom"
@@ -314,9 +312,7 @@ class RegisterContent extends Component {
                                         name="Apellido"
                                         value={this.state.Apellido}
                                         onBlur={this.handleOnBlur}
-                                        onChange={this.handleChange}
-                                        data-for="error-apellido"
-                                        data-tip="Este campo es obligatorio."
+                                        onChange={this.soloLetras}
                                     />
                                     <ReactTooltip id="error-apellido"
                                         place="bottom"
