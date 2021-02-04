@@ -37,5 +37,5 @@ node_modules
 .next/
 
 #docker
-data-node/
+#data-node/
 mongoclient/
