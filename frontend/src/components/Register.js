@@ -159,7 +159,7 @@ class RegisterContent extends Component {
             case "FechaNacimiento":
                 if (!this.state.FechaNacimiento) {
                     this.setState({
-                        FechaNacimientoError: 'Este campo es obligatorio.'
+                        FechaNacimientoError: ''
                     })
                 } else if (this.state.FechaNacimiento > fechaActual) {
                     this.setState({
