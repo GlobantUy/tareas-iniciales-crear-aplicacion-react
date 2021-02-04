@@ -1,18 +1,7 @@
 
 import React, { Component } from 'react';
 
-const userLogin = () => {
-  try {
-    if (sessionStorage.getItem('Usuario-Values')) {
-      return true
-    } else {
-      return false
-    }
-  }catch (error) {
-    console.log(error);
-  }//error no manejado
 
-}
 class Header extends React.Component {
  
   constructor(props) {
@@ -59,6 +48,18 @@ class Header extends React.Component {
   }
 
   render() {
+    const userLogin = () => {
+      try {
+        if (sessionStorage.getItem('Usuario-Values')) {
+          return true
+        } else {
+          return false
+        }
+      }catch (error) {
+        console.log(error);
+      }//error no manejado
+    
+    }
     const isLoggedIn = userLogin();
     if (isLoggedIn) {
       this.getName();
