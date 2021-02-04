@@ -167,11 +167,11 @@ class SimLoan extends Component {
 
     render() {
         const { errors } = this.state
-        const { data, loading } = this.state;
+        const { loading } = this.state;
         return (
             <div>
-                <LoadingSpinner /> 
-                {loading ? <LoadingSpinner /> : <div /> }
+                 
+                {loading ? <LoadingSpinner />: <div /> }
                 <h1 className="titleForm">Simulador de préstamos</h1>
 
                 <div className="form">
