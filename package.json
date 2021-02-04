@@ -19,8 +19,7 @@
   "homepage": "https://github.com/GlobantUy/tareas-iniciales-crear-aplicacion-react#readme",
   "dependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-react-app": "^3.1.2",
-    "serverless": "^2.22.0"
+    "babel-preset-react-app": "^3.1.2"
   },
   "devDependencies": {}
 }
