@@ -86,6 +86,20 @@ class RegisterContent extends Component {
         })
     }
 
+    soloLetras = (e) => {
+        const { name, value } = e.target;
+        let regex = new RegExp("^[a-zA-Z ]+$");
+        if (regex.test(value)) {
+            this.setState({
+                [name]: value
+            });
+        } else if (value == "") {
+            this.setState({
+                [name]: value
+            });
+        }
+    }
+
     handleChangePreferencias = event => {
         if (this.state.Preferencias.includes(event.target.value)) {
             var index = this.state.Preferencias.indexOf(event.target.value);
