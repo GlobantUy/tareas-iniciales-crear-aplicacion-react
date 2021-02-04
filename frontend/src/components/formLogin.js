@@ -118,50 +118,20 @@ class SimLogin extends Component {
 
                         if (!values.password) {
                             errors.password = '';
-                            if (!values.email) {
-                                errors.email = '';
-                            } else if (
-                                !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
-                            ) {
-                                errors.email = 'Formato invalido';
-                                mailCorrecto = true;
-                            } else {
-                                mailCorrecto = true;
-                                ReactTooltip.rebuild('errormail');
-                            }
-                        } else {
-                            passwordd = values.password
                             contraCorrecta = false;
-
-                            if (errorPass == false) {
-                                datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique.";
-                                errorPass = true
-                            }
-                            if (!values.email) {
-                                mailCorrecto = true;
-                            } else if (
-                                !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
-                            ) {
-                                errors.email = 'Formato invalido.';
-                                mailCorrecto = false;
-                            } else {
-                                emaill = values.email
-                                mailCorrecto = true;
-                            }
                         }
-                        if (values.password.length < 8 && values.password.length >= 1) {
+                        else if (values.password.length < 8 && values.password.length >= 1) {
+                            errors.password = 'La contraseña ingresada es menor a 8 caracteres'
                             contraCorrecta = false;
-                            errors.password = 'La contraseña ingresada es menor a 8 caracteres.'
-
-                        } else {
+                        }
+                        else {
                             contraCorrecta = true;
                             passwordd = values.password
                         }
 
-
                         if (!values.email) {
                             errors.email = '';
-                            // mailCorrecto = false;
+                            mailCorrecto = false;
                         }
                         else if (!values.email) {
                             errors.email = '';
@@ -170,7 +140,7 @@ class SimLogin extends Component {
                         else if (
                             !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                         ) {
-                            errors.email = 'Formato invalido.';
+                            errors.email = 'Formato invalido';
                             mailCorrecto = false;
                         }
                         else {
@@ -179,7 +149,7 @@ class SimLogin extends Component {
                         }
 
                         if (errorPass == false) {
-                            datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique.";
+                            datosIncorrectos = "Los datos ingresados no son correctos, por favor verifique";
                             errorPass = true
                         }
 

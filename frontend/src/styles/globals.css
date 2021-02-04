@@ -1,4 +1,5 @@
 /*@import 'https://fonts.googleapis.com/css2?family=Roboto&display=swap';*/
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 footer {
     position: fixed;
@@ -149,9 +150,11 @@ select:focus {
     padding-left: 65px;
     padding-top: 10px;
 }
+
 .menu ul li {
     padding-bottom: 30px;
 }
+
 .menu ul li a {
     width: 120px;
     padding: 10px 0px 10px 10px;
@@ -212,14 +215,24 @@ select:focus {
     font-family: 'Roboto', sans-serif;
 }
 
-.error-bottom{
+.error-bottom {
     color: red;
     font-size: 14px;
 }
+
 .Ingreso {
     margin-top: 4px;
     height: 32px;
     width: 167px;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 .inputMonto {

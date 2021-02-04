@@ -19,7 +19,7 @@ const validate = values => {
     let porcentaje = (0.2) * (values.Ingreso)
     let monto = values.Monto_a_pedir
     if ((monto > porcentaje) && (values.Ingreso > 0)) {
-        errors.Monto_a_pedir = 'El monto solicitado excede el 20% de su salario, intente con un monto menor.'
+        errors.Monto_a_pedir = 'El monto solicitado excede el 20% de sus ingresos.'
     }
     return errors
 }

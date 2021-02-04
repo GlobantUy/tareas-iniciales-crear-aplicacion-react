@@ -350,6 +350,7 @@ class RegisterContent extends Component {
                                         className="error-tooltip"
                                     >
                                     </ReactTooltip>
+                                    <label className="error-bottom">{this.state.FechaNacimientoError}</label>
                                 </div>
                             </div>
 
@@ -467,11 +468,18 @@ class RegisterContent extends Component {
 
                             <div className="row row-name-genero">
                                 <div className="col-3">
-                                    <p>Género*</p>
+                                    <p data-for="error-genero" data-tip="Este campo es obligatorio.">Género*</p>
                                 </div>
                                 <div className="col-3">
                                     <p>Preferencias*</p>
                                 </div>
+                                <ReactTooltip id="error-genero"
+                                    place="bottom"
+                                    type="info"
+                                    effect="solid"
+                                    className="error-tooltip"
+                                >
+                                </ReactTooltip>
                             </div>
 
                             <div className="row">
