@@ -84,6 +84,20 @@ class RegisterContent extends Component {
         })
     }
 
+    soloLetras = (e) => {
+        const { name, value } = e.target;
+        let regex = new RegExp("^[a-zA-Z ]+$");
+        if (regex.test(value)) {
+            this.setState({
+                [name]: value
+            });
+        }else if (value == "") {
+            this.setState({
+                [name]: value
+            });
+        }
+    }
+
     handleChangePreferencias = event => {
         if (this.state.Preferencias.includes(event.target.value)) {
             var index = this.state.Preferencias.indexOf(event.target.value);
@@ -98,8 +112,6 @@ class RegisterContent extends Component {
     comprobarInputs = () => {
         let nombre = this.state.Nombre
         let apellido = this.state.Apellido
-        let nombreIncorrecto = this.state.NombreError
-        let apellidoIncorrecto = this.state.ApellidoError
         let fechaNacIncorrecta = this.state.FechaNacimientoError
         let fechaNac = this.state.FechaNacimiento
         let email = this.state.Email
@@ -109,8 +121,8 @@ class RegisterContent extends Component {
         let genero = this.state.Genero
         let preferencias = this.state.Preferencias
         if (nombre && apellido && fechaNac && email && pass && confirmPass && departamento && genero && preferencias != '' &&
-            nombreIncorrecto != "Ingrese un nombre valido." && apellidoIncorrecto != "Ingrese un apellido valido." && pass.length >= 8 &&
-            fechaNacIncorrecta != "Solo nacidos el "+ dia +"/"+mesActual+"/"+anio +" o antes." && fechaNacIncorrecta != "Solo nacidos despues del "+ anioMin+'.') {
+            pass.length >= 8 && fechaNacIncorrecta != "Solo nacidos el " + dia + "/" + mesActual + "/" + anio + " o antes." &&
+            fechaNacIncorrecta != "Solo nacidos despues del " + anioMin + '.') {
             this.setState({
                 isDisable: false
             })
@@ -129,10 +141,6 @@ class RegisterContent extends Component {
                     this.setState({
                         NombreError: 'Este campo es obligatorio.'
                     })
-                } else if (!/[A-Z]$/i.test(this.state.Nombre)) {
-                    this.setState({
-                        NombreError: 'Ingrese un nombre valido.',
-                    })
                 } else {
                     this.setState({
                         NombreError: '',
@@ -143,10 +151,6 @@ class RegisterContent extends Component {
                 if (!this.state.Apellido) {
                     this.setState({
                         ApellidoError: 'Este campo es obligatorio.'
-                    })
-                } else if (!/[A-Z]$/i.test(this.state.Apellido)) {
-                    this.setState({
-                        ApellidoError: 'Ingrese un apellido valido.',
                     })
                 } else {
                     this.setState({
@@ -161,11 +165,11 @@ class RegisterContent extends Component {
                     })
                 } else if (this.state.FechaNacimiento > fechaActual) {
                     this.setState({
-                        FechaNacimientoError: 'Solo nacidos el '+ diaActual +"/"+mesActual+"/"+anio +" o antes." 
+                        FechaNacimientoError: 'Solo nacidos el ' + diaActual + "/" + mesActual + "/" + anio + " o antes."
                     })
                 } else if (this.state.FechaNacimiento < fechaMin) {
                     this.setState({
-                        FechaNacimientoError: 'Solo nacidos despues del '+ anioMin +'.'
+                        FechaNacimientoError: 'Solo nacidos despues del ' + anioMin + '.'
                     })
                 } else {
                     this.setState({
@@ -290,7 +294,7 @@ class RegisterContent extends Component {
                                         name="Nombre"
                                         value={this.state.Nombre}
                                         onBlur={this.handleOnBlur}
-                                        onChange={this.handleChange}
+                                        onChange={this.soloLetras}
                                     />
                                     <label className="error">{this.state.NombreError}</label>
                                 </div>
@@ -304,7 +308,7 @@ class RegisterContent extends Component {
                                         name="Apellido"
                                         value={this.state.Apellido}
                                         onBlur={this.handleOnBlur}
-                                        onChange={this.handleChange}
+                                        onChange={this.soloLetras}
                                     />
                                     <label className="error">{this.state.ApellidoError}</label>
                                 </div>
