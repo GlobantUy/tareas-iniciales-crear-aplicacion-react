@@ -292,6 +292,8 @@ class RegisterContent extends Component {
                                         value={this.state.Nombre}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.soloLetras}
+                                        data-for="error-name"
+                                        data-tip="Este campo es obligatorio."
                                     />
                                     <ReactTooltip id="error-name"
                                         place="bottom"
@@ -300,8 +302,6 @@ class RegisterContent extends Component {
                                         className="error-tooltip"
                                     >
                                     </ReactTooltip>
-                                    <label className="error-bottom">{this.state.NombreError}</label>
-
                                 </div>
 
                                 <div className="col-4">
@@ -313,6 +313,8 @@ class RegisterContent extends Component {
                                         value={this.state.Apellido}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.soloLetras}
+                                        data-for="error-apellido"
+                                        data-tip="Este campo es obligatorio."
                                     />
                                     <ReactTooltip id="error-apellido"
                                         place="bottom"
@@ -321,8 +323,6 @@ class RegisterContent extends Component {
                                         className="error-tooltip"
                                     >
                                     </ReactTooltip>
-                                    <label className="error-bottom">{this.state.ApellidoError}</label>
-
                                 </div>
 
                                 <div className="col-4">
