@@ -122,7 +122,7 @@ module.exports.store = async (req, res) => {
                       }
                     },
                     status:500,
-                    message: 'Storage fail'
+                    message: 'Storage failure'
 
                   })
                 }
