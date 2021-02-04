@@ -42,7 +42,7 @@ class Tableadmin extends Component {
     }
 
     componentDidMount() {
-
+        
         let clientes = this.getLoans()
         console.log(clientes);
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
