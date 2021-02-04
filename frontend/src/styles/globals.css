@@ -105,14 +105,15 @@ select:focus {
 }
 
 .User {
+    margin-top: 30px;
+    margin-right: 102px;
     float: right;
-    display: none;
     display: block;
     position: absolute;
     width: 192px;
     height: 19px;
-    left: 988px;
-    top: 31px;
+    
+    right: 0px;
 }
 
 .User span {
@@ -173,7 +174,7 @@ select:focus {
     left: 100px;
 }
 
-.containerDescuento ul {
+.containertablas ul {
     margin-top: 15px;
 }
 
