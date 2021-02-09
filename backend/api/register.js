@@ -20,7 +20,7 @@ module.exports.register = async (req, res) => {
               }
             },
             status: 409,
-            message: 'Email belongs to an existing account'
+            message: 'Email belongs to an existing account.'
           })
         } else {
           if (req.body.name != undefined && req.body.name.length != 0) {
@@ -52,7 +52,7 @@ module.exports.register = async (req, res) => {
                             }
                           },
                           status: 200,
-                          message: 'User registered successfully'
+                          message: 'User registered successfully.'
                         })
                       } else {
                         return ({
@@ -62,7 +62,7 @@ module.exports.register = async (req, res) => {
                             }
                           },
                           status: 400,
-                          message: "Must provide a 'preferences' property and value"
+                          message: "Must provide a 'preferences' property and value."
                         })
                       }
                     } else {
@@ -73,7 +73,7 @@ module.exports.register = async (req, res) => {
                           }
                         },
                         status: 400,
-                        message: "Must provide a 'gender' property and value"
+                        message: "Must provide a 'gender' property and value."
                       })
                     }
                   } else {
@@ -84,7 +84,7 @@ module.exports.register = async (req, res) => {
                         }
                       },
                       status: 400,
-                      message: "Must provide a 'passwd' property and value"
+                      message: "Must provide a 'passwd' property and value."
                     })
                   }
                 } else {
@@ -95,7 +95,7 @@ module.exports.register = async (req, res) => {
                       }
                     },
                     status: 400,
-                    message: "Must provide a 'department' property and value"
+                    message: "Must provide a 'department' property and value."
                   })
                 }
               } else {
@@ -106,7 +106,7 @@ module.exports.register = async (req, res) => {
                     }
                   },
                   status: 400,
-                  message: "Must provide a 'dateOfBirth' property and value"
+                  message: "Must provide a 'dateOfBirth' property and value."
                 })
               }
             } else {
@@ -117,7 +117,7 @@ module.exports.register = async (req, res) => {
                   }
                 },
                 status: 400,
-                message: "Must provide a 'lName' property and value"
+                message: "Must provide a 'lName' property and value."
               })
             }
           } else {
@@ -128,7 +128,7 @@ module.exports.register = async (req, res) => {
                 }
               },
               status: 400,
-              message: "Must provide a 'name' property and value"
+              message: "Must provide a 'name' property and value."
             })
           }
         }
@@ -140,7 +140,7 @@ module.exports.register = async (req, res) => {
             }
           },
           status: 400,
-          message: "Must provide an 'email' property and value"
+          message: "Must provide an 'email' property and value."
         })
       }
     } catch (err) {
@@ -151,7 +151,7 @@ module.exports.register = async (req, res) => {
           }
         },
         status: 500,
-        message: 'Internal server error (005)'
+        message: 'Internal server error (005).'
       })
     }
   } else if (req.method != 'OPTIONS'){
