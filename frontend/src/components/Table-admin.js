@@ -10,13 +10,13 @@ class Tableadmin extends Component {
 
     constructor(props) {
         //since we are extending class Table so we have to use super in order to override Component class constructor
-        super(props) 
+        super(props)
         this.handleClicked = this.handleClicked.bind(this);
         this.changeFilterDropdown = this.changeFilterDropdown.bind(this);
         this.changeStateDropdown = this.changeStateDropdown.bind(this);
         this.handleLimpiar = this.handleLimpiar.bind(this);
         //state is by default an object
-        this.state = { 
+        this.state = {
             estadocambiados: [],
             rowSelected: false,
             isAplicarDisabled: true,
@@ -32,11 +32,11 @@ class Tableadmin extends Component {
             this.setState({
                 clientes: resp.data.loans
             })
-            
+
         }).catch((error) => {
             console.log(error);
         });
-        
+
         /*return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }*/
     }
 
@@ -49,24 +49,16 @@ class Tableadmin extends Component {
         switch (state) {
             default:
                 return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-                    <option value="option1" > Pendiente</ option>
-                    <option value="option2" > Rechazado</ option>
-                    <option value="option3" > Aprobado</ option>
-                </ select>);
-                break
-            case false:
-                return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-                    <option value="option1" > Pendiente</ option>
-                    <option value="option2" selected='selected'> Rechazado</ option>
-                    <option value="option3" > Aprobado</ option>
-                </ select>);
+                    <option value="option1" > Pendiente     </ option>
+                    <option value="option2" > Rechazado     </ option>
+                    <option value="option3" > Aprobado      </ option>
+                </ select>)
                 break
             case true:
-                return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-                    <option value="option1" > Pendiente</ option>
-                    <option value="option2" > Rechazado</ option>
-                    <option value="option3" selected='selected' > Aprobado</ option>
-                </ select>);
+                return (<label>Aprobado </label>)
+                break
+            case false:
+                return (<label>Rechazado </label>)
                 break
         }
     }
@@ -95,7 +87,7 @@ class Tableadmin extends Component {
         )
 
     }
-    
+
     changeStateDropdown(index) {
         let listaclientes = this.state.clientes
         let dropdown = document.getElementById('menutabla' + index);
@@ -104,8 +96,8 @@ class Tableadmin extends Component {
             let estado = (dropdown.value == "option2") ? false : true;
             listaclientes[index].state = estado
             let listacambiados = this.state.estadocambiados;
-            let indice = listacambiados.findIndex(cliente => cliente.email == listaclientes[index].userEmail) 
-            indice === -1 ? listacambiados.push({ email: listaclientes[index].userEmail, state: estado }) : listacambiados[indice].state = estado 
+            let indice = listacambiados.findIndex(cliente => cliente.email == listaclientes[index].userEmail)
+            indice === -1 ? listacambiados.push({ email: listaclientes[index].userEmail, state: estado }) : listacambiados[indice].state = estado
             this.setState({
                 isAplicarDisabled: false,
                 rowSelected: true,
@@ -164,7 +156,7 @@ class Tableadmin extends Component {
                         <td className="celda">
                             {this.crearestado(state, index)}
                         </td>
-                        
+
                     </tr>
                 )
             }
@@ -174,25 +166,25 @@ class Tableadmin extends Component {
     renderTableHeader() {
         let header = Object.keys(this.state.clientes[0])
         return header.map((key, index) => {
-            if (key == "userName") 
+            if (key == "userName")
                 return <th key={index}>{"Usuario"}</th>
-            if (key == "amount") 
+            if (key == "amount")
                 return <th key={index}>{"Monto solicitado"}</th>
-            if (key == "date") 
+            if (key == "date")
                 return <th key={index}>{"Fecha"}</th>
-            if (key == "currency") 
+            if (key == "currency")
                 return <th key={index}>{"Moneda"}</th>
-            if (key == "state" ) 
+            if (key == "state")
                 return <th key={index}>{"Estado"}</th>
-            if (key == "payments"){
+            if (key == "payments") {
                 return <th key={index}>{"Cuotas"}</th>
-            } else if (key !== "_id" &&  key != "userEmail" &&  key != "stateDate"){
+            } else if (key !== "_id" && key != "userEmail" && key != "stateDate") {
                 return <th key={index}>{key}</th>
-            }  
+            }
         })
     }
     render() {
-        if(prestamosCargados) {
+        if (prestamosCargados) {
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
