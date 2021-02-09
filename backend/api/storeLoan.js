@@ -26,7 +26,7 @@ module.exports.store = async (req, res) => {
             }
           },
           status: 200,
-          message: 'Provided email does not belong to a registered user'
+          message: 'Provided email does not belong to a registered user.'
         })
       } else {
         if (isNaN(req.body.amount)) {
@@ -37,7 +37,7 @@ module.exports.store = async (req, res) => {
               }
             },
             status: 400,
-            message: 'Provided amount is not a number'
+            message: 'Provided amount is not a number.'
           })
         } else {
           if (req.body.currency != 'U$S' && req.body.currency != '$U') {
@@ -48,7 +48,7 @@ module.exports.store = async (req, res) => {
                 }
               },
               status: 400,
-              message: 'Invalid currency type'
+              message: 'Invalid currency type.'
             })
           } else {
             if (isNaN(req.body.payments)) {
@@ -59,7 +59,7 @@ module.exports.store = async (req, res) => {
                   }
                 },
                 status: 400,
-                message: 'Amount of payments is not a number'
+                message: 'Amount of payments is not a number.'
               })
             } else {
               /* if (req.body.loanType == undefined || req.body.loanType.length < 4) {
@@ -69,7 +69,7 @@ module.exports.store = async (req, res) => {
                        href: "https://" + req.headers.host + req.url
                      }
                    },
-                   message: "Invalid 'loanType' value"
+                   message: "Invalid 'loanType' value."
                  })
                } else {
                  */
@@ -112,7 +112,7 @@ module.exports.store = async (req, res) => {
                       }
                     },
                     status: 200,
-                    message: 'Storage successful'
+                    message: 'Storage successful.'
                   })
                 } catch {
                   return ({
@@ -122,7 +122,7 @@ module.exports.store = async (req, res) => {
                       }
                     },
                     status:500,
-                    message: 'Storage failure'
+                    message: 'Storage failure.'
 
                   })
                 }
@@ -134,7 +134,7 @@ module.exports.store = async (req, res) => {
                     }
                   },
                   status: 200,
-                  message: 'The user already has a loan pending approval'
+                  message: 'The user already has a loan pending approval.'
 
                 })
               }

@@ -21,7 +21,7 @@ module.exports.returnLoans = async (req, res) => {
           }
         },
         status: 200,
-        message: 'User not found'
+        message: 'User not found.'
       });
     }
     const type = userSearch[0].userType;
@@ -37,7 +37,7 @@ module.exports.returnLoans = async (req, res) => {
               }
             },
             status: 200,
-            loans: "No loans found"
+            loans: "No loans found."
 
           };
         } else {
@@ -65,7 +65,7 @@ module.exports.returnLoans = async (req, res) => {
               }
             },
             status: 200,
-            message: "User has no registered loans"
+            message: "User has no registered loans."
 
           };
         } else {
@@ -91,7 +91,7 @@ module.exports.returnLoans = async (req, res) => {
             }
           },
           status: 200,
-          message: 'No loans found'
+          message: 'No loans found.'
 
         };
         break;

@@ -18,7 +18,7 @@ module.exports.login = async (req, res) => {
           }
         },
         status: 400,
-        message: "No value for 'email' was provided"
+        message: "No value for 'email' was provided."
 
       })
     }
@@ -30,7 +30,7 @@ module.exports.login = async (req, res) => {
           }
         },
         status: 400,
-        message: "No value for 'passwd' was provided"
+        message: "No value for 'passwd' was provided."
 
       })
     }
@@ -72,7 +72,7 @@ module.exports.login = async (req, res) => {
           }
         },
         status: 500,
-        message: 'Internal error (005)'
+        message: 'Internal error (005).'
 
       })
     }
