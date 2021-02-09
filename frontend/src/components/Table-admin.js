@@ -57,7 +57,7 @@ class Tableadmin extends Component {
             case false:
                 return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
                     <option value="option1" > Pendiente</ option>
-                    <option value="option2" selected="selected"> Rechazado</ option>
+                    <option value="option2" selected='selected'> Rechazado</ option>
                     <option value="option3" > Aprobado</ option>
                 </ select>);
                 break
@@ -65,7 +65,7 @@ class Tableadmin extends Component {
                 return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
                     <option value="option1" > Pendiente</ option>
                     <option value="option2" > Rechazado</ option>
-                    <option value="option3" selected="selected" > Aprobado</ option>
+                    <option value="option3" selected='selected' > Aprobado</ option>
                 </ select>);
                 break
         }
@@ -113,7 +113,7 @@ class Tableadmin extends Component {
                 hidden: false,
                 estadocambiados: listacambiados
             });
-            fila.className="selectitem"
+            fila.className = 'selected';
         } else {
             this.setState({
                 isAplicarDisabled: true,
@@ -160,7 +160,7 @@ class Tableadmin extends Component {
                     <tr id={cliente} key={index}>
                         <td className="celda">{userName}</td>
                         <td className="celda">{amount}</td>
-                        <td className="celda">{date.substring(10, 0).split("-").reverse().join(" ").toString('dd-MM-YYYY')}</td>
+                        <td className="celda">{date.substring(10, 0).split("-").reverse().join(" ").toString(months)}</td>
                         <td className="celda">{currency}</td>
                         <td className="celda">{payments}</td>
                         <td className="celda">
