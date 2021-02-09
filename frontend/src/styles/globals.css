@@ -1,4 +1,5 @@
 /*@import 'https://fonts.googleapis.com/css2?family=Roboto&display=swap';*/
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 footer {
     position: fixed;
@@ -150,9 +151,11 @@ select:focus {
     padding-left: 65px;
     padding-top: 10px;
 }
+
 .menu ul li {
     padding-bottom: 30px;
 }
+
 .menu ul li a {
     width: 120px;
     padding: 10px 0px 10px 10px;
@@ -208,10 +211,29 @@ select:focus {
     width: 190px;
 }
 
+.error-tooltip {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.error-bottom {
+    color: red;
+    font-size: 14px;
+}
+
 .Ingreso {
     margin-top: 4px;
     height: 32px;
     width: 167px;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 .inputMonto {
@@ -221,7 +243,7 @@ select:focus {
 }
 
 .inputPesos {
-    margin-top: -35px;
+    margin-top: -36px;
     text-align: right;
 }
 
@@ -345,11 +367,7 @@ input[type='checkbox'] {
     text-align: center;
 }
 
-.error {
-    color: #E2331F;
-}
-
-.no-encontrado{
+.no-encontrado {
     display: none;
 }
 
@@ -639,6 +657,7 @@ a.button {
     background: #FFFFFF;
     color: #F07E1A;
 }
+
 #btnCancelar2 {
     position: absolute;
     height: 40px;
@@ -652,17 +671,20 @@ a.button {
 }
 
 .close-icon{
+    cursor: pointer;
     height: 15px;
     width: 15px;
     position: absolute;
     float: right;
-    margin-left: 29.6em;  
-    margin-top: 5px ;
+    margin-left: 29.6em;
+    margin-top: 5px;
 }
-.close-icon:hover{
-    transition:all  ease-in-out;
+
+.close-icon:hover {
+    transition: all ease-in-out;
     filter: invert(69%) sepia(39%) saturate(6378%) hue-rotate(351deg) brightness(98%) contrast(92%);
 }
+
 #btnSolicitar {
     position: absolute;
     margin-left: 270px;
@@ -688,8 +710,9 @@ a.button {
     border: 1px solid #F07E1A;
 }
 
-#modalPendiente #btnVolver{
-    left: 260px;}
+#modalPendiente #btnVolver {
+    left: 260px;
+}
 
 /* No logueado */
 
@@ -945,82 +968,76 @@ a.button {
 }
 
 .selectitem:hover {
-   background-color:#FFFFFF ;
+    background-color: #FFFFFF;
 }
 
 /*Registro*/
 
-.inp-registro{
+.inp-registro {
     height: 40px;
     width: 350px;
     margin-top: 4px;
     margin-bottom: 8px;
 }
 
-.inputTipo{
+.inputTipo {
     height: 16px;
     width: 16px;
 }
 
-.genero{
+.genero {
     width: 174.76px;
     height: 16px;
     left: 19px;
     top: calc(50% - 16px/2 + 0.5px);
     margin-top: 13px;
     margin-bottom: 13px;
-    
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
-    
     color: #000000;
-    
 }
 
-.row-name-genero{
-margin-top: 16px;
-margin-bottom: 11px;
+.row-name-genero {
+    margin-top: 16px;
+    margin-bottom: 11px;
 }
 
-div .rdbutons{
+div .rdbutons {
     left: 0px;
     margin-top: 14px;
     margin-bottom: 14px;
 }
 
-.body{
+.body {
     width: 100%;
     height: 100%;
 }
 
-.form.registro{
+.form.registro {
     left: 0%;
     width: 100%;
     margin-right: 0%;
     margin-left: 0%;
 }
 
-.titlee-registro{
-height: 28px;
-left: 596px;
-top: 118px;
-margin-bottom: 24px;
-
-/* TITULO */
-
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 24px;
-line-height: 28px;
-
-color: #000000;
+.titlee-registro {
+    height: 28px;
+    left: 596px;
+    top: 118px;
+    margin-bottom: 24px;
+    /* TITULO */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
 }
 
-.btn-registro{
+.btn-registro {
     color: #000000;
     background: #F07E1A;
     border: none;
@@ -1029,7 +1046,7 @@ color: #000000;
     margin-top: 24px;
 }
 
-.btn-registro:disabled{
+.btn-registro:disabled {
     color: #636363;
     background: #E0E0E0;
 }
@@ -1067,20 +1084,24 @@ color: #000000;
 
 input[type=date]::-webkit-datetime-edit-month-field {
     cursor: text;
-  }
-  input[type=date]::-webkit-datetime-edit-day-field {
-    cursor: text;
-  }
-  input[type=date]::-webkit-datetime-edit-year-field {
-    cursor: text;
-  }
-  input[type=date]::-webkit-calendar-picker-indicator:hover {
-    cursor: pointer;
-  }
-  input[type=date]::-webkit-datetime-edit { 
-    padding: 1em; 
-  }
-  input[type=date]::-webkit-datetime-edit-text { 
-     padding: 0 0.3em; 
-  }
+}
 
+input[type=date]::-webkit-datetime-edit-day-field {
+    cursor: text;
+}
+
+input[type=date]::-webkit-datetime-edit-year-field {
+    cursor: text;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+}
+
+input[type=date]::-webkit-datetime-edit {
+    padding: 1em;
+}
+
+input[type=date]::-webkit-datetime-edit-text {
+    padding: 0 0.3em;
+}

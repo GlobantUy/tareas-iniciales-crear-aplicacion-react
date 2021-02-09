@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
+import ReactTooltip from 'react-tooltip';
+import ReactDOM from 'react-dom';
 
 let URL = process.env.RESTURL_BACKEND + '/register'
 
@@ -91,7 +93,7 @@ class RegisterContent extends Component {
             this.setState({
                 [name]: value
             });
-        }else if (value == "") {
+        } else if (value == "") {
             this.setState({
                 [name]: value
             });
@@ -112,6 +114,8 @@ class RegisterContent extends Component {
     comprobarInputs = () => {
         let nombre = this.state.Nombre
         let apellido = this.state.Apellido
+        let nombreIncorrecto = this.state.NombreError
+        let apellidoIncorrecto = this.state.ApellidoError
         let fechaNacIncorrecta = this.state.FechaNacimientoError
         let fechaNac = this.state.FechaNacimiento
         let email = this.state.Email
@@ -139,7 +143,11 @@ class RegisterContent extends Component {
             case "Nombre":
                 if (!this.state.Nombre) {
                     this.setState({
-                        NombreError: 'Este campo es obligatorio.'
+                        NombreError: ''
+                    })
+                } else if (!/[A-Z]$/i.test(this.state.Nombre)) {
+                    this.setState({
+                        NombreError: 'Ingrese un nombre valido.',
                     })
                 } else {
                     this.setState({
@@ -150,7 +158,11 @@ class RegisterContent extends Component {
             case "Apellido":
                 if (!this.state.Apellido) {
                     this.setState({
-                        ApellidoError: 'Este campo es obligatorio.'
+                        ApellidoError: ''
+                    })
+                } else if (!/[A-Z]$/i.test(this.state.Apellido)) {
+                    this.setState({
+                        ApellidoError: 'Ingrese un apellido valido.',
                     })
                 } else {
                     this.setState({
@@ -161,7 +173,7 @@ class RegisterContent extends Component {
             case "FechaNacimiento":
                 if (!this.state.FechaNacimiento) {
                     this.setState({
-                        FechaNacimientoError: 'Este campo es obligatorio.'
+                        FechaNacimientoError: ''
                     })
                 } else if (this.state.FechaNacimiento > fechaActual) {
                     this.setState({
@@ -195,7 +207,7 @@ class RegisterContent extends Component {
             case "Password":
                 if (!this.state.Password) {
                     this.setState({
-                        PasswordError: 'Este campo es obligatorio.'
+                        PasswordError: ''
                     })
                 } else if (this.state.Password.length < 8) {
                     this.setState({
@@ -263,6 +275,7 @@ class RegisterContent extends Component {
                 }
             }).catch(error => {
                 console.log(error)
+                alert("No hemos podido registrarte debido a problemas tecnicos.")
             })
 
         } else {
@@ -286,7 +299,6 @@ class RegisterContent extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-4">
-
                                     <p>Nombres*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -295,12 +307,19 @@ class RegisterContent extends Component {
                                         value={this.state.Nombre}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.soloLetras}
+                                        data-for="error-name"
+                                        data-tip="Este campo es obligatorio."
                                     />
-                                    <label className="error">{this.state.NombreError}</label>
+                                    <ReactTooltip id="error-name"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                    </ReactTooltip>
                                 </div>
 
                                 <div className="col-4">
-
                                     <p className="mid">Apellidos*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -309,12 +328,19 @@ class RegisterContent extends Component {
                                         value={this.state.Apellido}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.soloLetras}
+                                        data-for="error-apellido"
+                                        data-tip="Este campo es obligatorio."
                                     />
-                                    <label className="error">{this.state.ApellidoError}</label>
+                                    <ReactTooltip id="error-apellido"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                    </ReactTooltip>
                                 </div>
 
                                 <div className="col-4">
-
                                     <p>Fecha de nacimiento*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -323,16 +349,24 @@ class RegisterContent extends Component {
                                         value={this.state.FechaNacimiento}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-date"
+                                        data-tip="Este campo es obligatorio."
                                         max={fechaActual}
                                         min={fechaMin}
                                     />
-                                    <label className="error">{this.state.FechaNacimientoError}</label>
+                                    <ReactTooltip id="error-date"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                    </ReactTooltip>
+                                    <label className="error-bottom">{this.state.FechaNacimientoError}</label>
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col-4">
-
                                     <p>Email*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -341,13 +375,21 @@ class RegisterContent extends Component {
                                         value={this.state.Email}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-email"
+                                        data-tip="Este campo es obligatorio."
                                     />
-                                    <label className="error">{this.state.EmailError}</label>
-                                    <label className="error">{errors.Email}</label>
+                                    <ReactTooltip id="error-email"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                    </ReactTooltip>
+                                    <label className="error-bottom">{errors.Email}</label>
+
                                 </div>
 
                                 <div className="col-4">
-
                                     <p className="mid">Contraseña*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -356,12 +398,21 @@ class RegisterContent extends Component {
                                         value={this.state.Password}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-psswd"
+                                        data-tip="Este campo es obligatorio."
                                     />
-                                    <label className="error">{this.state.PasswordError}</label>
+                                    <ReactTooltip id="error-psswd"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                    </ReactTooltip>
+                                    <label className="error-bottom">{this.state.PasswordError}</label>
+
                                 </div>
 
                                 <div className="col-4">
-
                                     <p>Confirmación de contraseña*</p>
                                     <input className="inp-registro"
                                         autoComplete="off"
@@ -370,18 +421,30 @@ class RegisterContent extends Component {
                                         value={this.state.ConfirmPassword}
                                         onBlur={this.handleOnBlur}
                                         onChange={this.handleChange}
+                                        data-for="error-confirmpsswd"
+                                        data-tip="Este campo es obligatorio."
                                     />
-                                    <label className="error">{this.state.ConfirmPasswordError}</label>
-                                    <label className="error">{errors.ConfirmPassword}</label>
+                                    <ReactTooltip id="error-confirmpsswd"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                    </ReactTooltip>
+                                    <label className="error-bottom">{errors.ConfirmPassword}</label>
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col-4">
-
                                     <p>Departamento*</p>
-
-                                    <select className="inp-registro" name="Departamento" value={this.state.Departamento} onChange={this.handleChange} onBlur={this.handleOnBlur}>
+                                    <select className="inp-registro"
+                                        name="Departamento"
+                                        value={this.state.Departamento}
+                                        onChange={this.handleChange}
+                                        onBlur={this.handleOnBlur}
+                                        data-for="error-departament"
+                                        data-tip="">
                                         <option hidden>Selecciona una opción</option>
                                         <option value="Artigas">Artigas</option>
                                         <option value="Canelones">Canelones</option>
@@ -403,7 +466,14 @@ class RegisterContent extends Component {
                                         <option value="Tacuarembo">Tacuarembo</option>
                                         <option value="TreintayTres">Treinta y Tres</option>
                                     </select>
-                                    <label className="error">{this.state.DepartamentoError}</label>
+                                    <ReactTooltip id="error-departament"
+                                        place="bottom"
+                                        type="info"
+                                        effect="solid"
+                                        className="error-tooltip"
+                                    >
+                                        <span className="error-tooltip">Este campo es obligatorio.</span>
+                                    </ReactTooltip>
                                 </div>
                             </div>
 
@@ -418,7 +488,6 @@ class RegisterContent extends Component {
 
                             <div className="row">
                                 <div className="col-3">
-
                                     <input
                                         type="radio"
                                         id="Femenino"
