@@ -142,6 +142,7 @@ class Tableadmin extends Component {
         }
     }
 
+    
     renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {
             const { userName, amount, date, currency, payments, state } = cliente //destructuring 
