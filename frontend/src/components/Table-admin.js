@@ -100,7 +100,7 @@ class Tableadmin extends Component {
     changeStateDropdown(index) {
         let listaclientes = this.state.clientes
         let dropdown = document.getElementById('menutabla' + index);
-        let fila = document.getElementById(index)
+        let fila = document.getElementById(index.toString())
         if (dropdown.value != "option1") {
             let estado = (dropdown.value == "option2") ? false : true;
             listaclientes[index].state = estado
@@ -113,14 +113,14 @@ class Tableadmin extends Component {
                 hidden: false,
                 estadocambiados: listacambiados
             });
-            fila = selected;
+            fila.className="selectitem"
         } else {
             this.setState({
                 isAplicarDisabled: true,
                 rowSelected: false,
                 hidden: true,
             });
-            fila = '';
+            fila.className = '';
         }
     }
 
