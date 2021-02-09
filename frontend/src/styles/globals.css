@@ -670,7 +670,8 @@ a.button {
     color: #F07E1A;
 }
 
-.close-icon {
+.close-icon{
+    cursor: pointer;
     height: 15px;
     width: 15px;
     position: absolute;

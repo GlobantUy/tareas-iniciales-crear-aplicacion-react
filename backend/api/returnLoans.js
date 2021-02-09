@@ -1,4 +1,5 @@
 const connectToDatabase = require('../lib/database');
+const user = require('./models/user');
 
 module.exports.returnLoans = async (req, res) => {
   let loanSearch
@@ -8,34 +9,38 @@ module.exports.returnLoans = async (req, res) => {
   const collectionT = db.collection('loans')
   const collectionU = db.collection('users')
   if (req.method === 'OPTIONS') {
-    return {status: 200, ok:'ok'};
+    return { status: 200, ok: 'ok' };
   }
   if (req.method === 'POST') {
-    console.log(req.body);
-    try {
-      userSearch = await collectionU.find({ email: req.body.email }).toArray()
-      console.log(userSearch);
-      
-    } catch (error) {
+    userSearch = await collectionU.find({ email: req.body.email }).toArray()
+    if (userSearch.length === 0) {
       return ({
         _links: {
           self: {
             href: "https://" + req.headers.host + req.url
           }
         },
-        status: 400,
-        message: 'User not found'
+        status: 200,
+        message: 'User not found.'
       });
-
     }
-    if(userSearch[0].email === req.body.email) {
-      const type =  userSearch[0].userType;
-      switch (type) {
-        case 'ADMIN':
+    const type = userSearch[0].userType;
+    switch (type) {
+      case 'ADMIN':
 
-          loanSearchAdm = await collectionT.find({}).toArray()
-          console.log(loanSearch);
+        loanSearchAdm = await collectionT.find({}).toArray()
+        if (loanSearchAdm.length === 0) {
+          output = {
+            _links: {
+              self: {
+                href: "https://" + req.headers.host + req.url
+              }
+            },
+            status: 200,
+            loans: "No loans found."
 
+          };
+        } else {
           output = {
             _links: {
               self: {
@@ -45,50 +50,52 @@ module.exports.returnLoans = async (req, res) => {
             status: 200,
             loans: loanSearchAdm
 
-          };            
-          break;
-        
-        case 'CUSTOMER':
-          loanSearchCust = await collectionT.find({userEmail: req.body.email }).toArray()
-          console.log(loanSearch);
+          };
+        }
+
+        break;
+
+      case 'CUSTOMER':
+        loanSearchCust = await collectionT.find({ userEmail: req.body.email }).toArray()
+        if (loanSearchCust.length === 0) {
           output = {
             _links: {
               self: {
                 href: "https://" + req.headers.host + req.url
               }
             },
-            status:200,
+            status: 200,
+            message: "User has no registered loans."
+
+          };
+        } else {
+          output = {
+            _links: {
+              self: {
+                href: "https://" + req.headers.host + req.url
+              }
+            },
+            status: 200,
             loans: loanSearchCust
 
           };
-          
-          break;
-      
-        default:
-          output = {
-            _links: {
-              self: {
-                href: "https://" + req.headers.host + req.url
-              }
-            },
-            status:200,
-            message: 'No loans found'
+        }
 
-          };
-          break;
-      }
-      return output;
+        break;
 
-    }else{
-      return ({
-        _links: {
-          self: {
-            href: "https://" + req.headers.host + req.url
-          }
-        },
-        status: 403,
-        message: 'Access denied'
+      default:
+        output = {
+          _links: {
+            self: {
+              href: "https://" + req.headers.host + req.url
+            }
+          },
+          status: 200,
+          message: 'No loans found.'
 
-      })
+        };
+        break;
     }
-  }}
+    return output;
+  }
+}
