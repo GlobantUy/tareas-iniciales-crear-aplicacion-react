@@ -74,7 +74,6 @@ class Tableadmin extends Component {
     handleLimpiar() {
         let listaclientes = this.getLoans();
         let filas = document.getElementsByTagName('tr')
-
         for (let i = 0; i < filas.length; i++) { filas[i].className = '' }
         this.setState({
             clientes: listaclientes,
@@ -105,8 +104,8 @@ class Tableadmin extends Component {
             let estado = (dropdown.value == "option2") ? false : true;
             listaclientes[index].state = estado
             let listacambiados = this.state.estadocambiados;
-            let indice = listacambiados.findIndex(cliente => cliente.email == listaclientes[index].email) 
-            indice === -1 ? listacambiados.push({ email: listaclientes[index].email, state: estado }) : listacambiados[indice].state = estado 
+            let indice = listacambiados.findIndex(cliente => cliente.email == listaclientes[index].userEmail) 
+            indice === -1 ? listacambiados.push({ email: listaclientes[index].userEmail, state: estado }) : listacambiados[indice].state = estado 
             this.setState({
                 isAplicarDisabled: false,
                 rowSelected: true,
@@ -152,15 +151,14 @@ class Tableadmin extends Component {
     }
 
     renderTableData(Filtro) {
-        const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
         return this.state.clientes.map((cliente, index) => {
             const { userName, amount, date, currency, payments, state } = cliente //destructuring 
             if (state == Filtro || Filtro == 'Todos') {
                 return (
-                    <tr id={cliente} key={index}>
+                    <tr id={index} key={index}>
                         <td className="celda">{userName}</td>
                         <td className="celda">{amount}</td>
-                        <td className="celda">{date.substring(10, 0).split("-").reverse().join(" ").toString(months)}</td>
+                        <td className="celda">{date.substring(10, 0).split("-").reverse().join(" ")}</td>
                         <td className="celda">{currency}</td>
                         <td className="celda">{payments}</td>
                         <td className="celda">
