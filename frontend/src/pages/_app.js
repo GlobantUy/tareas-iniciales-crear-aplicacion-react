@@ -2,7 +2,7 @@
 import NProgress from 'nprogress'; //nprogress module
 import 'nprogress/nprogress.css'; //styles of nprogress
 */
-import NextNprogress from 'nextjs-progressbar';
+//import NextNprogress from 'nextjs-progressbar';
 import '../styles/globals.css'
 //Binding events. 
 /*Router.events.on('routeChangeStart', () => NextNprogress.start()); 
