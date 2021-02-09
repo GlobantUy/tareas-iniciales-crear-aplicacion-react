@@ -652,6 +652,7 @@ a.button {
 }
 
 .close-icon{
+    cursor: pointer;
     height: 15px;
     width: 15px;
     position: absolute;
