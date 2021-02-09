@@ -77,15 +77,17 @@ class SimLogin extends Component {
                             "email": emaill
                         }).then(res => {
                             console.log(res.data.loans)
-                            if (res.data.loans == undefined) {
-                                sessionStorage.setItem('prestamosNull', false);
-                                this.redireccionar()
-                            } else {
+                            if (res.data.loans == "No loans found.") {
                                 sessionStorage.setItem('prestamosNull', true);
-                                sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
-
-
                                 this.redireccionar()
+                                //sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
+                            } else {
+                                sessionStorage.setItem('prestamosNull', false);
+                                
+                                this.redireccionar()
+
+
+                                //this.redireccionar()
                             }
                         })
 
