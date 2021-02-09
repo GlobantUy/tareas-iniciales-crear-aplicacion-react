@@ -1,8 +1,10 @@
 import React, { Component, } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
+import ReactTooltip from 'react-tooltip';
+import ReactDOM from 'react-dom';
 
-let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique'
+let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique.'
 var btn = "btnPrimarioDisabled";
 let rol
 let errorPass = true
@@ -115,32 +117,32 @@ class SimLogin extends Component {
                         const errors = {};
 
                         if (!values.password) {
-                            errors.password = 'Necesario';
+                            errors.password = '';
                             contraCorrecta = false;
-                        } 
+                        }
                         else if (values.password.length < 8 && values.password.length >= 1) {
                             errors.password = 'La contraseña ingresada es menor a 8 caracteres'
                             contraCorrecta = false;
                         }
                         else {
                             contraCorrecta = true;
-                            passwordd = values.password  
-                        }  
+                            passwordd = values.password
+                        }
 
                         if (!values.email) {
-                            errors.email = 'Necesario';
+                            errors.email = '';
                             mailCorrecto = false;
-                        } 
+                        }
                         else if (!values.email) {
                             errors.email = '';
                             mailCorrecto = false;
-                        } 
+                        }
                         else if (
                             !/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(values.email)
                         ) {
                             errors.email = 'Formato invalido';
                             mailCorrecto = false;
-                        } 
+                        }
                         else {
                             mailCorrecto = true;
                             emaill = values.email;
@@ -184,8 +186,19 @@ class SimLogin extends Component {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.email}
+                                data-for="errormail"
+                                data-tip="Este campo es obligatorio."
                             />
-                            { touched.email && <label className="error">{errors.email}</label>}
+
+                            <ReactTooltip id="errormail"
+                                place="right"
+                                type="info"
+                                effect="solid"
+                                className="error-tooltip"
+                            >
+                            </ReactTooltip>
+                            {touched.email && <label className="error-bottom">{errors.email}</label>}
+
 
                             <p>Contraseña *</p>
                             <input className="inputIngreso"
@@ -194,11 +207,22 @@ class SimLogin extends Component {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.password}
+                                data-for="errorpsswd"
+                                data-tip="Este campo es obligatorio."
                             />
-                            { touched.password && <label className="error">{errors.password}</label>}
-                            <a href="/empty" type="submit"><p className="recContr"> Recuperar contraseña</p></a>
 
-                            { touched.password && <p id="datosIncorrectos" className="no-encontrado ">{datosIncorrectos}</p>}
+                            <ReactTooltip id="errorpsswd"
+                                place="right"
+                                type="info"
+                                effect="solid"
+                                className="error-tooltip"
+                            >
+                            </ReactTooltip>
+                            {touched.email && <label className="error-bottom">{errors.password}</label>}
+
+                            <a href="/empty" type="submit"><p className="recContr">Recuperar contraseña</p></a>
+
+                            { touched.password && <p id="datosIncorrectos" className="no-encontrado">{datosIncorrectos}</p>}
 
                             <button
                                 className={btn}
@@ -212,7 +236,6 @@ class SimLogin extends Component {
                     )}
                 </Formik>
                 <a href="/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
-
             </div>
         )
     }
