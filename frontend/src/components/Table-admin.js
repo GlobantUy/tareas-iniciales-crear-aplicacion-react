@@ -44,8 +44,8 @@ class Tableadmin extends Component {
 
     componentDidMount() {
 
-        let clientes = this.getLoans()
-        console.log(clientes);
+        /*let clientes = this.getLoans()
+        console.log(clientes);*/
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
             0
             email = cliente.userEmail
@@ -200,8 +200,9 @@ class Tableadmin extends Component {
     }
 
     render() {
-        if (prestamosCargados) {
-            this.getLoans();
+        
+        if(!prestamosCargados) {
+            //this.getLoans();
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>

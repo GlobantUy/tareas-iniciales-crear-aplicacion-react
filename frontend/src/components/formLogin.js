@@ -1,8 +1,8 @@
 import React, { Component, } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
+import LoadingSpinner from './Spinner';
 import ReactTooltip from 'react-tooltip';
-import ReactDOM from 'react-dom';
 
 let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique.'
 var btn = "btnPrimarioDisabled";
@@ -19,6 +19,9 @@ class SimLogin extends Component {
 
     constructor(props) {
         super(props)
+        this.state = {
+            loading: false,
+        }
     }
     redireccionar() {
         const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
@@ -54,6 +57,7 @@ class SimLogin extends Component {
     }
 
     post(email, pass) {
+        this.setState({ loading: true }, () => {
         axios.post(URL, {
             "email": email,
             "passwd": pass,
@@ -73,27 +77,32 @@ class SimLogin extends Component {
                             "email": emaill
                         }).then(res => {
                             console.log(res.data.loans)
-                            if (res.data.loans == undefined) {
-                                sessionStorage.setItem('prestamosNull', false);
-                                this.redireccionar()
-                            } else {
+                            if (res.data.loans == "No loans found.") {
                                 sessionStorage.setItem('prestamosNull', true);
-                                sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
-
-
                                 this.redireccionar()
+                                //sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
+                            } else {
+                                sessionStorage.setItem('prestamosNull', false);
+                                
+                                this.redireccionar()
+
+
+                                //this.redireccionar()
                             }
                         })
 
                     }
                 } else {
                     console.log(Response.data.found)
+                    this.setState({loading:false});
                     this.mostrarError()
+
                 }
             })
             .catch(error => {
                 console.log("Error al iniciar sesion", error)
             });
+        })//fin state loading
     }
 
     guardarStorage = (user, clave, type) => {
@@ -108,8 +117,11 @@ class SimLogin extends Component {
     }
 
     render() {
+        const { loading } = this.state
         return (
             <div className="formLogin">
+            { loading ? <LoadingSpinner />: <div /> }
+            
                 <h1>Ingreso</h1>
                 <Formik
                     initialValues={{ email: '', password: '' }}

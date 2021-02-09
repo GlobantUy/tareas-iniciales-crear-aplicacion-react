@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import LoadingSpinner from './Spinner';
 import ReactTooltip from 'react-tooltip';
-import ReactDOM from 'react-dom';
-
 
 const validate = values => {
     const errors = {}
@@ -30,6 +29,7 @@ class SimLoan extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading: false,
             Ingreso: '',
             Monto_a_pedir: '',
             Moneda_$U: false,
@@ -112,27 +112,31 @@ class SimLoan extends Component {
             window.location.href = '/Descuento'
         }
 
-        axios.post(process.env.RESTURL_FRONTEND + '/hello', {
-            user: {
-                Ingreso: this.state.Ingreso,
-                Monto_a_pedir: this.state.Monto_a_pedir,
-                financiacion: this.state.financiacion,
-                TipoDePrestamoInmueble: this.state.TipoDePrestamoInmueble,
-                TipoDePrestamoAutomotor: this.state.TipoDePrestamoAutomotor,
-                TipoDePrestamoOtros: this.state.TipoDePrestamoOtros,
-            }
-        },
-            { withCredentials: true }
-        )
-            .then(Response => {
-                console.log("registration res", Response)
-                if (!Object.keys(result).length) {
-                    window.location.href = process.env.RESTURL_FRONTEND + '/Descuento';
+        this.setState({ loading: true }, () => {
+            axios.post(process.env.RESTURL_BACKEND + '/storeLoan', {
+                user: {
+                    Ingreso: this.state.Ingreso,
+                    Monto_a_pedir: this.state.Monto_a_pedir,
+                    financiacion: this.state.financiacion,
+                    TipoDePrestamoInmueble: this.state.TipoDePrestamoInmueble,
+                    TipoDePrestamoAutomotor: this.state.TipoDePrestamoAutomotor,
+                    TipoDePrestamoOtros: this.state.TipoDePrestamoOtros,
                 }
-            })
-            .catch(error => {
-                console.log("registration error", error)
-            });
+            },
+                { withCredentials: true }
+            )
+                .then(Response => {
+                    console.log("registration res", Response)
+                    if (!Object.keys(result).length) {
+                        window.location.href = process.env.RESTURL_FRONTEND + '/Descuento';
+                    }
+                })
+                .catch(error => {
+                    console.log("registration error", error)
+                });
+
+        })
+            
     }
 
     componentDidMount() {
@@ -156,8 +160,11 @@ class SimLoan extends Component {
 
     render() {
         const { errors } = this.state
+        const { loading } = this.state;
         return (
             <div>
+                 
+                {loading ? <LoadingSpinner />: <div /> }
                 <h1 className="titleForm">Simulador de préstamos</h1>
 
                 <div className="form">
@@ -301,6 +308,7 @@ class SimLoan extends Component {
 
                     </form>
                 </div>
+               
             </div>
         )
     }
