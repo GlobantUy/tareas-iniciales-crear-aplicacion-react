@@ -1105,3 +1105,15 @@ input[type=date]::-webkit-datetime-edit {
 input[type=date]::-webkit-datetime-edit-text {
     padding: 0 0.3em;
 }
+.admin-text{
+    position: absolute;
+    height: 28px;
+    left: 581px;
+    top: 118px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+}
