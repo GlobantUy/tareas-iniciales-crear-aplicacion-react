@@ -32,7 +32,6 @@ class SimLogin extends Component {
                 sessionStorage.setItem('volverAceptarpress', false);
             }else{
                 window.location.href = "/Descuento"
-                console.log(rol+' Este es el rol del else')
                 sessionStorage.setItem('volverAceptarpress', false);
             }
         } else {
