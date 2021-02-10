@@ -2,6 +2,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Antes de empezar:
+
+Instalar serverles by npm
+
+    npm i -g serverless
+
 First, run the development server:
 
 ```bash

@@ -6,6 +6,7 @@ import axios from 'axios';
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
 let URLupdateLoan = process.env.RESTURL_BACKEND + '/updateLoan';
 let prestamosCargados
+
 class Tableadmin extends Component {
 
     constructor(props) {
@@ -26,8 +27,7 @@ class Tableadmin extends Component {
     }
 
     getLoans() {
-        // data = [email, Estado]
-        let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+        let email = JSON.parse(sessionStorage.getItem('Usuario-values')).email
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
             this.setState({
                 clientes: resp.data.loans
@@ -47,7 +47,7 @@ class Tableadmin extends Component {
 
     crearestado(state, index) {
         switch (state) {
-            case undefined:
+         default:
                 return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
                     <option value="option1" > Pendiente     </ option>
                     <option value="option2" > Rechazado     </ option>
@@ -166,7 +166,7 @@ class Tableadmin extends Component {
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.state.clientes[0])
+        let header = Object.keys(this.getLoans)
         console.log(header)
         return header.map((key, index) => {
             if (key == "userName")
@@ -187,7 +187,8 @@ class Tableadmin extends Component {
         })
     }
     render() {
-        if (prestamosCargados) {
+        if(!prestamosCargados) {
+            this.getLoans();
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>

@@ -24,7 +24,8 @@ class Header extends React.Component {
       this.userData.role = JSON.parse(sessionStorage.getItem('Usuario-Values')).role;
       this.userData.tabla = this.getRole();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      return false
     }
 
   }
@@ -47,20 +48,23 @@ class Header extends React.Component {
     }
   }
 
+  userLogin = () => {
+    try {
+      if (!sessionStorage.getItem('Usuario-Values')) {
+        return false
+      } else {
+        return true
+      }
+    }catch (error) {
+      //console.log(error);
+      return false
+    }//error no manejado
+  
+  }
+
   render() {
-    const userLogin = () => {
-      try {
-        if (sessionStorage.getItem('Usuario-Values')) {
-          return true
-        } else {
-          return false
-        }
-      }catch (error) {
-        console.log(error);
-      }//error no manejado
     
-    }
-    const isLoggedIn = userLogin();
+    const isLoggedIn = this.userLogin();
     if (isLoggedIn) {
       this.getName();
       return (
