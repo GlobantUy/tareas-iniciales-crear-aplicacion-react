@@ -81,7 +81,8 @@ class Tableadmin extends Component {
         axios.post(URLupdateLoan, {
             data
         }).then(res => {
-            this.getLoans
+            this.getLoans()
+            window.location.href = '/Tableadmin';
         }
 
         )
@@ -145,13 +146,13 @@ class Tableadmin extends Component {
     
     renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {
-            const { userName, amount, date, currency, payments, state } = cliente //destructuring 
+            const { userName, amount, date, currency, payments, state } = cliente //destructuring
             if (state == Filtro || Filtro == 'Todos') {
                 return (
                     <tr id={index} key={index}>
                         <td className="celda">{userName}</td>
                         <td className="celda">{amount}</td>
-                        <td className="celda">{date.substring(10, 0).split("-").reverse().join(" ")}</td>
+                        <td className="celda">{date.substring(10, 0).split("-").reverse().join("/")}</td>
                         <td className="celda">{currency}</td>
                         <td className="celda">{payments}</td>
                         <td className="celda">
@@ -166,6 +167,7 @@ class Tableadmin extends Component {
 
     renderTableHeader() {
         let header = Object.keys(this.state.clientes[0])
+        console.log(header)
         return header.map((key, index) => {
             if (key == "userName")
                 return <th key={index}>{"Usuario"}</th>
