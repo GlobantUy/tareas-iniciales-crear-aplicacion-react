@@ -47,7 +47,7 @@ class Tableadmin extends Component {
 
     crearestado(state, index) {
         switch (state) {
-            default:
+            case undefined:
                 return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
                     <option value="option1" > Pendiente     </ option>
                     <option value="option2" > Rechazado     </ option>
