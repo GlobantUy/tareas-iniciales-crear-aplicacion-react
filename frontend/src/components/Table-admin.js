@@ -11,15 +11,15 @@ class Tableadmin extends Component {
 
     constructor(props) {
         //since we are extending class Table so we have to use super in order to override Component class constructor
-        super(props) 
+        super(props)
         this.handleClicked = this.handleClicked.bind(this);
         this.changeFilterDropdown = this.changeFilterDropdown.bind(this);
         this.changeStateDropdown = this.changeStateDropdown.bind(this);
         this.handleLimpiar = this.handleLimpiar.bind(this);
         //state is by default an object
-        this.state = { 
+        this.state = {
             estadocambiados: [],
-            data : [],
+            data: [],
             rowSelected: false,
             clientes: [{ Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '', Estado: '' }],
             isAplicarDisabled: true,
@@ -34,18 +34,18 @@ class Tableadmin extends Component {
             console.log(email);
             console.log(resp);
             return resp.data.loans;
-            
+
         }).catch((error) => {
             console.log(error);
         });
-        
+
         /*return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }*/
     }
 
     componentDidMount() {
 
-        let clientes = this.getLoans()
-        console.log(clientes);
+        /*let clientes = this.getLoans()
+        console.log(clientes);*/
         let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
             0
             email = cliente.userEmail
@@ -103,18 +103,18 @@ class Tableadmin extends Component {
     }
 
     handleClicked() {
-        
-            data = [email, Estado]
-            axios.post(URLupdateLoan, {
-            "data": data  
-            }).then(res => {
-          
-             }
-             
-            )
-                        
+
+        data = [email, Estado]
+        axios.post(URLupdateLoan, {
+            "data": data
+        }).then(res => {
+
         }
-    
+
+        )
+
+    }
+
     changeStateDropdown(index) {
         let listaclientes = this.state.clientes
         let dropdown = document.getElementById('menutabla' + index);
@@ -200,8 +200,9 @@ class Tableadmin extends Component {
     }
 
     render() {
-        if(prestamosCargados) {
-            this.getLoans();
+        
+        if(!prestamosCargados) {
+            //this.getLoans();
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>

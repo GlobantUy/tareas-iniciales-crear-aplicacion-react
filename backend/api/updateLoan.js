@@ -66,7 +66,7 @@ module.exports.update = async (req, res) => {
                   }
                 },
                 status: 200,
-                message: 'User ' + req.body.data[i].email + ' has no registered loans'
+                message: 'User ' + req.body.data[i].email + ' has no registered loans.'
               })
             } else {
               if (totalLoanSearch.length == total) {
@@ -78,7 +78,7 @@ module.exports.update = async (req, res) => {
                     }
                   },
                   status:200,
-                  message: 'User ' + req.body.data[i].email + ' has no loans pending review'
+                  message: 'User ' + req.body.data[i].email + ' has no loans pending review.'
                 })
               } else {
                 if (req.body.data[i].state != true && req.body.data[i].state != false) {
@@ -105,7 +105,7 @@ module.exports.update = async (req, res) => {
                 }
               },
               status: 500,
-              message: 'Internal error (001)'
+              message: 'Internal error (001).'
 
             })
           }
@@ -118,7 +118,7 @@ module.exports.update = async (req, res) => {
               }
             },
             status: 400,
-            message: 'Invalid value for state or email in array at position ' + errorPosition
+            message: 'Invalid value for state or email in array at position ' + errorPosition + "."
 
           })
         } else {
@@ -130,7 +130,7 @@ module.exports.update = async (req, res) => {
               }
             },
             status: 400,
-            message: 'Duplicate entry for email property in array (' + dupEmail + ') '
+            message: 'Duplicate entry for email property in array (' + dupEmail + ').'
 
           })
         }
@@ -148,7 +148,7 @@ module.exports.update = async (req, res) => {
             }
           },
           status: 200,
-          message: 'Loan state modified successfully'
+          message: 'Loan state modified successfully.'
 
         })
       }
