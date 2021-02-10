@@ -19,7 +19,7 @@ module.exports.register = async (req, res) => {
                 href: "https://" + req.headers.host + req.url
               }
             },
-            status: 400,
+            status: 200,
             message: 'Email belongs to an existing account.'
           })
         } else {
