@@ -263,7 +263,7 @@ class RegisterContent extends Component {
                 "passwd": this.state.Password
             }).then(Response => {
                 console.log(Response)
-                if (Response.data.message == "Email belongs to an existing account") {
+                if (Response.data.message == "Email belongs to an existing account.") {
                     this.setState({
                         EmailError: 'Ya existe un usuario con este email'
                     })
