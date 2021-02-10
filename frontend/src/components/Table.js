@@ -2,6 +2,7 @@ import React, { Children, Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import axios from 'axios';
+import LoadingSpinner from './Spinner';
 
 let emailFromStorage
 let monedaPost
@@ -193,8 +194,10 @@ class Table extends Component {
     }
 
     render() {
+        const { loading } = this.state
         return (
             <div className="container">
+                { loading ? <LoadingSpinner/> : <div />}
                 <h2 id='titleee'>Resultado de préstamo</h2>
                 <h1 id='ingresos'>  Ingresos </h1>
                 <h1 id='ingresoss'> {this.state.Moneda + this.state.Ingreso} </h1>

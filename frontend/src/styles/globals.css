@@ -1105,3 +1105,28 @@ input[type=date]::-webkit-datetime-edit {
 input[type=date]::-webkit-datetime-edit-text {
     padding: 0 0.3em;
 }
+
+/*Spinner */
+
+#carga {
+    border: 15px solid #ccc;
+    border-top-color: #F07E1A;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-animation: girar 1.5s linear infinite;
+    -o-animation: girar 1.5s linear infinite;
+    animation: girar 1.5s linear infinite;
+}
+
+@keyframes girar {
+    from {transform: rotate(0deg); }
+    to { transform: rotate(360deg); } 
+}

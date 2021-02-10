@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
+import LoadingSpinner from './Spinner';
 
 let Estado
 let email
@@ -200,11 +201,12 @@ class Tableadmin extends Component {
     }
 
     render() {
-        
+        const { loading } = this.state
         if(!prestamosCargados) {
             //this.getLoans();
-            return (
+            return (   
                 <div className="container">
+                    { loading ? <LoadingSpinner />: <div /> }
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
                     <h2 id='Filtro'>Filtro por estado </h2>
                     <select id='menufiltro' onChange={this.changeFilterDropdown} >

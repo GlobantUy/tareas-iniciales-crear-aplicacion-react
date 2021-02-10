@@ -91,8 +91,9 @@ class SimLoan extends Component {
                 break;
         }
     }
-
+    
     handleSumbit(e) {
+        
         e.preventDefault();
         sessionStorage.setItem('prestamoValues', JSON.stringify(this.state));
         sessionStorage.setItem('volverBoton', false);
@@ -110,8 +111,11 @@ class SimLoan extends Component {
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
             window.location.href = '/Descuento'
+            this.setState({
+                loading: false
+            })
         }
-
+        
         this.setState({ loading: true }, () => {
             axios.post(process.env.RESTURL_BACKEND + '/storeLoan', {
                 user: {
@@ -126,18 +130,19 @@ class SimLoan extends Component {
                 { withCredentials: true }
             )
                 .then(Response => {
+                    this.setState({loading: false })
                     console.log("registration res", Response)
                     if (!Object.keys(result).length) {
                         window.location.href = process.env.RESTURL_FRONTEND + '/Descuento';
+                        
                     }
                 })
                 .catch(error => {
                     console.log("registration error", error)
-                });
-
-        })
-            
+                });      
+            })      
     }
+
 
     componentDidMount() {
         const volverTue = JSON.parse(sessionStorage.getItem('volverBoton'));
@@ -163,10 +168,8 @@ class SimLoan extends Component {
         const { loading } = this.state;
         return (
             <div>
-                 
-                {loading ? <LoadingSpinner />: <div /> }
                 <h1 className="titleForm">Simulador de préstamos</h1>
-
+                {loading ? <LoadingSpinner />: <div /> }
                 <div className="form">
                     <form onSubmit={this.handleSumbit}>
 

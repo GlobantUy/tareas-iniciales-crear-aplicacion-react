@@ -3,6 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import ReactTooltip from 'react-tooltip';
 import ReactDOM from 'react-dom';
+import LoadingSpinner from './Spinner';
 
 let URL = process.env.RESTURL_BACKEND + '/register'
 
@@ -49,6 +50,7 @@ class RegisterContent extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading: false,
             Nombre: '',
             NombreError: '',
 
@@ -252,6 +254,7 @@ class RegisterContent extends Component {
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
+            this.setState({ loading: true }, () => {
             axios.post(URL, {
                 "name": this.state.Nombre,
                 "lName": this.state.Apellido,
@@ -265,7 +268,8 @@ class RegisterContent extends Component {
                 console.log(Response)
                 if (Response.data.message == "Email belongs to an existing account") {
                     this.setState({
-                        EmailError: 'Ya existe un usuario con este email'
+                        EmailError: 'Ya existe un usuario con este email',
+                        loading: false
                     })
                 } else {
                     this.setState({
@@ -276,8 +280,11 @@ class RegisterContent extends Component {
             }).catch(error => {
                 console.log(error)
                 alert("No hemos podido registrarte debido a problemas tecnicos.")
+                this.setState({
+                    loading: false
+                })
             })
-
+        })
         } else {
             this.setState({
                 EmailError: ''
@@ -286,9 +293,11 @@ class RegisterContent extends Component {
     }
 
     render() {
+        const { loading } = this.state;
         const { errors } = this.state
         return (
             <Fragment>
+                {loading ? <LoadingSpinner />: <div /> }
                 <div className="body">
                     <form className="form registro" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
 
