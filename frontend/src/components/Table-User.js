@@ -17,7 +17,6 @@ class TableUser extends Component {
     }
 
     getLoans() {
-        // data = [email, Estado]
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
             console.log(email);
             console.log(resp);
@@ -26,14 +25,10 @@ class TableUser extends Component {
         }).catch((error) => {
             console.log(error);
         });
-
-        /*return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }*/
     }
 
     componentDidMount() {
-
-        
-        try{
+        try {
             let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
                 0
                 email = cliente.userEmail
@@ -46,10 +41,9 @@ class TableUser extends Component {
             this.setState({
                 clientes: listaclientes
             })
-        }catch{
+        } catch {
             prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
         }
-
     }
 
     renderTableData() {
@@ -75,12 +69,11 @@ class TableUser extends Component {
             } else {
                 return <th key={index}>{key}</th>
             }
-
         })
     }
 
     render() {
-        if (prestamosCargados == false) {
+        if (prestamosCargados == true) {
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
