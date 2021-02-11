@@ -41,7 +41,8 @@ class Header extends React.Component {
 
   logout() {
     try {
-      sessionStorage.removeItem('Usuario-Values');
+      localStorage.clear()
+      sessionStorage.clear()
     } catch (error) {
       console.log(error)
     }
