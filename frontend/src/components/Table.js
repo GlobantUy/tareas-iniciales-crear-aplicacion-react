@@ -69,6 +69,16 @@ class Table extends Component {
             abierto4: false
         });
     }
+
+    abrirTableuser = () => {
+        this.setState({
+            abierto: false,
+            abierto2: false,
+            abierto3: false,
+            abierto4: false
+        });
+        window.location.href = '/Tableuser'
+    }
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
         this.handleSubmitClicked = this.handleSubmitClicked.bind(this);
@@ -222,7 +232,7 @@ class Table extends Component {
                 <Modal isOpen={this.state.abierto4} className='modalStyles' id='modalPendiente'>
                 <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <p className='textModal2'>Ya tienes un prestamo pendiente</p>
-                    <Button id="btnCancelar2" onClick={this.cerrarModals}>Cancelar</Button>
+                    <Button id="btnCancelar2" onClick={this.abrirTableuser}>Ver mis prestamos</Button>
                     <a href="/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 

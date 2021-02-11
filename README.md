@@ -1,11 +1,48 @@
-[//]: <> (Solo modificar el texto entre corchetes [] según lo que se describa)
+# STB_BANK APP
+# Development Start Guide
 
-# [Título de la tarea]
-[Descripción de la tarea tal cuál fue descripta por los tutores (copy&paste del texto).]
+## Database
+Start Database
 
-# Integrantes
+    docker-compose up mongodb
+
+Stop Database 
+
+   Ctrl + C en la terminal de ejecucion
+
+    docker-compose down -v
+## Backend
+
+En la carpeta backend correr el comando:
+
+    npm run start
+## Frontend
+
+En la carpeta front end correr el comando:
+
+    npm run dev
+
+# DockerStart Guide
+Para buildear las imagenes
+
+    docker-compose build --no-cache
+
+Start de el sistema
+
+    docker-compose up -d
+
+Ver logs del sistema
+
+    docker-compose logs -f
+
+Stop Sistema 
+
+    docker-compose down -v
+
+
+# Equipo
  - [Nombre (@usuario)]
  - [Nombre (@usuario)]
  
-# Resolución
+# Links
 [Información sobre la resolución de la tarea realizada]
