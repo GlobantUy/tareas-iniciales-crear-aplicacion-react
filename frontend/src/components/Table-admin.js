@@ -208,7 +208,7 @@ class Tableadmin extends Component {
                     <div>
                         <table id='Administrador'>
                             <tbody>
-                                {this.renderTableHeader()}
+                               <tr>{this.renderTableHeader()}</tr>
                                 {this.renderTableData(this.state.filtro)}
                             </tbody>
                         </table>
