@@ -1118,12 +1118,11 @@ input[type=date]::-webkit-datetime-edit-text {
     opacity: 40%;
 }
 #carga {
-    border: 15px solid #ccc;
+    border: 15px solid white;
     border-top-color: #F07E1A;
     height: 100px;
     width: 100px;
     border-radius: 100%;
-    opacity: 75%;
     position: absolute;
     top: 0;
     left: 0;
