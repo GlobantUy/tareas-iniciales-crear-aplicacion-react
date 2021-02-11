@@ -32,20 +32,27 @@ class TableUser extends Component {
 
     componentDidMount() {
 
-        let clientes = this.getLoans()
-        let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
-            0
-            email = cliente.userEmail
-            console.log(email)
-            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments }
-        });
-        prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
-        this.setState({
-            clientes: listaclientes
-        })
+        
+        try{
+            let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
+                0
+                email = cliente.userEmail
+                let clientes = this.getLoans()
+                console.log(clientes)
+                console.log(email)
+                return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments }
+            });
+            prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
+            this.setState({
+                clientes: listaclientes
+            })
+        }catch{
+            prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
+        }
+
     }
 
-    renderTableData(Filtro) {
+    renderTableData() {
         return this.state.clientes.map((cliente, index) => {
             const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas } = cliente //destructuring
             return (
@@ -73,19 +80,33 @@ class TableUser extends Component {
     }
 
     render() {
-        return (
-            <div className="container">
-                <h2 id='titulo'>Solicitudes de préstamo</h2>
-                <div>
-                    <table id='Administrador'>
-                        <tbody>
-                            <tr>{this.renderTableHeader()}</tr>
-                            {this.renderTableData()}
-                        </tbody>
-                    </table>
+        if (prestamosCargados == false) {
+            return (
+                <div className="container">
+                    <h2 id='titulo'>Solicitudes de préstamo</h2>
+                    <div>
+                        <table id='Administrador'>
+                            <tbody>
+                                <tr>{this.renderTableHeader()}</tr>
+                                {this.renderTableData()}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <>
+                    <div className="container">
+                        <h2 id='titulo'>Solicitudes de préstamo</h2>
+                    </div>
+                    <div>
+                        <img className="Tablet" src="/table.png" />
+                        <p id="noDatos">No has solicitado un prestamo aún</p>
+                    </div>
+                </>
+            )
+        }
     }
 }
 export default TableUser

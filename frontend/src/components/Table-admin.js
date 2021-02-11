@@ -46,17 +46,22 @@ class Tableadmin extends Component {
 
         /*let clientes = this.getLoans()
         console.log(clientes);*/
-        let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
-            0
-            email = cliente.userEmail
-            Estado = cliente.state
-            console.log(email, Estado)
-            return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
-        });
-        prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
-        this.setState({
-            clientes: listaclientes
-        })
+        try{
+            let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
+                0
+                email = cliente.userEmail
+                Estado = cliente.state
+                console.log(email, Estado)
+                return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }
+            });
+            prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
+            this.setState({
+                clientes: listaclientes
+            })
+        }catch{
+            prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
+        }
+
     }
 
     crearestado(Estado, index) {
@@ -201,7 +206,7 @@ class Tableadmin extends Component {
 
     render() {
         
-        if(!prestamosCargados) {
+        if(prestamosCargados == false) {
             //this.getLoans();
             return (
                 <div className="container">
@@ -248,7 +253,6 @@ class Tableadmin extends Component {
                     </div>
                 </>
             )
-
         }
     }
 }
