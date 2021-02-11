@@ -12,68 +12,65 @@ class TableUser extends Component {
         super(props)
 
         this.state = {
-            clientes: [{ Usuario: "", Montosolicitado: '', Fecha: '', Moneda: '', Cuotas: '' }],
+            clientes: [{userName: "",  amount: '', date: '', currency: '', payments: '' }],
         }
     }
 
-    getLoans() {
+    getLoans(){
+        let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
-            console.log(email);
-            console.log(resp);
-            return resp.data.loans;
-
+            this.setState({
+                clientes: resp.data.loans
+            })
         }).catch((error) => {
             console.log(error);
+
         });
     }
 
     componentDidMount() {
-        try {
-            let listaclientes = JSON.parse(sessionStorage.getItem('prestamos')).map((cliente) => {
-                0
-                email = cliente.userEmail
-                let clientes = this.getLoans()
-                console.log(clientes)
-                console.log(email)
-                return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments }
-            });
-            prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
-            this.setState({
-                clientes: listaclientes
-            })
-        } catch {
-            prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
-        }
+        prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
+        this.getLoans()
     }
 
     renderTableData() {
         return this.state.clientes.map((cliente, index) => {
-            const { Usuario, Montosolicitado, Fecha, Moneda, Cuotas } = cliente //destructuring
-            return (
-                <tr id={index} key={index}>
-                    <td className="celda">{Usuario}</td>
-                    <td className="celda">{Montosolicitado}</td>
-                    <td className="celda">{Fecha}</td>
-                    <td className="celda">{Moneda}</td>
-                    <td className="celda">{Cuotas}</td>
-                </tr>
-            )
+            const { userName, amount, date, currency, payments} = cliente //destructuring
+                return (
+                    <tr id={index} key={index}>
+                        <td className="celda">{userName}</td>
+                        <td className="celda">{amount}</td>
+                        <td className="celda">{date.substring(10, 0).split("-").reverse().join("-")}</td>
+                        <td className="celda">{currency}</td>
+                        <td className="celda">{payments}</td>
+                    </tr>
+                )
         })
     }
 
     renderTableHeader() {
         let header = Object.keys(this.state.clientes[0])
         return header.map((key, index) => {
-            if (key == "Montosolicitado") {
+            if (key == "userName")
+                return <th key={index}>{"Usuario"}</th>
+            if (key == "amount")
                 return <th key={index}>{"Monto solicitado"}</th>
-            } else {
+            if (key == "date")
+                return <th key={index}>{"Fecha"}</th>
+            if (key == "currency")
+                return <th key={index}>{"Moneda"}</th>
+            if (key == "state")
+                return <th key={index}>{"Estado"}</th>
+            if (key == "payments") {
+                return <th key={index}>{"Cuotas"}</th>
+            } else if (key !== "_id" && key != "userEmail" && key != "stateDate") {
                 return <th key={index}>{key}</th>
             }
         })
     }
 
     render() {
-        if (prestamosCargados == true) {
+        if (!prestamosCargados) {
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>

@@ -42,7 +42,7 @@ class Table extends Component {
         }
         )
             .then(Response => {
-                if (Response.data.message == 'The user already has a loan pending approval') {
+                if (Response.data.message == 'The user already has a loan pending approval.') {
                     this.setState({ abierto4: !this.state.abierto4 });
                 } else {
                     this.setState({ abierto2: !this.state.abierto2 });
