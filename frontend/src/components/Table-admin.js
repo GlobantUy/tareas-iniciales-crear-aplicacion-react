@@ -49,16 +49,26 @@ class Tableadmin extends Component {
     crearestado(state, index) {
         switch (state) {
             case undefined:
-                return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-                    <option value="option1" > Pendiente     </ option>
-                    <option value="option2" > Rechazado     </ option>
-                    <option value="option3" > Aprobado      </ option>
-                </ select>)
+                return (<select value={'option1'} id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
+                    <option value="option1" >Pendiente</ option>
+                    <option value="option2" >Rechazado</ option>
+                    <option value="option3" >Aprobado</ option>
+                </ select>);
                 break
             case true:
                 return (<label>Aprobado </label>)
+                /*return (<select value={'option3'} id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
+                    <option value="option1" >Pendiente</ option>
+                    <option value="option2" >Rechazado</ option>
+                    <option value="option3" >Aprobado</ option>
+                </ select>);*/
                 break
             case false:
+                /*return (<select value={'option2'} id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
+                    <option value="option1" >Pendiente</ option>
+                    <option value="option2" >Rechazado</ option>
+                    <option value="option3" >Aprobado</ option>
+                </ select>);*/
                 return (<label>Rechazado </label>)
                 break
 
