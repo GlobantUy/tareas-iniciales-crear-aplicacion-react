@@ -70,7 +70,7 @@ module.exports.update = async (req, res) => {
               })
             } else {
               if (totalLoanSearch.length == total) {
-                conf3 = true; // false
+                conf3 = false
                 return ({
                   _links: {
                     self: {
