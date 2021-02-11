@@ -7,11 +7,10 @@ export default function Home() {
     let rol= JSON.parse(sessionStorage.getItem('Usuario-Values')).role;
     switch (rol) {
       case 'ADMIN':
-        console.log('admin catch')
         return (
           <div>
             <Header />
-              <h2 className='admin-text'>Bienvenido Administrador</h2>    
+              <h2 className='admin-text'>Bienvenido Administrador.</h2>    
             <footer>
       
             </footer>
@@ -19,7 +18,6 @@ export default function Home() {
         )
         break;
       case 'CUSTOMER':
-        console.log('customer catch')
         return (
           <div>
             <Header />
@@ -32,7 +30,6 @@ export default function Home() {
         )        
         break;
       default:
-        console.log('default catch')
         return (
           <div>
             <Header />
@@ -47,7 +44,6 @@ export default function Home() {
     }
    
   } catch (error) {
-    console.log('error catch')
     return (
       <div>
         <Header />
