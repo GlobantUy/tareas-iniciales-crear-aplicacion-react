@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
-
+import { faThList } from '@fortawesome/free-solid-svg-icons';
 
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
 let URLupdateLoan = process.env.RESTURL_BACKEND + '/updateLoan';
@@ -19,6 +19,7 @@ class Tableadmin extends Component {
         //state is by default an object
         this.state = {
             estadocambiados: [],
+            clientes: [{ userName: "",  amount: '', date: '', currency: '', payments: '', state: '' }],
             rowSelected: false,
             isAplicarDisabled: true,
             hidden: true,
@@ -26,18 +27,16 @@ class Tableadmin extends Component {
         }
     }
 
-    getLoans() {
-        let email = JSON.parse(sessionStorage.getItem('Usuario-values')).email
+    getLoans(){
+        let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
             this.setState({
                 clientes: resp.data.loans
             })
-
         }).catch((error) => {
             console.log(error);
-        });
 
-        /*return { Usuario: cliente.userName, Montosolicitado: cliente.amount, Fecha: cliente.date.substring(10, 0).split("-").reverse().join("-"), Moneda: cliente.currency, Cuotas: cliente.payments, Estado: cliente.state }*/
+        });
     }
 
     componentDidMount() {
@@ -45,9 +44,11 @@ class Tableadmin extends Component {
         this.getLoans()
     }
 
+   
+
     crearestado(state, index) {
         switch (state) {
-         default:
+            case undefined:
                 return (<select id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
                     <option value="option1" > Pendiente     </ option>
                     <option value="option2" > Rechazado     </ option>
@@ -60,20 +61,26 @@ class Tableadmin extends Component {
             case false:
                 return (<label>Rechazado </label>)
                 break
+
         }
     }
 
     handleLimpiar() {
-        let listaclientes = this.getLoans();
+        let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
         let filas = document.getElementsByTagName('tr')
         for (let i = 0; i < filas.length; i++) { filas[i].className = '' }
-        this.setState({
-            clientes: listaclientes,
-            hidden: true,
-            isAplicarDisabled: true
+        const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
+            this.setState({
+                clientes: resp.data.loans,
+                hidden: true,
+                isAplicarDisabled: true
+            })
+        }).catch((error) => {
+            console.log(error);
 
         });
     }
+    
 
     handleClicked() {
         let lista = this.state.estadocambiados
@@ -143,16 +150,16 @@ class Tableadmin extends Component {
         }
     }
 
-    
+
     renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {
-            const { userName, amount, date, currency, payments, state } = cliente //destructuring
-            if (state == Filtro || Filtro == 'Todos') {
+            const { userName, amount, date, currency, payments, state} = cliente //destructuring
+            if (state == Filtro || Filtro == 'Todos' ) {
                 return (
                     <tr id={index} key={index}>
                         <td className="celda">{userName}</td>
                         <td className="celda">{amount}</td>
-                        <td className="celda">{date.substring(10, 0).split("-").reverse().join("/")}</td>
+                        <td className="celda">{date.substring(10, 0).split("-").reverse().join("-")}</td>
                         <td className="celda">{currency}</td>
                         <td className="celda">{payments}</td>
                         <td className="celda">
@@ -166,8 +173,7 @@ class Tableadmin extends Component {
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.getLoans)
-        console.log(header)
+        let header = Object.keys(this.state.clientes[0])
         return header.map((key, index) => {
             if (key == "userName")
                 return <th key={index}>{"Usuario"}</th>
@@ -187,8 +193,8 @@ class Tableadmin extends Component {
         })
     }
     render() {
-        if(!prestamosCargados) {
-            this.getLoans();
+        if (!prestamosCargados) {
+            //this.getLoans();
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
@@ -202,7 +208,7 @@ class Tableadmin extends Component {
                     <div>
                         <table id='Administrador'>
                             <tbody>
-                                <tr>{this.renderTableHeader()}</tr>
+                                {this.renderTableHeader()}
                                 {this.renderTableData(this.state.filtro)}
                             </tbody>
                         </table>
