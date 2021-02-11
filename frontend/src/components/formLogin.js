@@ -56,52 +56,45 @@ class SimLogin extends Component {
         }
     }
 
-    post(email, pass) {
+     post(email, pass) {
         this.setState({ loading: true }, () => {
-        axios.post(URL, {
-            "email": email,
-            "passwd": pass,
-        },
-        )
-            .then(Response => {
+            axios.post(URL, {
+                "email": email,
+                "passwd": pass,
+            },
+            ).then(Response => {
                 console.log("post realizado correctamente", Response)
                 if (Response.data.found == undefined) {
                     rol = Response.data.rol;
+                    console.log(rol)
                     this.quitarError()
-                    if (rol == "CUSTOMER") {
-                        console.log(rol)
+                    axios.post(URLreturnpres, {
+                        "email": emaill
+                    }).then(res => {
+                        console.log(res)
+                        if (res.data.loans != undefined) {
+                            sessionStorage.setItem('prestamosNull', false);
+                            sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
+
+                            //this.redireccionar()
+                        } else {
+
+                            sessionStorage.setItem('prestamosNull', true);
+
+                            //this.redireccionar()
+                        }
                         this.redireccionar()
-                    } else {
-                        console.log(rol)
-                        axios.post(URLreturnpres, {
-                            "email": emaill
-                        }).then(res => {
-                            console.log(res.data.loans)
-                            if (res.data.loans == "No loans found.") {
-                                sessionStorage.setItem('prestamosNull', true);
-                                this.redireccionar()
-                                //sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
-                            } else {
-                                sessionStorage.setItem('prestamosNull', false);
-                                
-                                this.redireccionar()
-
-
-                                //this.redireccionar()
-                            }
-                        })
-
-                    }
+                    })
                 } else {
                     console.log(Response.data.found)
-                    this.setState({loading:false});
+                    this.setState({ loading: false });
                     this.mostrarError()
 
                 }
             })
-            .catch(error => {
-                console.log("Error al iniciar sesion", error)
-            });
+                .catch(error => {
+                    console.log("Error al iniciar sesion", error)
+                });
         })//fin state loading
     }
 
@@ -120,11 +113,11 @@ class SimLogin extends Component {
         const { loading } = this.state
         return (
             <div className="formLogin">
-            { loading ? <LoadingSpinner />: <div /> }
-            
+                { loading ? <LoadingSpinner /> : <div />}
+
                 <h1>Ingreso</h1>
                 <Formik
-                    initialValues={{ email: '', password: '' }}
+                    initialValues={{ email: 'andrew@globant.com', password: '12345678' }}
                     validate={values => {
                         const errors = {};
 
