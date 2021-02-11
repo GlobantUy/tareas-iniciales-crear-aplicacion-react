@@ -27,8 +27,13 @@ class SimLogin extends Component {
         const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
             this.guardarStorage(emaill, passwordd, rol)
-            window.location.href = "/Descuento"
-            sessionStorage.setItem('volverAceptarpress', false);
+            if (rol == "ADMIN") {
+                window.location.href = "/Tableadmin"
+                sessionStorage.setItem('volverAceptarpress', false);
+            }else{
+                window.location.href = "/Descuento"
+                sessionStorage.setItem('volverAceptarpress', false);
+            }
         } else {
             if (rol == "CUSTOMER") {
                 window.location.href = "/"
