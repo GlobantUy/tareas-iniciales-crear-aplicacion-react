@@ -273,6 +273,7 @@ class RegisterContent extends Component {
                     })
                 } else {
                     this.setState({
+                        loading: false,
                         EmailError: ''
                     })
                     window.location.href = '/ingreso'

@@ -10,13 +10,14 @@ let cuotasPost
 let monto_a_pedir
 let URL = process.env.RESTURL_BACKEND + '/storeLoan'
 class Table extends Component {
-
+    
     //popup usuario logueado//
     state = {
         abierto: false,
         abierto2: false,
         abierto3: false,
         abierto4: false,
+        
     }
 
     volverAceptarPres = () => {
@@ -55,6 +56,12 @@ class Table extends Component {
             });
     }
 
+    showSpinner = () =>{
+        this.setState({
+            loading: true
+        })
+    }
+
     cerrarModal = () => {
         this.setState({ abierto: !this.state.abierto });
     }
@@ -73,6 +80,7 @@ class Table extends Component {
 
     abrirTableuser = () => {
         this.setState({
+            loading: true,
             abierto: false,
             abierto2: false,
             abierto3: false,
@@ -83,6 +91,9 @@ class Table extends Component {
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
         this.handleSubmitClicked = this.handleSubmitClicked.bind(this);
+        this.state = {
+            loading: false,
+        }
         this.state = { //state is by default an object
             Ingreso: '',
             Monto_a_pedir: '',
@@ -94,6 +105,13 @@ class Table extends Component {
         }
     }
 
+    showSpinner = () =>{
+        this.setState({
+            abierto3: false,    
+            loading: true  
+        })
+    }
+    
     componentDidMount() {
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
         monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
@@ -189,8 +207,19 @@ class Table extends Component {
 
     volverSimular = () => {
         sessionStorage.setItem('volverBoton', true);
+        this.showSpinner();
         window.location.href = process.env.RESTURL_FRONTEND;
 
+    }
+
+    volverInicio = () => {
+        this.setState({
+            loading: true,
+            abierto4: false,
+            abierto: false,
+            abierto2: false,
+            abierto3: false,
+        })
     }
 
     render() {
@@ -229,14 +258,14 @@ class Table extends Component {
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
                 <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <p className='textModal2'>Su préstamo ha sido registrado exitosamente <br></br> y se encuentra pendiente de aprobación</p>
-                    <a href={process.env.RESTURL_FRONTEND} target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                    <a href={process.env.RESTURL_FRONTEND} target="_self" onClick ={this.volverInicio}><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto4} className='modalStyles' id='modalPendiente'>
                 <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <p className='textModal2'>Ya tienes un prestamo pendiente</p>
                     <Button id="btnCancelar2" onClick={this.abrirTableuser}>Ver mis prestamos</Button>
-                    <a href="/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                    <a href="/" target="_self" onClick ={this.volverInicio}><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto3} className="modalStyless" >
@@ -246,7 +275,7 @@ class Table extends Component {
                         <ModalBody className="modalBody">
                             <p className="subTitle">Necesita ingresar como usuario para <br></br> solicitar el préstamo</p>
                             <Button id="btnCR" onClick={this.cerrarModal3} > Cerrar </Button>
-                            <a href="/ingreso" >
+                            <a href="/ingreso" onClick={this.showSpinner}>
                                 <Button id="btnIN" onClick={this.volverAceptarPres}> Ingresar </Button>
                             </a>
                         </ModalBody>
