@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
+let URLreturnpres = process.env.RESTURL_BACKEND + '/returnLoans'
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
-let email
 let prestamosCargados
 
 class TableUser extends Component {
@@ -12,11 +12,53 @@ class TableUser extends Component {
         super(props)
 
         this.state = {
-            clientes: [{userName: "",  amount: '', date: '', currency: '', payments: '' }],
+            clientes: [{ userName: "", amount: '', date: '', currency: '', payments: '', state: '' }],
+            filtro: 'Todos'
         }
     }
 
-    getLoans(){
+    crearestado(state, index) {
+        switch (state) {
+            case undefined:
+                return (<label> Pendiente </label>)
+                break
+            case true:
+                return (<label>Aprobado </label>)
+                break
+            case false:
+                return (<label>Rechazado </label>)
+                break
+        }
+    }
+
+    changeFilterDropdown = () => {
+        let dropdown = document.getElementById('menufiltro');
+        switch (dropdown.value) {
+            case 'option1':
+                this.setState({
+                    filtro: 'Todos'
+                })
+                break
+
+            case 'option2':
+                this.setState({
+                    filtro: true
+                })
+                break
+            case 'option3':
+                this.setState({
+                    filtro: false
+                })
+                break
+            default:
+                this.setState({
+                    filtro: undefined
+                })
+                break
+        }
+    }
+
+    getLoans() {
         let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
             this.setState({
@@ -29,13 +71,24 @@ class TableUser extends Component {
     }
 
     componentDidMount() {
-        prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
+        let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
+        axios.post(URLreturnpres, {
+            "email": email
+        }).then(res => {
+            console.log(res.data.loans)
+            if (res.data.loans == undefined) {
+                prestamosCargados = true
+            } else {
+                prestamosCargados = false
+            }
+        })
         this.getLoans()
     }
 
-    renderTableData() {
+    renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {
-            const { userName, amount, date, currency, payments} = cliente //destructuring
+            const { userName, amount, date, currency, payments, state } = cliente //destructuring
+            if (state == Filtro || Filtro == 'Todos') {
                 return (
                     <tr id={index} key={index}>
                         <td className="celda">{userName}</td>
@@ -43,8 +96,12 @@ class TableUser extends Component {
                         <td className="celda">{date.substring(10, 0).split("-").reverse().join("-")}</td>
                         <td className="celda">{currency}</td>
                         <td className="celda">{payments}</td>
+                        <td className="celda">
+                            {this.crearestado(state, index)}
+                        </td>
                     </tr>
                 )
+            }
         })
     }
 
@@ -74,11 +131,18 @@ class TableUser extends Component {
             return (
                 <div className="container">
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
+                    <h2 id='Filtro'>Filtro por estado </h2>
+                    <select id='menufiltro' onChange={this.changeFilterDropdown} >
+                        <option value="option1"> Todos </ option>
+                        <option value="option2">Aprobado  </ option>
+                        <option value="option3"> Rechazado </ option>
+                        <option value="opción4" >Pendiente  </ option>
+                    </select>
                     <div>
                         <table id='Administrador'>
                             <tbody>
                                 <tr>{this.renderTableHeader()}</tr>
-                                {this.renderTableData()}
+                                {this.renderTableData(this.state.filtro)}
                             </tbody>
                         </table>
                     </div>

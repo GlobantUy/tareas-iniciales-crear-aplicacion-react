@@ -13,7 +13,6 @@ let contraCorrecta = false
 let emaill
 let passwordd
 let URL = process.env.RESTURL_BACKEND + '/login'
-let URLreturnpres = process.env.RESTURL_BACKEND + '/returnLoans'
 
 class SimLogin extends Component {
 
@@ -30,7 +29,7 @@ class SimLogin extends Component {
             if (rol == "ADMIN") {
                 window.location.href = "/Tableadmin"
                 sessionStorage.setItem('volverAceptarpress', false);
-            }else{
+            } else {
                 window.location.href = "/Descuento"
                 sessionStorage.setItem('volverAceptarpress', false);
             }
@@ -61,7 +60,7 @@ class SimLogin extends Component {
         }
     }
 
-     post(email, pass) {
+    post(email, pass) {
         this.setState({ loading: true }, () => {
             axios.post(URL, {
                 "email": email,
@@ -73,20 +72,7 @@ class SimLogin extends Component {
                     rol = Response.data.rol;
                     console.log(rol)
                     this.quitarError()
-                    axios.post(URLreturnpres, {
-                        "email": emaill
-                    }).then(res => {
-                        console.log(res.data.loans)
-                        if (res.data.loans == "No loans found.") {
-                            sessionStorage.setItem('prestamosNull', true);
-                            this.redireccionar()
-                            sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
-                        } else {
-                            sessionStorage.setItem('prestamosNull', false);
-                            
-                            this.redireccionar()
-                        }
-                    })
+                    this.redireccionar()
                 } else {
                     console.log(Response.data.found)
                     this.setState({ loading: false });
@@ -118,7 +104,7 @@ class SimLogin extends Component {
 
                 <h1>Ingreso</h1>
                 <Formik
-                    initialValues={{ email: 'andrew@globant.com', password: '12345678' }}
+                    initialValues={{ email: '', password: '' }}
                     validate={values => {
                         const errors = {};
 
