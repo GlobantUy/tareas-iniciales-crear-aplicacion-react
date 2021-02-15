@@ -18,7 +18,7 @@ class TableUser extends Component {
 
     crearestado(state, index) {
         switch (state) {
-            case undefined:
+            case "pendiente":
                 return (<label> Pendiente </label>)
                 break
             case true:
@@ -51,7 +51,7 @@ class TableUser extends Component {
                 break
             default:
                 this.setState({
-                    filtro: undefined
+                    filtro: "pendiente"
                 })
                 break
         }
@@ -65,7 +65,7 @@ class TableUser extends Component {
             } else {
                 prestamosCargados = false
                 this.setState({
-                    clientes: resp.data.loans
+                    clientes: resp.data.loans.reverse()
                 })
             }
         }).catch((error) => {
@@ -98,6 +98,9 @@ class TableUser extends Component {
     }
 
     renderTableHeader() {
+        if (this.state.clientes[0].state == undefined) {
+            this.state.clientes[0].state = "pendiente"
+        }
         let header = Object.keys(this.state.clientes[0])
         return header.map((key, index) => {
             if (key == "userName")
