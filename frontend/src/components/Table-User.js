@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
-let URLreturnpres = process.env.RESTURL_BACKEND + '/returnLoans'
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
 let prestamosCargados
 
@@ -61,27 +60,20 @@ class TableUser extends Component {
     getLoans() {
         let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
-            this.setState({
-                clientes: resp.data.loans
-            })
+            if (resp.data.loans == undefined) {
+                prestamosCargados = true
+            } else {
+                prestamosCargados = false
+                this.setState({
+                    clientes: resp.data.loans
+                })
+            }
         }).catch((error) => {
             console.log(error);
-
         });
     }
 
     componentDidMount() {
-        let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
-        axios.post(URLreturnpres, {
-            "email": email
-        }).then(res => {
-            console.log(res.data.loans)
-            if (res.data.loans == undefined) {
-                prestamosCargados = true
-            } else {
-                prestamosCargados = false
-            }
-        })
         this.getLoans()
     }
 
