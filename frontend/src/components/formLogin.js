@@ -237,7 +237,7 @@ class SimLogin extends Component {
                             </ReactTooltip>
                             {touched.email && <label className="error-bottom">{errors.password}</label>}
 
-                            <a href="/empty" type="submit"><p className="recContr">Recuperar contraseña</p></a>
+                            <a href="/Recuperarcontra" type="submit"><p className="recContr">Recuperar contraseña</p></a>
 
                             { touched.password && <p id="datosIncorrectos" className="no-encontrado">{datosIncorrectos}</p>}
 
