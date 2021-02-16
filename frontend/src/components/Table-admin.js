@@ -31,7 +31,7 @@ class Tableadmin extends Component {
         let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
             this.setState({
-                clientes: resp.data.loans
+                clientes: resp.data.loans.reverse()
             })
         }).catch((error) => {
             console.log(error);
@@ -48,8 +48,8 @@ class Tableadmin extends Component {
 
     crearestado(state, index) {
         switch (state) {
-            case undefined:
-                return (<select value={'option1'} id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
+            case "pendiente":
+                return (<select  id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
                     <option value="option1" >Pendiente</ option>
                     <option value="option2" >Rechazado</ option>
                     <option value="option3" >Aprobado</ option>
@@ -81,7 +81,7 @@ class Tableadmin extends Component {
         for (let i = 0; i < filas.length; i++) { filas[i].className = '' }
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
             this.setState({
-                clientes: resp.data.loans,
+                clientes: resp.data.loans.reverse(),
                 hidden: true,
                 isAplicarDisabled: true
             })
@@ -133,32 +133,34 @@ class Tableadmin extends Component {
         }
     }
 
-    changeFilterDropdown() {
-        let dropdown = document.getElementById('menufiltro');
-        switch (dropdown.value) {
-            case 'option1':
-                this.setState({
-                    filtro: 'Todos'
-                })
-                break
+  
+changeFilterDropdown() {
+    let dropdown = document.getElementById('menufiltro');
+    switch (dropdown.value) {
+        case 'option1':
+            this.setState({
+                filtro: 'Todos'
+            })
+            break
 
-            case 'option2':
-                this.setState({
-                    filtro: true
-                })
-                break
-            case 'option3':
-                this.setState({
-                    filtro: false
-                })
-                break
-            default:
-                this.setState({
-                    filtro: undefined
-                })
-                break
-        }
+        case 'option2':
+            this.setState({
+                filtro: true
+            })
+            break
+        case 'option3':
+            this.setState({
+                filtro: false
+            })
+            break
+        default:
+            this.setState({
+                filtro: "pendiente"
+            })
+            break
     }
+}
+
 
 
     renderTableData(Filtro) {
@@ -183,6 +185,9 @@ class Tableadmin extends Component {
     }
 
     renderTableHeader() {
+        if (this.state.clientes[0].state == undefined) {
+            this.state.clientes[0].state = "pendiente"
+        }
         let header = Object.keys(this.state.clientes[0])
         return header.map((key, index) => {
             if (key == "userName")
@@ -193,7 +198,7 @@ class Tableadmin extends Component {
                 return <th key={index}>{"Fecha"}</th>
             if (key == "currency")
                 return <th key={index}>{"Moneda"}</th>
-            if (key == "state")
+            if (key == "state" )
                 return <th key={index}>{"Estado"}</th>
             if (key == "payments") {
                 return <th key={index}>{"Cuotas"}</th>
@@ -207,8 +212,8 @@ class Tableadmin extends Component {
             //this.getLoans();
             return (
                 <div className="container">
-                    <h2 id='titulo'>Solicitudes de préstamo</h2>
-                    <h2 id='Filtro'>Filtro por estado </h2>
+                    <h1 id='titulo'>Solicitudes</h1>
+                    <h1 id='Filtro'>Filtro por estado </h1>
                     <select id='menufiltro' onChange={this.changeFilterDropdown} >
                         <option value="option1"> Todos </ option>
                         <option value="option2">Aprobado  </ option>
