@@ -6,6 +6,7 @@ import axios from 'axios';
 let emailFromStorage
 let monedaPost
 let cuotasPost
+let tipoPrestamo = new Array()
 let monto_a_pedir
 let URL = process.env.RESTURL_BACKEND + '/storeLoan'
 class Table extends Component {
@@ -30,15 +31,30 @@ class Table extends Component {
             this.setState({ abierto3: !this.state.abierto3 });
         }
     }
+    guardarTipo =( value , type) =>{
+        
+        if (value == true) {
+            tipoPrestamo.push(type)
+        } else {
+            return false
+        }
+     
+    }
 
-    abrirModal2 = () => {
+    abrirModal2 = () => {   
         emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+        let automotor = JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoAutomotor
+        let inmueble = JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoInmueble
+        let otros = JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoOtros
+        this.guardarTipo(inmueble,'Inmuebles')
+        this.guardarTipo(otros,'Otros')
+        this.guardarTipo(automotor,'Automotor')
         axios.post(URL, {
             'email': emailFromStorage,
             'amount': monto_a_pedir,
             'currency': monedaPost,
             'payments': cuotasPost,
-            //'loanType': ''
+            'loanType': tipoPrestamo
         }
         )
             .then(Response => {
@@ -52,6 +68,7 @@ class Table extends Component {
             .catch(error => {
                 console.log("registration error", error)
             });
+            tipoPrestamo = [];
     }
 
     cerrarModal = () => {
