@@ -386,6 +386,7 @@ class RegisterContent extends Component {
                                     >
                                     </ReactTooltip>
                                     <label className="error-bottom">{errors.Email}</label>
+                                    <label className="error-bottom">{this.state.EmailError}</label>
 
                                 </div>
 
