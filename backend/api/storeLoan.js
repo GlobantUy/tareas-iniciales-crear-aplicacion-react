@@ -63,12 +63,13 @@ module.exports.store = async (req, res) => {
               })
             } else {
               if (req.body.loanType == undefined || req.body.loanType.length == 0) {
-                return res.status(400).json({
+                return ({
                   _links: {
                     self: {
                       href: "https://" + req.headers.host + req.url
                     }
                   },
+                  status: 400,
                   message: "Invalid 'loanType' value."
                 })
               } else {
