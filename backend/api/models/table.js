@@ -23,7 +23,7 @@ const tableSchema = new mongoose.Schema({
   },
   loanType: {
     type: Array,
-    required: true
+    required: false
   },
   state: {
     type: Boolean,
