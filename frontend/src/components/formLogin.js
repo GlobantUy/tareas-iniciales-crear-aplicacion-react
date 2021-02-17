@@ -24,19 +24,6 @@ class SimLogin extends Component {
         }
     }
 
-    Tooltip() {
-        const [isTooltipVisible, setTooltipVisibility] = React.useState(false);
-
-        React.useEffect(() => {
-            setTooltipVisibility(true);
-        }, []);
-        return (
-            <div className="App">
-                {isTooltipVisible && <div>tooltip component</div>}
-            </div>
-        );
-    }
-
     redireccionar() {
         const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
