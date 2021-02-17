@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
-import { faThList } from '@fortawesome/free-solid-svg-icons';
+import LoadingSpinner from './Spinner';
 
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
 let URLupdateLoan = process.env.RESTURL_BACKEND + '/updateLoan';
@@ -203,10 +203,12 @@ class Tableadmin extends Component {
         })
     }
     render() {
-        if (!prestamosCargados) {
+        const { loading } = this.state
+        if(!prestamosCargados) {
             //this.getLoans();
-            return (
+            return (   
                 <div className="container">
+                    { loading ? <LoadingSpinner />: <div /> }
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
                     <h2 id='Filtro'>Filtro por estado </h2>
                     <select id='menufiltro' onChange={this.changeFilterDropdown} >

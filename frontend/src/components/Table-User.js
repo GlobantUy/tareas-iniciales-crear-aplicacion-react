@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
+import LoadingSpinner from './Spinner';
 
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
 let prestamosCargados
@@ -12,7 +13,8 @@ class TableUser extends Component {
 
         this.state = {
             clientes: [{ userName: "", amount: '', date: '', currency: '', payments: '', state: '' }],
-            filtro: 'Todos'
+            filtro: 'Todos',
+            loading: false
         }
     }
 
@@ -122,9 +124,11 @@ class TableUser extends Component {
     }
 
     render() {
-        if (!prestamosCargados) {
+        const { loading } = this.state
+        if (prestamosCargados) {
             return (
                 <div className="container">
+                    { loading ? <LoadingSpinner /> : <div />}
                     <h2 id='titulo'>Solicitudes de préstamo</h2>
                     <h2 id='Filtro'>Filtro por estado </h2>
                     <select id='menufiltro' onChange={this.changeFilterDropdown} >
@@ -146,6 +150,7 @@ class TableUser extends Component {
         } else {
             return (
                 <>
+                    { loading ? <LoadingSpinner /> : <div />}
                     <div className="container">
                         <h2 id='titulo'>Solicitudes de préstamo</h2>
                     </div>
