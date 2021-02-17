@@ -117,6 +117,12 @@ class SimLogin extends Component {
         sessionStorage.setItem('Usuario-Values', JSON.stringify(this.values));
     }
 
+    showSpinner = () =>{
+        this.setState({
+            loading: true
+        })
+    }
+
     render() {
         const { loading } = this.state
         return (
@@ -248,7 +254,7 @@ class SimLogin extends Component {
                         </form>
                     )}
                 </Formik>
-                <a href="/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
+                <a href="/registro" target="_self" onClick={this.showSpinner}><button className="btnSecundario">Registrarse</button></a>
             </div>
         )
     }
