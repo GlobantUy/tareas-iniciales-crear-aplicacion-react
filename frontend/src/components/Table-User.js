@@ -4,7 +4,6 @@ import axios from 'axios';
 import LoadingSpinner from './Spinner';
 
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
-let prestamosCargados
 
 class TableUser extends Component {
 
@@ -14,7 +13,8 @@ class TableUser extends Component {
         this.state = {
             clientes: [{ userName: "", amount: '', date: '', currency: '', payments: '', state: '' }],
             filtro: 'Todos',
-            loading: false
+            loading: false,
+            prestamosCargados: false
         }
     }
 
@@ -63,11 +63,13 @@ class TableUser extends Component {
         let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
             if (resp.data.loans == undefined) {
-                prestamosCargados = true
-            } else {
-                prestamosCargados = false
                 this.setState({
-                    clientes: resp.data.loans.reverse()
+                    prestamosCargados:true
+                })
+            } else {
+                this.setState({
+                    clientes: resp.data.loans.reverse(),
+                    prestamosCargados:false
                 })
             }
         }).catch((error) => {
@@ -125,7 +127,7 @@ class TableUser extends Component {
 
     render() {
         const { loading } = this.state
-        if (prestamosCargados) {
+        if (!this.state.prestamosCargados) {
             return (
                 <div className="container">
                     { loading ? <LoadingSpinner /> : <div />}
