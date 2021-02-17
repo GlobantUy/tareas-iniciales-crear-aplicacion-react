@@ -1113,3 +1113,62 @@ input[type=date]::-webkit-datetime-edit-text {
     line-height: 28px;
     color: #000000;
 }
+
+.hidden-inputs-forgotpass{
+    display: none;
+}
+
+.btns-forgotpass{
+    color: #000000;
+    background: #F07E1A;
+    border: none;
+    height: 40px;
+    width: 168px;
+    margin-bottom: 10px;
+}
+
+.contenedor{
+    display: grid;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title-forgotpass{
+    height: 20px;
+    left: 596px;
+    top: 118px;
+    margin-bottom: 20px;
+    /* TITULO */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+}
+
+.input-forgotpass {
+    height: 40px;
+    width: 270px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.form-forgotpass{
+    width: 168px;
+    position: absolute;
+    left: 50%;
+    margin-left: -82px;
+    margin-top: 118px;
+    margin-bottom: 82px;
+}
+
+.show-inputs{
+    display: grid;
+}
+
+.btns-forgotpass:disabled {
+    color: #636363;
+    background: #E0E0E0;
+}

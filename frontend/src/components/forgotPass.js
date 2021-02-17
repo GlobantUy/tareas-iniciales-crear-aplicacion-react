@@ -47,129 +47,82 @@ class RecuperarContra extends Component {
             abierto: false,
             abierto2: false,
 
-            errors: {},
+            isDisable: true,
         }
         this.handleChange = this.handleChange.bind(this)
-        this.handleSumbit = this.handleSumbit.bind(this)
     }
 
     handleChange(e) {
+        const { name, value } = e.target;
         this.setState({
-            [e.target.name]: e.target.value
+            [name]: value
         })
+        if (value != "") {
+            this.setState({isDisable:false})
+        }else{
+            this.setState({isDisable:true})
+        }
     }
+
+    
+
+    enviarCorreo = () => {
+        if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(this.state.Email)) {
+            this.setState({ EmailError: "Formato Incorrecto." })
+        } else {
+            this.setState({
+                EmailError: ""
+            })
+            this.setState({isDisable:true})
+            this.abrirModal()
+        }
+    }
+
 
     inputCode = () => {
         if (correoCorrecto == true) {
-            return (
-                <Fragment>
-                    <div className="col-12">
-                        <p className="mid">Codigo*</p>
-                        <input className="inp-registro"
-                            autoComplete="off"
-                            type="text"
-                            name="Codigo"
-                            value={this.state.Codigo}
-                            onChange={this.handleChange}
-                        />
-                        <label className="error-bottom">{this.state.CodigoError}</label>
-                    </div>
+            let code = document.getElementById("input-code-container")
+            code.className += ' show-inputs'
 
-                    <button type="button" onClick={this.verifyCode}>Verificar codigo</button>
-                </Fragment>
-            )
-        }
-    }
-
-    inputContra = () => {
-        if (codigoCorrecto == true) {
-            return (
-                <Fragment>
-                    <div className="col-12">
-                        <p className="mid">Contraseña*</p>
-                        <input className="inp-registro"
-                            autoComplete="off"
-                            type="password"
-                            name="password"
-                            value={this.state.Password}
-                            onChange={this.handleChange}
-                        />
-                        <label className="error-bottom">{this.state.PasswordError}</label>
-
-                        <p className="mid">Confirmar Contraseña*</p>
-                        <input className="inp-registro"
-                            autoComplete="off"
-                            type="password"
-                            name="ConfirmPassword"
-                            value={this.state.ConfirmPassword}
-                            onChange={this.handleChange}
-                        />
-                        <label className="error-bottom">{this.state.ConfirmPasswordError}</label>
-                    </div>
-                </Fragment>
-            )
-        }
-    }
-
-    enviarCorreo = () => {
-        if (this.state.Email == "andrew@globant.com") {
-            this.cerrarModals();
-            correoCorrecto = true
-            this.inputCode();
-        } else {
-            console.log("correo Incorrecto")
+            let inputEmail = document.getElementById("input-email")
+            inputEmail.readOnly = true
         }
     }
 
     verifyCode = () => {
         if (this.state.Codigo == "TH50L32KM") {
+            this.setState({ CodigoError: "" })
             codigoCorrecto = true
+            this.setState({isDisable:true})
             this.inputContra();
         } else {
+            this.setState({ CodigoError: "Codigo incorrecto." })
             console.log("codigo Incorrecto")
         }
     }
 
-    resendCode = () => {
-        console.log("TH50L32KM")
+    inputContra = () => {
+        if (codigoCorrecto == true) {
+            let contra = document.getElementById("input-contras")
+            contra.className += ' show-inputs'
+
+            let btnVerifyCode = document.getElementById("btn-verifycode")
+            btnVerifyCode.className += ' no-encontrado'
+
+            let inputCode = document.getElementById("input-code")
+            inputCode.readOnly = true
+        }
     }
 
-    handleSumbit(e) {
-        e.preventDefault();
-        const { errors, ...sinErrors } = this.state
-        const result = validate(sinErrors)
-        this.setState({ errors: result })
-        if (!Object.keys(result).length) {
-            axios.post(URL, {
-                "name": this.state.Nombre,
-                "lName": this.state.Apellido,
-                "dateOfBirth": this.state.FechaNacimiento,
-                "gender": this.state.Genero,
-                "preferences": this.state.Preferencias,
-                "email": this.state.Email,
-                "department": this.state.Departamento,
-                "passwd": this.state.Password
-            }).then(Response => {
-                console.log(Response)
-                if (Response.data.message == "Email belongs to an existing account.") {
-                    this.setState({
-                        EmailError: 'Ya existe un usuario con este email'
-                    })
-                } else {
-                    this.setState({
-                        EmailError: ''
-                    })
-                    window.location.href = '/ingreso'
-                }
-            }).catch(error => {
-                console.log(error)
-                alert("No hemos podido registrarte debido a problemas tecnicos.")
-            })
-
+    verifyPass = () => {
+        if (this.state.Password.length < 8) {
+            this.setState({ PasswordError: "La contraseña ingresada es menor a 8 caracteres." })
+        } else if (this.state.Password != this.state.ConfirmPassword) {
+            this.setState({ PasswordError: "Las contraseñas no coinciden." })
         } else {
-            this.setState({
-                EmailError: ''
-            })
+            this.setState({ PasswordError: "" })
+            window.location.href = "/ingreso"
+            //Future...
         }
     }
 
@@ -189,71 +142,117 @@ class RecuperarContra extends Component {
         });
     }
 
+    correoRecibido = () => {
+        correoCorrecto = true
+        this.inputCode();
+        this.cerrarModals()
+        let btnGetCode = document.getElementById("btn-getCode")
+        btnGetCode.className += ' no-encontrado'
+    }
+
+    resendCode = () => {
+        console.log("TH50L32KM")
+        this.setState({ abierto2: false })
+    }
+
     render() {
         return (
             <Fragment>
                 <div className="body">
-                    <form className="form registro" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
+                    <form className="form-forgotpass" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
 
-                        <center>
-                            <h1 className="titlee-registro">Recuperar contraseña</h1>
-                        </center>
+                        <div className="contenedor">
+                            <h1 className="title-forgotpass">Recuperar contraseña</h1>
 
-                        <div className="container">
-                            <div className="row">
+                            <div className="contenedor">
+                                <p className="mid" data-for="info-email"
+                                    data-tip="Ingrese su email para recibir un codigo">Email*</p>
+                                <ReactTooltip id="info-email"
+                                    place="left"
+                                    type="info"
+                                    effect="solid"
+                                    className="error-tooltip"
+                                >
+                                </ReactTooltip>
+                                <input id="input-email"
+                                    className="input-forgotpass"
+                                    autoComplete="off"
+                                    type="text"
+                                    name="Email"
+                                    value={this.state.Email}
+                                    onChange={this.handleChange}
+                                />
+                                <label className="error-bottom">{this.state.EmailError}</label>
 
-                                <div className="col-4">
-                                    <p className="mid" data-for="info-email"
-                                        data-tip="Ingrese su email para recibir un codigo">Email*</p>
-                                    <ReactTooltip id="info-email"
-                                        place="bottom"
-                                        type="info"
-                                        effect="solid"
-                                        className="error-tooltip"
-                                    >
-                                    </ReactTooltip>
-                                    <input className="inp-registro"
+                                <button id="btn-getCode" className="btns-forgotpass" type="button" disabled={this.state.isDisable} onClick={this.enviarCorreo}>Recibir codigo</button>
+
+                                <div id="input-code-container" className="hidden-inputs-forgotpass ">
+                                    <p className="mid">Codigo*</p>
+                                    <input id="input-code"
+                                        className="input-forgotpass"
                                         autoComplete="off"
                                         type="text"
-                                        name="Email"
-                                        value={this.state.Email}
+                                        name="Codigo"
+                                        value={this.state.Codigo}
                                         onChange={this.handleChange}
                                     />
+                                    <label className="error-bottom">{this.state.CodigoError}</label>
 
-                                    <button type="button" onClick={this.abrirModal}>Recibir codigo</button>
+                                    <button id="btn-verifycode" className="btns-forgotpass" type="button" disabled={this.state.isDisable} onClick={this.verifyCode}>Verificar codigo</button>
+
                                 </div>
+                                <div id="input-contras" className="hidden-inputs-forgotpass">
+                                    <p className="mid">Nueva Contraseña*</p>
+                                    <input className="input-forgotpass"
+                                        autoComplete="off"
+                                        type="password"
+                                        name="Password"
+                                        value={this.state.Password}
+                                        onChange={this.handleChange}
+                                    />
+                                    <label className="error-bottom">{this.state.PasswordError}</label>
 
-                                <Modal isOpen={this.state.abierto} className="modalStyless" >
-                                    <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
-                                    <ModalHeader>
-                                        <h1 className="titlee">Codigo enviado</h1>
-                                        <ModalBody className="modalBody">
-                                            <p className="subTitle">¿Ha recibido su codigo?</p>
-                                            <Button id="btnCR" onClick={this.abrirModal2} > No </Button>
-                                            <Button id="btnIN" onClick={this.enviarCorreo}> Si </Button>
-                                        </ModalBody>
-                                    </ModalHeader>
-                                </Modal>
+                                    <p className="mid">Confirmar Contraseña*</p>
+                                    <input className="input-forgotpass"
+                                        autoComplete="off"
+                                        type="password"
+                                        name="ConfirmPassword"
+                                        value={this.state.ConfirmPassword}
+                                        onChange={this.handleChange}
+                                    />
+                                    <label className="error-bottom">{this.state.ConfirmPasswordError}</label>
 
-                                <Modal isOpen={this.state.abierto2} className="modalStyless" >
-                                    <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
-                                    <ModalHeader>
-                                        <h1 className="titlee">Soluciones</h1>
-                                        <ModalBody className="modalBody">
-                                            <p className="subTitle">1. Verifique la direccion de email ingresada <br></br>
-                                            2. Reenvie el codigo</p>
-                                            <Button id="btnCR" onClick={this.cerrarModals} > Verificar email </Button>
-                                            <Button id="btnIN" onClick={this.resendCode}> Reenviar codigo </Button>
-                                        </ModalBody>
-                                    </ModalHeader>
-                                </Modal>
-
-                                {this.inputCode()}
-                                {this.inputContra()}
+                                    <button className="btns-forgotpass" type="button" disabled={this.state.isDisable} onClick={this.verifyPass}>Cambiar contraseña</button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div >
+
+                <Modal isOpen={this.state.abierto} className="modalStyless" >
+                    <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
+                    <ModalHeader>
+                        <h1 className="titlee">Codigo enviado</h1>
+                        <ModalBody className="modalBody">
+                            <p className="subTitle">¿Ha recibido su codigo?</p>
+                            <Button id="btnCR" onClick={this.abrirModal2} > No </Button>
+                            <Button id="btnIN" onClick={this.correoRecibido}> Si </Button>
+                        </ModalBody>
+                    </ModalHeader>
+                </Modal>
+
+                <Modal isOpen={this.state.abierto2} className="modalStyless" >
+                    <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
+                    <ModalHeader>
+                        <h1 className="titlee">Soluciones</h1>
+                        <ModalBody className="modalBody">
+                            <p className="subTitle">1. Verifique la direccion de email ingresada <br></br>
+                                            2. Reenvie el codigo</p>
+                            <Button id="btnCR" onClick={this.cerrarModals} > Verificar email </Button>
+                            <Button id="btnIN" onClick={this.resendCode}> Reenviar codigo </Button>
+                        </ModalBody>
+                    </ModalHeader>
+                </Modal>
             </Fragment >
         )
     }
