@@ -3,26 +3,6 @@ import axios from 'axios';
 import LoadingSpinner from './Spinner';
 import ReactTooltip from 'react-tooltip';
 
-const validate = values => {
-    const errors = {}
-
-    if (!values.Ingreso) {
-        errors.Ingreso = 'Este campo es obligatorio'
-    }
-    if (!values.financiacion) {
-        errors.financiacion = 'Este campo es obligatorio'
-    }
-    if (!values.Monto_a_pedir) {
-        errors.Monto_a_pedir = ''
-    }
-    let porcentaje = (0.2) * (values.Ingreso)
-    let monto = values.Monto_a_pedir
-    if ((monto > porcentaje) && (values.Ingreso > 0)) {
-        errors.Monto_a_pedir = 'El monto solicitado excede el 20% de sus ingresos.'
-    }
-    return errors
-}
-
 let emailFromStorage
 let currency = ''
 class SimLoan extends Component {
@@ -47,13 +27,33 @@ class SimLoan extends Component {
         this.handleSumbit = this.handleSumbit.bind(this)
     }
 
-    onBlur = (e) => {
-        const { errors, ...sinErrors } = this.state
-        const result = validate(sinErrors)
-        this.setState({ errors: result })
-        if (!Object.keys(result).length) {
-            window.location.href = '/Descuento'
-            this.setState({btn: 'btnPrimario'})
+    validacion = () => {
+        const error = {}
+        if (!this.state.Ingreso) {
+            error.Ingreso = true
+        }
+        if (!this.state.Moneda_$U && !this.state.Moneda_U$S) {
+            error.moneda = true
+        }
+        if (!this.state.Monto_a_pedir) {
+            error.Monto_a_pedir2 = true
+        }
+        let porcentaje = (0.2) * (this.state.Ingreso)
+        let monto = this.state.Monto_a_pedir
+        if (monto > porcentaje) {
+            error.Monto_a_pedir = 'El monto solicitado excede el 20% de sus ingresos.'
+        }
+        if (!this.state.financiacion) {
+            error.financiacion = true
+        }
+
+        this.setState({ errors: error })
+        if (!Object.keys(error).length) {
+            // window.location.href = '/Descuento'
+            console.log('todo ok')
+            this.setState({ btn: 'btnPrimario' })
+        }else{
+            this.setState({ btn: 'btnPrimarioDisabled' })
         }
     }
 
@@ -61,6 +61,7 @@ class SimLoan extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+        this.validacion()
     }
 
     checkboxChange = (e) => {
@@ -183,7 +184,6 @@ class SimLoan extends Component {
                             placeholder="Agregar en $U"
                             value={this.state.Ingreso}
                             onChange={this.handleChange}
-                            onBlur={this.onBlur}
                             data-for="ingreso-pesos"
                             data-tip=""
                         />
@@ -240,7 +240,6 @@ class SimLoan extends Component {
                             placeholder="Agregar Monto"
                             value={this.state.Monto_a_pedir}
                             onChange={this.handleChange}
-                            onBlur={this.onBlur}
                             data-for="solicitar-monto"
                             data-tip="Este campo es obligatorio."
                         />
