@@ -1101,6 +1101,40 @@ input[type=date]::-webkit-datetime-edit {
 input[type=date]::-webkit-datetime-edit-text {
     padding: 0 0.3em;
 }
+
+/*Spinner */
+
+.spinner {
+    background-color: #636363;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    opacity: 40%;
+}
+#carga {
+    border: 15px solid white;
+    border-top-color: #F07E1A;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-animation: girar 1.5s linear infinite;
+    -o-animation: girar 1.5s linear infinite;
+    animation: girar 1.5s linear infinite;
+    z-index: 999;
+}
+
+@keyframes girar {
+    from {transform: rotate(0deg); }
+    to { transform: rotate(360deg); } 
+}
 .admin-text{
     position: absolute;
     height: 28px;
