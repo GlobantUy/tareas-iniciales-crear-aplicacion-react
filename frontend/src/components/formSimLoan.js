@@ -240,6 +240,7 @@ class SimLoan extends Component {
                             placeholder="Agregar Monto"
                             value={this.state.Monto_a_pedir}
                             onChange={this.handleChange}
+                            onBlur={this.onBlur}
                             data-for="solicitar-monto"
                             data-tip="Este campo es obligatorio."
                         />
@@ -309,7 +310,7 @@ class SimLoan extends Component {
                         />
                         <label className="label-tipo" htmlFor="Otros">Otros</label><br></br>
 
-                        <button className="btnPrimario">Simular préstamo</button>
+                        <button className={this.state.btn}>Simular préstamo</button>
 
                     </form>
                 </div>
