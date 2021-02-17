@@ -21,6 +21,10 @@ const tableSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  loanType: {
+    type: Array,
+    required: true
+  },
   state: {
     type: Boolean,
     required: false
