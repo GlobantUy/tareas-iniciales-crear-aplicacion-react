@@ -40,10 +40,21 @@ class SimLoan extends Component {
             TipoDePrestamoAutomotor: false,
             TipoDePrestamoOtros: false,
             registrationErrors: '',
+            btn: 'btnPrimarioDisabled',
             errors: {}
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
+    }
+
+    onBlur = (e) => {
+        const { errors, ...sinErrors } = this.state
+        const result = validate(sinErrors)
+        this.setState({ errors: result })
+        if (!Object.keys(result).length) {
+            window.location.href = '/Descuento'
+            this.setState({btn: 'btnPrimario'})
+        }
     }
 
     handleChange(e) {
@@ -105,13 +116,6 @@ class SimLoan extends Component {
             TipoDePrestamoOtros
         } = this.state;
 
-        const { errors, ...sinErrors } = this.state
-        const result = validate(sinErrors)
-        this.setState({ errors: result })
-        if (!Object.keys(result).length) {
-            window.location.href = '/Descuento'
-        }
-
         this.setState({ loading: true }, () => {
             axios.post(process.env.RESTURL_BACKEND + '/storeLoan', {
                 user: {
@@ -136,7 +140,7 @@ class SimLoan extends Component {
                 });
 
         })
-            
+
     }
 
     componentDidMount() {
@@ -163,8 +167,8 @@ class SimLoan extends Component {
         const { loading } = this.state;
         return (
             <div>
-                 
-                {loading ? <LoadingSpinner />: <div /> }
+
+                {loading ? <LoadingSpinner /> : <div />}
                 <h1 className="titleForm">Simulador de préstamos</h1>
 
                 <div className="form">
@@ -179,6 +183,7 @@ class SimLoan extends Component {
                             placeholder="Agregar en $U"
                             value={this.state.Ingreso}
                             onChange={this.handleChange}
+                            onBlur={this.onBlur}
                             data-for="ingreso-pesos"
                             data-tip=""
                         />
@@ -308,7 +313,7 @@ class SimLoan extends Component {
 
                     </form>
                 </div>
-               
+
             </div>
         )
     }
