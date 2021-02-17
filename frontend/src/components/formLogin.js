@@ -13,7 +13,6 @@ let contraCorrecta = false
 let emaill
 let passwordd
 let URL = process.env.RESTURL_BACKEND + '/login'
-let URLreturnpres = process.env.RESTURL_BACKEND + '/returnLoans'
 
 class SimLogin extends Component {
 
@@ -67,43 +66,19 @@ class SimLogin extends Component {
                 "email": email,
                 "passwd": pass,
             },
-            )
-                .then(Response => {
-                    console.log("post realizado correctamente", Response)
-                    if (Response.data.found == undefined) {
-                        rol = Response.data.rol;
-                        this.quitarError()
-                        if (rol == "CUSTOMER") {
-                            console.log(rol)
-                            this.redireccionar()
-                        } else {
-                            console.log(rol)
-                            axios.post(URLreturnpres, {
-                                "email": emaill
-                            }).then(res => {
-                                console.log(res.data.loans)
-                                if (res.data.loans == "No loans found.") {
-                                    sessionStorage.setItem('prestamosNull', true);
-                                    this.redireccionar()
-                                    //sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
-                                } else {
-                                    sessionStorage.setItem('prestamosNull', false);
-
-                                    this.redireccionar()
-
-
-                                    //this.redireccionar()
-                                }
-                            })
-
-                        }
-                    } else {
-                        console.log(Response.data.found)
-                        this.setState({ loading: false });
-                        this.mostrarError()
-
-                    }
-                })
+            ).then(Response => {
+                console.log("post realizado correctamente", Response)
+                if (Response.data.found == undefined) {
+                    rol = Response.data.rol;
+                    console.log(rol)
+                    this.quitarError()
+                    this.redireccionar()
+                } else {
+                    console.log(Response.data.found)
+                    this.setState({ loading: false });
+                    this.mostrarError()
+                }
+            })
                 .catch(error => {
                     console.log("Error al iniciar sesion", error)
                 });

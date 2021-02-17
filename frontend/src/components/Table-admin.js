@@ -252,7 +252,6 @@ class Tableadmin extends Component {
                     </div>
                 </>
             )
-
         }
     }
 }
