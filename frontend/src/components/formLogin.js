@@ -13,7 +13,6 @@ let contraCorrecta = false
 let emaill
 let passwordd
 let URL = process.env.RESTURL_BACKEND + '/login'
-let URLreturnpres = process.env.RESTURL_BACKEND + '/returnLoans'
 
 class SimLogin extends Component {
 
