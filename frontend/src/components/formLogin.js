@@ -30,7 +30,7 @@ class SimLogin extends Component {
             if (rol == "ADMIN") {
                 window.location.href = "/Tableadmin"
                 sessionStorage.setItem('volverAceptarpress', false);
-            }else{
+            } else {
                 window.location.href = "/Descuento"
                 sessionStorage.setItem('volverAceptarpress', false);
             }
@@ -63,50 +63,50 @@ class SimLogin extends Component {
 
     post(email, pass) {
         this.setState({ loading: true }, () => {
-        axios.post(URL, {
-            "email": email,
-            "passwd": pass,
-        },
-        )
-            .then(Response => {
-                console.log("post realizado correctamente", Response)
-                if (Response.data.found == undefined) {
-                    rol = Response.data.rol;
-                    this.quitarError()
-                    if (rol == "CUSTOMER") {
-                        console.log(rol)
-                        this.redireccionar()
+            axios.post(URL, {
+                "email": email,
+                "passwd": pass,
+            },
+            )
+                .then(Response => {
+                    console.log("post realizado correctamente", Response)
+                    if (Response.data.found == undefined) {
+                        rol = Response.data.rol;
+                        this.quitarError()
+                        if (rol == "CUSTOMER") {
+                            console.log(rol)
+                            this.redireccionar()
+                        } else {
+                            console.log(rol)
+                            axios.post(URLreturnpres, {
+                                "email": emaill
+                            }).then(res => {
+                                console.log(res.data.loans)
+                                if (res.data.loans == "No loans found.") {
+                                    sessionStorage.setItem('prestamosNull', true);
+                                    this.redireccionar()
+                                    //sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
+                                } else {
+                                    sessionStorage.setItem('prestamosNull', false);
+
+                                    this.redireccionar()
+
+
+                                    //this.redireccionar()
+                                }
+                            })
+
+                        }
                     } else {
-                        console.log(rol)
-                        axios.post(URLreturnpres, {
-                            "email": emaill
-                        }).then(res => {
-                            console.log(res.data.loans)
-                            if (res.data.loans == "No loans found.") {
-                                sessionStorage.setItem('prestamosNull', true);
-                                this.redireccionar()
-                                //sessionStorage.setItem('prestamos', JSON.stringify(res.data.loans));
-                            } else {
-                                sessionStorage.setItem('prestamosNull', false);
-                                
-                                this.redireccionar()
-
-
-                                //this.redireccionar()
-                            }
-                        })
+                        console.log(Response.data.found)
+                        this.setState({ loading: false });
+                        this.mostrarError()
 
                     }
-                } else {
-                    console.log(Response.data.found)
-                    this.setState({loading:false});
-                    this.mostrarError()
-
-                }
-            })
-            .catch(error => {
-                console.log("Error al iniciar sesion", error)
-            });
+                })
+                .catch(error => {
+                    console.log("Error al iniciar sesion", error)
+                });
         })//fin state loading
     }
 
@@ -121,12 +121,18 @@ class SimLogin extends Component {
         sessionStorage.setItem('Usuario-Values', JSON.stringify(this.values));
     }
 
+    showSpinner = () =>{
+        this.setState({
+            loading: true
+        })
+    }
+
     render() {
         const { loading } = this.state
         return (
             <div className="formLogin">
-            { loading ? <LoadingSpinner />: <div /> }
-            
+                { loading ? <LoadingSpinner /> : <div />}
+
                 <h1>Ingreso</h1>
                 <Formik
                     initialValues={{ email: '', password: '' }}
@@ -252,7 +258,7 @@ class SimLogin extends Component {
                         </form>
                     )}
                 </Formik>
-                <a href="/registro" target="_self"><button className="btnSecundario">Registrarse</button></a>
+                <a href="/registro" target="_self" onClick={this.showSpinner}><button className="btnSecundario">Registrarse</button></a>
             </div>
         )
     }
