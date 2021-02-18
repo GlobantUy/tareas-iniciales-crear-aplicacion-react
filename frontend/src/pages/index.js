@@ -23,11 +23,20 @@ export default function Home() {
         break;
       case 'CUSTOMER':
         return (
-          <div>
-            <Header />
-            <SimLoan />
-            <footer>
-            </footer>
+          <div className="App">
+            {isTooltipVisible && <ReactTooltip id="error-sim"
+              place="right"
+              type="dark"
+              effect="solid"
+              className="error-tooltip"
+            >
+            </ReactTooltip>}
+            <div>
+              <Header />
+              <SimLoan />
+              <footer>
+              </footer>
+            </div>
           </div>
         )
         break;

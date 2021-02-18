@@ -9,7 +9,6 @@ export default function Registro() {
     setTooltipVisibility(true);
   }, []);
   return (
-
     <div className="App">
       {isTooltipVisible && <ReactTooltip id="error-registro"
         place="bottom"

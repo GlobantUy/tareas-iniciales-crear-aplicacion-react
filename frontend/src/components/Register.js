@@ -190,11 +190,7 @@ class RegisterContent extends Component {
                 }
                 break;
             case "Email":
-                if (!this.state.Email) {
-                    this.setState({
-                        EmailError: 'Este campo es obligatorio.'
-                    })
-                } else if (this.state.EmailError == 'Ya existe un usuario con este email.') {
+                if (this.state.EmailError == 'Ya existe un usuario con este email.') {
                     this.setState({
                         EmailError: 'Ya existe un usuario con este email.',
                     })
