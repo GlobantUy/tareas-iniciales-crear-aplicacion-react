@@ -113,7 +113,6 @@ select:focus {
     position: absolute;
     width: 192px;
     height: 19px;
-    
     right: 0px;
 }
 
@@ -212,7 +211,6 @@ select:focus {
 }
 
 .error-tooltip {
-    color: white;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -690,7 +688,7 @@ a.button {
     color: #F07E1A;
 }
 
-.close-icon{
+.close-icon {
     cursor: pointer;
     height: 15px;
     width: 15px;
@@ -821,8 +819,10 @@ a.button {
 
 #titulo {
     position: absolute;
-    top: 17%;
-    left: 41%;
+    width: 118px;
+    height: 28px;
+    left: 581px;
+    top: 118px;
     font-size: 24px;
     font-family: 'Roboto' sans-serif;
     font-style: normal;
@@ -971,7 +971,6 @@ a.button {
     box-sizing: border-box;
 }
 
-
 .selectitem {
     width: 100%;
     height: 100%;
@@ -985,7 +984,6 @@ a.button {
     text-align-last: center;
     padding-left: 10px;
 }
-
 
 /*Registro*/
 
