@@ -8,7 +8,7 @@ export default function Ingreso() {
     setTooltipVisibility(true);
   }, []);
   return (
-    <div className="ingreso">
+    <div className="App">
       {isTooltipVisible && <ReactTooltip id="error-ingreso"
         place="right"
         type="info"
