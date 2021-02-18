@@ -1178,7 +1178,7 @@ input[type=date]::-webkit-datetime-edit-text {
     border: none;
     height: 40px;
     width: 168px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .contenedor{
@@ -1189,10 +1189,10 @@ input[type=date]::-webkit-datetime-edit-text {
 }
 
 .title-forgotpass{
-    height: 20px;
+    height: 30px;
     left: 596px;
     top: 118px;
-    margin-bottom: 20px;
+    margin: 30px 0px;
     /* TITULO */
     font-family: Roboto;
     font-style: normal;
@@ -1210,7 +1210,7 @@ input[type=date]::-webkit-datetime-edit-text {
 }
 
 .form-forgotpass{
-    width: 168px;
+    width: 284px;
     position: absolute;
     left: 50%;
     margin-left: -82px;
