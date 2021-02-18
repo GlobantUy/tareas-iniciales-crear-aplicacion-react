@@ -22,7 +22,7 @@ module.exports.login = async (req, res) => {
 
       })
     }
-    if (req.body.passwd === undefined) {
+    if (req.body.dateOfBirth === undefined) {
       return ({
         _links: {
           self: {
@@ -30,15 +30,15 @@ module.exports.login = async (req, res) => {
           }
         },
         status: 400,
-        message: "No value for 'passwd' was provided."
+        message: "No value for 'dateOfBirth' was provided."
 
       })
     }
     try {
-      userSearch = await collection.find({ email: req.body.email, passwd: req.body.passwd }).toArray()
+      dataSearch = await collection.find({ email: req.body.email, dateOfBirth: req.body.dateOfBirth }).toArray()
       let conf = true
       try {
-        userSearch[0].email
+        dataSearch[0].email
       } catch (err) {
         conf = false
         return ({
@@ -48,7 +48,7 @@ module.exports.login = async (req, res) => {
             }
           },
           status: 200,
-          found: 'false'
+          messsage: 'Provided email and date did not match any user.'
 
         })
       }
@@ -60,8 +60,7 @@ module.exports.login = async (req, res) => {
             }
           },
           status: 200,
-          email: userSearch[0].email,
-          rol: userSearch[0].userType
+          passwd: dataSearch[0].dateOfBirth
         })
       }
     } catch (err) {
