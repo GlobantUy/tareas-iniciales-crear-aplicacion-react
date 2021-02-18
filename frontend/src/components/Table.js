@@ -2,20 +2,23 @@ import React, { Children, Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import axios from 'axios';
+import LoadingSpinner from './Spinner';
 
 let emailFromStorage
 let monedaPost
 let cuotasPost
+let tipoPrestamo = new Array()
 let monto_a_pedir
 let URL = process.env.RESTURL_BACKEND + '/storeLoan'
 class Table extends Component {
-
+    
     //popup usuario logueado//
     state = {
         abierto: false,
         abierto2: false,
         abierto3: false,
         abierto4: false,
+        
     }
 
     volverAceptarPres = () => {
@@ -30,15 +33,30 @@ class Table extends Component {
             this.setState({ abierto3: !this.state.abierto3 });
         }
     }
+    guardarTipo =( value , type) =>{
+        
+        if (value == true) {
+            tipoPrestamo.push(type)
+        } else {
+            return false
+        }
+     
+    }
 
-    abrirModal2 = () => {
+    abrirModal2 = () => {   
         emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+        let automotor = JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoAutomotor
+        let inmueble = JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoInmueble
+        let otros = JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoOtros
+        this.guardarTipo(inmueble,'Inmuebles')
+        this.guardarTipo(otros,'Otros')
+        this.guardarTipo(automotor,'Automotor')
         axios.post(URL, {
             'email': emailFromStorage,
             'amount': monto_a_pedir,
             'currency': monedaPost,
             'payments': cuotasPost,
-            //'loanType': ''
+            'loanType': tipoPrestamo
         }
         )
             .then(Response => {
@@ -52,6 +70,13 @@ class Table extends Component {
             .catch(error => {
                 console.log("registration error", error)
             });
+            tipoPrestamo = [];
+    }
+
+    showSpinner = () =>{
+        this.setState({
+            loading: true
+        })
     }
 
     cerrarModal = () => {
@@ -72,6 +97,7 @@ class Table extends Component {
 
     abrirTableuser = () => {
         this.setState({
+            loading: true,
             abierto: false,
             abierto2: false,
             abierto3: false,
@@ -82,6 +108,9 @@ class Table extends Component {
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
         this.handleSubmitClicked = this.handleSubmitClicked.bind(this);
+        this.state = {
+            loading: false,
+        }
         this.state = { //state is by default an object
             Ingreso: '',
             Monto_a_pedir: '',
@@ -89,13 +118,36 @@ class Table extends Component {
             financiacion: '',
             rowSelected: false,
             clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Plazo: '', ValorCuota: '' }],
-            isDisabled: true
+            isDisabled: true,
+            tipoPrestamo: [],
         }
     }
 
+    showSpinner = () =>{
+        this.setState({
+            abierto3: false,    
+            loading: true  
+        })
+    }
+
+    getTipoPrestamos() {
+        let printTipo = ''
+        const myTipos = [ { name: "Automotor", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoAutomotor },
+                          { name: "Inmueble", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoInmueble },
+                          { name: "Otros", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoOtros } ];
+        myTipos.forEach(element => {
+            if(element.value === true){
+               //console.log(element.name.toString())
+               printTipo = printTipo +  element.name + ' - '
+            }
+        })
+        return printTipo;
+    }
+    
     componentDidMount() {
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
         monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
+        
         this.setState({
 
             clientes: [
@@ -109,7 +161,8 @@ class Table extends Component {
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
             Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
             Moneda: moneda,
-            financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion
+            financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
+            tipoPrestamo: this.getTipoPrestamos()
 
         })
     }
@@ -188,18 +241,33 @@ class Table extends Component {
 
     volverSimular = () => {
         sessionStorage.setItem('volverBoton', true);
+        this.showSpinner();
         window.location.href = process.env.RESTURL_FRONTEND;
 
     }
 
+    volverInicio = () => {
+        this.setState({
+            loading: true,
+            abierto4: false,
+            abierto: false,
+            abierto2: false,
+            abierto3: false,
+        })
+    }
+
     render() {
+        const { loading } = this.state
         return (
             <div className="container">
+                { loading ? <LoadingSpinner/> : <div />}
                 <h2 id='titleee'>Resultado de préstamo</h2>
                 <h1 id='ingresos'>  Ingresos </h1>
                 <h1 id='ingresoss'> {this.state.Moneda + this.state.Ingreso} </h1>
-                <h1 id='Monto' >  Monto  solicitado </h1>
+                <h1 id='Monto' >  Monto solicitado </h1>
                 <h1 id='Montoss'> {this.state.Moneda + this.state.Monto_a_pedir} </h1>
+                <h1 id='TipoPrestamo' >  Motivo del Prestamo </h1>
+                <h1 id='TipoPrestamoss'> {this.state.tipoPrestamo} </h1>
                 <h2 id='seleccionar'>Seleccione la fila deseada para solicitar su préstamo</h2>
                 <div className="table-responsive-">
                     <table id='clientes'>
@@ -226,14 +294,14 @@ class Table extends Component {
                 <Modal isOpen={this.state.abierto2} className='modalStyles'>
                 <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <p className='textModal2'>Su préstamo ha sido registrado exitosamente <br></br> y se encuentra pendiente de aprobación</p>
-                    <a href={process.env.RESTURL_FRONTEND} target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                    <a href={process.env.RESTURL_FRONTEND} target="_self" onClick ={this.volverInicio}><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto4} className='modalStyles' id='modalPendiente'>
                 <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                     <p className='textModal2'>Ya tienes un prestamo pendiente</p>
                     <Button id="btnCancelar2" onClick={this.abrirTableuser}>Ver mis prestamos</Button>
-                    <a href="/" target="_self"><Button id="btnVolver">Volver al inicio</Button></a>
+                    <a href="/" target="_self" onClick ={this.volverInicio}><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
                 <Modal isOpen={this.state.abierto3} className="modalStyless" >
@@ -243,7 +311,7 @@ class Table extends Component {
                         <ModalBody className="modalBody">
                             <p className="subTitle">Necesita ingresar como usuario para <br></br> solicitar el préstamo</p>
                             <Button id="btnCR" onClick={this.cerrarModal3} > Cerrar </Button>
-                            <a href="/ingreso" >
+                            <a href="/ingreso" onClick={this.showSpinner}>
                                 <Button id="btnIN" onClick={this.volverAceptarPres}> Ingresar </Button>
                             </a>
                         </ModalBody>

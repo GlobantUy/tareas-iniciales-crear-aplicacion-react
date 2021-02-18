@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
-import { faThList } from '@fortawesome/free-solid-svg-icons';
+import LoadingSpinner from './Spinner';
 
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
 let URLupdateLoan = process.env.RESTURL_BACKEND + '/updateLoan';
-let prestamosCargados
 
 class Tableadmin extends Component {
 
@@ -23,16 +22,25 @@ class Tableadmin extends Component {
             rowSelected: false,
             isAplicarDisabled: true,
             hidden: true,
-            filtro: 'Todos'
+            filtro: 'Todos',
+            loading: false,
+            prestamosCargados: false
         }
     }
 
     getLoans(){
         let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
-            this.setState({
-                clientes: resp.data.loans.reverse()
-            })
+            if (resp.data.loans == "No loans found.") {
+                this.setState({
+                    prestamosCargados:true
+                })
+            } else {
+                this.setState({
+                    clientes: resp.data.loans.reverse(),
+                    prestamosCargados:false
+                })
+            }
         }).catch((error) => {
             console.log(error);
 
@@ -40,11 +48,8 @@ class Tableadmin extends Component {
     }
 
     componentDidMount() {
-        prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
         this.getLoans()
-    }
-
-   
+    }   
 
     crearestado(state, index) {
         switch (state) {
@@ -57,18 +62,8 @@ class Tableadmin extends Component {
                 break
             case true:
                 return (<label>Aprobado </label>)
-                /*return (<select value={'option3'} id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-                    <option value="option1" >Pendiente</ option>
-                    <option value="option2" >Rechazado</ option>
-                    <option value="option3" >Aprobado</ option>
-                </ select>);*/
                 break
             case false:
-                /*return (<select value={'option2'} id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-                    <option value="option1" >Pendiente</ option>
-                    <option value="option2" >Rechazado</ option>
-                    <option value="option3" >Aprobado</ option>
-                </ select>);*/
                 return (<label>Rechazado </label>)
                 break
 
@@ -100,10 +95,7 @@ class Tableadmin extends Component {
         }).then(res => {
             this.getLoans()
             window.location.href = '/Tableadmin';
-        }
-
-        )
-
+        })
     }
 
     changeStateDropdown(index) {
@@ -132,7 +124,6 @@ class Tableadmin extends Component {
             fila.className = '';
         }
     }
-
   
 changeFilterDropdown() {
     let dropdown = document.getElementById('menufiltro');
@@ -142,7 +133,6 @@ changeFilterDropdown() {
                 filtro: 'Todos'
             })
             break
-
         case 'option2':
             this.setState({
                 filtro: true
@@ -160,8 +150,6 @@ changeFilterDropdown() {
             break
     }
 }
-
-
 
     renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {
@@ -202,18 +190,20 @@ changeFilterDropdown() {
                 return <th key={index}>{"Estado"}</th>
             if (key == "payments") {
                 return <th key={index}>{"Cuotas"}</th>
-            } else if (key !== "_id" && key != "userEmail" && key != "stateDate") {
+            } else if (key !== "_id" && key != "userEmail" && key != "stateDate" && key != "loanType") {
                 return <th key={index}>{key}</th>
             }
         })
     }
     render() {
-        if (!prestamosCargados) {
+        const { loading } = this.state
+        if (!this.state.prestamosCargados) {
             //this.getLoans();
-            return (
+            return (   
                 <div className="container">
-                    <h1 id='titulo'>Solicitudes</h1>
-                    <h1 id='Filtro'>Filtro por estado </h1>
+                    { loading ? <LoadingSpinner />: <div /> }
+                    <h2 id='titulo'>Solicitudes de préstamo</h2>
+                    <h2 id='Filtro'>Filtro por estado </h2>
                     <select id='menufiltro' onChange={this.changeFilterDropdown} >
                         <option value="option1"> Todos </ option>
                         <option value="option2">Aprobado  </ option>
@@ -239,6 +229,7 @@ changeFilterDropdown() {
         } else {
             return (
                 <>
+                    { loading ? <LoadingSpinner /> : <div />}
                     <div className="container">
                         <h2 id='titulo'>Solicitudes de préstamo</h2>
                         <h2 id='Filtro'>Filtro por estado </h2>
@@ -255,7 +246,6 @@ changeFilterDropdown() {
                     </div>
                 </>
             )
-
         }
     }
 }

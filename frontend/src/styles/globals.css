@@ -581,7 +581,17 @@ a.button {
     top: 28%;
     right: 16%;
 }
-
+#TipoPrestamo{
+    text-align: center;
+    position: absolute;
+    font-family: 'Heebo', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    top: 24%;
+    right: -12%;
+    font-size: 16px;
+    line-height: 23px;
+}
 #Monto {
     text-align: center;
     position: absolute;
@@ -592,6 +602,16 @@ a.button {
     right: 5%;
     font-size: 16px;
     line-height: 23px;
+}
+#TipoPrestamoss {
+    text-align: center;
+    position: absolute;
+    font-family: 'Heebo', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    top: 28%;
+    right: -15%;
+    font-size: 19px;
 }
 
 #Montoss {
@@ -1101,7 +1121,40 @@ input[type=date]::-webkit-datetime-edit-text {
     padding: 0 0.3em;
 }
 
-.admin-text {
+/*Spinner */
+
+.spinner {
+    background-color: #636363;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    opacity: 40%;
+}
+#carga {
+    border: 15px solid white;
+    border-top-color: #F07E1A;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-animation: girar 1.5s linear infinite;
+    -o-animation: girar 1.5s linear infinite;
+    animation: girar 1.5s linear infinite;
+    z-index: 999;
+}
+
+@keyframes girar {
+    from {transform: rotate(0deg); }
+    to { transform: rotate(360deg); } 
+}
+.admin-text{
     position: absolute;
     height: 28px;
     left: 581px;
