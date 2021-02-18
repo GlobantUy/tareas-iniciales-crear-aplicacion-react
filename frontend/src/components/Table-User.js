@@ -14,7 +14,7 @@ class TableUser extends Component {
             clientes: [{ userName: "", amount: '', date: '', currency: '', payments: '', state: '' }],
             filtro: 'Todos',
             loading: false,
-            prestamosCargados: false
+            prestamosCargados: true
         }
     }
 
