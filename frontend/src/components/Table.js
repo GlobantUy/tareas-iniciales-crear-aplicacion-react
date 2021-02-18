@@ -7,6 +7,7 @@ import LoadingSpinner from './Spinner';
 let emailFromStorage
 let monedaPost
 let cuotasPost
+let tipoPrestamo = new Array()
 let monto_a_pedir
 let URL = process.env.RESTURL_BACKEND + '/storeLoan'
 class Table extends Component {
@@ -32,15 +33,30 @@ class Table extends Component {
             this.setState({ abierto3: !this.state.abierto3 });
         }
     }
+    guardarTipo =( value , type) =>{
+        
+        if (value == true) {
+            tipoPrestamo.push(type)
+        } else {
+            return false
+        }
+     
+    }
 
-    abrirModal2 = () => {
+    abrirModal2 = () => {   
         emailFromStorage = JSON.parse(sessionStorage.getItem('Usuario-Values')).email
+        let automotor = JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoAutomotor
+        let inmueble = JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoInmueble
+        let otros = JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoOtros
+        this.guardarTipo(inmueble,'Inmuebles')
+        this.guardarTipo(otros,'Otros')
+        this.guardarTipo(automotor,'Automotor')
         axios.post(URL, {
             'email': emailFromStorage,
             'amount': monto_a_pedir,
             'currency': monedaPost,
             'payments': cuotasPost,
-            //'loanType': ''
+            'loanType': tipoPrestamo
         }
         )
             .then(Response => {
@@ -54,6 +70,7 @@ class Table extends Component {
             .catch(error => {
                 console.log("registration error", error)
             });
+            tipoPrestamo = [];
     }
 
     showSpinner = () =>{
@@ -101,7 +118,8 @@ class Table extends Component {
             financiacion: '',
             rowSelected: false,
             clientes: [{ Moneda: '', Tasa: '', Cuotas: '', Plazo: '', ValorCuota: '' }],
-            isDisabled: true
+            isDisabled: true,
+            tipoPrestamo: [],
         }
     }
 
@@ -111,10 +129,25 @@ class Table extends Component {
             loading: true  
         })
     }
+
+    getTipoPrestamos() {
+        let printTipo = ''
+        const myTipos = [ { name: "Automotor", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoAutomotor },
+                          { name: "Inmueble", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoInmueble },
+                          { name: "Otros", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoOtros } ];
+        myTipos.forEach(element => {
+            if(element.value === true){
+               //console.log(element.name.toString())
+               printTipo = printTipo +  element.name + ' - '
+            }
+        })
+        return printTipo;
+    }
     
     componentDidMount() {
         let moneda = (JSON.parse(sessionStorage.getItem('prestamoValues')).Moneda_$U) ? "$U" : "U$S"
         monto_a_pedir = parseInt((JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir))
+        
         this.setState({
 
             clientes: [
@@ -128,7 +161,8 @@ class Table extends Component {
             Ingreso: JSON.parse(sessionStorage.getItem('prestamoValues')).Ingreso,
             Monto_a_pedir: JSON.parse(sessionStorage.getItem('prestamoValues')).Monto_a_pedir,
             Moneda: moneda,
-            financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion
+            financiacion: JSON.parse(sessionStorage.getItem('prestamoValues')).financiacion,
+            tipoPrestamo: this.getTipoPrestamos()
 
         })
     }
@@ -230,8 +264,10 @@ class Table extends Component {
                 <h2 id='titleee'>Resultado de préstamo</h2>
                 <h1 id='ingresos'>  Ingresos </h1>
                 <h1 id='ingresoss'> {this.state.Moneda + this.state.Ingreso} </h1>
-                <h1 id='Monto' >  Monto  solicitado </h1>
+                <h1 id='Monto' >  Monto solicitado </h1>
                 <h1 id='Montoss'> {this.state.Moneda + this.state.Monto_a_pedir} </h1>
+                <h1 id='TipoPrestamo' >  Motivo del Prestamo </h1>
+                <h1 id='TipoPrestamoss'> {this.state.tipoPrestamo} </h1>
                 <h2 id='seleccionar'>Seleccione la fila deseada para solicitar su préstamo</h2>
                 <div className="table-responsive-">
                     <table id='clientes'>
