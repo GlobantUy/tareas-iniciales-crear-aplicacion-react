@@ -11,7 +11,7 @@ export default function Ingreso() {
     <div className="App">
       {isTooltipVisible && <ReactTooltip id="error-ingreso"
         place="right"
-        type="warning"
+        type="dark"
         effect="solid"
         className="error-tooltip"
       >

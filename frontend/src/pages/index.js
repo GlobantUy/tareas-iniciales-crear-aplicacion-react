@@ -36,7 +36,7 @@ export default function Home() {
           <div className="App">
             {isTooltipVisible && <ReactTooltip id="error-sim"
               place="right"
-              type="warning"
+              type="dark"
               effect="solid"
               className="error-tooltip"
             >
@@ -57,7 +57,7 @@ export default function Home() {
       <div className="App">
         {isTooltipVisible && <ReactTooltip id="error-sim"
           place="right"
-          type="warning"
+          type="dark"
           effect="solid"
           className="error-tooltip"
         >
