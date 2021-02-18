@@ -1,6 +1,6 @@
 const connectToDatabase = require('../lib/database');
 
-module.exports.login = async (req, res) => {
+module.exports.passwd = async (req, res) => {
   let userSearch
 
   const db = await connectToDatabase()
