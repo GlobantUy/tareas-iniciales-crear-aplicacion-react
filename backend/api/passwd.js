@@ -89,7 +89,7 @@ module.exports.passwd = async (req, res) => {
                     }
                 },
                 status: 500,
-                message: 'Internal error (005).' + err
+                message: 'Internal error (005).'
 
             })
         }
