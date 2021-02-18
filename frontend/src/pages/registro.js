@@ -13,7 +13,7 @@ export default function Registro() {
     <div className="App">
       {isTooltipVisible && <ReactTooltip id="error-registro"
         place="bottom"
-        type="info"
+        type="warning"
         effect="solid"
         className="error-tooltip"
       >
