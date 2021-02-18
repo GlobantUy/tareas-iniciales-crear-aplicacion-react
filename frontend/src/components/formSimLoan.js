@@ -270,7 +270,6 @@ class SimLoan extends Component {
                         <label className="label-tipo" htmlFor="Otros">Otros</label><br></br>
 
                         <button className="btnPrimario">Simular préstamo</button>
-
                     </form>
                 </div>
             </div>

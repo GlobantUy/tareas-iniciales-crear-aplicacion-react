@@ -26,9 +26,7 @@ export default function Home() {
           <div>
             <Header />
             <SimLoan />
-
             <footer>
-
             </footer>
           </div>
         )
