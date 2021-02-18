@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import LoadingSpinner from './Spinner';
-import ReactTooltip from 'react-tooltip';
 
 let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique.'
 var btn = "btnPrimarioDisabled";

@@ -2,8 +2,6 @@ import SimLogin from '../components/formLogin'
 import React from "react";
 import ReactTooltip from 'react-tooltip';
 
-
-
 export default function Ingreso() {
   const [isTooltipVisible, setTooltipVisibility] = React.useState(false);
   React.useEffect(() => {
