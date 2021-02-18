@@ -255,37 +255,37 @@ class RegisterContent extends Component {
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
             this.setState({ loading: true }, () => {
-            axios.post(URL, {
-                "name": this.state.Nombre,
-                "lName": this.state.Apellido,
-                "dateOfBirth": this.state.FechaNacimiento,
-                "gender": this.state.Genero,
-                "preferences": this.state.Preferencias,
-                "email": this.state.Email,
-                "department": this.state.Departamento,
-                "passwd": this.state.Password
-            }).then(Response => {
-                console.log(Response)
-                if (Response.data.message == "Email belongs to an existing account.") {
+                axios.post(URL, {
+                    "name": this.state.Nombre,
+                    "lName": this.state.Apellido,
+                    "dateOfBirth": this.state.FechaNacimiento,
+                    "gender": this.state.Genero,
+                    "preferences": this.state.Preferencias,
+                    "email": this.state.Email,
+                    "department": this.state.Departamento,
+                    "passwd": this.state.Password
+                }).then(Response => {
+                    console.log(Response)
+                    if (Response.data.message == "Email belongs to an existing account.") {
+                        this.setState({
+                            EmailError: 'Ya existe un usuario con este email',
+                            loading: false
+                        })
+                    } else {
+                        this.setState({
+                            loading: false,
+                            EmailError: ''
+                        })
+                        window.location.href = '/ingreso'
+                    }
+                }).catch(error => {
+                    console.log(error)
+                    alert("No hemos podido registrarte debido a problemas tecnicos.")
                     this.setState({
-                        EmailError: 'Ya existe un usuario con este email',
                         loading: false
                     })
-                } else {
-                    this.setState({
-                        loading: false,
-                        EmailError: ''
-                    })
-                    window.location.href = '/ingreso'
-                }
-            }).catch(error => {
-                console.log(error)
-                alert("No hemos podido registrarte debido a problemas tecnicos.")
-                this.setState({
-                    loading: false
                 })
             })
-        })
         } else {
             this.setState({
                 EmailError: ''
@@ -293,12 +293,19 @@ class RegisterContent extends Component {
         }
     }
 
+    volverCerrar = () => {
+
+        sessionStorage.setItem('volverBoton', true);
+        window.location.href = process.env.RESTURL_FRONTEND;
+
+    }
+
     render() {
         const { loading } = this.state;
         const { errors } = this.state
         return (
             <Fragment>
-                {loading ? <LoadingSpinner />: <div /> }
+                {loading ? <LoadingSpinner /> : <div />}
                 <div className="body">
                     <form className="form registro" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
 
@@ -651,6 +658,14 @@ class RegisterContent extends Component {
                             <center>
                                 <button type="submit" disabled={this.state.isDisable} className="btn-registro">Registrarse</button>
                             </center>
+
+                            <Modal isOpen={this.state.abierto} className='modalStyles'>
+                                <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
+                                <h3 className='tittle'>Usuario registrado exitosamente</h3>
+                                <p className='text'>Su usuario ha sido registrado correctamente, presione OK para ingresar al sistema</p>
+                                <Button id="btnCancelar" onClick={this.cerrarModal}>Cerrar</Button>
+                                <Button id="btnSolicitar" onClick={this.abrirModal}>OK</Button>
+                            </Modal>
 
                         </div>
 
