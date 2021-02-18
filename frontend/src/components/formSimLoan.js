@@ -46,11 +46,9 @@ class SimLoan extends Component {
         if (!this.state.financiacion) {
             error.financiacion = true
         }
-
+        console.log(error)
         this.setState({ errors: error })
         if (!Object.keys(error).length) {
-            // window.location.href = '/Descuento'
-            console.log('todo ok')
             this.setState({ btn: 'btnPrimario' })
         }else{
             this.setState({ btn: 'btnPrimarioDisabled' })
