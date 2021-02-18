@@ -41,6 +41,11 @@ functions:
             method: post
             cors: true
 
+        - http:
+            path: /api/passwd
+            method: post
+            cors: true
+
 custom:
   serverless-offline:
     host: 0.0.0.0
