@@ -2,9 +2,10 @@ import React, { Component, Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import axios from 'axios';
+import LoadingSpinner from './Spinner';
 import ReactTooltip from 'react-tooltip';
 
-//let URL = process.env.RESTURL_BACKEND + '/register'
+let URL = process.env.RESTURL_BACKEND + '/passwd'
 
 const data = new Date();
 let anioMin = data.getUTCFullYear() - 100
@@ -29,6 +30,8 @@ class RecuperarContra extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading: false,
+
             Email: '',
             EmailError: '',
 
@@ -84,10 +87,30 @@ class RecuperarContra extends Component {
     }
 
     getPass = () => {
+
+
+        function convertDateFormat(string) {
+            return string.split('-').reverse().join('-');
+        }
+
         let emailError = this.state.EmailError
         let fechaError = this.state.FechaNacimientoError
+        let email = this.state.Email
+        let dateOfBirth = convertDateFormat(this.state.FechaNacimiento)
+
         if (emailError == "" && fechaError == "") {
-            this.setState({ abierto: !this.state.abierto });
+            console.log(dateOfBirth)
+            console.log(email)
+            this.setState({ loading: true }, () => {
+                axios.post(URL, { "email": email, "dateOfBirth": dateOfBirth }).then((resp) => {
+                    console.log(resp)
+                    this.setState({ abierto: !this.state.abierto, loading: false });
+                }).catch((error) => {
+                    console.log(error);
+                    this.setState({ loading: false })
+                    alert("Correo o fecha de nacimiento incorrectos.")
+                });
+            });
         }
     }
 
@@ -102,11 +125,12 @@ class RecuperarContra extends Component {
     }
 
     render() {
+        const { loading } = this.state;
         return (
             <Fragment>
                 <div className="body">
                     <form className="form-forgotpass" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
-
+                    {loading ? <LoadingSpinner /> : <div />}
                         <div className="contenedor">
                             <h1 className="title-forgotpass">Recuperar contraseña</h1>
 
