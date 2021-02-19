@@ -703,6 +703,19 @@ a.button {
     filter: invert(69%) sepia(39%) saturate(6378%) hue-rotate(351deg) brightness(98%) contrast(92%);
 }
 
+#btnOK {
+    position: absolute;
+    left: 270px;
+    width: 165px;
+    height: 40px;
+    margin-bottom: 20px;
+    color: #000000;
+    background: #F07E1A;
+    box-sizing: border-box;
+    bottom: -100px;
+    border: 1px solid #F07E1A;
+}
+
 #btnSolicitar {
     position: absolute;
     margin-left: 270px;
