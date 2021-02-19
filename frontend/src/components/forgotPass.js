@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import axios from 'axios';
 import LoadingSpinner from './Spinner';
-import ReactTooltip from 'react-tooltip';
 
 let URL = process.env.RESTURL_BACKEND + '/passwd'
 
@@ -62,7 +61,7 @@ class RecuperarContra extends Component {
         switch (name) {
             case "FechaNacimiento":
                 if (!this.state.FechaNacimiento) {
-                    this.setState({ FechaNacimientoError: 'Este campo es obligatorio.' })
+                    this.setState({ FechaNacimientoError: '' })
 
                 } else if (this.state.FechaNacimiento > fechaActual) {
                     this.setState({ FechaNacimientoError: 'Solo nacidos el ' + diaActual + "/" + mesActual + "/" + anio + " o antes." })
@@ -76,7 +75,7 @@ class RecuperarContra extends Component {
                 break;
             case "Email":
                 if (!this.state.Email) {
-                    this.setState({ EmailError: 'Este campo es obligatorio.' })
+                    this.setState({ EmailError: '' })
                 } else if (!/^[A-Z0-9.%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i.test(this.state.Email)) {
                     this.setState({ EmailError: "Formato Incorrecto." })
                 } else {
@@ -123,13 +122,8 @@ class RecuperarContra extends Component {
         let emailError = this.state.EmailError
         let fechaError = this.state.FechaNacimientoError
         if (emailError == "" && fechaError == "") {
-            console.log(dateOfBirth)
-            console.log(email)
             this.setState({ loading: true }, () => {
-                axios.post(URL, {
-                    "email": email,
-                    "dateOfBirth": dateOfBirth
-                }).then((resp) => {
+                axios.post(URL, { "email": email, "dateOfBirth": dateOfBirth }).then((resp) => {
                     console.log(resp)
                     if (resp.data.message == "Value of 'dateOfBirth' did not match.") {
                         this.setState({ FechaNacimientoError: "La fecha de nacimiento no coinside.", loading: false })
@@ -141,14 +135,17 @@ class RecuperarContra extends Component {
                 }).catch((error) => {
                     console.log(error);
                     this.setState({ loading: false })
-                    alert("Correo o fecha de nacimiento incorrectos.")
+                    alert("No hemos podido obtener tu contraseña debido a problemas tecnicos.")
                 });
             });
         }
     }
 
     ingresar = () => {
-        window.location.href = "/ingreso"
+        this.cerrarModals()
+        this.setState({ loading: true }, () => {
+            window.location.href = "/ingreso"
+        });
     }
 
     cerrarModals = () => {
@@ -176,6 +173,8 @@ class RecuperarContra extends Component {
                                     value={this.state.Email}
                                     onChange={this.handleChange}
                                     onBlur={this.handleOnBlur}
+                                    data-for="error-forgotpass"
+                                    data-tip="Este campo es obligatorio."
                                 />
                                 <label className="error-bottom">{this.state.EmailError}</label>
 
@@ -189,6 +188,8 @@ class RecuperarContra extends Component {
                                         onBlur={this.handleOnBlur}
                                         max={fechaActual}
                                         min={fechaMin}
+                                        data-for="error-forgotpass"
+                                        data-tip="Este campo es obligatorio."
                                     />
                                     <label className="error-bottom">{this.state.FechaNacimientoError}</label>
 
