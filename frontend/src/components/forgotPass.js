@@ -38,6 +38,8 @@ class RecuperarContra extends Component {
             FechaNacimiento: '',
             FechaNacimientoError: '',
 
+            password: '',
+
             abierto: false,
 
             isDisable: true,
@@ -87,17 +89,39 @@ class RecuperarContra extends Component {
     }
 
     getPass = () => {
-
-
         function convertDateFormat(string) {
-            return string.split('-').reverse().join('-');
+            return string.split('-').reverse()
         }
 
+        function splitDate(array) {
+            let algo = array.split('0')
+            return algo
+        }
+
+        let date = convertDateFormat(this.state.FechaNacimiento)
+        let dia = splitDate(date[0])
+        let mes = splitDate(date[1])
+        let anio = date[2]
+
+        if (dia[0] == "") {
+            dia = dia[1]
+        } else if (dia[1] == "") {
+            dia = dia[0] + "0"
+        } else {
+            dia = dia[0]
+        }
+
+        if (mes[0] == "") {
+            mes = mes[1]
+        } else if (mes[1] == "") {
+            mes = mes[0] + "0"
+        } else {
+            mes = mes[0]
+        }
+        let email = this.state.Email
+        let dateOfBirth = dia + "-" + mes + "-" + anio
         let emailError = this.state.EmailError
         let fechaError = this.state.FechaNacimientoError
-        let email = this.state.Email
-        let dateOfBirth = convertDateFormat(this.state.FechaNacimiento)
-
         if (emailError == "" && fechaError == "") {
             console.log(dateOfBirth)
             console.log(email)
@@ -108,10 +132,11 @@ class RecuperarContra extends Component {
                 }).then((resp) => {
                     console.log(resp)
                     if (resp.data.message == "Value of 'dateOfBirth' did not match.") {
-                        this.setState({ FechaNacimientoError: "Correo o fecha de nacimiento incorrectos." })
-                        this.setState({ loading: false })
+                        this.setState({ FechaNacimientoError: "La fecha de nacimiento no coinside", loading: false })
+                    } else if (resp.data.message == "Provided email did not match any user.") {
+                        this.setState({ EmailError: "El email ingresado no coinside con el de ningun usuario", loading: false })
                     } else {
-                        this.setState({ abierto: !this.state.abierto, loading: false });
+                        this.setState({ password: resp.data.passwd, abierto: !this.state.abierto, loading: false })
                     }
                 }).catch((error) => {
                     console.log(error);
@@ -180,7 +205,7 @@ class RecuperarContra extends Component {
                     <ModalHeader>
                         <h1 className="titlee">Contraseña</h1>
                         <ModalBody className="modalBody">
-                            <p className="subTitle">Su contraseña es "12345678"</p>
+                            <p className="subTitle">Su contraseña es: {this.state.password}</p>
                             <Button id="btnCR" onClick={this.cerrarModals} > Cancelar </Button>
                             <Button id="btnIN" onClick={this.ingresar}> Ingresar </Button>
                         </ModalBody>

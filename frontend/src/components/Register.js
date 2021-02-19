@@ -248,6 +248,7 @@ class RegisterContent extends Component {
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
+            console.log(this.state.FechaNacimiento)
             this.setState({ loading: true }, () => {
             axios.post(URL, {
                 "name": this.state.Nombre,
@@ -593,7 +594,7 @@ class RegisterContent extends Component {
                             </div>
 
                             <center>
-                                <button type="submit" disabled={this.state.isDisable} className="btn-registro">Registrarse</button>
+                                <button type="submit" /* disabled={this.state.isDisable} */ className="btn-registro">Registrarse</button>
                             </center>
 
                         </div>
