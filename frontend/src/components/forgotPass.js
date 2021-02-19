@@ -102,9 +102,17 @@ class RecuperarContra extends Component {
             console.log(dateOfBirth)
             console.log(email)
             this.setState({ loading: true }, () => {
-                axios.post(URL, { "email": email, "dateOfBirth": dateOfBirth }).then((resp) => {
+                axios.post(URL, {
+                    "email": email,
+                    "dateOfBirth": dateOfBirth
+                }).then((resp) => {
                     console.log(resp)
-                    this.setState({ abierto: !this.state.abierto, loading: false });
+                    if (resp.data.message == "Value of 'dateOfBirth' did not match.") {
+                        this.setState({ FechaNacimientoError: "Correo o fecha de nacimiento incorrectos." })
+                        this.setState({ loading: false })
+                    } else {
+                        this.setState({ abierto: !this.state.abierto, loading: false });
+                    }
                 }).catch((error) => {
                     console.log(error);
                     this.setState({ loading: false })
@@ -130,7 +138,7 @@ class RecuperarContra extends Component {
             <Fragment>
                 <div className="body">
                     <form className="form-forgotpass" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
-                    {loading ? <LoadingSpinner /> : <div />}
+                        {loading ? <LoadingSpinner /> : <div />}
                         <div className="contenedor">
                             <h1 className="title-forgotpass">Recuperar contraseña</h1>
 
