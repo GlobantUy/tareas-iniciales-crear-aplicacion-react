@@ -62,7 +62,7 @@ class RecuperarContra extends Component {
         switch (name) {
             case "FechaNacimiento":
                 if (!this.state.FechaNacimiento) {
-                    this.setState({ FechaNacimientoError: 'Este campo es obligatorio' })
+                    this.setState({ FechaNacimientoError: 'Este campo es obligatorio.' })
 
                 } else if (this.state.FechaNacimiento > fechaActual) {
                     this.setState({ FechaNacimientoError: 'Solo nacidos el ' + diaActual + "/" + mesActual + "/" + anio + " o antes." })
@@ -132,9 +132,9 @@ class RecuperarContra extends Component {
                 }).then((resp) => {
                     console.log(resp)
                     if (resp.data.message == "Value of 'dateOfBirth' did not match.") {
-                        this.setState({ FechaNacimientoError: "La fecha de nacimiento no coinside", loading: false })
+                        this.setState({ FechaNacimientoError: "La fecha de nacimiento no coinside.", loading: false })
                     } else if (resp.data.message == "Provided email did not match any user.") {
-                        this.setState({ EmailError: "El email ingresado no coinside con el de ningun usuario", loading: false })
+                        this.setState({ EmailError: "El email ingresado no coinside con el de ningun usuario.", loading: false })
                     } else {
                         this.setState({ password: resp.data.passwd, abierto: !this.state.abierto, loading: false })
                     }
