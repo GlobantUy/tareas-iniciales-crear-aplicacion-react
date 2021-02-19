@@ -1,8 +1,7 @@
-import React, { Component, } from 'react';
+import React, { Component } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import LoadingSpinner from './Spinner';
-import ReactTooltip from 'react-tooltip';
 
 let datosIncorrectos = 'Los datos ingresados no son correctos, por favor verifique.'
 var btn = "btnPrimarioDisabled";
@@ -22,6 +21,7 @@ class SimLogin extends Component {
             loading: false,
         }
     }
+
     redireccionar() {
         const volverSolicitar = JSON.parse(sessionStorage.getItem('volverAceptarpress'));
         if (volverSolicitar) {
@@ -78,8 +78,7 @@ class SimLogin extends Component {
                     this.setState({ loading: false });
                     this.mostrarError()
                 }
-            })
-                .catch(error => {
+            }).catch(error => {
                     console.log("Error al iniciar sesion", error)
                 });
         })//fin state loading
@@ -184,19 +183,10 @@ class SimLogin extends Component {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.email}
-                                data-for="errormail"
+                                data-for="error-ingreso"
                                 data-tip="Este campo es obligatorio."
                             />
-
-                            <ReactTooltip id="errormail"
-                                place="right"
-                                type="info"
-                                effect="solid"
-                                className="error-tooltip"
-                            >
-                            </ReactTooltip>
                             {touched.email && <label className="error-bottom">{errors.email}</label>}
-
 
                             <p>Contraseña *</p>
                             <input className="inputIngreso"
@@ -205,17 +195,9 @@ class SimLogin extends Component {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.password}
-                                data-for="errorpsswd"
+                                data-for="error-ingreso"
                                 data-tip="Este campo es obligatorio."
                             />
-
-                            <ReactTooltip id="errorpsswd"
-                                place="right"
-                                type="info"
-                                effect="solid"
-                                className="error-tooltip"
-                            >
-                            </ReactTooltip>
                             {touched.email && <label className="error-bottom">{errors.password}</label>}
 
                             <a href="/Recuperarcontra" type="submit"><p className="recContr">Recuperar contraseña</p></a>

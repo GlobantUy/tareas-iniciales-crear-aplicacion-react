@@ -119,7 +119,7 @@ class TableUser extends Component {
                 return <th key={index}>{"Estado"}</th>
             if (key == "payments") {
                 return <th key={index}>{"Cuotas"}</th>
-            } else if (key !== "_id" && key != "userEmail" && key != "stateDate") {
+            } else if (key !== "_id" && key != "userEmail" && key != "stateDate" && key != "loanType") {
                 return <th key={index}>{key}</th>
             }
         })

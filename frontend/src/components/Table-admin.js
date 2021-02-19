@@ -5,7 +5,6 @@ import LoadingSpinner from './Spinner';
 
 let URLgetLoans = process.env.RESTURL_BACKEND + '/returnLoans';
 let URLupdateLoan = process.env.RESTURL_BACKEND + '/updateLoan';
-let prestamosCargados
 
 class Tableadmin extends Component {
 
@@ -23,16 +22,25 @@ class Tableadmin extends Component {
             rowSelected: false,
             isAplicarDisabled: true,
             hidden: true,
-            filtro: 'Todos'
+            filtro: 'Todos',
+            loading: false,
+            prestamosCargados: false
         }
     }
 
     getLoans(){
         let email = JSON.parse(sessionStorage.getItem('Usuario-Values')).email;
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
-            this.setState({
-                clientes: resp.data.loans
-            })
+            if (resp.data.loans == "No loans found.") {
+                this.setState({
+                    prestamosCargados:true
+                })
+            } else {
+                this.setState({
+                    clientes: resp.data.loans.reverse(),
+                    prestamosCargados:false
+                })
+            }
         }).catch((error) => {
             console.log(error);
 
@@ -40,16 +48,13 @@ class Tableadmin extends Component {
     }
 
     componentDidMount() {
-        prestamosCargados = JSON.parse(sessionStorage.getItem('prestamosNull'));
         this.getLoans()
-    }
-
-   
+    }   
 
     crearestado(state, index) {
         switch (state) {
-            case undefined:
-                return (<select value={'option1'} id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
+            case "pendiente":
+                return (<select  id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
                     <option value="option1" >Pendiente</ option>
                     <option value="option2" >Rechazado</ option>
                     <option value="option3" >Aprobado</ option>
@@ -57,18 +62,8 @@ class Tableadmin extends Component {
                 break
             case true:
                 return (<label>Aprobado </label>)
-                /*return (<select value={'option3'} id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-                    <option value="option1" >Pendiente</ option>
-                    <option value="option2" >Rechazado</ option>
-                    <option value="option3" >Aprobado</ option>
-                </ select>);*/
                 break
             case false:
-                /*return (<select value={'option2'} id={'menutabla' + index} className="selectitem" onChange={(e) => this.changeStateDropdown(index)}>
-                    <option value="option1" >Pendiente</ option>
-                    <option value="option2" >Rechazado</ option>
-                    <option value="option3" >Aprobado</ option>
-                </ select>);*/
                 return (<label>Rechazado </label>)
                 break
 
@@ -81,7 +76,7 @@ class Tableadmin extends Component {
         for (let i = 0; i < filas.length; i++) { filas[i].className = '' }
         const myLoans = axios.post(URLgetLoans, { "email": email }).then((resp) => {
             this.setState({
-                clientes: resp.data.loans,
+                clientes: resp.data.loans.reverse(),
                 hidden: true,
                 isAplicarDisabled: true
             })
@@ -100,10 +95,7 @@ class Tableadmin extends Component {
         }).then(res => {
             this.getLoans()
             window.location.href = '/Tableadmin';
-        }
-
-        )
-
+        })
     }
 
     changeStateDropdown(index) {
@@ -132,34 +124,32 @@ class Tableadmin extends Component {
             fila.className = '';
         }
     }
-
-    changeFilterDropdown() {
-        let dropdown = document.getElementById('menufiltro');
-        switch (dropdown.value) {
-            case 'option1':
-                this.setState({
-                    filtro: 'Todos'
-                })
-                break
-
-            case 'option2':
-                this.setState({
-                    filtro: true
-                })
-                break
-            case 'option3':
-                this.setState({
-                    filtro: false
-                })
-                break
-            default:
-                this.setState({
-                    filtro: undefined
-                })
-                break
-        }
+  
+changeFilterDropdown() {
+    let dropdown = document.getElementById('menufiltro');
+    switch (dropdown.value) {
+        case 'option1':
+            this.setState({
+                filtro: 'Todos'
+            })
+            break
+        case 'option2':
+            this.setState({
+                filtro: true
+            })
+            break
+        case 'option3':
+            this.setState({
+                filtro: false
+            })
+            break
+        default:
+            this.setState({
+                filtro: "pendiente"
+            })
+            break
     }
-
+}
 
     renderTableData(Filtro) {
         return this.state.clientes.map((cliente, index) => {
@@ -183,6 +173,9 @@ class Tableadmin extends Component {
     }
 
     renderTableHeader() {
+        if (this.state.clientes[0].state == undefined) {
+            this.state.clientes[0].state = "pendiente"
+        }
         let header = Object.keys(this.state.clientes[0])
         return header.map((key, index) => {
             if (key == "userName")
@@ -193,18 +186,18 @@ class Tableadmin extends Component {
                 return <th key={index}>{"Fecha"}</th>
             if (key == "currency")
                 return <th key={index}>{"Moneda"}</th>
-            if (key == "state")
+            if (key == "state" )
                 return <th key={index}>{"Estado"}</th>
             if (key == "payments") {
                 return <th key={index}>{"Cuotas"}</th>
-            } else if (key !== "_id" && key != "userEmail" && key != "stateDate") {
+            } else if (key !== "_id" && key != "userEmail" && key != "stateDate" && key != "loanType") {
                 return <th key={index}>{key}</th>
             }
         })
     }
     render() {
         const { loading } = this.state
-        if(!prestamosCargados) {
+        if (!this.state.prestamosCargados) {
             //this.getLoans();
             return (   
                 <div className="container">
@@ -236,6 +229,7 @@ class Tableadmin extends Component {
         } else {
             return (
                 <>
+                    { loading ? <LoadingSpinner /> : <div />}
                     <div className="container">
                         <h2 id='titulo'>Solicitudes de préstamo</h2>
                         <h2 id='Filtro'>Filtro por estado </h2>
