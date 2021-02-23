@@ -48,7 +48,7 @@ module.exports.passwd = async (req, res) => {
                         }
                     },
                     status: 200,
-                    messsage: 'Provided email did not match any user.'
+                    message: 'Provided email did not match any user.'
 
                 })
             }
