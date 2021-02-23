@@ -603,7 +603,8 @@ a.button {
     line-height: 23px;
 }
 #TipoPrestamoss {
-    padding-left: 44%;
+    right: 0px;
+    padding-left: 57%;
     position: fixed;
     font-family: 'Heebo', sans-serif;
     font-style: normal;
