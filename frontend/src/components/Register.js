@@ -594,7 +594,7 @@ class RegisterContent extends Component {
                             </div>
 
                             <center>
-                                <button type="submit" /* disabled={this.state.isDisable} */ className="btn-registro">Registrarse</button>
+                                <button type="submit" disabled={this.state.isDisable} className="btn-registro">Registrarse</button>
                             </center>
 
                         </div>

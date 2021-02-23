@@ -52,6 +52,7 @@ class RecuperarContra extends Component {
         if (this.state.Email && this.state.FechaNacimiento != "") {
             this.setState({ isDisable: false })
         } else {
+            console.log(this.state.FechaNacimiento)
             this.setState({ isDisable: true })
         }
     }
@@ -162,8 +163,10 @@ class RecuperarContra extends Component {
                     <form className="form-forgotpass" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
                         {loading ? <LoadingSpinner /> : <div />}
                         <div className="contenedor">
-                            <h1 className="title-forgotpass">Recuperar contraseña</h1>
 
+                            <center>
+                                <h1 className="title-forgotpass">Recuperar contraseña</h1>
+                            </center>
                             <div className="contenedor">
                                 <p className="mid">Email*</p>
                                 <input className="input-forgotpass"
