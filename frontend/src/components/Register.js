@@ -105,7 +105,7 @@ class RegisterContent extends Component {
 
     soloLetras = (e) => {
         const { name, value } = e.target;
-        let regex = new RegExp("^[a-zA-Z ]+$");
+        let regex = new RegExp("^[a-zA-ZÑñ ]+$");
         if (regex.test(value)) {
             this.setState({
                 [name]: value
@@ -265,38 +265,39 @@ class RegisterContent extends Component {
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
+            element.className += " velo"
             this.setState({ loading: true }, () => {
-                axios.post(URL, {
-                    "name": this.state.Nombre,
-                    "lName": this.state.Apellido,
-                    "dateOfBirth": this.state.FechaNacimiento,
-                    "gender": this.state.Genero,
-                    "preferences": this.state.Preferencias,
-                    "email": this.state.Email,
-                    "department": this.state.Departamento,
-                    "passwd": this.state.Password
-                }).then(Response => {
-                    console.log(Response)
-                    if (Response.data.message == "Email belongs to an existing account.") {
-                        this.setState({
-                            EmailError: 'Ya existe un usuario con este email',
-                            loading: false
-                        })
-                    } else {
-                        this.setState({
-                            loading: false,
-                            EmailError: ''
-                        })
-                        this.setState({ abierto: !this.state.abierto });
-                    }
-                }).catch(error => {
-                    console.log(error)
-                    alert("No hemos podido registrarte debido a problemas tecnicos.")
+            axios.post(URL, {
+                "name": this.state.Nombre,
+                "lName": this.state.Apellido,
+                "dateOfBirth": this.state.FechaNacimiento,
+                "gender": this.state.Genero,
+                "preferences": this.state.Preferencias,
+                "email": this.state.Email,
+                "department": this.state.Departamento,
+                "passwd": this.state.Password
+            }).then(Response => {
+                if (Response.data.message == "Email belongs to an existing account.") {
                     this.setState({
+                        EmailError: 'Ya existe un usuario con este email',
                         loading: false
                     })
+                    element.className = "container"
+                } else {
+                    this.setState({
+                        loading: false,
+                        EmailError: ''
+                    })
+                    element.className = "container"
+                    window.location.href = '/ingreso'
+                }
+            }).catch(error => {
+                alert("No hemos podido registrarte debido a problemas tecnicos.")
+                this.setState({
+                    loading: false
                 })
             })
+        })
         } else {
             this.setState({
                 EmailError: ''
