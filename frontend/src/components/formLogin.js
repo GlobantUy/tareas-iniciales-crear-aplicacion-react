@@ -200,7 +200,7 @@ class SimLogin extends Component {
                             />
                             {touched.email && <label className="error-bottom">{errors.password}</label>}
 
-                            <a href="/empty" type="submit"><p className="recContr">Recuperar contraseña</p></a>
+                            <a href="/empty" type="submit"><p className="recContr" onClick={this.showSpinner}>Recuperar contraseña</p></a>
 
                             { touched.password && <p id="datosIncorrectos" className="no-encontrado">{datosIncorrectos}</p>}
 

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import LoadingSpinner from './Spinner';
 
 let URL = process.env.RESTURL_BACKEND + '/register'
+let element
 
 const data = new Date();
 let anioMin = data.getUTCFullYear() - 100
@@ -84,6 +85,9 @@ class RegisterContent extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+    componentDidMount(){
+        element = document.getElementById("cont")
     }
 
     soloLetras = (e) => {
@@ -248,6 +252,7 @@ class RegisterContent extends Component {
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
+            element.className += " velo"
             this.setState({ loading: true }, () => {
             axios.post(URL, {
                 "name": this.state.Nombre,
@@ -265,11 +270,13 @@ class RegisterContent extends Component {
                         EmailError: 'Ya existe un usuario con este email',
                         loading: false
                     })
+                    element.className = "container"
                 } else {
                     this.setState({
                         loading: false,
                         EmailError: ''
                     })
+                    element.className = "container"
                     window.location.href = '/ingreso'
                 }
             }).catch(error => {
@@ -292,15 +299,13 @@ class RegisterContent extends Component {
         const { errors } = this.state
         return (
             <Fragment>
-                {loading ? <LoadingSpinner />: <div /> }
                 <div className="body">
+                {loading ? <LoadingSpinner />: <div /> }
                     <form className="form registro" onSubmit={this.handleSumbit} onMouseMove={this.comprobarInputs}>
-
                         <center>
                             <h1 className="titlee-registro">Registro de usuario STB Bank</h1>
                         </center>
-
-                        <div className="container">
+                        <div className="container" id="cont">
                             <div className="row">
                                 <div className="col-4">
                                     <p>Nombres*</p>
