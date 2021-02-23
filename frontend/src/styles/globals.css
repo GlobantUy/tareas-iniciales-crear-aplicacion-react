@@ -583,7 +583,7 @@ a.button {
 }
 #TipoPrestamo{
     text-align: center;
-    position: absolute;
+    position: fixed;
     font-family: 'Heebo', sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -604,13 +604,12 @@ a.button {
     line-height: 23px;
 }
 #TipoPrestamoss {
-    text-align: center;
-    position: absolute;
+    padding-left: 44%;
+    position: fixed;
     font-family: 'Heebo', sans-serif;
     font-style: normal;
     font-weight: normal;
     top: 28%;
-    right: -15%;
     font-size: 19px;
 }
 
@@ -820,7 +819,6 @@ a.button {
 
 #titulo {
     position: absolute;
-    width: 118px;
     height: 28px;
     left: 581px;
     top: 118px;

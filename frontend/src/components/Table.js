@@ -137,11 +137,11 @@ class Table extends Component {
                           { name: "Otros", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoOtros } ];
         myTipos.forEach(element => {
             if(element.value === true){
-               //console.log(element.name.toString())
-               printTipo = printTipo +  element.name + ' - '
+
+               printTipo = printTipo +  element.name + ', '
             }
         })
-        return printTipo;
+        return printTipo.slice(0, printTipo.length - 2);
     }
     
     componentDidMount() {
