@@ -71,9 +71,9 @@ class RegisterContent extends Component {
             Departamento: '',
             DepartamentoError: '',
 
-            MasculinoSelect: false,
-            FemeninoSelect: false,
-            OtrosSelect: false,
+            masculinoChecked: false,
+            femeninoChecked: false,
+            otrosChecked: false,
 
             Preferencias: [],
 
@@ -301,9 +301,11 @@ class RegisterContent extends Component {
             Password: '',
             ConfirmPassword: '',
             Departamento: '',
-            MasculinoSelect: false,
-            FemeninoSelect: false,
-            OtrosSelect: false,
+
+            masculinoChecked: false,
+            femeninoChecked: false,
+            otrosChecked: false,
+
             Preferencias: [null]
         });
 
@@ -313,11 +315,11 @@ class RegisterContent extends Component {
         switch (e.target.name) {
             case 'Genero':
                 if(e.target.id == 'Femenino'){
-                    this.setState({FemeninoSelect:true, MasculinoSelect:false, OtrosSelect:false, Genero:'Femenino'})
+                    this.setState({femeninoChecked:true, masculinoChecked:false, otrosChecked:false, Genero:'Femenino'})
                 }else if(e.target.id == 'Masculino'){
-                    this.setState({FemeninoSelect:false, MasculinoSelect:true, OtrosSelect:false, Genero:'Masculino'})
+                    this.setState({femeninoChecked:false, masculinoChecked:true, otrosChecked:false, Genero:'Masculino'})
                 }else{
-                    this.setState({FemeninoSelect:false, MasculinoSelect:false, OtrosSelect:true, Genero:'Otro'})
+                    this.setState({femeninoChecked:false, masculinoChecked:false, otrosChecked:true, Genero:'Otro'})
                 }
                 console.log(this.state.Genero)
                 break;
@@ -489,7 +491,7 @@ render() {
                                     id="Femenino"
                                     name="Genero"
                                     onChange={this.checkboxChange}
-                                    checked={this.state.FemeninoSelect}
+                                    checked={this.state.femeninoChecked}
                                 />
 
                                 <label className="genero" htmlFor="Femenino">Femenino</label>
@@ -500,7 +502,7 @@ render() {
                                         id="Masculino"
                                         name="Genero"
                                         onChange={this.checkboxChange}
-                                        checked={this.state.MasculinoSelect}
+                                        checked={this.state.masculinoChecked}
                                     />
                                     <label className="genero" htmlFor="Masculino">Masculino</label>
                                 </div>
@@ -510,7 +512,7 @@ render() {
                                     id="Otro"
                                     name="Genero"
                                     onChange={this.checkboxChange}
-                                    checked={this.state.OtrosSelect}
+                                    checked={this.state.otrosChecked}
                                 />
                                 <label className="genero" htmlFor="Otro">Otro</label>
                             </div>
