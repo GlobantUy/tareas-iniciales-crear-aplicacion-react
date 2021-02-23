@@ -88,7 +88,7 @@ class RegisterContent extends Component {
 
     soloLetras = (e) => {
         const { name, value } = e.target;
-        let regex = new RegExp("^[a-zA-Z ]+$");
+        let regex = new RegExp("^[a-zA-ZÑñ ]+$");
         if (regex.test(value)) {
             this.setState({
                 [name]: value
