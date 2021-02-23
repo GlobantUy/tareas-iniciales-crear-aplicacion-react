@@ -158,7 +158,7 @@ class TableUser extends Component {
                     </div>
                     <div>
                         <img className="Tablet" src="/table.png" />
-                        <p id="noDatos">No has solicitado un prestamo aún</p>
+                        <p id="noDatos">No has solicitado un préstamo aún</p>
                     </div>
                 </>
             )

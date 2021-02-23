@@ -133,7 +133,7 @@ class Table extends Component {
     getTipoPrestamos() {
         let printTipo = ''
         const myTipos = [ { name: "Automotor", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoAutomotor },
-                          { name: "Inmueble", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoInmueble },
+                          { name: "Inmuebles", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoInmueble },
                           { name: "Otros", value: JSON.parse(sessionStorage.getItem('prestamoValues')).TipoDePrestamoOtros } ];
         myTipos.forEach(element => {
             if(element.value === true){
@@ -266,7 +266,7 @@ class Table extends Component {
                 <h1 id='ingresoss'> {this.state.Moneda + this.state.Ingreso} </h1>
                 <h1 id='Monto' >  Monto solicitado </h1>
                 <h1 id='Montoss'> {this.state.Moneda + this.state.Monto_a_pedir} </h1>
-                <h1 id='TipoPrestamo' >  Motivo del Prestamo </h1>
+                <h1 id='TipoPrestamo' >  Motivo del Préstamo </h1>
                 <h1 id='TipoPrestamoss'> {this.state.tipoPrestamo} </h1>
                 <h2 id='seleccionar'>Seleccione la fila deseada para solicitar su préstamo</h2>
                 <div className="table-responsive-">
@@ -286,7 +286,7 @@ class Table extends Component {
                 <Modal isOpen={this.state.abierto} className='modalStyles'>
                      <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
                      <h3 className='tittle'>Confirmar préstamo</h3>
-                    <p className='text'>Prestamo valor {this.state.Moneda + this.state.Monto_a_pedir + " en " + cuotasPost} cuotas</p>
+                    <p className='text'>Préstamo valor {this.state.Moneda + this.state.Monto_a_pedir + " en " + cuotasPost} cuotas</p>
                     <Button id="btnCancelar" onClick={this.cerrarModal}>Cancelar</Button>
                     <Button id="btnSolicitar" onClick={this.abrirModal2}>Solicitar</Button>
                 </Modal>
@@ -299,8 +299,8 @@ class Table extends Component {
 
                 <Modal isOpen={this.state.abierto4} className='modalStyles' id='modalPendiente'>
                 <img onClick={this.cerrarModals} className='close-icon' src='./close.png'></img>
-                    <p className='textModal2'>Ya tienes un prestamo pendiente</p>
-                    <Button id="btnCancelar2" onClick={this.abrirTableuser}>Ver mis prestamos</Button>
+                    <p className='textModal2'>Ya tienes un préstamo pendiente</p>
+                    <Button id="btnCancelar2" onClick={this.abrirTableuser}>Ver mis préstamos</Button>
                     <a href="/" target="_self" onClick ={this.volverInicio}><Button id="btnVolver">Volver al inicio</Button></a>
                 </Modal>
 
