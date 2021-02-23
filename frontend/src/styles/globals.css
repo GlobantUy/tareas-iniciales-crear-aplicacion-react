@@ -1162,6 +1162,10 @@ input[type=date]::-webkit-datetime-edit-text {
     z-index: 999;
 }
 
+.velo {
+    display: none;
+}
+
 @keyframes girar {
     from {transform: rotate(0deg); }
     to { transform: rotate(360deg); } 
