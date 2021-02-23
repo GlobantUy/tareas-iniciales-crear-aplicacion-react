@@ -75,6 +75,7 @@ class RegisterContent extends Component {
             femeninoChecked: false,
             otrosChecked: false,
 
+            
             inmueblesChecked: false,
             hogarChecked: false,
             juguetesChecked: false,
@@ -115,6 +116,17 @@ class RegisterContent extends Component {
             });
         }
     }
+
+    handleChangePreferencias = event => {
+        if (this.state.Preferencias.includes(event.target.value)) {
+            var index = this.state.Preferencias.indexOf(event.target.value);
+            this.state.Preferencias.splice(index, 1);
+        } else {
+            this.setState(state => {
+                state.Preferencias.push(event.target.value)
+            });
+        }
+    };
 
     comprobarInputs = () => {
         let nombre = this.state.Nombre
