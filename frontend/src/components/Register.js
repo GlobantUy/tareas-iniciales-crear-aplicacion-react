@@ -92,7 +92,7 @@ class RegisterContent extends Component {
 
     soloLetras = (e) => {
         const { name, value } = e.target;
-        let regex = new RegExp("^[a-zA-Z ]+$");
+        let regex = new RegExp("^[a-zA-ZÑñ ]+$");
         if (regex.test(value)) {
             this.setState({
                 [name]: value
@@ -264,7 +264,6 @@ class RegisterContent extends Component {
                 "department": this.state.Departamento,
                 "passwd": this.state.Password
             }).then(Response => {
-                console.log(Response)
                 if (Response.data.message == "Email belongs to an existing account.") {
                     this.setState({
                         EmailError: 'Ya existe un usuario con este email',
@@ -280,7 +279,6 @@ class RegisterContent extends Component {
                     window.location.href = '/ingreso'
                 }
             }).catch(error => {
-                console.log(error)
                 alert("No hemos podido registrarte debido a problemas tecnicos.")
                 this.setState({
                     loading: false
