@@ -172,8 +172,8 @@ class SimLoan extends Component {
         return (
             <div>
                 <h1 className="titleForm">Simulador de préstamos</h1>
-                {loading ? <LoadingSpinner /> : <div />}
                 <div className="form">
+                {loading ? <LoadingSpinner /> : <div />}
                     <form onSubmit={this.handleSumbit}>
 
                         <p>Ingreso($U)*</p>

@@ -67,14 +67,11 @@ class SimLogin extends Component {
                 "passwd": pass,
             },
             ).then(Response => {
-                console.log("post realizado correctamente", Response)
                 if (Response.data.found == undefined) {
                     rol = Response.data.rol;
-                    console.log(rol)
                     this.quitarError()
                     this.redireccionar()
                 } else {
-                    console.log(Response.data.found)
                     this.setState({ loading: false });
                     this.mostrarError()
                 }
@@ -85,7 +82,6 @@ class SimLogin extends Component {
     }
 
     guardarStorage = (user, clave, type) => {
-        console.log('guardado correctamnete')
         this.values = {
             email: user,
             password: clave,
@@ -200,7 +196,7 @@ class SimLogin extends Component {
                             />
                             {touched.email && <label className="error-bottom">{errors.password}</label>}
 
-                            <a href="/Recuperarcontra" type="submit"><p className="recContr">Recuperar contraseña</p></a>
+                            <a href="/Recuperarcontra" type="submit"><p className="recContr" onClick={this.showSpinner}>Recuperar contraseña</p></a>
 
                             { touched.password && <p id="datosIncorrectos" className="no-encontrado">{datosIncorrectos}</p>}
 
