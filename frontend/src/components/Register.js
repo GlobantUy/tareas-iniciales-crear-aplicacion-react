@@ -50,22 +50,22 @@ class RegisterContent extends Component {
         super(props)
         this.state = {
             loading: false,
-            Nombre: 'q',
+            Nombre: '',
             NombreError: '',
 
-            Apellido: 'q',
+            Apellido: '',
             ApellidoError: '',
 
             FechaNacimiento: '',
             FechaNacimientoError: '',
 
-            Email: 'w@q.com',
+            Email: '',
             EmailError: '',
 
-            Password: '11111111',
+            Password: '',
             PasswordError: '',
 
-            ConfirmPassword: '11111111',
+            ConfirmPassword: '',
             ConfirmPasswordError: '',
 
             Departamento: '',
