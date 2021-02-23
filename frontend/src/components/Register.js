@@ -272,39 +272,29 @@ class RegisterContent extends Component {
         const result = validate(sinErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
-            element.className += " velo"
-            this.setState({ loading: true }, () => {
-                axios.post(URL, {
-                    "name": this.state.Nombre,
-                    "lName": this.state.Apellido,
-                    "dateOfBirth": this.state.FechaNacimiento,
-                    "gender": this.state.Genero,
-                    "preferences": this.state.Preferencias,
-                    "email": this.state.Email,
-                    "department": this.state.Departamento,
-                    "passwd": this.state.Password
-                }).then(Response => {
-                    if (Response.data.message == "Email belongs to an existing account.") {
-                        this.setState({
-                            EmailError: 'Ya existe un usuario con este email',
-                            loading: false
-                        })
-                        element.className = "container"
-                    } else {
-                        this.setState({
-                            loading: false,
-                            EmailError: ''
-                        })
-                        element.className = "container"
-                        console.log(Response)
-                    }
-                }).catch(error => {
-                    alert("No hemos podido registrarte debido a problemas tecnicos.")
+            axios.post(URL, {
+                "name": this.state.Nombre,
+                "lName": this.state.Apellido,
+                "dateOfBirth": this.state.FechaNacimiento,
+                "gender": this.state.Genero,
+                "preferences": this.state.Preferencias,
+                "email": this.state.Email,
+                "department": this.state.Departamento,
+                "passwd": this.state.Password
+            }).then(Response => {
+                if (Response.data.message == "Email belongs to an existing account.") {
                     this.setState({
-                        loading: false
+                        EmailError: 'Ya existe un usuario con este email',
                     })
-                    element.className = "container"
-                })
+                } else {
+                    this.setState({
+                        EmailError: '',
+                        abierto: !this.state.abierto
+                    })
+                }
+
+            }).catch(error => {
+                alert("No hemos podido registrarte debido a problemas tecnicos.")
             })
         } else {
             this.setState({
@@ -314,10 +304,13 @@ class RegisterContent extends Component {
         
     }
 
-    abrirModal = () => {
-        this.setState({
-            abierto: !this.state.abierto
+    spinner = () => {
+        element.className += " velo"
+        this.setState({ 
+            loading: true,
+            abierto: !this.state.abierto,
         })
+        
     }
 
     cerrarModal = () => {
@@ -753,7 +746,7 @@ class RegisterContent extends Component {
                             </div>
 
                             <center>
-                                <button type="submit" disabled={this.state.isDisable} onClick={this.abrirModal} className="btn-registro">Registrarse</button>
+                                <button type="submit" disabled={this.state.isDisable} className="btn-registro">Registrarse</button>
                             </center>
 
                             <Modal isOpen={this.state.abierto} className='modalStyles'>
@@ -761,7 +754,7 @@ class RegisterContent extends Component {
                                 <h3 className='tittle'>Usuario registrado exitosamente</h3>
                                 <p className='text'>Su usuario ha sido registrado correctamente, presione OK para ingresar al sistema</p>
                                 <Button id="btnCancelar" onClick={this.cerrarModal}>Cerrar</Button>
-                                <a href="/ingreso" target="_self"><Button id="btnOK">OK</Button></a>
+                                <a href="/ingreso" target="_self"><Button id="btnOK" onClick={this.spinner}>OK</Button></a>
                             </Modal>
 
                         </div>
