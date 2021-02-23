@@ -173,9 +173,11 @@ changeFilterDropdown() {
     }
 
     renderTableHeader() {
-        if (this.state.clientes[0].state == undefined) {
-            this.state.clientes[0].state = "pendiente"
-        }
+        this.state.clientes.forEach(element => {
+            if (element.state == undefined) {
+                element.state = "pendiente"
+            }
+        });
         let header = Object.keys(this.state.clientes[0])
         return header.map((key, index) => {
             if (key == "userName")
