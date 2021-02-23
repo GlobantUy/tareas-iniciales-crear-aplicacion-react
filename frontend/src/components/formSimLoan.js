@@ -3,26 +3,6 @@ import axios from 'axios';
 import LoadingSpinner from './Spinner';
 import ReactTooltip from 'react-tooltip';
 
-const validate = values => {
-    const errors = {}
-
-    if (!values.Ingreso) {
-        errors.Ingreso = 'Este campo es obligatorio'
-    }
-    if (!values.financiacion) {
-        errors.financiacion = 'Este campo es obligatorio'
-    }
-    if (!values.Monto_a_pedir) {
-        errors.Monto_a_pedir = ''
-    }
-    let porcentaje = (0.2) * (values.Ingreso)
-    let monto = values.Monto_a_pedir
-    if ((monto > porcentaje) && (values.Ingreso > 0)) {
-        errors.Monto_a_pedir = 'El monto solicitado excede el 20% de sus ingresos.'
-    }
-    return errors
-}
-
 let emailFromStorage
 let currency = ''
 class SimLoan extends Component {
@@ -40,16 +20,52 @@ class SimLoan extends Component {
             TipoDePrestamoAutomotor: false,
             TipoDePrestamoOtros: false,
             registrationErrors: '',
+            btn: 'btnPrimarioDisabled',
+            btnst: true,
             errors: {}
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
     }
 
-    handleChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+    validacion = () => {
+        const error = {}
+        if (!this.state.Ingreso) {
+            error.Ingreso = true
+        }
+        if (!this.state.Moneda_$U && !this.state.Moneda_U$S) {
+            error.moneda = true
+        }
+        if (!this.state.Monto_a_pedir) {
+            error.Monto_a_pedir2 = true
+        }
+        let porcentaje = (0.2) * (this.state.Ingreso)
+        let monto = this.state.Monto_a_pedir
+        if (monto > porcentaje) {
+            error.Monto_a_pedir = 'El monto solicitado excede el 20% de sus ingresos.'
+        }
+        if (!this.state.financiacion) {
+            error.financiacion = true
+        }
+        console.log(error)
+        this.setState({ errors: error })
+        if (!Object.keys(error).length) {
+            this.setState({ 
+                btn: 'btnPrimario',
+                btnst: false
+            })
+        }else{
+            this.setState({ 
+                btn: 'btnPrimarioDisabled',
+                btnst: true
+            })
+        }
+    }
+
+    async handleChange(e) {
+        const { name, value } = e.target;
+        await this.setState({ [name]: value })
+        this.validacion()
     }
 
     checkboxChange = (e) => {
@@ -77,7 +93,7 @@ class SimLoan extends Component {
                         Moneda_U$S: false,
                         TipoMoneda: currency
                     })
-
+                    this.validacion()
                 } else {
                     currency = 'U$S'
                     this.setState({
@@ -85,6 +101,7 @@ class SimLoan extends Component {
                         Moneda_$U: false,
                         TipoMoneda: currency
                     })
+                    this.validacion()
                 }
                 break;
             default:
@@ -105,16 +122,6 @@ class SimLoan extends Component {
             TipoDePrestamoOtros
         } = this.state;
 
-        const { errors, ...sinErrors } = this.state
-        const result = validate(sinErrors)
-        this.setState({ errors: result })
-        if (!Object.keys(result).length) {
-            window.location.href = '/Descuento'
-            this.setState({
-                loading: false
-            })
-        }
-
         this.setState({ loading: true }, () => {
             axios.post(process.env.RESTURL_BACKEND + '/storeLoan', {
                 user: {
@@ -131,10 +138,7 @@ class SimLoan extends Component {
                 .then(Response => {
                     this.setState({ loading: false })
                     console.log("registration res", Response)
-                    if (!Object.keys(result).length) {
                         window.location.href = process.env.RESTURL_FRONTEND + '/Descuento';
-
-                    }
                 })
                 .catch(error => {
                     console.log("registration error", error)
@@ -269,9 +273,11 @@ class SimLoan extends Component {
                         />
                         <label className="label-tipo" htmlFor="Otros">Otros</label><br></br>
 
-                        <button className="btnPrimario">Simular préstamo</button>
+                        <button className={this.state.btn} disabled={this.state.btnst}>Simular préstamo</button>
+
                     </form>
                 </div>
+
             </div>
         )
     }
