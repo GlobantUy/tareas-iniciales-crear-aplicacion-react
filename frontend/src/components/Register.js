@@ -5,6 +5,7 @@ import LoadingSpinner from './Spinner';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap'
 
 let URL = process.env.RESTURL_BACKEND + '/register'
+let element
 
 const data = new Date();
 let anioMin = data.getUTCFullYear() - 100
@@ -75,7 +76,7 @@ class RegisterContent extends Component {
             femeninoChecked: false,
             otrosChecked: false,
 
-            
+            Preferencias: [],
             inmueblesChecked: false,
             hogarChecked: false,
             juguetesChecked: false,
@@ -91,6 +92,8 @@ class RegisterContent extends Component {
 
             isDisable: true,
             errors: {},
+
+            abierto: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSumbit.bind(this)
@@ -102,6 +105,9 @@ class RegisterContent extends Component {
         })
     }
 
+    componentDidMount() {
+        element = document.getElementById("cont")
+    }
 
     soloLetras = (e) => {
         const { name, value } = e.target;
@@ -126,6 +132,7 @@ class RegisterContent extends Component {
                 state.Preferencias.push(event.target.value)
             });
         }
+        this.checkboxChange(event)
     };
 
     comprobarInputs = () => {
@@ -267,42 +274,50 @@ class RegisterContent extends Component {
         if (!Object.keys(result).length) {
             element.className += " velo"
             this.setState({ loading: true }, () => {
-            axios.post(URL, {
-                "name": this.state.Nombre,
-                "lName": this.state.Apellido,
-                "dateOfBirth": this.state.FechaNacimiento,
-                "gender": this.state.Genero,
-                "preferences": this.state.Preferencias,
-                "email": this.state.Email,
-                "department": this.state.Departamento,
-                "passwd": this.state.Password
-            }).then(Response => {
-                if (Response.data.message == "Email belongs to an existing account.") {
+                axios.post(URL, {
+                    "name": this.state.Nombre,
+                    "lName": this.state.Apellido,
+                    "dateOfBirth": this.state.FechaNacimiento,
+                    "gender": this.state.Genero,
+                    "preferences": this.state.Preferencias,
+                    "email": this.state.Email,
+                    "department": this.state.Departamento,
+                    "passwd": this.state.Password
+                }).then(Response => {
+                    if (Response.data.message == "Email belongs to an existing account.") {
+                        this.setState({
+                            EmailError: 'Ya existe un usuario con este email',
+                            loading: false
+                        })
+                        element.className = "container"
+                    } else {
+                        this.setState({
+                            loading: false,
+                            EmailError: ''
+                        })
+                        element.className = "container"
+                        console.log(Response)
+                    }
+                }).catch(error => {
+                    alert("No hemos podido registrarte debido a problemas tecnicos.")
                     this.setState({
-                        EmailError: 'Ya existe un usuario con este email',
                         loading: false
                     })
                     element.className = "container"
-                } else {
-                    this.setState({
-                        loading: false,
-                        EmailError: ''
-                    })
-                    element.className = "container"
-                    window.location.href = '/ingreso'
-                }
-            }).catch(error => {
-                alert("No hemos podido registrarte debido a problemas tecnicos.")
-                this.setState({
-                    loading: false
                 })
             })
-        })
         } else {
             this.setState({
                 EmailError: ''
             })
         }
+        
+    }
+
+    abrirModal = () => {
+        this.setState({
+            abierto: !this.state.abierto
+        })
     }
 
     cerrarModal = () => {
@@ -347,7 +362,6 @@ class RegisterContent extends Component {
                 } else {
                     this.setState({ femeninoChecked: false, masculinoChecked: false, otrosChecked: true, Genero: 'Otro' })
                 }
-                console.log(this.state.Genero)
                 break;
             default:
                 break;
@@ -431,7 +445,7 @@ class RegisterContent extends Component {
                             <h1 className="titlee-registro">Registro de usuario STB Bank</h1>
                         </center>
 
-                        <div className="container">
+                        <div className="container" id="cont">
                             <div className="row">
                                 <div className="col-4">
                                     <p>Nombres*</p>
@@ -615,7 +629,7 @@ class RegisterContent extends Component {
                                         id="Inmuebles"
                                         name="Preferencias"
                                         value="Inmuebles"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.inmueblesChecked}
                                     />
                                     <label htmlFor="Inmuebles">Inmuebles</label><br></br>
@@ -625,7 +639,7 @@ class RegisterContent extends Component {
                                         id="Hogar_deco"
                                         name="Preferencias"
                                         value="Hogar_deco"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.hogarChecked}
                                     />
                                     <label htmlFor="Hogar_deco">Hogar y decoración</label><br></br>
@@ -635,7 +649,7 @@ class RegisterContent extends Component {
                                         id="Juguetes"
                                         name="Preferencias"
                                         value="Juguetes"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.juguetesChecked}
                                     />
                                     <label htmlFor="Juguetes">Juguetes</label><br></br>
@@ -645,7 +659,7 @@ class RegisterContent extends Component {
                                         id="Entretenimiento"
                                         name="Preferencias"
                                         value="Entretenimiento"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.entretenimientoChecked}
                                     />
                                     <label htmlFor="Entretenimiento">Entretenimiento</label><br></br>
@@ -659,7 +673,7 @@ class RegisterContent extends Component {
                                         id="Autos"
                                         name="Preferencias"
                                         value="Autos"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.autosChecked}
                                     />
                                     <label htmlFor="Autos">Autos</label><br></br>
@@ -669,7 +683,7 @@ class RegisterContent extends Component {
                                         id="Opticas"
                                         name="Preferencias"
                                         value="Opticas"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.opticasChecked}
                                     />
                                     <label htmlFor="Opticas">Opticas</label><br></br>
@@ -679,7 +693,7 @@ class RegisterContent extends Component {
                                         id="Salud_belleza"
                                         name="Preferencias"
                                         value="Salud_belleza"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.saludChecked}
                                     />
                                     <label htmlFor="Salud_belleza">Salud y belleza</label><br></br>
@@ -689,7 +703,7 @@ class RegisterContent extends Component {
                                         id="Comida"
                                         name="Preferencias"
                                         value="Comida"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.comidaChecked}
                                     />
                                     <label htmlFor="Comida">Comida</label><br></br>
@@ -701,7 +715,7 @@ class RegisterContent extends Component {
                                         id="Libros"
                                         name="Preferencias"
                                         value="Libros"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.librosChecked}
                                     />
                                     <label htmlFor="Libros">Libros</label><br></br>
@@ -711,7 +725,7 @@ class RegisterContent extends Component {
                                         id="Viajes_turismo"
                                         name="Preferencias"
                                         value="Viajes_turismo"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.viajesChecked}
                                     />
                                     <label htmlFor="Viajes_turismo">Viajes y turismo</label><br></br>
@@ -721,7 +735,7 @@ class RegisterContent extends Component {
                                         id="Vestimenta"
                                         name="Preferencias"
                                         value="Vestimenta"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.vestimentaChecked}
                                     />
                                     <label htmlFor="Vestimenta">Vestimenta</label><br></br>
@@ -731,7 +745,7 @@ class RegisterContent extends Component {
                                         id="Joyas"
                                         name="Preferencias"
                                         value="Joyas"
-                                        onChange={this.checkboxChange}
+                                        onChange={this.handleChangePreferencias}
                                         checked={this.state.joyasChecked}
                                     />
                                     <label htmlFor="Joyas">Joyas</label><br></br>
@@ -739,7 +753,7 @@ class RegisterContent extends Component {
                             </div>
 
                             <center>
-                                <button type="submit" disabled={this.state.isDisable} className="btn-registro">Registrarse</button>
+                                <button type="submit" disabled={this.state.isDisable} onClick={this.abrirModal} className="btn-registro">Registrarse</button>
                             </center>
 
                             <Modal isOpen={this.state.abierto} className='modalStyles'>
