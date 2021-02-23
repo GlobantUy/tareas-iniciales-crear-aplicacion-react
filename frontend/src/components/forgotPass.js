@@ -52,7 +52,6 @@ class RecuperarContra extends Component {
         if (this.state.Email && this.state.FechaNacimiento != "") {
             this.setState({ isDisable: false })
         } else {
-            console.log(this.state.FechaNacimiento)
             this.setState({ isDisable: true })
         }
     }

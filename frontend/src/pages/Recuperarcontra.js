@@ -12,7 +12,7 @@ export default function User() {
         <div >
             <div className="App">
                 {isTooltipVisible && <ReactTooltip id="error-forgotpass"
-                    place="bottom"
+                    place="right"
                     type="dark"
                     effect="solid"
                     className="error-tooltip"
