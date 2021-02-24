@@ -23,7 +23,7 @@ class Header extends React.Component {
       this.userData.role = JSON.parse(sessionStorage.getItem('Usuario-Values')).role;
       this.userData.tabla = this.getRole();
     } catch (error) {
-      // console.log(error);
+        console.log(error);
       return false
     }
 
@@ -31,7 +31,6 @@ class Header extends React.Component {
 
   getRole() {
     let role = JSON.parse(sessionStorage.getItem('Usuario-Values')).role;
-      console.log(role);
       if (role === 'ADMIN'){
         return process.env.RESTURL_FRONTEND + "/Tableadmin";
       }else{
@@ -56,9 +55,8 @@ class Header extends React.Component {
         return true
       }
     }catch (error) {
-      //console.log(error);
       return false
-    }//error no manejado
+    }
   
   }
 
