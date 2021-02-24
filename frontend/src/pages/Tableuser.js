@@ -3,7 +3,7 @@ import TableUser from '../components/Table-User';
 
 export default function User() {
     return (
-        <div >
+        <div className='containertablas'>
             <Header />
             <TableUser />
             <footer>
