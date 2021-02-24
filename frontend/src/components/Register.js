@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import LoadingSpinner from './Spinner';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap'
+import { Button, Modal } from 'reactstrap'
 
 let URL = process.env.RESTURL_BACKEND + '/register'
 let element
