@@ -579,7 +579,7 @@ class RegisterContent extends Component {
                                 </div>
                             </div>
 
-                            <div className="row">
+                            <div className="row checkType">
                                 <div className="col-3">
                                     <input
                                         type="radio"
