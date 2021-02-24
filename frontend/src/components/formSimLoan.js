@@ -47,7 +47,6 @@ class SimLoan extends Component {
         if (!this.state.financiacion) {
             error.financiacion = true
         }
-        console.log(error)
         this.setState({ errors: error })
         if (!Object.keys(error).length) {
             this.setState({ 
@@ -137,7 +136,6 @@ class SimLoan extends Component {
             )
                 .then(Response => {
                     this.setState({ loading: false })
-                    console.log("registration res", Response)
                         window.location.href = process.env.RESTURL_FRONTEND + '/Descuento';
                 })
                 .catch(error => {

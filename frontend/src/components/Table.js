@@ -65,7 +65,6 @@ class Table extends Component {
                 } else {
                     this.setState({ abierto2: !this.state.abierto2 });
                 }
-                console.log("registration res", Response)
             })
             .catch(error => {
                 console.log("registration error", error)

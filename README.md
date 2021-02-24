@@ -23,26 +23,86 @@ En la carpeta front end correr el comando:
     npm run dev
 
 # DockerStart Guide
-Para buildear las imagenes
+## Requerimientos previos:
+    Docker Instalado
+    Docker Compose Instalado
+    Conexion a Internet
+
+### Cambiar la conexion de la base de datos segun corresponda:
+    
+### Docker
+    MONGODB_URL=mongodb://mongodb:27017/database
+### Desarrollo
+    MONGODB_URL=mongodb://localhost:27017/database
+### Vercel Deploy
+    MONGODB_URL=mongodb+srv://test1:123@cluster0.e2axf.mongodb.net/database?retryWrites=true&w=majority´´´
+
+
+### Para buildear las imagenes
 
     docker-compose build --no-cache
 
-Start de el sistema
+### Start de el sistema
 
     docker-compose up -d
 
-Ver logs del sistema
+### Ver logs del sistema
 
     docker-compose logs -f
 
-Stop Sistema 
+### Aplicacion
+
+**Acceder en un navegador web a la url:**
+    
+    http://localhost:3000
+
+    SuperUsuario: admin@test.com
+    Clave: 12345678
+
+### Cliete NoSQL
+
+**En un Navegador acceder a la url**
+
+    http://localhost:58080
+    Usuario: admin
+    Clave: 1234
+    Database: database
+
+### Stop Sistema 
 
     docker-compose down -v
 
+ ## Docker es la version productiva
 
-# Equipo
- - [Nombre (@usuario)]
- - [Nombre (@usuario)]
+## Cliente STB
+
+- [Guillermo Talento]()
+## Equipo Anima
+
+- [Katherine Damires Gonzalez](usuario)
+- [Andrew Nahuel Martinez Herrera](usuario)
+- [Bruno Agustin Dos Santos Rodriguez](usuario)
+- [Diego Agustin Ramirez Martinez](usuario)
+- [Alejandro Gonzalez Gonzalez](usuario)
+- [Jonathan Eduardo Cembranos Fernandez](usuario)
+- [Kevin Mora Pais](usuario)
+- [Sebastian Agustin Pi Bas](usuario)
+
+## Tutores Globant
  
+- [Eva Dathaguy](eva.dathaguy@globant.com)
+- [Romina Rodriguez]()
+- [Veronica Varela]()
+- [Analia Luque]()
+- [Marcelo Santamaria](@msantamariaglo)
+- [Felipe Cordoves]()
+- [Nacho Gomez]()
+- [Leo Giovanetti]()
+
 # Links
-[Información sobre la resolución de la tarea realizada]
+
+[ANIMA](https://anima.edu.uy/)
+
+[GLOBANT](http://www.globant.com/)
+
+[STB](https://www.softwaretestingbureau.com/)
