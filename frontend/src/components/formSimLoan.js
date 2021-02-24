@@ -200,7 +200,7 @@ class SimLoan extends Component {
 
                         <div className="inputPesos">
                             <input
-                                type="radio"
+                                type="checkbox"
                                 id="Moneda_$U"
                                 name="Moneda"
                                 onChange={this.checkboxChange}

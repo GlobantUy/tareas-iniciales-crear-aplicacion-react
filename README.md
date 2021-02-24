@@ -106,3 +106,5 @@ En la carpeta front end correr el comando:
 [GLOBANT](http://www.globant.com/)
 
 [STB](https://www.softwaretestingbureau.com/)
+
+## Desarrollado entre 2020 y 2021
