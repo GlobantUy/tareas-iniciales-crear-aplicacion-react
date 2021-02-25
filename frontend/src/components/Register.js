@@ -294,7 +294,7 @@ class RegisterContent extends Component {
                 }
 
             }).catch(error => {
-                alert("No hemos podido registrarte debido a problemas tecnicos.")
+                alert("No hemos podido registrarte debido a problemas técnicos.")
             })
         } else {
             this.setState({

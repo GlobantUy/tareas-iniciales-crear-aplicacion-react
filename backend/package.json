@@ -1,6 +1,6 @@
 {
   "name": "stb-backend",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Backend Serverless with mongodb as persistance data instance",
   "main": "handler.js",
   "scripts": {
