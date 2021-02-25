@@ -125,15 +125,15 @@ class RecuperarContra extends Component {
             this.setState({ loading: true }, () => {
                 axios.post(URL, { "email": email, "dateOfBirth": dateOfBirth }).then((resp) => {
                     if (resp.data.message == "Value of 'dateOfBirth' did not match.") {
-                        this.setState({ FechaNacimientoError: "La fecha de nacimiento no coinside.", loading: false })
+                        this.setState({ FechaNacimientoError: "La fecha de nacimiento no coincide.", loading: false })
                     } else if (resp.data.message == "Provided email did not match any user.") {
-                        this.setState({ EmailError: "El email ingresado no coinside con el de ningun usuario.", loading: false })
+                        this.setState({ EmailError: "El email ingresado no coincide con el de ningún usuario.", loading: false })
                     } else {
                         this.setState({ password: resp.data.passwd, abierto: !this.state.abierto, loading: false })
                     }
                 }).catch((error) => {
                     this.setState({ loading: false })
-                    alert("No hemos podido obtener tu contraseña debido a problemas tecnicos.")
+                    alert("No hemos podido obtener tu contraseña debido a problemas técnicos.")
                 });
             });
         }

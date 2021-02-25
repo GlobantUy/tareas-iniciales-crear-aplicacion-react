@@ -1,6 +1,15 @@
 # STB_BANK APP
 # Development Start Guide
 
+## Pre Requisitos
+Tener instalado
+    
+    Node JS v12 en adelante
+    NPM 6+
+
+Instalar serverles by npm
+
+    npm i -g serverless
 ## Database
 Start Database
 
@@ -29,6 +38,8 @@ En la carpeta front end correr el comando:
     Conexion a Internet
 
 ### Cambiar la conexion de la base de datos segun corresponda:
+
+En el archivo .env de la carpeta **"backend"** en la raiz del proyecto:
     
 ### Docker
     MONGODB_URL=mongodb://mongodb:27017/database
@@ -59,7 +70,7 @@ En la carpeta front end correr el comando:
     SuperUsuario: admin@test.com
     Clave: 12345678
 
-### Cliete NoSQL
+### Cliente NoSQL
 
 **En un Navegador acceder a la url**
 
