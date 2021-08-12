@@ -117,3 +117,5 @@ En el archivo .env de la carpeta **"backend"** en la raiz del proyecto:
 [GLOBANT](http://www.globant.com/)
 
 [STB](https://www.softwaretestingbureau.com/)
+
+## Desarrollado entre 2020 y 2021

@@ -188,26 +188,29 @@ class SimLoan extends Component {
                         />
 
                         <p >Moneda del Préstamo*</p>
+                        <div className="inputPesos">
                         <input
-                            type="radio"
+                            type="checkbox"
                             id="Moneda_U$S"
                             name="Moneda"
                             onChange={this.checkboxChange}
                             checked={this.state.Moneda_U$S}
                         />
                         <label data-for="error-sim"
-                            data-tip="Este campo es obligatorio." htmlFor="Moneda_U$S">U$S</label>
-
+                            data-tip="Este campo es obligatorio." htmlFor="Moneda_U$S"></label>
+                            <span>U$S</span>
+                        </div>
                         <div className="inputPesos">
                             <input
-                                type="radio"
+                                type="checkbox"
                                 id="Moneda_$U"
                                 name="Moneda"
                                 onChange={this.checkboxChange}
                                 checked={this.state.Moneda_$U}
                             />
                             <label data-for="error-sim"
-                                data-tip="Este campo es obligatorio." htmlFor="Moneda_$U">$U</label>
+                                data-tip="Este campo es obligatorio." htmlFor="Moneda_$U"></label>
+                                <span>$U</span>
                         </div>
 
                         <p>Monto a Pedir($U)*</p>
@@ -241,6 +244,7 @@ class SimLoan extends Component {
                         </select>
 
                         <p>Tipo de préstamo</p>
+                        <div className="checkType">
                         <input className="inputTipo"
                             type="checkbox"
                             value="Inmuebles"
@@ -270,7 +274,7 @@ class SimLoan extends Component {
                             checked={this.state.TipoDePrestamoOtros}
                         />
                         <label className="label-tipo" htmlFor="Otros">Otros</label><br></br>
-
+                        </div>
                         <button className={this.state.btn} disabled={this.state.btnst}>Simular préstamo</button>
 
                     </form>
